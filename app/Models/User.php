@@ -29,4 +29,19 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function referringDoctorAssessments(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(RadiologyContrastAssessment::class, 'referring_doctor_id');
+    }
+
+    public function radiologyNurseAssessments(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(RadiologyContrastAssessment::class, 'radiology_nurse_id');
+    }
+
+    public function radiologyContrastMedications(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(RadiologyContrastMedication::class, 'nurse_id');
+    }
 }
