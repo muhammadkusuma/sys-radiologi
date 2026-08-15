@@ -6,14 +6,14 @@
 <style>
     /* Styled like paper but interactive */
     .paper-container {
-        background: #fff;
-        border: 1px solid #cbd5e1;
-        box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+        background: #0f172a; /* Dark background */
+        border: 1px solid #1e293b;
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
         padding: 20px;
         border-radius: 12px;
         font-family: Arial, Helvetica, sans-serif;
         font-size: 11px;
-        color: #000;
+        color: #f1f5f9; /* Light text */
         max-width: 277mm;
         margin: 0 auto;
     }
@@ -22,7 +22,7 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        border-bottom: 2px solid #000;
+        border-bottom: 2px solid #334155;
         padding-bottom: 8px;
         margin-bottom: 10px;
     }
@@ -33,6 +33,7 @@
         text-align: center;
         flex-grow: 1;
         text-transform: uppercase;
+        color: #f8fafc;
     }
 
     table.paper-table {
@@ -43,37 +44,42 @@
     }
 
     table.paper-table td, table.paper-table th {
-        border: 1px solid #000;
+        border: 1px solid #334155;
         padding: 4px 6px;
         vertical-align: middle;
+        color: #e2e8f0;
     }
 
     .section-title {
         text-align: center;
         font-weight: bold;
         font-size: 12px;
-        background-color: #f1f5f9;
+        background-color: #1e293b;
+        color: #f8fafc;
         height: 24px;
     }
 
     /* Form control elements styled to blend in */
     .paper-input {
         border: none;
-        border-bottom: 1px dotted #000;
+        border-bottom: 1px dotted #475569;
         outline: none;
         font-size: 11px;
         padding: 1px 2px;
         background: transparent;
         width: 100%;
+        color: #f8fafc;
     }
 
     .paper-input:focus {
-        background-color: #f8fafc;
-        border-bottom: 1px solid #2563eb;
+        background-color: #1e293b;
+        border-bottom: 1px solid #3b82f6;
     }
 
     .paper-textarea {
-        border: 1px solid #cbd5e1;
+        border: 1px solid #334155;
+        background-color: #0f172a;
+        color: #f8fafc;
         border-radius: 4px;
         outline: none;
         font-size: 11px;
@@ -84,13 +90,14 @@
     }
 
     .paper-textarea:focus {
-        border-color: #2563eb;
-        background-color: #f8fafc;
+        border-color: #3b82f6;
+        background-color: #1e293b;
     }
 
     .label-cell {
         font-weight: bold;
-        background-color: #f8fafc;
+        background-color: #1e293b;
+        color: #f8fafc;
         width: 13%;
     }
 
@@ -99,11 +106,64 @@
     }
 
     .signature-box {
-        border: 1px dashed #cbd5e1;
+        border: 1px dashed #334155;
         border-radius: 6px;
-        background: #f8fafc;
+        background: #1e293b;
         cursor: crosshair;
     }
+
+    /* Print overrides to guarantee perfect white-page standard medical record output */
+    @media print {
+        body {
+            background-color: #ffffff !important;
+            color: #000000 !important;
+        }
+        .paper-container {
+            background: #ffffff !important;
+            border: none !important;
+            color: #000000 !important;
+            box-shadow: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+            max-width: 100% !important;
+        }
+        .form-header {
+            border-bottom: 2px solid #000000 !important;
+        }
+        .form-title {
+            color: #000000 !important;
+        }
+        table.paper-table td, table.paper-table th {
+            border: 1px solid #000000 !important;
+            color: #000000 !important;
+        }
+        .section-title {
+            background-color: #f1f5f9 !important;
+            color: #000000 !important;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+        .paper-input {
+            border-bottom: 1px dotted #000000 !important;
+            color: #000000 !important;
+        }
+        .paper-textarea {
+            border: 1px solid #000000 !important;
+            background-color: #ffffff !important;
+            color: #000000 !important;
+        }
+        .label-cell {
+            background-color: #f8fafc !important;
+            color: #000000 !important;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+        .no-print {
+            display: none !important;
+        }
+    }
+
+    
 </style>
 @endsection
 
