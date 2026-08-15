@@ -220,6 +220,12 @@ class AssessmentController extends Controller
 
         $validated['updated_by'] = Auth::id();
 
+        // If doctor signs from edit form
+        if ($request->filled('doctor_signature') && !$assessment->doctor_signature) {
+            $validated['radiology_doctor_id'] = Auth::id();
+            $validated['signed_at'] = now();
+        }
+
         $assessment->update($validated);
 
         // Update medications
