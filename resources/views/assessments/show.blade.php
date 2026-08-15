@@ -840,6 +840,14 @@
 
     </div>
 
+    <script>
+        if (window.location.search.includes('download=1')) {
+            window.addEventListener('DOMContentLoaded', () => {
+                setTimeout(() => {
+                    window.print();
+                }, 500);
+            });
+        }
+    </script>
 </body>
-
 </html>

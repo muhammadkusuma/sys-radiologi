@@ -177,6 +177,10 @@
                                             Lihat / Cetak
                                         </a>
                                         
+                                        <a href="{{ route('assessments.show', $ast->id) }}?download=1" class="inline-flex items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded-lg text-white bg-red-650 hover:bg-red-750 shadow-sm transition">
+                                            Download PDF
+                                        </a>
+                                        
                                         @if(!$ast->doctor_signature || Auth::user()->role === 'dokter')
                                             <a href="{{ route('assessments.edit', $ast->id) }}" class="inline-flex items-center px-2.5 py-1.5 border border-slate-300 text-xs font-medium rounded-lg text-blue-600 bg-white hover:bg-blue-50 transition">
                                                 Edit

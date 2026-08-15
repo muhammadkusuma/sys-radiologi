@@ -122,6 +122,17 @@
         </div>
     </div>
 
+    @if ($errors->any())
+        <div class="mb-6 bg-red-50 border border-red-200 text-red-800 rounded-xl p-4 shadow-sm">
+            <div class="font-bold text-sm mb-1">Gagal memperbarui! Harap periksa inputan berikut:</div>
+            <ul class="list-disc pl-5 text-xs space-y-0.5">
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
     <form action="{{ route('assessments.update', $assessment->id) }}" method="POST" id="assessmentForm">
         @csrf
         <input type="hidden" name="patient_id" value="{{ $patient->id }}">
