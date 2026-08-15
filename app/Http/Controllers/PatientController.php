@@ -22,4 +22,12 @@ class PatientController extends Controller
 
         return redirect()->route('dashboard')->with('success', 'Pasien baru berhasil didaftarkan.');
     }
+
+    public function destroy($id)
+    {
+        $patient = Patient::findOrFail($id);
+        $patient->delete();
+
+        return redirect()->route('dashboard')->with('success', 'Data pasien berhasil dihapus.');
+    }
 }

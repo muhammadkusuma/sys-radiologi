@@ -100,10 +100,17 @@
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-700">{{ $patient->name }}</td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-600">{{ $patient->gender }}</td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-600">{{ $patient->date_of_birth ? $patient->date_of_birth->format('d/m/Y') : '-' }}</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm">
+                                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm space-x-2">
                                         <a href="{{ route('assessments.create', $patient->id) }}" class="inline-flex items-center px-3 py-1.5 border border-transparent text-xs font-medium rounded-lg text-white bg-blue-600 hover:bg-blue-750 shadow-sm transition">
                                             + Buat Asesmen
                                         </a>
+                                        <form action="{{ route('patients.destroy', $patient->id) }}" method="POST" class="inline-block" onsubmit="return confirm('Apakah Anda yakin ingin menghapus pasien dan semua histori asesmennya?')">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="inline-flex items-center px-2 py-1.5 border border-red-200 text-xs font-medium rounded-lg text-red-600 bg-red-50 hover:bg-red-100 transition cursor-pointer">
+                                                Hapus
+                                            </button>
+                                        </form>
                                     </td>
                                 </tr>
                             @empty
@@ -175,6 +182,14 @@
                                                 Edit
                                             </a>
                                         @endif
+                                        
+                                        <form action="{{ route('assessments.destroy', $ast->id) }}" method="POST" class="inline-block" onsubmit="return confirm('Apakah Anda yakin ingin menghapus dokumen asesmen ini?')">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="inline-flex items-center px-2 py-1.5 border border-red-200 text-xs font-medium rounded-lg text-red-600 bg-red-50 hover:bg-red-100 transition cursor-pointer">
+                                                Hapus
+                                            </button>
+                                        </form>
                                     </td>
                                 </tr>
                             @empty

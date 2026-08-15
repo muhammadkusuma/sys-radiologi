@@ -127,7 +127,8 @@
         <input type="hidden" name="patient_id" value="{{ $patient->id }}">
 
         <!-- HALAMAN 1 -->
-        <div class="paper-container mb-8">
+        <div class="overflow-x-auto w-full mb-8">
+            <div class="paper-container">
             <div class="form-header">
                 <div style="font-weight: bold;">RS AWAL BROS<br><span style="font-size: 9px; font-weight: normal;">Pekanbaru</span></div>
                 <div class="form-title">Asesmen Tindakan Radiologi Kontras (Halaman 1 dari 2)</div>
@@ -531,10 +532,12 @@
                     </td>
                 </tr>
             </table>
+            </div>
         </div>
 
         <!-- HALAMAN 2 -->
-        <div class="paper-container mb-8">
+        <div class="overflow-x-auto w-full mb-8">
+            <div class="paper-container">
             <div class="form-header">
                 <div style="font-weight: bold;">RS AWAL BROS<br><span style="font-size: 9px; font-weight: normal;">Pekanbaru</span></div>
                 <div class="form-title">Catatan Pemberian Obat Kontras (Halaman 2 dari 2)</div>
@@ -606,6 +609,7 @@
                 </div>
             </div>
             @endif
+            </div>
         </div>
 
         <!-- CONTROL BUTTONS -->

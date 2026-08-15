@@ -270,4 +270,12 @@ class AssessmentController extends Controller
 
         return redirect()->route('dashboard')->with('success', $msg);
     }
+
+    public function destroy($id)
+    {
+        $assessment = RadiologyContrastAssessment::findOrFail($id);
+        $assessment->delete();
+
+        return redirect()->route('dashboard')->with('success', 'Data asesmen berhasil dihapus.');
+    }
 }
