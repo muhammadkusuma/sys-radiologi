@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Catatan Pemberian Obat</title>
+
+    <style>
+        /* ================================
+           A4 LANDSCAPE
+        ================================= */
+
+        @page {
+            size: A4 landscape;
+            margin: 8mm;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            width: 100%;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 11px;
+            color: #000;
+            background: #fff;
+        }
+
+        /* ================================
+           HALAMAN
+        ================================= */
+
+        .page {
+            width: 100%;
+            max-width: 277mm;
+            margin: 0 auto;
+        }
+
+        /* ================================
+           HEADER / LOGO
+        ================================= */
+
+        .header {
+            width: 100%;
+            margin-bottom: 5px;
+        }
+
+        .logo {
+            height: 40px;
+            width: auto;
+            display: block;
+            margin-bottom: 3px;
+        }
+
+        /* ================================
+           JUDUL
+        ================================= */
+
+        .judul-form {
+            font-weight: bold;
+            margin: 0 0 5px 0;
+        }
+
+        /* ================================
+           TABEL
+        ================================= */
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            table-layout: fixed;
+            margin: 0;
+        }
+
+        td,
+        th {
+            border: 1px solid #000;
+            padding: 3px 4px;
+            vertical-align: middle;
+            line-height: 14px;
+            overflow-wrap: break-word;
+        }
+
+        /* ================================
+           TABEL CATATAN OBAT
+        ================================= */
+
+        .tabel-obat td {
+            height: 25px;
+        }
+
+        .tabel-obat .header-tabel {
+            font-weight: bold;
+            text-align: center;
+        }
+
+        /* ================================
+           TEMPAT & WAKTU
+        ================================= */
+
+        .tempat-waktu {
+            font-size: 11px;
+            line-height: 16px;
+            margin-top: 5px;
+        }
+
+        .garis {
+            letter-spacing: 1px;
+        }
+
+        .garis-jam {
+            letter-spacing: 1px;
+        }
+
+        /* ================================
+           TANDA TANGAN
+        ================================= */
+
+        .ttd-area {
+            display: flex;
+            width: 100%;
+            margin-top: 25px;
+        }
+
+        .ttd-kolom {
+            width: 50%;
+            text-align: center;
+            font-size: 10px;
+        }
+
+        .ttd-jabatan {
+            margin-bottom: 5px;
+        }
+
+        .ttd-ruang {
+            height: 55px;
+        }
+
+        .ttd-garis {
+            font-size: 10px;
+        }
+
+        /* ================================
+           FOOTER DOKUMEN
+        ================================= */
+
+        .footer-area {
+            display: flex;
+            justify-content: flex-end;
+            align-items: flex-end;
+            width: 100%;
+            margin-top: 5px;
+        }
+
+        .footer-dokumen {
+            font-size: 8px;
+            line-height: 10px;
+            text-align: right;
+        }
+
+        .kode-dokumen {
+            border: 1px solid #000;
+            padding: 1px 4px;
+            display: inline-block;
+        }
+
+        .footer-dokumen div:last-child {
+            margin-top: 1px;
+        }
+
+        /* ================================
+           PRINT
+        ================================= */
+
+        @media print {
+
+            html,
+            body {
+                width: 100%;
+                height: auto;
+                margin: 0;
+                padding: 0;
+            }
+
+            body {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .page {
+                width: 100%;
+                max-width: none;
+                margin: 0;
+            }
+
+            table {
+                page-break-inside: auto;
+            }
+
+            tr {
+                page-break-inside: avoid;
+                page-break-after: auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="page">
+
+        <!-- HEADER -->
+        <div class="header">
+            <img src="logo-ab.png" alt="RS Awal Bros" class="logo">
+        </div>
+
+
+        <!-- JUDUL -->
+        <p class="judul-form">
+            Catatan Pemberian Obat
+        </p>
+
+
+        <!-- TABEL PEMBERIAN OBAT -->
+        <table class="tabel-obat">
+
+            <tr class="header-tabel">
+                <td>Nama Obat</td>
+                <td>Dosis</td>
+                <td>Rute Pemberian</td>
+                <td>Kecepatan</td>
+                <td>Tekanan</td>
+                <td>Jam</td>
+                <td>Reaksi</td>
+                <td>Keterangan</td>
+                <td>Paraf Perawat</td>
+            </tr>
+
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+
+        </table>
+
+
+        <!-- TEMPAT & WAKTU -->
+        <div class="tempat-waktu">
+
+            <div>
+                Pekanbaru,
+                <span class="garis">
+                    ........................
+                </span>
+            </div>
+
+            <div>
+                Jam:
+                <span class="garis-jam">
+                    ............................
+                </span>WIB
+            </div>
+
+        </div>
+
+
+        <!-- TANDA TANGAN -->
+        <div class="ttd-area">
+
+            <div class="ttd-kolom">
+
+                <div class="ttd-jabatan">
+                    Perawat Radiologi
+                </div>
+
+                <div class="ttd-ruang"></div>
+
+                <div class="ttd-garis">
+                    (................................)
+                </div>
+
+            </div>
+
+
+            <div class="ttd-kolom">
+
+                <div class="ttd-jabatan">
+                    Dokter Spesialis Radiologi
+                </div>
+
+                <div class="ttd-ruang"></div>
+
+                <div class="ttd-garis">
+                    (................................)
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- FOOTER DOKUMEN -->
+        <div class="footer-area">
+
+            <div class="footer-dokumen">
+
+                <div class="kode-dokumen">
+                    RSAB-AY/Rad/007/AKR/2025/Rev.00
+                </div>
+
+                <div>
+                    Halaman 2 dari 2
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

@@ -71,6 +71,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
     'medical_history',
     'created_by',
     'updated_by',
+    'radiology_doctor_id',
+    'doctor_signature',
+    'nurse_signature',
+    'signed_at',
 ])]
 class RadiologyContrastAssessment extends Model
 {
@@ -108,6 +112,7 @@ class RadiologyContrastAssessment extends Model
             'post_temperature' => 'decimal:1',
             'post_oxygen_saturation' => 'decimal:2',
             'medical_history' => 'array',
+            'signed_at' => 'datetime',
         ];
     }
 
@@ -124,6 +129,11 @@ class RadiologyContrastAssessment extends Model
     public function radiologyNurse(): BelongsTo
     {
         return $this->belongsTo(User::class, 'radiology_nurse_id');
+    }
+
+    public function radiologyDoctor(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'radiology_doctor_id');
     }
 
     public function medications(): HasMany

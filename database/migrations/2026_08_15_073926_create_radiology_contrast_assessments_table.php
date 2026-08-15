@@ -261,6 +261,20 @@ return new class extends Migration
                 ->constrained('users')
                 ->nullOnDelete();
 
+            $table->foreignId('radiology_doctor_id')
+                ->nullable()
+                ->constrained('users')
+                ->nullOnDelete();
+
+            $table->longText('doctor_signature')
+                ->nullable();
+
+            $table->longText('nurse_signature')
+                ->nullable();
+
+            $table->timestamp('signed_at')
+                ->nullable();
+
             $table->timestamps();
             $table->softDeletes();
 
