@@ -87,7 +87,7 @@ return new class extends Migration
             $table->index([
                 'assessment_id',
                 'administered_at',
-            ]);
+            ], 'rad_contrast_meds_assessment_admin_index');
         });
     }
 
