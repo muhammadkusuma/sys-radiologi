@@ -50,7 +50,7 @@
 
         @media screen {
             html, body {
-                background-color: #020617 !important;
+                background-color: #f8fafc !important;
             }
             .page {
                 background: #ffffff !important;
@@ -59,12 +59,12 @@
                 margin-top: 20px;
                 margin-bottom: 20px;
                 border-radius: 12px;
-                box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4), 0 8px 10px -6px rgba(0, 0, 0, 0.4);
+                box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
             }
             .no-print-bar {
-                background-color: #0f172a !important;
-                border-bottom: 1px solid #1e293b !important;
-                color: #f8fafc !important;
+                background-color: #ffffff !important;
+                border-bottom: 1px solid #cbd5e1 !important;
+                color: #0f172a !important;
             }
         }
 
@@ -356,11 +356,11 @@
 
     <!-- TOP CONTROL BAR (HIDDEN IN PRINT) -->
     <div class="no-print no-print-bar">
-        <div style="font-size: 13px; font-weight: bold; color: #f1f5f9;">
+        <div style="font-size: 13px; font-weight: bold; color: #1e293b;">
             Mode Pratinjau Dokumen Medis
         </div>
         <div style="display: flex; gap: 10px;">
-            <a href="{{ route('dashboard') }}" style="text-decoration: none; padding: 6px 14px; background: #1e293b; border: 1px solid #334155; border-radius: 6px; color: #f1f5f9; font-weight: 600; font-size: 12px;">
+            <a href="{{ route('dashboard') }}" style="text-decoration: none; padding: 6px 14px; background: #fff; border: 1px solid #cbd5e1; border-radius: 6px; color: #475569; font-weight: 600; font-size: 12px;">
                 &larr; Kembali
             </a>
             <button onclick="window.print()" style="cursor: pointer; padding: 6px 14px; background: #2563eb; border: none; border-radius: 6px; color: #fff; font-weight: 600; font-size: 12px; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">
