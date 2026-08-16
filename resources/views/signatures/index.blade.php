@@ -3,7 +3,7 @@
 @section('title', 'Master Tanda Tangan')
 
 @section('content')
-<div class="max-w-2xl mx-auto space-y-6">
+<div class="max-w-3xl space-y-6">
     <div>
         <h1 class="text-2xl font-bold text-slate-900">Master Tanda Tangan (TTD)</h1>
         <p class="text-sm text-slate-500">Unggah tanda tangan transparan Anda (.png) untuk digunakan secara otomatis pada dokumen asesmen.</p>
@@ -15,7 +15,7 @@
         </div>
     @endif
 
-    <div class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm p-6 space-y-6">
+    <div class="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-200 p-6 space-y-6">
         <div>
             <h2 class="text-base font-bold text-slate-900 mb-2">Tanda Tangan Anda Saat Ini</h2>
             <div class="border border-dashed border-slate-300 rounded-xl p-4 bg-slate-50 flex items-center justify-center min-h-[150px]">

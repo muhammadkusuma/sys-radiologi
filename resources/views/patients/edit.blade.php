@@ -3,7 +3,7 @@
 @section('title', 'Edit Pasien')
 
 @section('content')
-<div class="max-w-2xl mx-auto space-y-6">
+<div class="max-w-3xl space-y-6">
     <div class="flex items-center space-x-3">
         <a href="{{ route('patients.index') }}" class="text-slate-500 hover:text-slate-700">
             <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">

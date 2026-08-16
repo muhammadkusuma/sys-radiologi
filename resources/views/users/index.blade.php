@@ -29,7 +29,19 @@
     @endif
 
     <!-- Users Table -->
-    <div class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm">
+    <div class="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-200">
+        <div class="p-5 border-b border-slate-200 bg-white flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <h2 class="text-base font-bold text-slate-900">Daftar Pengguna Sistem</h2>
+            <div class="relative max-w-xs w-full">
+                <input type="text" id="userSearch" onkeyup="filterUserTable()" placeholder="Cari user..." class="block w-full pl-9 pr-3 py-1.5 border border-slate-300 rounded-lg text-sm bg-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
+                    <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                </div>
+            </div>
+        </div>
+
         <div class="overflow-x-auto">
             <table class="min-w-full divide-y divide-slate-200">
                 <thead class="bg-slate-50">
@@ -84,7 +96,7 @@
         <div class="fixed inset-0 transition-opacity bg-slate-900/30 backdrop-blur-sm" onclick="toggleUserModal()"></div>
         <span class="hidden sm:inline-block sm:align-middle sm:h-screen">&#8203;</span>
         
-        <div class="inline-block align-bottom bg-white rounded-xl text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full border border-slate-200">
+        <div class="inline-block align-bottom bg-white rounded-xl text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full border border-slate-200 relative z-10">
             <form id="userForm" action="{{ route('users.store') }}" method="POST">
                 @csrf
                 <input type="hidden" name="_method" id="formMethod" value="POST">
@@ -159,6 +171,30 @@
         document.getElementById('email').value = user.email;
         document.getElementById('role').value = user.role;
         document.getElementById('password').required = false;
+    }
+
+    function filterUserTable() {
+        const input = document.getElementById("userSearch");
+        const filter = input.value.toLowerCase();
+        const tbody = document.querySelector("table tbody");
+        const rows = tbody.getElementsByTagName("tr");
+
+        for (let i = 0; i < rows.length; i++) {
+            const row = rows[i];
+            const cells = row.getElementsByTagName("td");
+            if (cells.length < 4) continue;
+            
+            const nama = cells[0].textContent.toLowerCase();
+            const username = cells[1].textContent.toLowerCase();
+            const email = cells[2].textContent.toLowerCase();
+            const role = cells[3].textContent.toLowerCase();
+
+            if (nama.includes(filter) || username.includes(filter) || email.includes(filter) || role.includes(filter)) {
+                row.style.display = "";
+            } else {
+                row.style.display = "none";
+            }
+        }
     }
 </script>
 @endsection

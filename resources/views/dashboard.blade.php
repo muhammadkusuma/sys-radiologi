@@ -27,8 +27,8 @@
     <!-- Quick Stats Cards -->
     <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
         <!-- Stat 1 -->
-        <div class="bg-white border border-slate-200 p-4 rounded-xl shadow-sm flex items-center space-x-3">
-            <div class="p-2.5 bg-blue-50 text-blue-600 rounded-lg">
+        <div class="bg-white border border-slate-200 p-4 rounded-2xl shadow-sm hover:shadow-md transition-shadow duration-200 flex items-center space-x-3">
+            <div class="p-2.5 bg-blue-50 text-blue-600 rounded-xl">
                 <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                 </svg>
@@ -39,8 +39,8 @@
             </div>
         </div>
         <!-- Stat 2 -->
-        <div class="bg-white border border-slate-200 p-4 rounded-xl shadow-sm flex items-center space-x-3">
-            <div class="p-2.5 bg-green-50 text-green-600 rounded-lg">
+        <div class="bg-white border border-slate-200 p-4 rounded-2xl shadow-sm hover:shadow-md transition-shadow duration-200 flex items-center space-x-3">
+            <div class="p-2.5 bg-green-50 text-green-600 rounded-xl">
                 <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
@@ -51,8 +51,8 @@
             </div>
         </div>
         <!-- Stat 3 -->
-        <div class="bg-white border border-slate-200 p-4 rounded-xl shadow-sm flex items-center space-x-3">
-            <div class="p-2.5 bg-amber-50 text-amber-600 rounded-lg">
+        <div class="bg-white border border-slate-200 p-4 rounded-2xl shadow-sm hover:shadow-md transition-shadow duration-200 flex items-center space-x-3">
+            <div class="p-2.5 bg-amber-50 text-amber-600 rounded-xl">
                 <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
@@ -63,8 +63,8 @@
             </div>
         </div>
         <!-- Stat 4 -->
-        <div class="bg-white border border-slate-200 p-4 rounded-xl shadow-sm flex items-center space-x-3">
-            <div class="p-2.5 bg-slate-50 text-slate-600 rounded-lg">
+        <div class="bg-white border border-slate-200 p-4 rounded-2xl shadow-sm hover:shadow-md transition-shadow duration-200 flex items-center space-x-3">
+            <div class="p-2.5 bg-slate-50 text-slate-600 rounded-xl">
                 <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                 </svg>
@@ -77,9 +77,17 @@
     </div>
 
     <!-- Assessments List -->
-    <div class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm">
-        <div class="p-5 border-b border-slate-200 bg-slate-50/50">
+    <div class="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-200">
+        <div class="p-5 border-b border-slate-200 bg-white flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <h2 class="text-base font-bold text-slate-900">Daftar Dokumen Asesmen Radiologi Kontras</h2>
+            <div class="relative max-w-xs w-full">
+                <input type="text" id="assessmentSearch" onkeyup="filterAssessmentTable()" placeholder="Cari asesmen..." class="block w-full pl-9 pr-3 py-1.5 border border-slate-300 rounded-lg text-sm bg-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
+                    <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                </div>
+            </div>
         </div>
         
         <div class="overflow-x-auto">
@@ -149,4 +157,32 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('scripts')
+<script>
+    function filterAssessmentTable() {
+        const input = document.getElementById("assessmentSearch");
+        const filter = input.value.toLowerCase();
+        const tbody = document.querySelector("table tbody");
+        const rows = tbody.getElementsByTagName("tr");
+
+        for (let i = 0; i < rows.length; i++) {
+            const row = rows[i];
+            const cells = row.getElementsByTagName("td");
+            if (cells.length < 5) continue;
+            
+            const rm = cells[0].textContent.toLowerCase();
+            const nama = cells[1].textContent.toLowerCase();
+            const type = cells[3].textContent.toLowerCase();
+            const status = cells[4].textContent.toLowerCase();
+
+            if (rm.includes(filter) || nama.includes(filter) || type.includes(filter) || status.includes(filter)) {
+                row.style.display = "";
+            } else {
+                row.style.display = "none";
+            }
+        }
+    }
+</script>
 @endsection

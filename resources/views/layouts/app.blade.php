@@ -115,7 +115,7 @@
     @endauth
 
     <!-- Main Container -->
-    <div class="flex-grow flex flex-col min-h-screen min-w-0">
+    <div class="flex-grow flex flex-col min-h-screen min-w-0 bg-white">
         @auth
             <!-- Mobile Header -->
             <header class="bg-white border-b border-slate-200 h-16 flex items-center justify-between px-4 md:hidden flex-shrink-0 no-print">
