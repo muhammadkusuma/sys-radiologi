@@ -9,11 +9,7 @@
         <p class="text-sm text-slate-500">Unggah tanda tangan transparan Anda (.png) untuk digunakan secara otomatis pada dokumen asesmen.</p>
     </div>
 
-    @if(session('success'))
-        <div class="bg-green-50 border border-green-200 text-green-800 text-sm rounded-lg p-4">
-            {{ session('success') }}
-        </div>
-    @endif
+
 
     <div class="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-200 p-6 space-y-6">
         <div>

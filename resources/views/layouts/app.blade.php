@@ -125,8 +125,6 @@
                     </svg>
                 </button>
                 <div class="flex items-center">
-                    <img src="/login.png" alt="Logo" class="h-8 w-auto mr-2">
-                    <span class="font-bold text-slate-800">Radiologi RSAB</span>
                 </div>
                 <div class="w-6"></div>
             </header>
@@ -143,7 +141,49 @@
         </footer>
     </div>
 
+    <!-- Toast Container -->
+    <div id="toast-container" class="fixed top-4 right-4 z-50 flex flex-col gap-2 pointer-events-none no-print"></div>
+
     <script>
+        function showToast(message, type = 'success') {
+            const container = document.getElementById('toast-container');
+            if (!container) return;
+
+            const toast = document.createElement('div');
+            toast.className = `flex items-center p-4 rounded-xl shadow-lg border text-sm font-semibold transition-all duration-300 transform translate-y-2 opacity-0 pointer-events-auto max-w-sm ${
+                type === 'success' 
+                    ? 'bg-green-50 text-green-800 border-green-200' 
+                    : 'bg-red-50 text-red-800 border-red-200'
+            }`;
+
+            const icon = type === 'success' 
+                ? `<svg class="h-5 w-5 text-green-500 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                   </svg>`
+                : `<svg class="h-5 w-5 text-red-500 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                   </svg>`;
+
+            toast.innerHTML = `
+                ${icon}
+                <span class="flex-grow">${message}</span>
+                <button onclick="this.parentElement.remove()" class="ml-3 text-slate-400 hover:text-slate-600 focus:outline-none font-bold text-base cursor-pointer">&times;</button>
+            `;
+
+            container.appendChild(toast);
+
+            setTimeout(() => {
+                toast.classList.remove('translate-y-2', 'opacity-0');
+            }, 10);
+
+            setTimeout(() => {
+                toast.classList.add('opacity-0');
+                setTimeout(() => {
+                    toast.remove();
+                }, 300);
+            }, 4000);
+        }
+
         function toggleSidebar() {
             const isCollapsed = document.documentElement.classList.toggle('sidebar-collapsed');
             localStorage.setItem("sidebar-collapsed", isCollapsed ? "true" : "false");
@@ -169,6 +209,17 @@
             setTimeout(() => {
                 document.body.classList.remove('preload');
             }, 10);
+            
+            // Trigger PHP session alerts to toast
+            @if(session('success'))
+                showToast("{{ session('success') }}", "success");
+            @endif
+            @if(session('error'))
+                showToast("{{ session('error') }}", "error");
+            @endif
+            @if($errors->any())
+                showToast("{{ $errors->first() }}", "error");
+            @endif
         });
     </script>
     @yield('scripts')
