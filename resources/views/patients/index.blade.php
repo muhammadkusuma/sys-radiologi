@@ -95,17 +95,17 @@
                     <div class="mt-4 space-y-4">
                         <div>
                             <label for="medical_record_number" class="block text-sm font-semibold text-slate-700">No. Rekam Medis</label>
-                            <input type="text" name="medical_record_number" id="medical_record_number" required placeholder="Contoh: 12-34-56" class="mt-1 block w-full px-3 py-2 border border-slate-350 rounded-lg text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 sm:text-sm">
+                            <input type="text" name="medical_record_number" id="medical_record_number" required placeholder="Contoh: 12-34-56" class="mt-1 appearance-none block w-full px-3 py-2 border border-slate-300 rounded-lg bg-white text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 sm:text-sm">
                         </div>
                         
                         <div>
                             <label for="name" class="block text-sm font-semibold text-slate-700">Nama Lengkap</label>
-                            <input type="text" name="name" id="name" required class="mt-1 block w-full px-3 py-2 border border-slate-350 rounded-lg text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500 sm:text-sm">
+                            <input type="text" name="name" id="name" required class="mt-1 appearance-none block w-full px-3 py-2 border border-slate-300 rounded-lg bg-white text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500 sm:text-sm">
                         </div>
 
                         <div>
                             <label for="gender" class="block text-sm font-semibold text-slate-700">Jenis Kelamin</label>
-                            <select name="gender" id="gender" required class="mt-1 block w-full px-3 py-2 border border-slate-350 rounded-lg text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500 sm:text-sm bg-white">
+                            <select name="gender" id="gender" required class="mt-1 appearance-none block w-full px-3 py-2 border border-slate-300 rounded-lg bg-white text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500 sm:text-sm">
                                 <option value="L">Laki-laki</option>
                                 <option value="P">Perempuan</option>
                             </select>
@@ -113,17 +113,17 @@
 
                         <div>
                             <label for="date_of_birth" class="block text-sm font-semibold text-slate-700">Tanggal Lahir</label>
-                            <input type="date" name="date_of_birth" id="date_of_birth" class="mt-1 block w-full px-3 py-2 border border-slate-350 rounded-lg text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500 sm:text-sm">
+                            <input type="date" name="date_of_birth" id="date_of_birth" class="mt-1 appearance-none block w-full px-3 py-2 border border-slate-300 rounded-lg bg-white text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500 sm:text-sm">
                         </div>
 
                         <div>
                             <label for="phone" class="block text-sm font-semibold text-slate-700">No. Telepon / HP</label>
-                            <input type="text" name="phone" id="phone" class="mt-1 block w-full px-3 py-2 border border-slate-350 rounded-lg text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500 sm:text-sm">
+                            <input type="text" name="phone" id="phone" class="mt-1 appearance-none block w-full px-3 py-2 border border-slate-300 rounded-lg bg-white text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500 sm:text-sm">
                         </div>
 
                         <div>
                             <label for="address" class="block text-sm font-semibold text-slate-700">Alamat Lengkap</label>
-                            <textarea name="address" id="address" rows="3" class="mt-1 block w-full px-3 py-2 border border-slate-350 rounded-lg text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500 sm:text-sm"></textarea>
+                            <textarea name="address" id="address" rows="3" class="mt-1 appearance-none block w-full px-3 py-2 border border-slate-300 rounded-lg bg-white text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500 sm:text-sm"></textarea>
                         </div>
                     </div>
                 </div>
