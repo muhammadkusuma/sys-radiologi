@@ -11,9 +11,14 @@ class DashboardController extends Controller
     public function index()
     {
         $patients = Patient::orderBy('name')->get();
-        $assessments = RadiologyContrastAssessment::with(['patient', 'radiologyNurse', 'radiologyDoctor'])
-            ->orderBy('created_at', 'desc')
-            ->get();
+        
+        $query = RadiologyContrastAssessment::with(['patient', 'radiologyNurse', 'radiologyDoctor']);
+        
+        if (auth()->user()->role === 'dokter') {
+            $query->whereNotNull('nurse_signature')->whereNull('doctor_signature');
+        }
+        
+        $assessments = $query->orderBy('created_at', 'desc')->get();
 
         return view('dashboard', compact('patients', 'assessments'));
     }

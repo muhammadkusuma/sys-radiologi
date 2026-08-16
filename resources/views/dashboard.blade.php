@@ -10,17 +10,18 @@
             <h1 class="text-2xl font-bold text-slate-900">Dashboard</h1>
             <p class="text-sm text-slate-500">Selamat datang kembali, <span class="font-semibold text-slate-700">{{ Auth::user()->name }}</span>.</p>
         </div>
+        @if(Auth::user()->role !== 'dokter')
         <a href="{{ route('patients.index') }}" class="inline-flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold rounded-lg shadow transition cursor-pointer">
             <svg class="h-5 w-5 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
             </svg>
             Buat Asesmen Baru
         </a>
+        @endif
     </div>
 
-
-
     <!-- Quick Stats Cards -->
+    @if(Auth::user()->role !== 'dokter')
     <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
         <!-- Stat 1 -->
         <div class="bg-white border border-slate-200 p-4 rounded-2xl shadow-sm hover:shadow-md transition-shadow duration-200 flex items-center space-x-3">
@@ -71,6 +72,7 @@
             </div>
         </div>
     </div>
+    @endif
 
     <!-- Assessments List -->
     <div class="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-200">
