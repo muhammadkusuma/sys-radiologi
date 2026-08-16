@@ -9,6 +9,16 @@ use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(function ($request, $next) {
+            if (auth()->user()->role !== 'superadmin') {
+                abort(403, 'Akses ditolak. Halaman ini hanya untuk IT/Superadmin.');
+            }
+            return $next($request);
+        });
+    }
+
     public function index()
     {
         $users = User::orderBy('name')->get();
@@ -22,7 +32,7 @@ class UserController extends Controller
             'username' => 'required|string|max:255|unique:users,username',
             'email' => 'required|string|email|max:255|unique:users,email',
             'password' => 'required|string|min:6',
-            'role' => 'required|in:dokter,perawat',
+            'role' => 'required|in:dokter,perawat,superadmin',
         ]);
 
         $validated['password'] = Hash::make($validated['password']);
@@ -39,7 +49,7 @@ class UserController extends Controller
             'username' => ['required', 'string', 'max:255', Rule::unique('users')->ignore($user->id)],
             'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
             'password' => 'nullable|string|min:6',
-            'role' => 'required|in:dokter,perawat',
+            'role' => 'required|in:dokter,perawat,superadmin',
         ]);
 
         if (!empty($validated['password'])) {

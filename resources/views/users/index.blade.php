@@ -52,7 +52,7 @@
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-600">{{ $user->username }}</td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-600">{{ $user->email }}</td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm">
-                                <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold {{ $user->role === 'dokter' ? 'bg-purple-100 text-purple-800' : 'bg-green-100 text-green-800' }} uppercase">
+                                <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold {{ $user->role === 'superadmin' ? 'bg-red-100 text-red-800' : ($user->role === 'dokter' ? 'bg-purple-100 text-purple-800' : 'bg-green-100 text-green-800') }} uppercase">
                                     {{ $user->role }}
                                 </span>
                             </td>
@@ -129,6 +129,7 @@
                             <select name="role" id="role" required class="mt-1 appearance-none block w-full px-3 py-2 border border-slate-300 rounded-lg bg-white text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500 sm:text-sm">
                                 <option value="perawat">Perawat</option>
                                 <option value="dokter">Dokter</option>
+                                <option value="superadmin">Superadmin (IT)</option>
                             </select>
                         </div>
                     </div>

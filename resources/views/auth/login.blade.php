@@ -82,7 +82,7 @@
 
                 <div class="mt-6 border-t border-slate-200 pt-4">
                     <h3 class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Akun Demo Cepat:</h3>
-                    <div class="grid grid-cols-2 gap-2 text-xs">
+                    <div class="grid grid-cols-3 gap-2 text-xs">
                         <button type="button" onclick="fillCreds('perawat')"
                             class="p-2 bg-slate-50 border border-slate-200 text-slate-700 rounded-lg text-left hover:bg-slate-100 transition cursor-pointer">
                             <div class="font-bold text-green-600">PERAWAT</div>
@@ -93,6 +93,12 @@
                             class="p-2 bg-slate-50 border border-slate-200 text-slate-700 rounded-lg text-left hover:bg-slate-100 transition cursor-pointer">
                             <div class="font-bold text-purple-600">DOKTER</div>
                             <div class="truncate">dokter</div>
+                            <div class="text-[10px] text-slate-400">pass: password</div>
+                        </button>
+                        <button type="button" onclick="fillCreds('admin')"
+                            class="p-2 bg-slate-50 border border-slate-200 text-slate-700 rounded-lg text-left hover:bg-slate-100 transition cursor-pointer">
+                            <div class="font-bold text-red-600">SUPERADMIN</div>
+                            <div class="truncate">admin</div>
                             <div class="text-[10px] text-slate-400">pass: password</div>
                         </button>
                     </div>
