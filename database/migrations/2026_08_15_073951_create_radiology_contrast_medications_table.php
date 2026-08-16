@@ -19,7 +19,8 @@ return new class extends Migration
 
             $table->foreignId('assessment_id')
                 ->constrained('radiology_contrast_assessments')
-                ->cascadeOnDelete();
+                ->cascadeOnDelete()
+                ->comment('ID relasi ke tabel radiology_contrast_assessments');
 
             /*
             |--------------------------------------------------------------------------
@@ -39,28 +40,35 @@ return new class extends Migration
             |
             */
 
-            $table->string('medication_name');
+            $table->string('medication_name')->comment('Nama obat kontras/medikasi yang diberikan');
 
             $table->string('dose')
-                ->nullable();
+                ->nullable()
+                ->comment('Dosis obat kontras/medikasi');
 
             $table->string('administration_route')
-                ->nullable();
+                ->nullable()
+                ->comment('Rute pemberian obat (cth: IV, Oral, dll)');
 
             $table->string('speed')
-                ->nullable();
+                ->nullable()
+                ->comment('Kecepatan pemberian obat');
 
             $table->string('pressure')
-                ->nullable();
+                ->nullable()
+                ->comment('Tekanan pemberian obat');
 
             $table->time('administered_at')
-                ->nullable();
+                ->nullable()
+                ->comment('Waktu/jam pemberian obat');
 
             $table->text('reaction')
-                ->nullable();
+                ->nullable()
+                ->comment('Reaksi setelah pemberian obat');
 
             $table->text('notes')
-                ->nullable();
+                ->nullable()
+                ->comment('Catatan/keterangan tambahan');
 
             /*
             |--------------------------------------------------------------------------
@@ -71,10 +79,12 @@ return new class extends Migration
             $table->foreignId('nurse_id')
                 ->nullable()
                 ->constrained('users')
-                ->nullOnDelete();
+                ->nullOnDelete()
+                ->comment('ID perawat yang memberikan medikasi (relasi ke users)');
 
             $table->string('nurse_initials')
-                ->nullable();
+                ->nullable()
+                ->comment('Inisial/paraf perawat yang memberikan medikasi');
 
             $table->timestamps();
 

@@ -20,29 +20,36 @@ return new class extends Migration
             $table->foreignId('patient_id')
                 ->nullable()
                 ->constrained('patients')
-                ->nullOnDelete();
+                ->nullOnDelete()
+                ->comment('ID pasien yang bersangkutan (relasi ke patients)');
 
             $table->date('procedure_date')
-                ->nullable();
+                ->nullable()
+                ->comment('Tanggal pelaksanaan tindakan radiologi kontras');
 
             $table->time('procedure_time')
-                ->nullable();
+                ->nullable()
+                ->comment('Waktu/jam tindakan radiologi kontras');
 
             $table->foreignId('referring_doctor_id')
                 ->nullable()
                 ->constrained('users')
-                ->nullOnDelete();
+                ->nullOnDelete()
+                ->comment('ID dokter pengirim/perujuk (relasi ke users)');
 
             $table->foreignId('radiology_nurse_id')
                 ->nullable()
                 ->constrained('users')
-                ->nullOnDelete();
+                ->nullOnDelete()
+                ->comment('ID perawat radiologi yang mendokumentasikan (relasi ke users)');
 
             $table->text('diagnosis')
-                ->nullable();
+                ->nullable()
+                ->comment('Diagnosis klinis pasien');
 
             $table->string('examination_type')
-                ->nullable();
+                ->nullable()
+                ->comment('Jenis pemeriksaan radiologi kontras');
 
             /*
             |--------------------------------------------------------------------------
@@ -51,37 +58,48 @@ return new class extends Migration
             */
 
             $table->string('general_condition')
-                ->nullable();
+                ->nullable()
+                ->comment('Keadaan umum pasien sebelum tindakan');
 
             $table->string('consciousness_level')
-                ->nullable();
+                ->nullable()
+                ->comment('Tingkat kesadaran pasien sebelum tindakan');
 
             $table->decimal('egfr', 8, 2)
-                ->nullable();
+                ->nullable()
+                ->comment('Nilai eGFR (Estimated Glomerular Filtration Rate) pasien');
 
             $table->time('last_meal_time')
-                ->nullable();
+                ->nullable()
+                ->comment('Waktu makan terakhir pasien sebelum tindakan');
 
             $table->decimal('body_weight', 6, 2)
-                ->nullable();
+                ->nullable()
+                ->comment('Berat badan pasien (Kg)');
 
             $table->string('blood_pressure')
-                ->nullable();
+                ->nullable()
+                ->comment('Tekanan darah pasien sebelum tindakan (mmHg)');
 
             $table->unsignedSmallInteger('pulse')
-                ->nullable();
+                ->nullable()
+                ->comment('Nadi pasien sebelum tindakan (x/menit)');
 
             $table->decimal('temperature', 4, 1)
-                ->nullable();
+                ->nullable()
+                ->comment('Suhu tubuh pasien sebelum tindakan (°C)');
 
             $table->unsignedSmallInteger('respiratory_rate')
-                ->nullable();
+                ->nullable()
+                ->comment('Frekuensi pernafasan pasien sebelum tindakan (x/menit)');
 
             $table->decimal('oxygen_saturation', 5, 2)
-                ->nullable();
+                ->nullable()
+                ->comment('Saturasi oksigen pasien sebelum tindakan (%)');
 
             $table->text('pre_procedure_complaint')
-                ->nullable();
+                ->nullable()
+                ->comment('Keluhan pasien sebelum tindakan');
 
             /*
             |--------------------------------------------------------------------------
@@ -90,10 +108,12 @@ return new class extends Migration
             */
 
             $table->boolean('has_allergy_history')
-                ->nullable();
+                ->nullable()
+                ->comment('Status memiliki riwayat alergi (0 = Tidak, 1 = Ada)');
 
             $table->text('allergy_description')
-                ->nullable();
+                ->nullable()
+                ->comment('Keterangan deskripsi riwayat alergi pasien jika ada');
 
             /*
             |--------------------------------------------------------------------------
@@ -102,24 +122,30 @@ return new class extends Migration
             */
 
             $table->string('contrast_batch')
-                ->nullable();
+                ->nullable()
+                ->comment('Nomor batch media kontras yang digunakan');
 
             $table->string('contrast_concentration')
-                ->nullable();
+                ->nullable()
+                ->comment('Konsentrasi media kontras');
 
             $table->decimal('contrast_dose_ml', 8, 2)
-                ->nullable();
+                ->nullable()
+                ->comment('Dosis media kontras yang disuntikkan (ml)');
 
             $table->boolean('contrast_double_check')
-                ->nullable();
+                ->nullable()
+                ->comment('Status pelaksanaan dobel cek obat kontras (0 = Tidak, 1 = Ya)');
 
             $table->boolean('allergy_test')
-                ->nullable();
+                ->nullable()
+                ->comment('Status pelaksanaan test alergi kontras (0 = Tidak, 1 = Ya)');
 
             $table->enum('allergy_test_result', [
                 'tidak_alergi',
                 'alergi',
-            ])->nullable();
+            ])->nullable()
+                ->comment('Hasil tes alergi: tidak_alergi atau alergi');
 
             /*
             |--------------------------------------------------------------------------
@@ -128,46 +154,60 @@ return new class extends Migration
             */
 
             $table->text('during_complaint')
-                ->nullable();
+                ->nullable()
+                ->comment('Keluhan pasien saat tindakan berlangsung');
 
             $table->string('allergy_sign_during')
-                ->nullable();
+                ->nullable()
+                ->comment('Tanda-tanda alergi yang muncul saat tindakan');
 
             $table->boolean('itching_during')
-                ->nullable();
+                ->nullable()
+                ->comment('Adanya gatal-gatal saat tindakan (0 = Tidak, 1 = Ya)');
 
             $table->boolean('nausea_during')
-                ->nullable();
+                ->nullable()
+                ->comment('Adanya mual saat tindakan (0 = Tidak, 1 = Ya)');
 
             $table->boolean('dizziness_during')
-                ->nullable();
+                ->nullable()
+                ->comment('Adanya pusing saat tindakan (0 = Tidak, 1 = Ya)');
 
             $table->boolean('shortness_of_breath_during')
-                ->nullable();
+                ->nullable()
+                ->comment('Adanya sesak nafas saat tindakan (0 = Tidak, 1 = Ya)');
 
             $table->boolean('swollen_eyes_during')
-                ->nullable();
+                ->nullable()
+                ->comment('Adanya mata bengkak saat tindakan (0 = Tidak, 1 = Ya)');
 
             $table->boolean('swelling_during')
-                ->nullable();
+                ->nullable()
+                ->comment('Adanya bengkak saat tindakan (0 = Tidak, 1 = Ya)');
 
             $table->boolean('pain_during')
-                ->nullable();
+                ->nullable()
+                ->comment('Adanya nyeri saat tindakan (0 = Tidak, 1 = Ya)');
 
             $table->boolean('redness_during')
-                ->nullable();
+                ->nullable()
+                ->comment('Adanya kemerahan saat tindakan (0 = Tidak, 1 = Ya)');
 
             $table->text('extravasation_sign_during')
-                ->nullable();
+                ->nullable()
+                ->comment('Tanda-tanda ekstravasasi saat tindakan');
 
             $table->time('iv_insertion_time')
-                ->nullable();
+                ->nullable()
+                ->comment('Waktu/jam pemasangan infus');
 
             $table->string('region')
-                ->nullable();
+                ->nullable()
+                ->comment('Lokasi/regio pemasangan infus');
 
             $table->string('iv_cath_size')
-                ->nullable();
+                ->nullable()
+                ->comment('Ukuran IV catheter (abocath) yang digunakan');
 
             /*
             |--------------------------------------------------------------------------
@@ -176,74 +216,86 @@ return new class extends Migration
             */
 
             $table->text('post_procedure_complaint')
-                ->nullable();
+                ->nullable()
+                ->comment('Keluhan pasien setelah tindakan selesai');
 
             $table->string('allergy_sign_after')
-                ->nullable();
+                ->nullable()
+                ->comment('Tanda-tanda alergi yang muncul setelah tindakan');
 
             $table->boolean('itching_after')
-                ->nullable();
+                ->nullable()
+                ->comment('Adanya gatal-gatal setelah tindakan (0 = Tidak, 1 = Ya)');
 
             $table->boolean('nausea_after')
-                ->nullable();
+                ->nullable()
+                ->comment('Adanya mual setelah tindakan (0 = Tidak, 1 = Ya)');
 
             $table->boolean('dizziness_after')
-                ->nullable();
+                ->nullable()
+                ->comment('Adanya pusing setelah tindakan (0 = Tidak, 1 = Ya)');
 
             $table->boolean('shortness_of_breath_after')
-                ->nullable();
+                ->nullable()
+                ->comment('Adanya sesak nafas setelah tindakan (0 = Tidak, 1 = Ya)');
 
             $table->boolean('swollen_eyes_after')
-                ->nullable();
+                ->nullable()
+                ->comment('Adanya mata bengkak setelah tindakan (0 = Tidak, 1 = Ya)');
 
             $table->boolean('bentol_after')
-                ->nullable();
+                ->nullable()
+                ->comment('Adanya bentol-bentol setelah tindakan (0 = Tidak, 1 = Ya)');
 
             $table->boolean('swelling_after')
-                ->nullable();
+                ->nullable()
+                ->comment('Adanya bengkak setelah tindakan (0 = Tidak, 1 = Ya)');
 
             $table->boolean('pain_after')
-                ->nullable();
+                ->nullable()
+                ->comment('Adanya nyeri setelah tindakan (0 = Tidak, 1 = Ya)');
 
             $table->boolean('redness_after')
-                ->nullable();
+                ->nullable()
+                ->comment('Adanya kemerahan setelah tindakan (0 = Tidak, 1 = Ya)');
 
             $table->text('extravasation_sign_after')
-                ->nullable();
+                ->nullable()
+                ->comment('Tanda-tanda ekstravasasi setelah tindakan');
 
             $table->string('post_blood_pressure')
-                ->nullable();
+                ->nullable()
+                ->comment('Tekanan darah pasien setelah tindakan (mmHg)');
 
             $table->unsignedSmallInteger('post_pulse')
-                ->nullable();
+                ->nullable()
+                ->comment('Nadi pasien setelah tindakan (x/menit)');
 
             $table->decimal('post_temperature', 4, 1)
-                ->nullable();
+                ->nullable()
+                ->comment('Suhu tubuh pasien setelah tindakan (°C)');
 
             $table->unsignedSmallInteger('post_respiratory_rate')
-                ->nullable();
+                ->nullable()
+                ->comment('Frekuensi pernafasan pasien setelah tindakan (x/menit)');
 
             $table->decimal('post_oxygen_saturation', 5, 2)
-                ->nullable();
+                ->nullable()
+                ->comment('Saturasi oksigen pasien setelah tindakan (%)');
 
             $table->time('iv_removal_time')
-                ->nullable();
+                ->nullable()
+                ->comment('Waktu/jam pelepasan infus');
 
             /*
             |--------------------------------------------------------------------------
             | RIWAYAT PENYAKIT
             |--------------------------------------------------------------------------
-            |
-            | Berdasarkan HTML saat ini terdapat:
-            | - Kemo/Radioterapi
-            | - Diabetes
-            |
-            | Dibuat JSON agar mudah ditambah tanpa migration baru.
-            |
             */
 
             $table->json('medical_history')
-                ->nullable();
+                ->nullable()
+                ->comment('Daftar riwayat penyakit penyerta pasien dalam format JSON (cth: Diabetes, Kemo)');
 
             /*
             |--------------------------------------------------------------------------
@@ -254,29 +306,35 @@ return new class extends Migration
             $table->foreignId('created_by')
                 ->nullable()
                 ->constrained('users')
-                ->nullOnDelete();
+                ->nullOnDelete()
+                ->comment('ID pembuat dokumen asesmen (relasi ke users)');
 
             $table->foreignId('updated_by')
                 ->nullable()
                 ->constrained('users')
-                ->nullOnDelete();
+                ->nullOnDelete()
+                ->comment('ID pengubah terakhir dokumen asesmen (relasi ke users)');
 
             $table->foreignId('radiology_doctor_id')
                 ->nullable()
                 ->constrained('users')
-                ->nullOnDelete();
+                ->nullOnDelete()
+                ->comment('ID dokter radiologi penanggung jawab (relasi ke users)');
 
             $table->longText('doctor_signature')
-                ->nullable();
+                ->nullable()
+                ->comment('Tanda tangan digital dokter radiologi (base64)');
 
             $table->longText('nurse_signature')
-                ->nullable();
+                ->nullable()
+                ->comment('Tanda tangan digital perawat radiologi (base64)');
 
             $table->timestamp('signed_at')
-                ->nullable();
+                ->nullable()
+                ->comment('Waktu penandatanganan dokumen');
 
             $table->timestamps();
-            $table->softDeletes();
+            $table->softDeletes()->comment('Waktu penghapusan dokumen soft delete');
 
             /*
             |--------------------------------------------------------------------------

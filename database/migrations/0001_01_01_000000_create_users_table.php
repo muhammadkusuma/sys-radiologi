@@ -12,15 +12,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('username')->unique();
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->string('role')->default('perawat'); // perawat, dokter
-            $table->text('signature')->nullable(); // TTD digital (base64/path)
-            $table->rememberToken();
+            $table->id()->comment('ID unik user');
+            $table->string('name')->comment('Nama lengkap user');
+            $table->string('username')->unique()->comment('Username unik untuk login');
+            $table->string('email')->unique()->comment('Alamat email user');
+            $table->timestamp('email_verified_at')->nullable()->comment('Waktu verifikasi email');
+            $table->string('password')->comment('Password hash user');
+            $table->string('role')->default('perawat')->comment('Peran user: perawat atau dokter'); // perawat, dokter
+            $table->text('signature')->nullable()->comment('Tanda tangan digital dalam format base64/path'); // TTD digital (base64/path)
+            $table->rememberToken()->comment('Token remember me login');
             $table->timestamps();
         });
 

@@ -9,29 +9,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('patients', function (Blueprint $table) {
-            $table->id();
-
-            $table->string('medical_record_number')
-                ->unique();
-
-            $table->string('name');
-
-            $table->enum('gender', [
-                'L',
-                'P',
-            ])->nullable();
-
-            $table->date('date_of_birth')
-                ->nullable();
-
-            $table->string('phone')
-                ->nullable();
-
-            $table->text('address')
-                ->nullable();
-
+            $table->id()->comment('ID unik pasien');
+            $table->string('medical_record_number')->unique()->comment('Nomor Rekam Medis (RM) unik pasien');
+            $table->string('name')->comment('Nama lengkap pasien');
+            $table->enum('gender', ['L', 'P'])->nullable()->comment('Jenis kelamin pasien: L (Laki-laki) atau P (Perempuan)');
+            $table->date('date_of_birth')->nullable()->comment('Tanggal lahir pasien');
+            $table->string('phone')->nullable()->comment('Nomor telepon pasien');
+            $table->text('address')->nullable()->comment('Alamat tempat tinggal pasien');
             $table->timestamps();
-            $table->softDeletes();
+            $table->softDeletes()->comment('Waktu penghapusan soft delete pasien');
         });
     }
 
