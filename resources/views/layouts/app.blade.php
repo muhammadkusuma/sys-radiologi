@@ -10,6 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/clocklet@0.3.0/css/clocklet.min.css">
     <script>
         if (localStorage.getItem("sidebar-collapsed") === "true" && window.innerWidth >= 768) {
             document.documentElement.classList.add('sidebar-collapsed');
@@ -170,6 +171,43 @@
         </div>
     </div>
 
+    <!-- Custom Analog Clock Picker Modal -->
+    <div id="analog-clock-picker" class="fixed inset-0 z-50 overflow-y-auto hidden flex items-center justify-center p-4">
+        <div class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm" onclick="closeClockPicker()"></div>
+        
+        <div class="bg-white rounded-2xl shadow-2xl border border-slate-205 w-72 relative z-10 overflow-hidden flex flex-col items-center p-5 space-y-4 select-none">
+            <!-- Time Display Header -->
+            <div class="flex items-center justify-between w-full">
+                <div class="flex items-baseline space-x-1 text-slate-800 font-bold text-4xl">
+                    <span id="clock-display-hours" class="cursor-pointer text-blue-600 hover:text-blue-700">12</span>
+                    <span class="text-slate-300 text-3xl">:</span>
+                    <span id="clock-display-minutes" class="cursor-pointer text-slate-400 hover:text-blue-600">00</span>
+                </div>
+                <div class="text-xs font-bold bg-blue-50 text-blue-600 px-2.5 py-1 rounded border border-blue-100 uppercase tracking-wider">24 Jam</div>
+            </div>
+            
+            <div class="text-xs font-semibold uppercase tracking-wider text-slate-400 self-start" id="clock-mode-title">Pilih Jam</div>
+            
+            <!-- Clock Face -->
+            <div class="relative w-52 h-52 bg-slate-50 rounded-full border border-slate-200 flex items-center justify-center">
+                <div class="absolute w-2 h-2 bg-blue-600 rounded-full z-20"></div>
+                
+                <div id="clock-hand" class="absolute bg-blue-600 origin-bottom z-10 transition-transform duration-200" style="bottom: 50%; left: calc(50% - 1px); width: 2px; height: 72px; transform: rotate(0deg);">
+                    <div class="absolute -top-3 -left-3 w-7 h-7 bg-blue-600 rounded-full flex items-center justify-center text-xs text-white font-bold shadow-sm">
+                        <div class="w-1.5 h-1.5 bg-white rounded-full"></div>
+                    </div>
+                </div>
+                
+                <div id="clock-numbers" class="absolute inset-0 z-0"></div>
+            </div>
+            
+            <div class="flex justify-end w-full space-x-2 pt-2 border-t border-slate-100">
+                <button type="button" onclick="closeClockPicker()" class="px-3.5 py-1.5 border border-slate-300 rounded-xl text-xs font-semibold text-slate-600 hover:bg-slate-50 cursor-pointer">Batal</button>
+                <button type="button" onclick="saveClockPicker()" class="px-3.5 py-1.5 bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold rounded-xl shadow cursor-pointer">OK</button>
+            </div>
+        </div>
+    </div>
+
     <script>
         let activeConfirmCallback = null;
 
@@ -231,6 +269,179 @@
             }, 4000);
         }
 
+        // Custom Analog Clock Picker JS Logic
+        let targetInputEl = null;
+        let selectedHour = 12;
+        let selectedMinute = 0;
+        let currentClockMode = 'hours';
+
+        function openClockPicker(inputEl) {
+            targetInputEl = inputEl;
+            const currentVal = inputEl.value || '12:00';
+            const parts = currentVal.split(':');
+            selectedHour = parseInt(parts[0]);
+            if (isNaN(selectedHour) || selectedHour < 0 || selectedHour > 23) {
+                selectedHour = 12;
+            }
+            selectedMinute = parseInt(parts[1]);
+            if (isNaN(selectedMinute) || selectedMinute < 0 || selectedMinute > 59) {
+                selectedMinute = 0;
+            }
+            
+            currentClockMode = 'hours';
+            updateClockPickerUI();
+            
+            document.getElementById('analog-clock-picker').classList.remove('hidden');
+        }
+
+        function closeClockPicker() {
+            document.getElementById('analog-clock-picker').classList.add('hidden');
+            targetInputEl = null;
+        }
+
+        function saveClockPicker() {
+            if (targetInputEl) {
+                const hh = String(selectedHour).padStart(2, '0');
+                const mm = String(selectedMinute).padStart(2, '0');
+                targetInputEl.value = `${hh}:${mm}`;
+                targetInputEl.dispatchEvent(new Event('change'));
+            }
+            closeClockPicker();
+        }
+
+        function updateClockPickerUI() {
+            const hoursDisplay = document.getElementById('clock-display-hours');
+            const minutesDisplay = document.getElementById('clock-display-minutes');
+            const modeTitle = document.getElementById('clock-mode-title');
+            
+            hoursDisplay.textContent = String(selectedHour).padStart(2, '0');
+            minutesDisplay.textContent = String(selectedMinute).padStart(2, '0');
+
+            if (currentClockMode === 'hours') {
+                hoursDisplay.className = "cursor-pointer text-blue-600 font-bold";
+                minutesDisplay.className = "cursor-pointer text-slate-400 hover:text-blue-500 font-semibold";
+                modeTitle.textContent = "Pilih Jam";
+                renderClockNumbers(12);
+            } else {
+                hoursDisplay.className = "cursor-pointer text-slate-400 hover:text-blue-500 font-semibold";
+                minutesDisplay.className = "cursor-pointer text-blue-600 font-bold";
+                modeTitle.textContent = "Pilih Menit";
+                renderClockNumbers(60);
+            }
+        }
+
+        function renderClockNumbers(mode) {
+            const container = document.getElementById('clock-numbers');
+            container.innerHTML = '';
+            
+            const radius = 80;
+            const centerX = 100;
+            const centerY = 100;
+            
+            if (mode === 12) {
+                // Outer Ring (1 - 12)
+                for (let i = 1; i <= 12; i++) {
+                    const angle = (i * 30 - 90) * (Math.PI / 180);
+                    const x = centerX + radius * Math.cos(angle);
+                    const y = centerY + radius * Math.sin(angle);
+                    
+                    const isSelected = selectedHour === i;
+                    const numDiv = document.createElement('div');
+                    numDiv.className = `absolute w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold cursor-pointer transition-colors ${
+                        isSelected
+                            ? 'bg-blue-600 text-white z-20 shadow-sm' 
+                            : 'text-slate-700 hover:bg-slate-200 z-10'
+                    }`;
+                    numDiv.style.left = `${x - 14}px`;
+                    numDiv.style.top = `${y - 14}px`;
+                    numDiv.textContent = i;
+                    
+                    numDiv.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        selectedHour = i;
+                        setHandRotation(i * 30, 72);
+                        setTimeout(() => {
+                            currentClockMode = 'minutes';
+                            updateClockPickerUI();
+                        }, 200);
+                    });
+                    
+                    container.appendChild(numDiv);
+                }
+
+                // Inner Ring (13 - 24/00)
+                const innerRadius = 50;
+                for (let i = 13; i <= 24; i++) {
+                    const val = i === 24 ? 0 : i;
+                    const angle = ((i - 12) * 30 - 90) * (Math.PI / 180);
+                    const x = centerX + innerRadius * Math.cos(angle);
+                    const y = centerY + innerRadius * Math.sin(angle);
+                    
+                    const isSelected = selectedHour === val;
+                    const numDiv = document.createElement('div');
+                    numDiv.className = `absolute w-6.5 h-6.5 rounded-full flex items-center justify-center text-[10px] font-bold cursor-pointer transition-colors ${
+                        isSelected
+                            ? 'bg-blue-600 text-white z-20 shadow-sm' 
+                            : 'text-slate-400 hover:bg-slate-200 z-10'
+                    }`;
+                    numDiv.style.left = `${x - 13}px`;
+                    numDiv.style.top = `${y - 13}px`;
+                    numDiv.textContent = i === 24 ? '00' : i;
+                    
+                    numDiv.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        selectedHour = val;
+                        setHandRotation((i - 12) * 30, 42);
+                        setTimeout(() => {
+                            currentClockMode = 'minutes';
+                            updateClockPickerUI();
+                        }, 200);
+                    });
+                    
+                    container.appendChild(numDiv);
+                }
+
+                if (selectedHour >= 13 || selectedHour === 0) {
+                    const angleHour = selectedHour === 0 ? 12 : selectedHour - 12;
+                    setHandRotation(angleHour * 30, 42);
+                } else {
+                    setHandRotation(selectedHour * 30, 72);
+                }
+            } else {
+                for (let i = 0; i < 60; i += 5) {
+                    const angle = (i * 6 - 90) * (Math.PI / 180);
+                    const x = centerX + radius * Math.cos(angle);
+                    const y = centerY + radius * Math.sin(angle);
+                    
+                    const isSelected = Math.round(selectedMinute / 5) * 5 === i;
+                    const numDiv = document.createElement('div');
+                    numDiv.className = `absolute w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold cursor-pointer transition-colors ${
+                        isSelected
+                            ? 'bg-blue-600 text-white z-20' 
+                            : 'text-slate-700 hover:bg-slate-200 z-10'
+                    }`;
+                    numDiv.style.left = `${x - 16}px`;
+                    numDiv.style.top = `${y - 16}px`;
+                    numDiv.textContent = String(i).padStart(2, '0');
+                    
+                    numDiv.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        selectedMinute = i;
+                        setHandRotation(i * 6, 72);
+                    });
+                    
+                    container.appendChild(numDiv);
+                }
+                setHandRotation(selectedMinute * 6, 72);
+            }
+        }
+
+        function setHandRotation(degrees, length = 72) {
+            const hand = document.getElementById('clock-hand');
+            hand.style.transform = `rotate(${degrees}deg)`;
+            hand.style.height = `${length}px`;
+        }
+
         function toggleSidebar() {
             const isCollapsed = document.documentElement.classList.toggle('sidebar-collapsed');
             localStorage.setItem("sidebar-collapsed", isCollapsed ? "true" : "false");
@@ -267,8 +478,34 @@
             @if($errors->any())
                 showToast("{{ $errors->first() }}", "error");
             @endif
+            
+            // Switch clock picker mode on header clicks
+            document.getElementById('clock-display-hours').addEventListener('click', () => {
+                currentClockMode = 'hours';
+                updateClockPickerUI();
+            });
+            document.getElementById('clock-display-minutes').addEventListener('click', () => {
+                currentClockMode = 'minutes';
+                updateClockPickerUI();
+            });
+
+            // Bind click listener on all data-clocklet elements to trigger our custom analog clock picker instead
+            document.addEventListener('focusin', (e) => {
+                if (e.target.matches('input[data-clocklet]')) {
+                    e.target.blur(); // prevent keyboard focus
+                    openClockPicker(e.target);
+                }
+            });
+            document.addEventListener('click', (e) => {
+                if (e.target.matches('input[data-clocklet]')) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    openClockPicker(e.target);
+                }
+            });
         });
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/clocklet@0.3.0/js/clocklet.min.js"></script>
     @yield('scripts')
 </body>
 

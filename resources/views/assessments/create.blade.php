@@ -178,7 +178,7 @@
                         <div class="flex items-center space-x-2">
                             <input type="date" name="procedure_date" value="{{ old('procedure_date', date('Y-m-d')) }}" class="paper-input w-32">
                             <span>Jam:</span>
-                            <input type="time" name="procedure_time" value="{{ old('procedure_time', date('H:i')) }}" class="paper-input w-20">
+                            <input type="text" data-clocklet="format: HH:mm" name="procedure_time" value="{{ old('procedure_time', date('H:i')) }}" class="paper-input w-20 text-center">
                             <span>WIB</span>
                         </div>
                     </td>
@@ -272,7 +272,7 @@
                     <td>
                         <div class="flex items-center space-x-1">
                             <span>Jam:</span>
-                            <input type="time" name="last_meal_time" value="{{ old('last_meal_time') }}" class="paper-input w-20">
+                            <input type="text" data-clocklet="format: HH:mm" name="last_meal_time" value="{{ old('last_meal_time') }}" class="paper-input w-20 text-center">
                         </div>
                     </td>
                     <td class="label-cell">Mual</td>
@@ -342,7 +342,7 @@
                     <td>
                         <div class="flex items-center space-x-1">
                             <span>Jam:</span>
-                            <input type="time" name="iv_insertion_time" value="{{ old('iv_insertion_time') }}" class="paper-input w-20">
+                            <input type="text" data-clocklet="format: HH:mm" name="iv_insertion_time" value="{{ old('iv_insertion_time') }}" class="paper-input w-20 text-center">
                         </div>
                     </td>
                     <td class="label-cell">Mata Bengkak</td>
@@ -485,7 +485,7 @@
                     <td>
                         <div class="flex items-center space-x-1">
                             <span>Jam:</span>
-                            <input type="time" name="iv_removal_time" value="{{ old('iv_removal_time') }}" class="paper-input w-20">
+                            <input type="text" data-clocklet="format: HH:mm" name="iv_removal_time" value="{{ old('iv_removal_time') }}" class="paper-input w-20 text-center">
                         </div>
                     </td>
                 </tr>
@@ -596,7 +596,7 @@
                                 <td><input type="text" name="medications[{{ $index }}][administration_route]" value="{{ $med['administration_route'] ?? '' }}" class="paper-input text-center" placeholder="Rute..."></td>
                                 <td><input type="text" name="medications[{{ $index }}][speed]" value="{{ $med['speed'] ?? '' }}" class="paper-input text-center" placeholder="Kecepatan..."></td>
                                 <td><input type="text" name="medications[{{ $index }}][pressure]" value="{{ $med['pressure'] ?? '' }}" class="paper-input text-center" placeholder="Tekanan..."></td>
-                                <td><input type="time" name="medications[{{ $index }}][administered_at]" value="{{ $med['administered_at'] ?? '' }}" class="paper-input text-center"></td>
+                                <td><input type="text" data-clocklet="format: HH:mm" name="medications[{{ $index }}][administered_at]" value="{{ $med['administered_at'] ?? '' }}" class="paper-input text-center"></td>
                                 <td><input type="text" name="medications[{{ $index }}][reaction]" value="{{ $med['reaction'] ?? '' }}" class="paper-input" placeholder="-"></td>
                                 <td><input type="text" name="medications[{{ $index }}][notes]" value="{{ $med['notes'] ?? '' }}" class="paper-input" placeholder="-"></td>
                                 <td class="center no-print"><button type="button" onclick="removeMedRow(this)" class="text-red-500 hover:text-red-700 font-bold">&times;</button></td>
@@ -609,7 +609,7 @@
                             <td><input type="text" name="medications[0][administration_route]" class="paper-input text-center" placeholder="Rute..."></td>
                             <td><input type="text" name="medications[0][speed]" class="paper-input text-center" placeholder="Kecepatan..."></td>
                             <td><input type="text" name="medications[0][pressure]" class="paper-input text-center" placeholder="Tekanan..."></td>
-                            <td><input type="time" name="medications[0][administered_at]" value="{{ date('H:i') }}" class="paper-input text-center"></td>
+                            <td><input type="text" data-clocklet="format: HH:mm" name="medications[0][administered_at]" value="{{ date('H:i') }}" class="paper-input text-center"></td>
                             <td><input type="text" name="medications[0][reaction]" class="paper-input" placeholder="-"></td>
                             <td><input type="text" name="medications[0][notes]" class="paper-input" placeholder="-"></td>
                             <td class="center no-print"><button type="button" onclick="removeMedRow(this)" class="text-red-500 hover:text-red-700 font-bold">&times;</button></td>
@@ -682,7 +682,7 @@
             <td><input type="text" name="medications[${medIndex}][administration_route]" class="paper-input text-center" placeholder="Rute..."></td>
             <td><input type="text" name="medications[${medIndex}][speed]" class="paper-input text-center" placeholder="Kecepatan..."></td>
             <td><input type="text" name="medications[${medIndex}][pressure]" class="paper-input text-center" placeholder="Tekanan..."></td>
-            <td><input type="time" name="medications[${medIndex}][administered_at]" class="paper-input text-center"></td>
+            <td><input type="text" data-clocklet="format: HH:mm" name="medications[${medIndex}][administered_at]" class="paper-input text-center"></td>
             <td><input type="text" name="medications[${medIndex}][reaction]" class="paper-input" placeholder="-"></td>
             <td><input type="text" name="medications[${medIndex}][notes]" class="paper-input" placeholder="-"></td>
             <td class="center no-print"><button type="button" onclick="removeMedRow(this)" class="text-red-500 hover:text-red-700 font-bold">&times;</button></td>
