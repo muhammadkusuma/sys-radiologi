@@ -239,21 +239,21 @@
                         <!-- Row 1 -->
                         <tr>
                             <td class="label-cell">Keadaan Umum</td>
-                            <td><input type="text" name="general_condition" value="{{ old('general_condition') }}" class="paper-input"></td>
+                            <td><textarea name="general_condition" rows="2" class="paper-input resize-y py-1" placeholder="Keadaan umum... (bisa enter/multiline)">{{ old('general_condition') }}</textarea></td>
                             <td class="label-cell">Keluhan</td>
-                            <td><input type="text" name="during_complaint" value="{{ old('during_complaint') }}" class="paper-input"></td>
+                            <td><textarea name="during_complaint" rows="2" class="paper-input resize-y py-1" placeholder="Keluhan saat tindakan...">{{ old('during_complaint') }}</textarea></td>
                             <td class="label-cell">Keluhan</td>
-                            <td><input type="text" name="post_procedure_complaint" value="{{ old('post_procedure_complaint') }}" class="paper-input"></td>
+                            <td><textarea name="post_procedure_complaint" rows="2" class="paper-input resize-y py-1" placeholder="Keluhan setelah tindakan...">{{ old('post_procedure_complaint') }}</textarea></td>
                         </tr>
 
                         <!-- Row 2 -->
                         <tr>
                             <td class="label-cell">Tingkat Kesadaran</td>
-                            <td><input type="text" name="consciousness_level" value="{{ old('consciousness_level') }}" class="paper-input"></td>
+                            <td><textarea name="consciousness_level" rows="2" class="paper-input resize-y py-1" placeholder="Tingkat kesadaran...">{{ old('consciousness_level') }}</textarea></td>
                             <td class="label-cell">Tanda-tanda Alergi</td>
-                            <td><input type="text" name="allergy_sign_during" value="{{ old('allergy_sign_during') }}" class="paper-input"></td>
+                            <td><textarea name="allergy_sign_during" rows="2" class="paper-input resize-y py-1" placeholder="Tanda alergi saat tindakan...">{{ old('allergy_sign_during') }}</textarea></td>
                             <td class="label-cell">Tanda-tanda Alergi</td>
-                            <td><input type="text" name="allergy_sign_after" value="{{ old('allergy_sign_after') }}" class="paper-input"></td>
+                            <td><textarea name="allergy_sign_after" rows="2" class="paper-input resize-y py-1" placeholder="Tanda alergi setelah tindakan...">{{ old('allergy_sign_after') }}</textarea></td>
                         </tr>
 
                         <!-- Row 3 -->
@@ -481,7 +481,7 @@
                                 </div>
                             </td>
                             <td class="label-cell">Tanda-tanda Ekstravasasi</td>
-                            <td><input type="text" name="extravasation_sign_during" value="{{ old('extravasation_sign_during') }}" placeholder="cth: Tidak ada" class="paper-input"></td>
+                            <td><textarea name="extravasation_sign_during" rows="2" class="paper-input resize-y py-1" placeholder="cth: Tidak ada">{{ old('extravasation_sign_during') }}</textarea></td>
                             <td class="label-cell"></td>
                             <td></td>
                         </tr>
@@ -520,7 +520,7 @@
                                 <label><input type="radio" name="pain_during" value="1" {{ old('pain_during') == '1' ? 'checked' : '' }}> Ya</label>
                             </td>
                             <td class="label-cell">Tanda-tanda Ekstravasasi</td>
-                            <td><input type="text" name="extravasation_sign_after" value="{{ old('extravasation_sign_after') }}" class="paper-input"></td>
+                            <td><textarea name="extravasation_sign_after" rows="2" class="paper-input resize-y py-1" placeholder="cth: Tidak ada">{{ old('extravasation_sign_after') }}</textarea></td>
                         </tr>
 
                         <!-- Row 17 -->

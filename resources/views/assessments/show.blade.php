@@ -460,21 +460,21 @@
             <!-- 1 -->
             <tr>
                 <td class="label">Keadaan Umum</td>
-                <td class="isi">{{ $assessment->general_condition ?: '-' }}</td>
+                <td class="isi">{!! $assessment->general_condition ? nl2br(e($assessment->general_condition)) : '-' !!}</td>
                 <td class="label">Keluhan</td>
-                <td class="isi">{{ $assessment->during_complaint ?: '-' }}</td>
+                <td class="isi">{!! $assessment->during_complaint ? nl2br(e($assessment->during_complaint)) : '-' !!}</td>
                 <td class="label">Keluhan</td>
-                <td class="isi">{{ $assessment->post_procedure_complaint ?: '-' }}</td>
+                <td class="isi">{!! $assessment->post_procedure_complaint ? nl2br(e($assessment->post_procedure_complaint)) : '-' !!}</td>
             </tr>
 
             <!-- 2 -->
             <tr>
                 <td class="label">Tingkat Kesadaran</td>
-                <td class="isi">{{ $assessment->consciousness_level ?: '-' }}</td>
+                <td class="isi">{!! $assessment->consciousness_level ? nl2br(e($assessment->consciousness_level)) : '-' !!}</td>
                 <td class="label">Tanda-tanda Alergi</td>
-                <td class="isi">{{ $assessment->allergy_sign_during ?: '-' }}</td>
+                <td class="isi">{!! $assessment->allergy_sign_during ? nl2br(e($assessment->allergy_sign_during)) : '-' !!}</td>
                 <td class="label">Tanda-tanda Alergi</td>
-                <td class="isi">{{ $assessment->allergy_sign_after ?: '-' }}</td>
+                <td class="isi">{!! $assessment->allergy_sign_after ? nl2br(e($assessment->allergy_sign_after)) : '-' !!}</td>
             </tr>
 
             <!-- 3 -->
@@ -631,7 +631,7 @@
                         style="font-weight: bold; text-decoration: underline;">{{ $assessment->contrast_batch ?: '-' }}</span>
                 </td>
                 <td class="label">Tanda-tanda Ekstravasasi</td>
-                <td class="isi">{{ $assessment->extravasation_sign_during ?: '-' }}</td>
+                <td class="isi">{!! $assessment->extravasation_sign_during ? nl2br(e($assessment->extravasation_sign_during)) : '-' !!}</td>
                 <td class="label"></td>
                 <td class="isi"></td>
             </tr>
@@ -660,7 +660,7 @@
                     <input type="radio" @checked($assessment->pain_during)> Ya
                 </td>
                 <td class="label">Tanda-tanda Ekstravasasi</td>
-                <td class="isi">{{ $assessment->extravasation_sign_after ?: '-' }}</td>
+                <td class="isi">{!! $assessment->extravasation_sign_after ? nl2br(e($assessment->extravasation_sign_after)) : '-' !!}</td>
             </tr>
 
             <!-- 17 -->
