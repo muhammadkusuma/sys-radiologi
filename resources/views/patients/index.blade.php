@@ -58,9 +58,18 @@
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-600">{{ $patient->phone ?? '-' }}</td>
                             <td class="px-6 py-4 text-sm text-slate-600 max-w-xs truncate">{{ $patient->address ?? '-' }}</td>
                             <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-semibold space-x-2">
-                                <a href="{{ route('assessments.create', $patient->id) }}" class="inline-flex items-center px-2.5 py-1 bg-green-50 text-green-700 hover:bg-green-100 rounded text-xs border border-green-200">
-                                    + Asesmen
-                                </a>
+                                @if($patient->radiologyContrastAssessments->count() > 0)
+                                    @php
+                                        $latestAssessment = $patient->radiologyContrastAssessments->first();
+                                    @endphp
+                                    <a href="{{ route('assessments.edit', $latestAssessment->id) }}" class="inline-flex items-center px-2.5 py-1 bg-yellow-55 text-yellow-800 hover:bg-yellow-100 rounded text-xs border border-yellow-200">
+                                        Edit Asesmen
+                                    </a>
+                                @else
+                                    <a href="{{ route('assessments.create', $patient->id) }}" class="inline-flex items-center px-2.5 py-1 bg-green-50 text-green-700 hover:bg-green-100 rounded text-xs border border-green-200">
+                                        + Asesmen
+                                    </a>
+                                @endif
                                 <a href="{{ route('patients.edit', $patient->id) }}" class="text-blue-600 hover:text-blue-900 cursor-pointer">Edit</a>
                                 <form id="delete-form-{{ $patient->id }}" action="{{ route('patients.destroy', $patient->id) }}" method="POST" class="inline-block">
                                     @csrf
