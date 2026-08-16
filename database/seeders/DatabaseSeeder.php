@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
 
         User::factory()->create([
             'name' => 'Perawat Indah',
+            'username' => 'perawat',
             'email' => 'perawat@example.com',
             'password' => bcrypt('password'),
             'role' => 'perawat',
@@ -26,6 +27,7 @@ class DatabaseSeeder extends Seeder
 
         User::factory()->create([
             'name' => 'Dr. Sp. Rad Ahmad',
+            'username' => 'dokter',
             'email' => 'dokter@example.com',
             'password' => bcrypt('password'),
             'role' => 'dokter',
