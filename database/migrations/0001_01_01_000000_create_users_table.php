@@ -19,6 +19,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('role')->default('perawat'); // perawat, dokter
+            $table->text('signature')->nullable(); // TTD digital (base64/path)
             $table->rememberToken();
             $table->timestamps();
         });

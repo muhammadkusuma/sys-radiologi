@@ -623,15 +623,23 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center border-t border-slate-200 pt-6 mt-6">
                 <div>
                     <span class="block text-xs font-bold text-slate-800 mb-2">Tanda Tangan Perawat Radiologi:</span>
-                    <canvas id="nurseSigPad" class="signature-box" width="350" height="130"></canvas>
-                    <div class="flex space-x-2 mt-2">
-                        <button type="button" onclick="clearNursePad()" class="px-3 py-1 bg-slate-200 text-slate-700 text-xs font-semibold rounded hover:bg-slate-350 cursor-pointer">Hapus</button>
-                    </div>
-                    <input type="hidden" name="nurse_signature" id="nurseSigInput">
+                    @if(Auth::user()->signature)
+                        <div class="bg-white p-3 border border-slate-200 rounded-lg inline-block shadow-sm">
+                            <img src="{{ Auth::user()->signature }}" alt="Tanda Tangan" class="h-16">
+                            <span class="text-[10px] text-green-600 font-bold block mt-1">Otomatis dari Profil Master TTD</span>
+                        </div>
+                        <input type="hidden" name="nurse_signature" id="nurseSigInput" value="{{ Auth::user()->signature }}">
+                    @else
+                        <div class="p-3 bg-amber-50 border border-amber-200 text-amber-800 text-xs rounded-lg">
+                            Anda belum mengunggah tanda tangan di Master TTD. Silakan 
+                            <a href="{{ route('signatures.index') }}" class="underline font-semibold text-blue-600" target="_blank">Unggah TTD Anda di sini</a> 
+                            agar dapat melakukan tanda tangan otomatis.
+                        </div>
+                    @endif
                 </div>
                 <div class="text-xs text-slate-500 space-y-2">
-                    <p class="font-bold text-slate-800">Tanda Tangan Elektronik</p>
-                    <p>Silakan gambar paraf / tanda tangan Anda pada bidang canvas di samping. Data ini akan dimasukkan ke dalam arsip PDF Halaman 2 dokumen resmi Asesmen Radiologi Kontras.</p>
+                    <p class="font-bold text-slate-800">Tanda Tangan Elektronik Otomatis</p>
+                    <p>Sistem mendeteksi tanda tangan PNG Anda yang diunggah di menu Master TTD. Tanda tangan ini akan otomatis dicantumkan pada lembar Asesmen Radiologi Kontras.</p>
                 </div>
             </div>
             @endif
@@ -692,83 +700,14 @@
         }
     }
 
-    // Canvas drawing setup
-    const nurseCanvas = document.getElementById('nurseSigPad');
-    let drawing = false;
-    let nurseCtx = null;
-
-    if (nurseCanvas) {
-        nurseCtx = nurseCanvas.getContext('2d');
-        nurseCtx.strokeStyle = "#000000";
-        nurseCtx.lineWidth = 3;
-        nurseCtx.lineCap = "round";
-
-        function getMousePos(canvasDom, e) {
-            var rect = canvasDom.getBoundingClientRect();
-            return {
-                x: (e.clientX || e.touches[0].clientX) - rect.left,
-                y: (e.clientY || e.touches[0].clientY) - rect.top
-            };
-        }
-
-        nurseCanvas.addEventListener('mousedown', function(e) {
-            drawing = true;
-            const pos = getMousePos(nurseCanvas, e);
-            nurseCtx.beginPath();
-            nurseCtx.moveTo(pos.x, pos.y);
-        });
-
-        nurseCanvas.addEventListener('mousemove', function(e) {
-            if (drawing) {
-                const pos = getMousePos(nurseCanvas, e);
-                nurseCtx.lineTo(pos.x, pos.y);
-                nurseCtx.stroke();
-            }
-        });
-
-        nurseCanvas.addEventListener('mouseup', function() {
-            drawing = false;
-        });
-
-        nurseCanvas.addEventListener('touchstart', function(e) {
-            e.preventDefault();
-            drawing = true;
-            const pos = getMousePos(nurseCanvas, e);
-            nurseCtx.beginPath();
-            nurseCtx.moveTo(pos.x, pos.y);
-        }, { passive: false });
-
-        nurseCanvas.addEventListener('touchmove', function(e) {
-            e.preventDefault();
-            if (drawing) {
-                const pos = getMousePos(nurseCanvas, e);
-                nurseCtx.lineTo(pos.x, pos.y);
-                nurseCtx.stroke();
-            }
-        }, { passive: false });
-
-        nurseCanvas.addEventListener('touchend', function() {
-            drawing = false;
-        });
-    }
-
-    function clearNursePad() {
-        if (nurseCanvas) {
-            nurseCtx.clearRect(0, 0, nurseCanvas.width, nurseCanvas.height);
-        }
-    }
-
     function submitForm(event) {
         event.preventDefault();
-        if (nurseCanvas) {
-            const input = document.getElementById('nurseSigInput');
-            const blank = document.createElement('canvas');
-            blank.width = nurseCanvas.width;
-            blank.height = nurseCanvas.height;
-            if (nurseCanvas.toDataURL() !== blank.toDataURL()) {
-                input.value = nurseCanvas.toDataURL();
-            }
-        }
+        @if(Auth::user()->role === 'perawat')
+            @if(!Auth::user()->signature)
+                alert('Anda harus mengunggah tanda tangan terlebih dahulu di Master TTD sebelum menyimpan asesmen.');
+                return;
+            @endif
+        @endif
         document.getElementById('assessmentForm').submit();
     }
 </script>
