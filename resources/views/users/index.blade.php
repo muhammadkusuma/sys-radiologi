@@ -66,10 +66,10 @@
                             <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-semibold space-x-2">
                                 <button onclick="editUser({{ json_encode($user) }})" class="text-blue-600 hover:text-blue-900 cursor-pointer">Edit</button>
                                 @if($user->id !== auth()->id())
-                                    <form action="{{ route('users.destroy', $user->id) }}" method="POST" class="inline-block" onsubmit="return confirm('Apakah Anda yakin ingin menghapus user ini?')">
+                                    <form id="delete-form-{{ $user->id }}" action="{{ route('users.destroy', $user->id) }}" method="POST" class="inline-block">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="text-red-600 hover:text-red-900 cursor-pointer">Hapus</button>
+                                        <button type="button" onclick="confirmDelete('{{ $user->id }}', 'Apakah Anda yakin ingin menghapus user ini?')" class="text-red-600 hover:text-red-900 cursor-pointer">Hapus</button>
                                     </form>
                                 @endif
                             </td>
@@ -206,6 +206,11 @@
             eyeIcon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />`;
         }
+    }
+    function confirmDelete(id, message) {
+        showConfirm('Konfirmasi Hapus', message, () => {
+            document.getElementById('delete-form-' + id).submit();
+        });
     }
 </script>
 @endsection

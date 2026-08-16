@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'Asesmen Radiologi Kontras') - RSAB</title>
+    <title>@yield('title', 'Asesmen Radiologi Kontras') - RSAB A. Yani</title>
     @vite(['resources/css/app.css'])
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -144,7 +144,54 @@
     <!-- Toast Container -->
     <div id="toast-container" class="fixed top-4 right-4 z-50 flex flex-col gap-2 pointer-events-none no-print"></div>
 
+    <!-- Custom Confirm Modal -->
+    <div id="confirm-modal" class="fixed inset-0 z-50 overflow-y-auto hidden">
+        <div class="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
+            <div class="fixed inset-0 transition-opacity bg-slate-900/30 backdrop-blur-sm" onclick="closeConfirmModal()"></div>
+            <span class="hidden sm:inline-block sm:align-middle sm:h-screen">&#8203;</span>
+            
+            <div class="inline-block align-bottom bg-white rounded-2xl text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-md sm:w-full border border-slate-200 relative z-10 p-6 space-y-4">
+                <div class="flex items-center space-x-3 text-red-650">
+                    <div class="p-2 bg-red-50 text-red-600 rounded-full">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900" id="confirm-title">Konfirmasi Tindakan</h3>
+                </div>
+                <div>
+                    <p class="text-sm text-slate-500" id="confirm-message">Apakah Anda yakin ingin melakukan tindakan ini?</p>
+                </div>
+                <div class="flex justify-end space-x-3 pt-2">
+                    <button type="button" onclick="closeConfirmModal()" class="px-4 py-2 border border-slate-300 rounded-lg text-sm font-semibold text-slate-700 hover:bg-slate-50 focus:outline-none cursor-pointer">Batal</button>
+                    <button type="button" id="confirm-submit-btn" class="px-4 py-2 bg-red-600 hover:bg-red-700 text-white text-sm font-semibold rounded-lg shadow focus:outline-none cursor-pointer">Hapus</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
+        let activeConfirmCallback = null;
+
+        function showConfirm(title, message, onConfirm) {
+            document.getElementById('confirm-title').textContent = title || 'Konfirmasi Tindakan';
+            document.getElementById('confirm-message').textContent = message || 'Apakah Anda yakin?';
+            activeConfirmCallback = onConfirm;
+            document.getElementById('confirm-modal').classList.remove('hidden');
+        }
+
+        function closeConfirmModal() {
+            document.getElementById('confirm-modal').classList.add('hidden');
+            activeConfirmCallback = null;
+        }
+
+        document.getElementById('confirm-submit-btn').addEventListener('click', () => {
+            if (typeof activeConfirmCallback === 'function') {
+                activeConfirmCallback();
+            }
+            closeConfirmModal();
+        });
+
         function showToast(message, type = 'success') {
             const container = document.getElementById('toast-container');
             if (!container) return;

@@ -134,10 +134,10 @@
                                 <a href="{{ route('assessments.edit', $ast->id) }}" class="inline-flex items-center px-2.5 py-1 bg-blue-50 hover:bg-blue-100 text-blue-700 text-xs font-semibold rounded border border-blue-200">
                                     Edit
                                 </a>
-                                <form action="{{ route('assessments.destroy', $ast->id) }}" method="POST" class="inline-block" onsubmit="return confirm('Apakah Anda yakin ingin menghapus dokumen asesmen ini?')">
+                                <form id="delete-form-{{ $ast->id }}" action="{{ route('assessments.destroy', $ast->id) }}" method="POST" class="inline-block">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="inline-flex items-center px-2.5 py-1 bg-red-50 hover:bg-red-100 text-red-700 text-xs font-semibold rounded border border-red-200 cursor-pointer">
+                                    <button type="button" onclick="confirmDelete('{{ $ast->id }}', 'Apakah Anda yakin ingin menghapus dokumen asesmen ini?')" class="inline-flex items-center px-2.5 py-1 bg-red-50 hover:bg-red-100 text-red-700 text-xs font-semibold rounded border border-red-200 cursor-pointer">
                                         Hapus
                                     </button>
                                 </form>
@@ -179,6 +179,11 @@
                 row.style.display = "none";
             }
         }
+    }
+    function confirmDelete(id, message) {
+        showConfirm('Konfirmasi Hapus', message, () => {
+            document.getElementById('delete-form-' + id).submit();
+        });
     }
 </script>
 @endsection

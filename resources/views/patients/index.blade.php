@@ -62,10 +62,10 @@
                                     + Asesmen
                                 </a>
                                 <a href="{{ route('patients.edit', $patient->id) }}" class="text-blue-600 hover:text-blue-900 cursor-pointer">Edit</a>
-                                <form action="{{ route('patients.destroy', $patient->id) }}" method="POST" class="inline-block" onsubmit="return confirm('Apakah Anda yakin ingin menghapus data pasien ini?')">
+                                <form id="delete-form-{{ $patient->id }}" action="{{ route('patients.destroy', $patient->id) }}" method="POST" class="inline-block">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="text-red-600 hover:text-red-900 cursor-pointer">Hapus</button>
+                                    <button type="button" onclick="confirmDelete('{{ $patient->id }}', 'Apakah Anda yakin ingin menghapus data pasien ini?')" class="text-red-600 hover:text-red-900 cursor-pointer">Hapus</button>
                                 </form>
                             </td>
                         </tr>
@@ -167,6 +167,11 @@
                 row.style.display = "none";
             }
         }
+    }
+    function confirmDelete(id, message) {
+        showConfirm('Konfirmasi Hapus', message, () => {
+            document.getElementById('delete-form-' + id).submit();
+        });
     }
 </script>
 @endsection
