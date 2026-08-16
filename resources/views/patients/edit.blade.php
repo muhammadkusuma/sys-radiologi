@@ -64,3 +64,14 @@
     </div>
 </div>
 @endsection
+
+@section('scripts')
+<script>
+    document.getElementById('medical_record_number').addEventListener('blur', function(e) {
+        let val = e.target.value.trim();
+        if (val && /^\d+$/.test(val)) {
+            e.target.value = val.padStart(8, '0');
+        }
+    });
+</script>
+@endsection

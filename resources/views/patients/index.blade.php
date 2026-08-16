@@ -104,7 +104,7 @@
                     <div class="mt-4 space-y-4">
                         <div>
                             <label for="medical_record_number" class="block text-sm font-semibold text-slate-700">No. Rekam Medis</label>
-                            <input type="text" name="medical_record_number" id="medical_record_number" required placeholder="Contoh: 12-34-56" class="mt-1 appearance-none block w-full px-3 py-2 border border-slate-300 rounded-lg bg-white text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 sm:text-sm">
+                            <input type="text" name="medical_record_number" id="medical_record_number" required placeholder="Contoh: 00286727" class="mt-1 appearance-none block w-full px-3 py-2 border border-slate-300 rounded-lg bg-white text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 sm:text-sm">
                         </div>
                         
                         <div>
@@ -182,5 +182,11 @@
             document.getElementById('delete-form-' + id).submit();
         });
     }
+    document.getElementById('medical_record_number').addEventListener('blur', function(e) {
+        let val = e.target.value.trim();
+        if (val && /^\d+$/.test(val)) {
+            e.target.value = val.padStart(8, '0');
+        }
+    });
 </script>
 @endsection

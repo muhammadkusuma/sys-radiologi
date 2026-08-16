@@ -48,7 +48,7 @@ class DatabaseSeeder extends Seeder
         );
 
         \App\Models\Patient::updateOrCreate(
-            ['medical_record_number' => '12-34-56'],
+            ['medical_record_number' => '00286727'],
             [
                 'name' => 'Budi Santoso',
                 'gender' => 'L',
@@ -59,7 +59,7 @@ class DatabaseSeeder extends Seeder
         );
 
         \App\Models\Patient::updateOrCreate(
-            ['medical_record_number' => '78-90-12'],
+            ['medical_record_number' => '00286728'],
             [
                 'name' => 'Siti Aminah',
                 'gender' => 'P',
