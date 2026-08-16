@@ -49,9 +49,12 @@
         }
 
         @media screen {
-            html, body {
+
+            html,
+            body {
                 background-color: #f8fafc !important;
             }
+
             .page {
                 background: #ffffff !important;
                 color: #000000 !important;
@@ -61,6 +64,7 @@
                 border-radius: 12px;
                 box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
             }
+
             .no-print-bar {
                 background-color: #ffffff !important;
                 border-bottom: 1px solid #cbd5e1 !important;
@@ -360,10 +364,12 @@
             Mode Pratinjau Dokumen Medis
         </div>
         <div style="display: flex; gap: 10px;">
-            <a href="{{ route('dashboard') }}" style="text-decoration: none; padding: 6px 14px; background: #fff; border: 1px solid #cbd5e1; border-radius: 6px; color: #475569; font-weight: 600; font-size: 12px;">
+            <a href="{{ route('dashboard') }}"
+                style="text-decoration: none; padding: 6px 14px; background: #fff; border: 1px solid #cbd5e1; border-radius: 6px; color: #475569; font-weight: 600; font-size: 12px;">
                 &larr; Kembali
             </a>
-            <button onclick="window.print()" style="cursor: pointer; padding: 6px 14px; background: #2563eb; border: none; border-radius: 6px; color: #fff; font-weight: 600; font-size: 12px; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">
+            <button onclick="window.print()"
+                style="cursor: pointer; padding: 6px 14px; background: #2563eb; border: none; border-radius: 6px; color: #fff; font-weight: 600; font-size: 12px; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">
                 Cetak Dokumen (Print)
             </button>
         </div>
@@ -374,8 +380,9 @@
 
         <div class="header">
             <div class="logo-area">
-                <span class="logo-text">RS AWAL BROS</span>
-                <span class="logo-subtext">Pekanbaru</span>
+                {{-- <span class="logo-text">RS AWAL BROS</span>
+                <span class="logo-subtext">Pekanbaru</span> --}}
+                <img src="{{ asset('login.png') }}" alt="" srcset="" style="height: 40px">
             </div>
             <div class="judul">
                 ASESMEN TINDAKAN RADIOLOGI KONTRAS
@@ -392,7 +399,8 @@
                     <div style="font-size: 12px; font-weight: bold; line-height: 16px;">
                         Nama: {{ $assessment->patient->name }}<br>
                         No. RM: {{ $assessment->patient->medical_record_number }}<br>
-                        JK/Tgl Lahir: {{ $assessment->patient->gender }} / {{ $assessment->patient->date_of_birth ? $assessment->patient->date_of_birth->format('d-m-Y') : '-' }}<br>
+                        JK/Tgl Lahir: {{ $assessment->patient->gender }} /
+                        {{ $assessment->patient->date_of_birth ? $assessment->patient->date_of_birth->format('d-m-Y') : '-' }}<br>
                         Alamat: {{ $assessment->patient->address ?: '-' }}
                     </div>
                 </td>
@@ -400,7 +408,8 @@
                     Tanggal Tindakan
                 </td>
                 <td class="isi-kanan right bold">
-                    {{ $assessment->procedure_date ? $assessment->procedure_date->format('d/m/Y') : '-' }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    {{ $assessment->procedure_date ? $assessment->procedure_date->format('d/m/Y') : '-' }}
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     Jam: {{ $assessment->procedure_time ? substr($assessment->procedure_time, 0, 5) : '-' }} WIB
                 </td>
             </tr>
@@ -473,7 +482,8 @@
             <!-- 3 -->
             <tr>
                 <td class="label">Nilai eGFR</td>
-                <td class="isi right bold">{{ $assessment->egfr ?: '-' }} <span style="font-weight:normal; font-size:10px;">ml/menit/1,73m²</span></td>
+                <td class="isi right bold">{{ $assessment->egfr ?: '-' }} <span
+                        style="font-weight:normal; font-size:10px;">ml/menit/1,73m²</span></td>
                 <td class="label">Gatal-gatal</td>
                 <td class="isi">
                     <input type="radio" @checked(!$assessment->itching_during)> Tidak
@@ -489,7 +499,8 @@
             <!-- 4 -->
             <tr>
                 <td class="label">Makan Terakhir</td>
-                <td class="isi right">Jam: {{ $assessment->last_meal_time ? substr($assessment->last_meal_time, 0, 5) : '-' }} WIB</td>
+                <td class="isi right">Jam:
+                    {{ $assessment->last_meal_time ? substr($assessment->last_meal_time, 0, 5) : '-' }} WIB</td>
                 <td class="label">Mual</td>
                 <td class="isi">
                     <input type="radio" @checked(!$assessment->nausea_during)> Tidak
@@ -552,7 +563,8 @@
                 <td class="label">Suhu</td>
                 <td class="isi right">{{ $assessment->temperature ?: '-' }} °C</td>
                 <td class="label">Pemasangan Infus</td>
-                <td class="isi right">Jam: {{ $assessment->iv_insertion_time ? substr($assessment->iv_insertion_time, 0, 5) : '-' }} WIB</td>
+                <td class="isi right">Jam:
+                    {{ $assessment->iv_insertion_time ? substr($assessment->iv_insertion_time, 0, 5) : '-' }} WIB</td>
                 <td class="label">Bentol-bentol</td>
                 <td class="isi">
                     <input type="radio" @checked(!$assessment->bentol_after)> Tidak
@@ -604,7 +616,8 @@
                 <td class="isi left">
                     <input type="radio" @checked(!$assessment->has_allergy_history)> Tidak &nbsp;
                     <input type="radio" @checked($assessment->has_allergy_history)> Ada:
-                    <span style="font-weight: bold; text-decoration: underline;">{{ $assessment->allergy_description ?: '-' }}</span>
+                    <span
+                        style="font-weight: bold; text-decoration: underline;">{{ $assessment->allergy_description ?: '-' }}</span>
                 </td>
                 <td class="label"></td>
                 <td class="isi"></td>
@@ -616,7 +629,8 @@
             <tr>
                 <td class="label">Obat Media Kontras</td>
                 <td class="isi left">
-                    Batch: <span style="font-weight: bold; text-decoration: underline;">{{ $assessment->contrast_batch ?: '-' }}</span>
+                    Batch: <span
+                        style="font-weight: bold; text-decoration: underline;">{{ $assessment->contrast_batch ?: '-' }}</span>
                 </td>
                 <td class="label">Tanda-tanda Ekstravasasi</td>
                 <td class="isi">{{ $assessment->extravasation_sign_during ?: '-' }}</td>
@@ -634,7 +648,8 @@
                     <input type="radio" @checked($assessment->swelling_during)> Ya
                 </td>
                 <td class="label">Pelepasan Infus</td>
-                <td class="isi right">Jam: {{ $assessment->iv_removal_time ? substr($assessment->iv_removal_time, 0, 5) : '-' }} WIB</td>
+                <td class="isi right">Jam:
+                    {{ $assessment->iv_removal_time ? substr($assessment->iv_removal_time, 0, 5) : '-' }} WIB</td>
             </tr>
 
             <!-- 16 -->
@@ -744,8 +759,9 @@
 
         <div class="header" style="margin-top: 15px;">
             <div class="logo-area">
-                <span class="logo-text">RS AWAL BROS</span>
-                <span class="logo-subtext">Pekanbaru</span>
+                {{-- <span class="logo-text">RS AWAL BROS</span>
+                <span class="logo-subtext">Pekanbaru</span> --}}
+                <img src="{{ asset('login.png') }}" alt="" srcset="" style="height: 40px">
             </div>
             <div class="judul">
                 CATATAN PEMBERIAN OBAT KONTRAS
@@ -772,7 +788,8 @@
                     <td class="center">{{ $med->administration_route }}</td>
                     <td class="center">{{ $med->speed }}</td>
                     <td class="center">{{ $med->pressure }}</td>
-                    <td class="center">{{ $med->administered_at ? substr($med->administered_at, 0, 5) : '-' }} WIB</td>
+                    <td class="center">{{ $med->administered_at ? substr($med->administered_at, 0, 5) : '-' }} WIB
+                    </td>
                     <td>{{ $med->reaction }}</td>
                     <td>{{ $med->notes }}</td>
                     <td class="center" style="font-size: 9px; font-weight: bold;">
@@ -798,13 +815,13 @@
         <div class="tempat-waktu">
             <div>
                 Pekanbaru,
-                <span class="bold" style="text-decoration: underline;">
+                <span id="current-print-date" class="bold" style="text-decoration: underline;">
                     {{ $assessment->procedure_date ? $assessment->procedure_date->format('d M Y') : date('d M Y') }}
                 </span>
             </div>
             <div>
                 Jam:
-                <span class="bold" style="text-decoration: underline;">
+                <span id="current-print-time" class="bold" style="text-decoration: underline;">
                     {{ $assessment->procedure_time ? substr($assessment->procedure_time, 0, 5) : date('H:i') }}
                 </span> WIB
             </div>
@@ -817,14 +834,16 @@
                     Perawat Radiologi
                 </div>
                 <div class="ttd-ruang">
-                    @if($assessment->nurse_signature)
+                    @if ($assessment->nurse_signature)
                         <img src="{{ $assessment->nurse_signature }}" alt="Ttd Perawat">
                     @else
                         <span style="color: #64748b; font-style: italic;">Belum ditandatangani</span>
                     @endif
                 </div>
                 <div class="ttd-garis">
-                    ( {{ $assessment->radiologyNurse ? $assessment->radiologyNurse->name : '................................' }} )
+                    (
+                    {{ $assessment->radiologyNurse ? $assessment->radiologyNurse->name : '................................' }}
+                    )
                 </div>
             </div>
 
@@ -833,14 +852,16 @@
                     Dokter Spesialis Radiologi
                 </div>
                 <div class="ttd-ruang">
-                    @if($assessment->doctor_signature)
+                    @if ($assessment->doctor_signature)
                         <img src="{{ $assessment->doctor_signature }}" alt="Ttd Dokter">
                     @else
                         <span style="color: #64748b; font-style: italic;">Belum ditandatangani</span>
                     @endif
                 </div>
                 <div class="ttd-garis">
-                    ( {{ $assessment->radiologyDoctor ? $assessment->radiologyDoctor->name : '................................' }} )
+                    (
+                    {{ $assessment->radiologyDoctor ? $assessment->radiologyDoctor->name : '................................' }}
+                    )
                 </div>
             </div>
         </div>
@@ -861,13 +882,38 @@
     </div>
 
     <script>
-        if (window.location.search.includes('download=1')) {
-            window.addEventListener('DOMContentLoaded', () => {
+        function updatePrintTime() {
+            const now = new Date();
+
+            // Format Date: d M Y (e.g. 16 Aug 2026)
+            const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+            const dateStr = now.getDate().toString().padStart(2, '0') + ' ' + months[now.getMonth()] + ' ' + now
+                .getFullYear();
+
+            // Format Time: H:i (e.g. 15:56)
+            const timeStr = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
+
+            const dateEl = document.getElementById('current-print-date');
+            const timeEl = document.getElementById('current-print-time');
+
+            if (dateEl) dateEl.textContent = dateStr;
+            if (timeEl) timeEl.textContent = timeStr;
+        }
+
+        // Run immediately on DOMContentLoaded
+        window.addEventListener('DOMContentLoaded', () => {
+            updatePrintTime();
+
+            if (window.location.search.includes('download=1')) {
                 setTimeout(() => {
                     window.print();
                 }, 500);
-            });
-        }
+            }
+        });
+
+        // Ensure it is fresh right before the print dialog opens
+        window.addEventListener('beforeprint', updatePrintTime);
     </script>
 </body>
+
 </html>
