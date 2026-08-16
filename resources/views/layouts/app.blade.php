@@ -503,6 +503,32 @@
                     openClockPicker(e.target);
                 }
             });
+
+            // Global Input Min/Max Validation Listener
+            document.addEventListener('change', function(e) {
+                if (e.target.matches('input[type="number"], input[min], input[max]')) {
+                    const input = e.target;
+                    const val = parseFloat(input.value);
+                    if (isNaN(val)) return;
+
+                    const min = parseFloat(input.getAttribute('min'));
+                    const max = parseFloat(input.getAttribute('max'));
+                    const labelCell = input.closest('tr')?.querySelector('.label-cell');
+                    const fieldName = labelCell ? labelCell.textContent.replace(/[*:]/g, '').trim() : input.name;
+
+                    if (!isNaN(min) && val < min) {
+                        showToast(`Nilai ${fieldName} tidak boleh kurang dari ${min}`, 'error');
+                        input.value = min;
+                        input.dispatchEvent(new Event('input', { bubbles: true }));
+                        input.dispatchEvent(new Event('change', { bubbles: true }));
+                    } else if (!isNaN(max) && val > max) {
+                        showToast(`Nilai ${fieldName} tidak boleh lebih dari ${max}`, 'error');
+                        input.value = max;
+                        input.dispatchEvent(new Event('input', { bubbles: true }));
+                        input.dispatchEvent(new Event('change', { bubbles: true }));
+                    }
+                }
+            });
         });
     </script>
     <script src="https://cdn.jsdelivr.net/npm/clocklet@0.3.0/js/clocklet.min.js"></script>

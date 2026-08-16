@@ -263,7 +263,7 @@
                             <td class="label-cell">Nilai eGFR</td>
                             <td>
                                 <div class="flex items-center space-x-1">
-                                    <input type="number" step="0.01" name="egfr" value="{{ old('egfr') }}" class="paper-input w-20 text-right">
+                                    <input type="number" step="0.01" name="egfr" min="0" max="300" value="{{ old('egfr') }}" class="paper-input w-20 text-right">
                                     <span class="text-[9px]">ml/menit/1,73m²</span>
                                 </div>
                             </td>
@@ -305,7 +305,7 @@
                             <td class="label-cell">Berat Badan</td>
                             <td>
                                 <div class="flex items-center space-x-1">
-                                    <input type="number" step="0.1" name="body_weight" value="{{ old('body_weight') }}" class="paper-input w-20 text-right">
+                                    <input type="number" step="0.1" name="body_weight" min="1" max="500" value="{{ old('body_weight') }}" class="paper-input w-20 text-right">
                                     <span>Kg</span>
                                 </div>
                             </td>
@@ -347,7 +347,7 @@
                             <td class="label-cell">Nadi</td>
                             <td>
                                 <div class="flex items-center space-x-1">
-                                    <input type="number" name="pulse" value="{{ old('pulse') }}" class="paper-input w-20 text-right">
+                                    <input type="number" name="pulse" min="30" max="220" value="{{ old('pulse') }}" class="paper-input w-20 text-right">
                                     <span>x/menit</span>
                                 </div>
                             </td>
@@ -365,7 +365,7 @@
                             <td class="label-cell">Suhu</td>
                             <td>
                                 <div class="flex items-center space-x-1">
-                                    <input type="number" step="0.1" name="temperature" value="{{ old('temperature') }}" class="paper-input w-20 text-right">
+                                    <input type="number" step="0.1" name="temperature" min="35" max="43" value="{{ old('temperature') }}" class="paper-input w-20 text-right">
                                     <span>&deg;C</span>
                                 </div>
                             </td>
@@ -389,7 +389,7 @@
                             <td class="label-cell">Pernafasan</td>
                             <td>
                                 <div class="flex items-center space-x-1">
-                                    <input type="number" name="respiratory_rate" value="{{ old('respiratory_rate') }}" class="paper-input w-20 text-right">
+                                    <input type="number" name="respiratory_rate" min="8" max="60" value="{{ old('respiratory_rate') }}" class="paper-input w-20 text-right">
                                     <span>x/menit</span>
                                 </div>
                             </td>
@@ -409,7 +409,7 @@
                             <td class="label-cell">Saturasi O2</td>
                             <td>
                                 <div class="flex items-center space-x-1">
-                                    <input type="number" step="0.1" name="oxygen_saturation" value="{{ old('oxygen_saturation') }}" class="paper-input w-20 text-right">
+                                    <input type="number" step="0.1" name="oxygen_saturation" min="50" max="100" value="{{ old('oxygen_saturation') }}" class="paper-input w-20 text-right">
                                     <span>%</span>
                                 </div>
                             </td>
@@ -418,7 +418,7 @@
                             <td class="label-cell">Nadi</td>
                             <td>
                                 <div class="flex items-center space-x-1">
-                                    <input type="number" name="post_pulse" value="{{ old('post_pulse') }}" class="paper-input w-20 text-right">
+                                    <input type="number" name="post_pulse" min="30" max="220" value="{{ old('post_pulse') }}" class="paper-input w-20 text-right">
                                     <span>x/menit</span>
                                 </div>
                             </td>
@@ -435,7 +435,7 @@
                             <td class="label-cell">Suhu</td>
                             <td>
                                 <div class="flex items-center space-x-1">
-                                    <input type="number" step="0.1" name="post_temperature" value="{{ old('post_temperature') }}" class="paper-input w-20 text-right">
+                                    <input type="number" step="0.1" name="post_temperature" min="35" max="43" value="{{ old('post_temperature') }}" class="paper-input w-20 text-right">
                                     <span>&deg;C</span>
                                 </div>
                             </td>
@@ -446,7 +446,7 @@
                             <td class="label-cell">Pernafasan</td>
                             <td>
                                 <div class="flex items-center space-x-1">
-                                    <input type="number" name="post_respiratory_rate" value="{{ old('post_respiratory_rate') }}" class="paper-input w-20 text-right">
+                                    <input type="number" name="post_respiratory_rate" min="8" max="60" value="{{ old('post_respiratory_rate') }}" class="paper-input w-20 text-right">
                                     <span>x/menit</span>
                                 </div>
                             </td>
@@ -467,7 +467,7 @@
                             <td class="label-cell">Saturasi O2</td>
                             <td>
                                 <div class="flex items-center space-x-1">
-                                    <input type="number" step="0.1" name="post_oxygen_saturation" value="{{ old('post_oxygen_saturation') }}" class="paper-input w-20 text-right">
+                                    <input type="number" step="0.1" name="post_oxygen_saturation" min="50" max="100" value="{{ old('post_oxygen_saturation') }}" class="paper-input w-20 text-right">
                                     <span>%</span>
                                 </div>
                             </td>
@@ -512,7 +512,7 @@
                             <td class="label-cell">Dosis</td>
                             <td>
                                 <div class="flex items-center space-x-1">
-                                    <input type="number" step="0.01" name="contrast_dose_ml" value="{{ old('contrast_dose_ml') }}" class="paper-input w-20 text-right">
+                                    <input type="number" step="0.01" name="contrast_dose_ml" min="0" max="500" value="{{ old('contrast_dose_ml') }}" class="paper-input w-20 text-right">
                                     <span>ml</span>
                                 </div>
                             </td>
@@ -767,16 +767,130 @@
         `;
             tbody.appendChild(tr);
             medIndex++;
+            saveDraft();
         }
 
         function removeMedRow(button) {
             const row = button.closest('tr');
             if (document.querySelectorAll('#medicationTableBody tr').length > 1) {
                 row.remove();
+                saveDraft();
             } else {
                 alert('Minimal harus ada 1 baris catatan pemberian obat.');
             }
         }
+
+        const storageKey = 'assessment_draft_create_{{ $patient->id }}';
+        const form = document.getElementById('assessmentForm');
+
+        function saveDraft() {
+            const formData = {};
+            const elements = form.querySelectorAll('input, select, textarea');
+            
+            elements.forEach(el => {
+                if (!el.name) return;
+                
+                if (el.type === 'radio') {
+                    if (el.checked) {
+                        formData[el.name] = el.value;
+                    }
+                } else if (el.type === 'checkbox') {
+                    if (!formData[el.name]) {
+                        formData[el.name] = [];
+                    }
+                    if (el.checked) {
+                        if (el.name.endsWith('[]')) {
+                            formData[el.name].push(el.value);
+                        } else {
+                            formData[el.name] = el.value;
+                        }
+                    }
+                } else {
+                    formData[el.name] = el.value;
+                }
+            });
+            
+            localStorage.setItem(storageKey, JSON.stringify(formData));
+        }
+
+        function loadDraft() {
+            const rawData = localStorage.getItem(storageKey);
+            if (!rawData) return;
+            
+            try {
+                const formData = JSON.parse(rawData);
+                
+                // Recreate medication rows if they exist in draft
+                let maxMedIndex = 0;
+                Object.keys(formData).forEach(key => {
+                    const match = key.match(/^medications\[(\d+)\]/);
+                    if (match) {
+                        const idx = parseInt(match[1]);
+                        if (idx > maxMedIndex) {
+                            maxMedIndex = idx;
+                        }
+                    }
+                });
+                
+                for (let i = 1; i <= maxMedIndex; i++) {
+                    if (!form.querySelector(`[name="medications[${i}][medication_name]"]`)) {
+                        addMedicationRow();
+                    }
+                }
+
+                const elements = form.querySelectorAll('input, select, textarea');
+                elements.forEach(el => {
+                    if (!el.name || formData[el.name] === undefined) return;
+                    
+                    if (el.type === 'radio') {
+                        if (el.value === formData[el.name]) {
+                            el.checked = true;
+                            el.dispatchEvent(new Event('change'));
+                        }
+                    } else if (el.type === 'checkbox') {
+                        if (el.name.endsWith('[]')) {
+                            if (Array.isArray(formData[el.name]) && formData[el.name].includes(el.value)) {
+                                el.checked = true;
+                                el.dispatchEvent(new Event('change'));
+                            }
+                        } else {
+                            if (el.value === formData[el.name]) {
+                                el.checked = true;
+                                el.dispatchEvent(new Event('change'));
+                            }
+                        }
+                    } else {
+                        el.value = formData[el.name];
+                        el.dispatchEvent(new Event('change'));
+                    }
+                });
+
+                // Auto handle allergy visibility based on the restored value
+                const allergyRadio = form.querySelector('input[name="has_allergy_history"]:checked');
+                if (allergyRadio) {
+                    toggleAllergy(allergyRadio.value === '1');
+                }
+                
+                showToast('Draf formulir yang belum disimpan berhasil dipulihkan secara otomatis.', 'success');
+            } catch (e) {
+                console.error('Gagal memuat draf:', e);
+            }
+        }
+
+        function debounce(func, wait) {
+            let timeout;
+            return function(...args) {
+                clearTimeout(timeout);
+                timeout = setTimeout(() => func.apply(this, args), wait);
+            };
+        }
+
+        form.addEventListener('input', debounce(saveDraft, 500));
+        form.addEventListener('change', saveDraft);
+
+        window.addEventListener('load', () => {
+            loadDraft();
+        });
 
         function submitForm(event) {
             event.preventDefault();
@@ -786,6 +900,7 @@
                     return;
                 @endif
             @endif
+            localStorage.removeItem(storageKey);
             document.getElementById('assessmentForm').submit();
         }
     </script>
