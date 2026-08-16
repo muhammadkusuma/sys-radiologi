@@ -238,419 +238,360 @@
                             <th colspan="2" class="section-title">Setelah Tindakan</th>
                         </tr>
 
-                        <!-- 1 -->
+                        <!-- Row 1 -->
                         <tr>
                             <td class="label-cell">Keadaan Umum</td>
-                            <td><input type="text" name="general_condition" value="{{ old('general_condition') }}"
-                                    class="paper-input"></td>
+                            <td><input type="text" name="general_condition" value="{{ old('general_condition') }}" class="paper-input"></td>
                             <td class="label-cell">Keluhan</td>
-                            <td><input type="text" name="during_complaint" value="{{ old('during_complaint') }}"
-                                    class="paper-input"></td>
+                            <td><input type="text" name="during_complaint" value="{{ old('during_complaint') }}" class="paper-input"></td>
                             <td class="label-cell">Keluhan</td>
-                            <td><input type="text" name="post_procedure_complaint"
-                                    value="{{ old('post_procedure_complaint') }}" class="paper-input"></td>
+                            <td><input type="text" name="post_procedure_complaint" value="{{ old('post_procedure_complaint') }}" class="paper-input"></td>
                         </tr>
 
-                        <!-- 2 -->
+                        <!-- Row 2 -->
                         <tr>
                             <td class="label-cell">Tingkat Kesadaran</td>
-                            <td><input type="text" name="consciousness_level" value="{{ old('consciousness_level') }}"
-                                    class="paper-input"></td>
-                            <td class="label-cell">Tanda Alergi</td>
-                            <td><input type="text" name="allergy_sign_during" value="{{ old('allergy_sign_during') }}"
-                                    class="paper-input"></td>
-                            <td class="label-cell">Tanda Alergi</td>
-                            <td><input type="text" name="allergy_sign_after" value="{{ old('allergy_sign_after') }}"
-                                    class="paper-input"></td>
+                            <td><input type="text" name="consciousness_level" value="{{ old('consciousness_level') }}" class="paper-input"></td>
+                            <td class="label-cell">Tanda-tanda Alergi</td>
+                            <td><input type="text" name="allergy_sign_during" value="{{ old('allergy_sign_during') }}" class="paper-input"></td>
+                            <td class="label-cell">Tanda-tanda Alergi</td>
+                            <td><input type="text" name="allergy_sign_after" value="{{ old('allergy_sign_after') }}" class="paper-input"></td>
                         </tr>
 
-                        <!-- 3 -->
+                        <!-- Row 3 -->
                         <tr>
                             <td class="label-cell">Nilai eGFR</td>
                             <td>
                                 <div class="flex items-center space-x-1">
-                                    <input type="number" step="0.01" name="egfr" value="{{ old('egfr') }}"
-                                        class="paper-input w-20 text-right">
-                                    <span class="text-[9px]">ml/mnt/1.73m²</span>
+                                    <input type="number" step="0.01" name="egfr" value="{{ old('egfr') }}" class="paper-input w-20 text-right">
+                                    <span class="text-[9px]">ml/menit/1,73m²</span>
                                 </div>
                             </td>
                             <td class="label-cell">Gatal-gatal</td>
                             <td>
-                                <label class="mr-2"><input type="radio" name="itching_during" value="0"
-                                        {{ old('itching_during', '0') == '0' ? 'checked' : '' }}> Tidak</label>
-                                <label><input type="radio" name="itching_during" value="1"
-                                        {{ old('itching_during') == '1' ? 'checked' : '' }}> Ya</label>
+                                <label class="mr-2"><input type="radio" name="itching_during" value="0" {{ old('itching_during', '0') == '0' ? 'checked' : '' }}> Tidak</label>
+                                <label><input type="radio" name="itching_during" value="1" {{ old('itching_during') == '1' ? 'checked' : '' }}> Ya</label>
                             </td>
                             <td class="label-cell">Gatal-gatal</td>
                             <td>
-                                <label class="mr-2"><input type="radio" name="itching_after" value="0"
-                                        {{ old('itching_after', '0') == '0' ? 'checked' : '' }}> Tidak</label>
-                                <label><input type="radio" name="itching_after" value="1"
-                                        {{ old('itching_after') == '1' ? 'checked' : '' }}> Ya</label>
+                                <label class="mr-2"><input type="radio" name="itching_after" value="0" {{ old('itching_after', '0') == '0' ? 'checked' : '' }}> Tidak</label>
+                                <label><input type="radio" name="itching_after" value="1" {{ old('itching_after') == '1' ? 'checked' : '' }}> Ya</label>
                             </td>
                         </tr>
 
-                        <!-- 4 -->
+                        <!-- Row 4 -->
                         <tr>
                             <td class="label-cell">Makan Terakhir</td>
                             <td>
                                 <div class="flex items-center space-x-1">
                                     <span>Jam:</span>
-                                    <input type="text" data-clocklet="format: HH:mm" name="last_meal_time"
-                                        value="{{ old('last_meal_time') }}" class="paper-input w-20 text-center">
+                                    <input type="text" data-clocklet="format: HH:mm" name="last_meal_time" value="{{ old('last_meal_time') }}" class="paper-input w-20 text-center">
                                 </div>
                             </td>
                             <td class="label-cell">Mual</td>
                             <td>
-                                <label class="mr-2"><input type="radio" name="nausea_during" value="0"
-                                        {{ old('nausea_during', '0') == '0' ? 'checked' : '' }}> Tidak</label>
-                                <label><input type="radio" name="nausea_during" value="1"
-                                        {{ old('nausea_during') == '1' ? 'checked' : '' }}> Ya</label>
+                                <label class="mr-2"><input type="radio" name="nausea_during" value="0" {{ old('nausea_during', '0') == '0' ? 'checked' : '' }}> Tidak</label>
+                                <label><input type="radio" name="nausea_during" value="1" {{ old('nausea_during') == '1' ? 'checked' : '' }}> Ya</label>
                             </td>
                             <td class="label-cell">Mual</td>
                             <td>
-                                <label class="mr-2"><input type="radio" name="nausea_after" value="0"
-                                        {{ old('nausea_after', '0') == '0' ? 'checked' : '' }}> Tidak</label>
-                                <label><input type="radio" name="nausea_after" value="1"
-                                        {{ old('nausea_after') == '1' ? 'checked' : '' }}> Ya</label>
+                                <label class="mr-2"><input type="radio" name="nausea_after" value="0" {{ old('nausea_after', '0') == '0' ? 'checked' : '' }}> Tidak</label>
+                                <label><input type="radio" name="nausea_after" value="1" {{ old('nausea_after') == '1' ? 'checked' : '' }}> Ya</label>
                             </td>
                         </tr>
 
-                        <!-- 5 -->
+                        <!-- Row 5 -->
                         <tr>
                             <td class="label-cell">Berat Badan</td>
                             <td>
                                 <div class="flex items-center space-x-1">
-                                    <input type="number" step="0.1" name="body_weight"
-                                        value="{{ old('body_weight') }}" class="paper-input w-20 text-right">
+                                    <input type="number" step="0.1" name="body_weight" value="{{ old('body_weight') }}" class="paper-input w-20 text-right">
                                     <span>Kg</span>
                                 </div>
                             </td>
                             <td class="label-cell">Pusing</td>
                             <td>
-                                <label class="mr-2"><input type="radio" name="dizziness_during" value="0"
-                                        {{ old('dizziness_during', '0') == '0' ? 'checked' : '' }}> Tidak</label>
-                                <label><input type="radio" name="dizziness_during" value="1"
-                                        {{ old('dizziness_during') == '1' ? 'checked' : '' }}> Ya</label>
+                                <label class="mr-2"><input type="radio" name="dizziness_during" value="0" {{ old('dizziness_during', '0') == '0' ? 'checked' : '' }}> Tidak</label>
+                                <label><input type="radio" name="dizziness_during" value="1" {{ old('dizziness_during') == '1' ? 'checked' : '' }}> Ya</label>
                             </td>
                             <td class="label-cell">Pusing</td>
                             <td>
-                                <label class="mr-2"><input type="radio" name="dizziness_after" value="0"
-                                        {{ old('dizziness_after', '0') == '0' ? 'checked' : '' }}> Tidak</label>
-                                <label><input type="radio" name="dizziness_after" value="1"
-                                        {{ old('dizziness_after') == '1' ? 'checked' : '' }}> Ya</label>
+                                <label class="mr-2"><input type="radio" name="dizziness_after" value="0" {{ old('dizziness_after', '0') == '0' ? 'checked' : '' }}> Tidak</label>
+                                <label><input type="radio" name="dizziness_after" value="1" {{ old('dizziness_after') == '1' ? 'checked' : '' }}> Ya</label>
                             </td>
                         </tr>
 
-                        <!-- 6 -->
+                        <!-- Row 6 -->
                         <tr>
                             <td class="label-cell">Tekanan Darah</td>
                             <td>
                                 <div class="flex items-center space-x-1">
-                                    <input type="text" name="blood_pressure" value="{{ old('blood_pressure') }}"
-                                        placeholder="120/80" class="paper-input w-20 text-center">
+                                    <input type="text" name="blood_pressure" value="{{ old('blood_pressure') }}" placeholder="120/80" class="paper-input w-20 text-center">
                                     <span>mmHg</span>
                                 </div>
                             </td>
                             <td class="label-cell">Sesak Nafas</td>
                             <td>
-                                <label class="mr-2"><input type="radio" name="shortness_of_breath_during"
-                                        value="0"
-                                        {{ old('shortness_of_breath_during', '0') == '0' ? 'checked' : '' }}> Tidak</label>
-                                <label><input type="radio" name="shortness_of_breath_during" value="1"
-                                        {{ old('shortness_of_breath_during') == '1' ? 'checked' : '' }}> Ya</label>
+                                <label class="mr-2"><input type="radio" name="shortness_of_breath_during" value="0" {{ old('shortness_of_breath_during', '0') == '0' ? 'checked' : '' }}> Tidak</label>
+                                <label><input type="radio" name="shortness_of_breath_during" value="1" {{ old('shortness_of_breath_during') == '1' ? 'checked' : '' }}> Ya</label>
                             </td>
                             <td class="label-cell">Sesak Nafas</td>
                             <td>
-                                <label class="mr-2"><input type="radio" name="shortness_of_breath_after"
-                                        value="0"
-                                        {{ old('shortness_of_breath_after', '0') == '0' ? 'checked' : '' }}> Tidak</label>
-                                <label><input type="radio" name="shortness_of_breath_after" value="1"
-                                        {{ old('shortness_of_breath_after') == '1' ? 'checked' : '' }}> Ya</label>
+                                <label class="mr-2"><input type="radio" name="shortness_of_breath_after" value="0" {{ old('shortness_of_breath_after', '0') == '0' ? 'checked' : '' }}> Tidak</label>
+                                <label><input type="radio" name="shortness_of_breath_after" value="1" {{ old('shortness_of_breath_after') == '1' ? 'checked' : '' }}> Ya</label>
                             </td>
                         </tr>
 
-                        <!-- 7 -->
+                        <!-- Row 7 -->
                         <tr>
                             <td class="label-cell">Nadi</td>
                             <td>
                                 <div class="flex items-center space-x-1">
-                                    <input type="number" name="pulse" value="{{ old('pulse') }}"
-                                        class="paper-input w-20 text-right">
-                                    <span>x/mnt</span>
+                                    <input type="number" name="pulse" value="{{ old('pulse') }}" class="paper-input w-20 text-right">
+                                    <span>x/menit</span>
+                                </div>
+                            </td>
+                            <td class="label-cell"></td>
+                            <td></td>
+                            <td class="label-cell">Mata Bengkak</td>
+                            <td>
+                                <label class="mr-2"><input type="radio" name="swollen_eyes_after" value="0" {{ old('swollen_eyes_after', '0') == '0' ? 'checked' : '' }}> Tidak</label>
+                                <label><input type="radio" name="swollen_eyes_after" value="1" {{ old('swollen_eyes_after') == '1' ? 'checked' : '' }}> Ya</label>
+                            </td>
+                        </tr>
+
+                        <!-- Row 8 -->
+                        <tr>
+                            <td class="label-cell">Suhu</td>
+                            <td>
+                                <div class="flex items-center space-x-1">
+                                    <input type="number" step="0.1" name="temperature" value="{{ old('temperature') }}" class="paper-input w-20 text-right">
+                                    <span>&deg;C</span>
                                 </div>
                             </td>
                             <td class="label-cell">Pemasangan Infus</td>
                             <td>
                                 <div class="flex items-center space-x-1">
                                     <span>Jam:</span>
-                                    <input type="text" data-clocklet="format: HH:mm" name="iv_insertion_time"
-                                        value="{{ old('iv_insertion_time') }}" class="paper-input w-20 text-center">
+                                    <input type="text" data-clocklet="format: HH:mm" name="iv_insertion_time" value="{{ old('iv_insertion_time') }}" class="paper-input w-20 text-center">
+                                    <span>WIB</span>
                                 </div>
                             </td>
-                            <td class="label-cell">Mata Bengkak</td>
-                            <td>
-                                <label class="mr-2"><input type="radio" name="swollen_eyes_after" value="0"
-                                        {{ old('swollen_eyes_after', '0') == '0' ? 'checked' : '' }}> Tidak</label>
-                                <label><input type="radio" name="swollen_eyes_after" value="1"
-                                        {{ old('swollen_eyes_after') == '1' ? 'checked' : '' }}> Ya</label>
-                            </td>
-                        </tr>
-
-                        <!-- 8 -->
-                        <tr>
-                            <td class="label-cell">Suhu</td>
-                            <td>
-                                <div class="flex items-center space-x-1">
-                                    <input type="number" step="0.1" name="temperature"
-                                        value="{{ old('temperature') }}" class="paper-input w-20 text-right">
-                                    <span>&deg;C</span>
-                                </div>
-                            </td>
-                            <td class="label-cell">Regio IV</td>
-                            <td><input type="text" name="region" value="{{ old('region') }}"
-                                    placeholder="cth: Antecubiti Dextra" class="paper-input"></td>
                             <td class="label-cell">Bentol-bentol</td>
                             <td>
-                                <label class="mr-2"><input type="radio" name="bentol_after" value="0"
-                                        {{ old('bentol_after', '0') == '0' ? 'checked' : '' }}> Tidak</label>
-                                <label><input type="radio" name="bentol_after" value="1"
-                                        {{ old('bentol_after') == '1' ? 'checked' : '' }}> Ya</label>
+                                <label class="mr-2"><input type="radio" name="bentol_after" value="0" {{ old('bentol_after', '0') == '0' ? 'checked' : '' }}> Tidak</label>
+                                <label><input type="radio" name="bentol_after" value="1" {{ old('bentol_after') == '1' ? 'checked' : '' }}> Ya</label>
                             </td>
                         </tr>
 
-                        <!-- 9 -->
+                        <!-- Row 9 -->
                         <tr>
                             <td class="label-cell">Pernafasan</td>
                             <td>
                                 <div class="flex items-center space-x-1">
-                                    <input type="number" name="respiratory_rate" value="{{ old('respiratory_rate') }}"
-                                        class="paper-input w-20 text-right">
-                                    <span>x/mnt</span>
+                                    <input type="number" name="respiratory_rate" value="{{ old('respiratory_rate') }}" class="paper-input w-20 text-right">
+                                    <span>x/menit</span>
                                 </div>
                             </td>
-                            <td class="label-cell">Ukuran IV Cath</td>
-                            <td><input type="text" name="iv_cath_size" value="{{ old('iv_cath_size') }}"
-                                    placeholder="cth: 20G" class="paper-input"></td>
+                            <td class="label-cell">Regio</td>
+                            <td><input type="text" name="region" value="{{ old('region') }}" placeholder="cth: Antecubiti Dextra" class="paper-input"></td>
                             <td class="label-cell">Tekanan Darah</td>
                             <td>
                                 <div class="flex items-center space-x-1">
-                                    <input type="text" name="post_blood_pressure"
-                                        value="{{ old('post_blood_pressure') }}" class="paper-input w-20 text-center">
+                                    <input type="text" name="post_blood_pressure" value="{{ old('post_blood_pressure') }}" placeholder="120/80" class="paper-input w-20 text-center">
                                     <span>mmHg</span>
                                 </div>
                             </td>
                         </tr>
 
-                        <!-- 10 -->
+                        <!-- Row 10 -->
                         <tr>
                             <td class="label-cell">Saturasi O2</td>
                             <td>
                                 <div class="flex items-center space-x-1">
-                                    <input type="number" step="0.1" name="oxygen_saturation"
-                                        value="{{ old('oxygen_saturation') }}" class="paper-input w-20 text-right">
+                                    <input type="number" step="0.1" name="oxygen_saturation" value="{{ old('oxygen_saturation') }}" class="paper-input w-20 text-right">
                                     <span>%</span>
                                 </div>
                             </td>
-                            <td class="label-cell">Tanda Ekstravasasi</td>
-                            <td><input type="text" name="extravasation_sign_during"
-                                    value="{{ old('extravasation_sign_during') }}" placeholder="cth: Tidak ada"
-                                    class="paper-input"></td>
-                            <td class="label-cell">Nadi setelah</td>
+                            <td class="label-cell">Ukuran IV Cath</td>
+                            <td><input type="text" name="iv_cath_size" value="{{ old('iv_cath_size') }}" placeholder="cth: 20G" class="paper-input"></td>
+                            <td class="label-cell">Nadi</td>
                             <td>
                                 <div class="flex items-center space-x-1">
-                                    <input type="number" name="post_pulse" value="{{ old('post_pulse') }}"
-                                        class="paper-input w-20 text-right">
-                                    <span>x/mnt</span>
+                                    <input type="number" name="post_pulse" value="{{ old('post_pulse') }}" class="paper-input w-20 text-right">
+                                    <span>x/menit</span>
                                 </div>
                             </td>
                         </tr>
 
-                        <!-- 11 -->
+                        <!-- Row 11 & 12 (Keluhan rowspan=2) -->
                         <tr>
                             <td rowspan="2" class="label-cell">Keluhan</td>
                             <td rowspan="2">
-                                <textarea name="pre_procedure_complaint" class="paper-textarea">{{ old('pre_procedure_complaint') }}</textarea>
+                                <textarea name="pre_procedure_complaint" class="paper-textarea h-full" style="height: 64px;">{{ old('pre_procedure_complaint') }}</textarea>
                             </td>
-                            <td class="label-cell">Bengkak Saat</td>
-                            <td>
-                                <label class="mr-2"><input type="radio" name="swelling_during" value="0"
-                                        {{ old('swelling_during', '0') == '0' ? 'checked' : '' }}> Tidak</label>
-                                <label><input type="radio" name="swelling_during" value="1"
-                                        {{ old('swelling_during') == '1' ? 'checked' : '' }}> Ya</label>
-                            </td>
-                            <td class="label-cell">Suhu setelah</td>
+                            <td class="label-cell"></td>
+                            <td></td>
+                            <td class="label-cell">Suhu</td>
                             <td>
                                 <div class="flex items-center space-x-1">
-                                    <input type="number" step="0.1" name="post_temperature"
-                                        value="{{ old('post_temperature') }}" class="paper-input w-20 text-right">
+                                    <input type="number" step="0.1" name="post_temperature" value="{{ old('post_temperature') }}" class="paper-input w-20 text-right">
                                     <span>&deg;C</span>
                                 </div>
                             </td>
                         </tr>
-
-                        <!-- 12 -->
                         <tr>
-                            <td class="label-cell">Nyeri Saat</td>
-                            <td>
-                                <label class="mr-2"><input type="radio" name="pain_during" value="0"
-                                        {{ old('pain_during', '0') == '0' ? 'checked' : '' }}> Tidak</label>
-                                <label><input type="radio" name="pain_during" value="1"
-                                        {{ old('pain_during') == '1' ? 'checked' : '' }}> Ya</label>
-                            </td>
-                            <td class="label-cell">Nafas setelah</td>
+                            <td class="label-cell"></td>
+                            <td></td>
+                            <td class="label-cell">Pernafasan</td>
                             <td>
                                 <div class="flex items-center space-x-1">
-                                    <input type="number" name="post_respiratory_rate"
-                                        value="{{ old('post_respiratory_rate') }}" class="paper-input w-20 text-right">
-                                    <span>x/mnt</span>
+                                    <input type="number" name="post_respiratory_rate" value="{{ old('post_respiratory_rate') }}" class="paper-input w-20 text-right">
+                                    <span>x/menit</span>
                                 </div>
                             </td>
                         </tr>
 
-                        <!-- 13 -->
+                        <!-- Row 13 -->
                         <tr>
                             <td class="label-cell">Riwayat Alergi</td>
                             <td>
                                 <div class="flex items-center space-x-2">
-                                    <label><input type="radio" name="has_allergy_history" value="0"
-                                            {{ old('has_allergy_history', '0') == '0' ? 'checked' : '' }}
-                                            onchange="toggleAllergy(false)"> Tidak</label>
-                                    <label><input type="radio" name="has_allergy_history" value="1"
-                                            {{ old('has_allergy_history') == '1' ? 'checked' : '' }}
-                                            onchange="toggleAllergy(true)"> Ada:</label>
-                                    <input type="text" name="allergy_description" id="allergy_desc_field"
-                                        placeholder="..." value="{{ old('allergy_description') }}"
-                                        {{ old('has_allergy_history') != '1' ? 'disabled' : '' }}
-                                        class="paper-input w-24">
+                                    <label><input type="radio" name="has_allergy_history" value="0" {{ old('has_allergy_history', '0') == '0' ? 'checked' : '' }} onchange="toggleAllergy(false)"> Tidak</label>
+                                    <label><input type="radio" name="has_allergy_history" value="1" {{ old('has_allergy_history') == '1' ? 'checked' : '' }} onchange="toggleAllergy(true)"> Ada:</label>
+                                    <input type="text" name="allergy_description" id="allergy_desc_field" placeholder="..." value="{{ old('allergy_description') }}" {{ old('has_allergy_history') != '1' ? 'disabled' : '' }} class="paper-input w-24">
                                 </div>
                             </td>
-                            <td class="label-cell">Kemerahan Saat</td>
-                            <td>
-                                <label class="mr-2"><input type="radio" name="redness_during" value="0"
-                                        {{ old('redness_during', '0') == '0' ? 'checked' : '' }}> Tidak</label>
-                                <label><input type="radio" name="redness_during" value="1"
-                                        {{ old('redness_during') == '1' ? 'checked' : '' }}> Ya</label>
-                            </td>
-                            <td class="label-cell">Sat O2 setelah</td>
+                            <td class="label-cell"></td>
+                            <td></td>
+                            <td class="label-cell">Saturasi O2</td>
                             <td>
                                 <div class="flex items-center space-x-1">
-                                    <input type="number" step="0.1" name="post_oxygen_saturation"
-                                        value="{{ old('post_oxygen_saturation') }}" class="paper-input w-20 text-right">
+                                    <input type="number" step="0.1" name="post_oxygen_saturation" value="{{ old('post_oxygen_saturation') }}" class="paper-input w-20 text-right">
                                     <span>%</span>
                                 </div>
                             </td>
                         </tr>
 
-                        <!-- 14 -->
+                        <!-- Row 14 -->
                         <tr>
-                            <td class="label-cell">Media Kontras</td>
+                            <td class="label-cell">Obat Media Kontras</td>
                             <td>
                                 <div class="flex items-center space-x-1">
                                     <span>Batch:</span>
-                                    <input type="text" name="contrast_batch" value="{{ old('contrast_batch') }}"
-                                        class="paper-input w-24">
+                                    <input type="text" name="contrast_batch" value="{{ old('contrast_batch') }}" class="paper-input w-24">
                                 </div>
                             </td>
-                            <td class="label-cell">Test Alergi</td>
+                            <td class="label-cell">Tanda-tanda Ekstravasasi</td>
+                            <td><input type="text" name="extravasation_sign_during" value="{{ old('extravasation_sign_during') }}" placeholder="cth: Tidak ada" class="paper-input"></td>
+                            <td class="label-cell"></td>
+                            <td></td>
+                        </tr>
+
+                        <!-- Row 15 -->
+                        <tr>
+                            <td class="label-cell">Konsentrasi</td>
+                            <td><input type="text" name="contrast_concentration" value="{{ old('contrast_concentration') }}" class="paper-input"></td>
+                            <td class="label-cell">Bengkak</td>
                             <td>
-                                <label class="mr-2"><input type="checkbox" name="allergy_test" value="1"
-                                        {{ old('allergy_test') == '1' ? 'checked' : '' }}> Ya</label>
+                                <label class="mr-2"><input type="radio" name="swelling_during" value="0" {{ old('swelling_during', '0') == '0' ? 'checked' : '' }}> Tidak</label>
+                                <label><input type="radio" name="swelling_during" value="1" {{ old('swelling_during') == '1' ? 'checked' : '' }}> Ya</label>
                             </td>
                             <td class="label-cell">Pelepasan Infus</td>
                             <td>
                                 <div class="flex items-center space-x-1">
                                     <span>Jam:</span>
-                                    <input type="text" data-clocklet="format: HH:mm" name="iv_removal_time"
-                                        value="{{ old('iv_removal_time') }}" class="paper-input w-20 text-center">
+                                    <input type="text" data-clocklet="format: HH:mm" name="iv_removal_time" value="{{ old('iv_removal_time') }}" class="paper-input w-20 text-center">
+                                    <span>WIB</span>
                                 </div>
                             </td>
                         </tr>
 
-                        <!-- 15 -->
+                        <!-- Row 16 -->
                         <tr>
-                            <td class="label-cell">Konsentrasi</td>
-                            <td><input type="text" name="contrast_concentration"
-                                    value="{{ old('contrast_concentration') }}" class="paper-input"></td>
-                            <td class="label-cell">Hasil Test Alergi</td>
-                            <td>
-                                <select name="allergy_test_result" class="paper-input">
-                                    <option value="">-- Pilih --</option>
-                                    <option value="tidak_alergi"
-                                        {{ old('allergy_test_result') === 'tidak_alergi' ? 'selected' : '' }}>Tidak Alergi
-                                    </option>
-                                    <option value="alergi"
-                                        {{ old('allergy_test_result') === 'alergi' ? 'selected' : '' }}>Alergi</option>
-                                </select>
-                            </td>
-                            <td class="label-cell">Tanda Ekstravasasi</td>
-                            <td><input type="text" name="extravasation_sign_after"
-                                    value="{{ old('extravasation_sign_after') }}" class="paper-input"></td>
-                        </tr>
-
-                        <!-- 16 -->
-                        <tr>
-                            <td class="label-cell">Dosis Kontras</td>
+                            <td class="label-cell">Dosis</td>
                             <td>
                                 <div class="flex items-center space-x-1">
-                                    <input type="number" step="0.01" name="contrast_dose_ml"
-                                        value="{{ old('contrast_dose_ml') }}" class="paper-input w-20 text-right">
+                                    <input type="number" step="0.01" name="contrast_dose_ml" value="{{ old('contrast_dose_ml') }}" class="paper-input w-20 text-right">
                                     <span>ml</span>
                                 </div>
                             </td>
-                            <td class="label-cell">Double Check</td>
+                            <td class="label-cell">Nyeri</td>
                             <td>
-                                <label><input type="checkbox" name="contrast_double_check" value="1"
-                                        {{ old('contrast_double_check') == '1' ? 'checked' : '' }}> Ya</label>
+                                <label class="mr-2"><input type="radio" name="pain_during" value="0" {{ old('pain_during', '0') == '0' ? 'checked' : '' }}> Tidak</label>
+                                <label><input type="radio" name="pain_during" value="1" {{ old('pain_during') == '1' ? 'checked' : '' }}> Ya</label>
                             </td>
-                            <td class="label-cell">Bengkak setelah</td>
+                            <td class="label-cell">Tanda-tanda Ekstravasasi</td>
+                            <td><input type="text" name="extravasation_sign_after" value="{{ old('extravasation_sign_after') }}" class="paper-input"></td>
+                        </tr>
+
+                        <!-- Row 17 -->
+                        <tr>
+                            <td class="label-cell">Dobel Cek Obat Kontras</td>
                             <td>
-                                <label class="mr-2"><input type="radio" name="swelling_after" value="0"
-                                        {{ old('swelling_after', '0') == '0' ? 'checked' : '' }}> Tidak</label>
-                                <label><input type="radio" name="swelling_after" value="1"
-                                        {{ old('swelling_after') == '1' ? 'checked' : '' }}> Ya</label>
+                                <label class="mr-2"><input type="radio" name="contrast_double_check" value="0" {{ old('contrast_double_check', '0') == '0' ? 'checked' : '' }}> Tidak</label>
+                                <label><input type="radio" name="contrast_double_check" value="1" {{ old('contrast_double_check') == '1' ? 'checked' : '' }}> Ya</label>
+                            </td>
+                            <td class="label-cell">Kemerahan</td>
+                            <td>
+                                <label class="mr-2"><input type="radio" name="redness_during" value="0" {{ old('redness_during', '0') == '0' ? 'checked' : '' }}> Tidak</label>
+                                <label><input type="radio" name="redness_during" value="1" {{ old('redness_during') == '1' ? 'checked' : '' }}> Ya</label>
+                            </td>
+                            <td class="label-cell">Bengkak</td>
+                            <td>
+                                <label class="mr-2"><input type="radio" name="swelling_after" value="0" {{ old('swelling_after', '0') == '0' ? 'checked' : '' }}> Tidak</label>
+                                <label><input type="radio" name="swelling_after" value="1" {{ old('swelling_after') == '1' ? 'checked' : '' }}> Ya</label>
                             </td>
                         </tr>
 
-                        <!-- 17 -->
+                        <!-- Row 18 -->
                         <tr>
-                            <td class="label-cell">Riwayat Penyakit</td>
+                            <td class="label-cell">Test Alergi</td>
+                            <td>
+                                <label class="mr-2"><input type="radio" name="allergy_test" value="0" {{ old('allergy_test', '0') == '0' ? 'checked' : '' }}> Tidak</label>
+                                <label><input type="radio" name="allergy_test" value="1" {{ old('allergy_test') == '1' ? 'checked' : '' }}> Ya</label>
+                            </td>
+                            <td class="label-cell"></td>
+                            <td></td>
+                            <td class="label-cell">Nyeri</td>
+                            <td>
+                                <label class="mr-2"><input type="radio" name="pain_after" value="0" {{ old('pain_after', '0') == '0' ? 'checked' : '' }}> Tidak</label>
+                                <label><input type="radio" name="pain_after" value="1" {{ old('pain_after') == '1' ? 'checked' : '' }}> Ya</label>
+                            </td>
+                        </tr>
+
+                        <!-- Row 19 -->
+                        <tr>
+                            <td class="label-cell">Hasil Test Alergi*</td>
+                            <td>
+                                <div class="flex items-center space-x-2">
+                                    <label class="mr-2"><input type="radio" name="allergy_test_result" value="tidak_alergi" {{ old('allergy_test_result', 'tidak_alergi') === 'tidak_alergi' ? 'checked' : '' }}> Tidak Alergi</label>
+                                    <label><input type="radio" name="allergy_test_result" value="alergi" {{ old('allergy_test_result') === 'alergi' ? 'checked' : '' }}> Alergi</label>
+                                </div>
+                            </td>
+                            <td class="label-cell"></td>
+                            <td></td>
+                            <td class="label-cell">Kemerahan</td>
+                            <td>
+                                <label class="mr-2"><input type="radio" name="redness_after" value="0" {{ old('redness_after', '0') == '0' ? 'checked' : '' }}> Tidak</label>
+                                <label><input type="radio" name="redness_after" value="1" {{ old('redness_after') == '1' ? 'checked' : '' }}> Ya</label>
+                            </td>
+                        </tr>
+
+                        <!-- Row 20 -->
+                        <tr>
+                            <td class="label-cell">Riwayat penyakit pasien</td>
                             <td>
                                 @php
                                     $histories = old('medical_history', []);
                                 @endphp
-                                <label class="checkbox-row"><input type="checkbox" name="medical_history[]"
-                                        value="Kemo/Radioterapi"
-                                        {{ in_array('Kemo/Radioterapi', $histories) ? 'checked' : '' }}>
-                                    Kemo/Radioterapi</label>
-                                <label class="checkbox-row"><input type="checkbox" name="medical_history[]"
-                                        value="Diabetes" {{ in_array('Diabetes', $histories) ? 'checked' : '' }}>
-                                    Diabetes</label>
+                                <label class="checkbox-row"><input type="checkbox" name="medical_history[]" value="Kemo/Radioterapi" {{ in_array('Kemo/Radioterapi', $histories) ? 'checked' : '' }}> Kemo/Radioterapi</label>
+                                <label class="checkbox-row"><input type="checkbox" name="medical_history[]" value="Diabetes" {{ in_array('Diabetes', $histories) ? 'checked' : '' }}> Diabetes</label>
                             </td>
-                            <td class="label-cell"></td>
-                            <td></td>
-                            <td class="label-cell">Nyeri setelah</td>
-                            <td>
-                                <label class="mr-2"><input type="radio" name="pain_after" value="0"
-                                        {{ old('pain_after', '0') == '0' ? 'checked' : '' }}> Tidak</label>
-                                <label><input type="radio" name="pain_after" value="1"
-                                        {{ old('pain_after') == '1' ? 'checked' : '' }}> Ya</label>
-                            </td>
-                        </tr>
-
-                        <!-- 18 -->
-                        <tr>
                             <td class="label-cell"></td>
                             <td></td>
                             <td class="label-cell"></td>
                             <td></td>
-                            <td class="label-cell">Kemerahan setelah</td>
-                            <td>
-                                <label class="mr-2"><input type="radio" name="redness_after" value="0"
-                                        {{ old('redness_after', '0') == '0' ? 'checked' : '' }}> Tidak</label>
-                                <label><input type="radio" name="redness_after" value="1"
-                                        {{ old('redness_after') == '1' ? 'checked' : '' }}> Ya</label>
-                            </td>
                         </tr>
                     </table>
                 </div>
