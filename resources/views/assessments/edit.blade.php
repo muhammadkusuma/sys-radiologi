@@ -167,8 +167,7 @@
                         <div style="font-weight: bold; font-size: 11px; line-height: 15px;">
                             Nama Pasien: {{ $patient->name }}<br>
                             No. RM: {{ $patient->medical_record_number }}<br>
-                            JK / Tgl Lahir: {{ $patient->gender }} / {{ $patient->date_of_birth ? $patient->date_of_birth->format('d/m/Y') : '-' }}<br>
-                            Alamat: {{ $patient->address }}
+                            Tanggal Lahir: {{ $patient->date_of_birth ? $patient->date_of_birth->format('d/m/Y') : '-' }}
                         </div>
                     </td>
                     <td class="label-cell">Tanggal Tindakan</td>

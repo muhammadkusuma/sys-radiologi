@@ -399,9 +399,7 @@
                     <div style="font-size: 12px; font-weight: bold; line-height: 16px;">
                         Nama: {{ $assessment->patient->name }}<br>
                         No. RM: {{ $assessment->patient->medical_record_number }}<br>
-                        JK/Tgl Lahir: {{ $assessment->patient->gender }} /
-                        {{ $assessment->patient->date_of_birth ? $assessment->patient->date_of_birth->format('d-m-Y') : '-' }}<br>
-                        Alamat: {{ $assessment->patient->address ?: '-' }}
+                        Tgl Lahir: {{ $assessment->patient->date_of_birth ? $assessment->patient->date_of_birth->format('d-m-Y') : '-' }}
                     </div>
                 </td>
                 <td class="label-kanan bold">
