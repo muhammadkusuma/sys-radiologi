@@ -16,8 +16,13 @@ class SignatureController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'signature_file' => 'required|image|mimes:png|max:1024',
+            'signature_file' => 'nullable|image|mimes:png|max:1024',
+            'signature_base64' => 'nullable|string',
         ]);
+
+        if (!$request->hasFile('signature_file') && !$request->filled('signature_base64')) {
+            return redirect()->route('signatures.index')->with('error', 'Silakan unggah file gambar atau gambar tanda tangan secara manual.');
+        }
 
         $user = Auth::user();
 
@@ -27,8 +32,12 @@ class SignatureController extends Controller
             $user->update([
                 'signature' => $base64
             ]);
+        } elseif ($request->filled('signature_base64')) {
+            $user->update([
+                'signature' => $request->signature_base64
+            ]);
         }
 
-        return redirect()->route('signatures.index')->with('success', 'Tanda tangan PNG berhasil diunggah.');
+        return redirect()->route('signatures.index')->with('success', 'Tanda tangan berhasil disimpan.');
     }
 }
