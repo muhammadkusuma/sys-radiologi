@@ -655,17 +655,23 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center border-t border-slate-200 pt-6 mt-6">
                 <div>
                     <span class="block text-xs font-bold text-slate-800 mb-2">Tanda Tangan Perawat Radiologi:</span>
-                    @if(Auth::user()->signature)
+                    @if($assessment->nurse_signature)
+                        <div class="bg-white p-3 border border-slate-200 rounded-lg inline-block shadow-sm">
+                            <img src="{{ $assessment->nurse_signature }}" alt="Tanda Tangan" class="h-16">
+                            <span class="text-[10px] text-green-600 font-bold block mt-1">Sudah Ditandatangani</span>
+                        </div>
+                        <input type="hidden" name="nurse_signature" id="nurseSigInput" value="{{ $assessment->nurse_signature }}">
+                    @elseif(Auth::user()->signature)
                         <div class="bg-white p-3 border border-slate-200 rounded-lg inline-block shadow-sm">
                             <img src="{{ Auth::user()->signature }}" alt="Tanda Tangan" class="h-16">
-                            <span class="text-[10px] text-green-600 font-bold block mt-1">Otomatis dari Profil Master TTD</span>
+                            <span class="text-[10px] text-slate-500 font-bold block mt-1">Otomatis Terisi saat klik "Minta TTD Dokter"</span>
                         </div>
-                        <input type="hidden" name="nurse_signature" id="nurseSigInput" value="{{ Auth::user()->signature }}">
+                        <input type="hidden" name="nurse_signature" id="nurseSigInput" value="">
                     @else
                         <div class="p-3 bg-amber-50 border border-amber-200 text-amber-800 text-xs rounded-lg">
                             Anda belum mengunggah tanda tangan di Master TTD. Silakan 
                             <a href="{{ route('signatures.index') }}" class="underline font-semibold text-blue-600" target="_blank">Unggah TTD Anda di sini</a> 
-                            agar dapat melakukan tanda tangan otomatis.
+                            agar dapat mengirim dokumen untuk ditandatangani dokter.
                         </div>
                     @endif
                 </div>
@@ -705,9 +711,18 @@
             <a href="{{ route('dashboard') }}" class="px-6 py-2.5 border border-slate-300 rounded-xl text-sm font-semibold text-slate-700 bg-white hover:bg-slate-50 transition cursor-pointer">
                 Batal
             </a>
-            <button type="submit" onclick="submitForm(event)" class="px-6 py-2.5 rounded-xl text-sm font-semibold text-white bg-blue-600 hover:bg-blue-750 transition cursor-pointer">
-                Simpan Perubahan
-            </button>
+            @if(Auth::user()->role === 'perawat')
+                <button type="button" onclick="submitAsDraft(event)" class="px-6 py-2.5 border border-slate-300 rounded-xl text-sm font-semibold text-slate-700 bg-white hover:bg-slate-50 transition cursor-pointer">
+                    Simpan Draft
+                </button>
+                <button type="button" onclick="submitMintaTtd(event)" class="px-6 py-2.5 rounded-xl text-sm font-semibold text-white bg-blue-600 hover:bg-blue-750 transition cursor-pointer">
+                    Minta TTD Dokter
+                </button>
+            @else
+                <button type="submit" onclick="submitForm(event)" class="px-6 py-2.5 rounded-xl text-sm font-semibold text-white bg-blue-600 hover:bg-blue-750 transition cursor-pointer">
+                    Simpan Perubahan
+                </button>
+            @endif
         </div>
     </form>
 </div>
@@ -868,14 +883,34 @@
         loadDraft();
     });
 
+    function submitAsDraft(event) {
+        event.preventDefault();
+        const nurseSig = document.getElementById('nurseSigInput');
+        if (nurseSig) {
+            nurseSig.value = ''; // Kosongkan agar status kembali ke Draft / Belum Lengkap
+        }
+        localStorage.removeItem(storageKey);
+        document.getElementById('assessmentForm').submit();
+    }
+
+    function submitMintaTtd(event) {
+        event.preventDefault();
+        @if(Auth::user()->signature)
+            const nurseSig = document.getElementById('nurseSigInput');
+            if (nurseSig) {
+                nurseSig.value = "{{ Auth::user()->signature }}"; // Set ttd perawat agar status menjadi Menunggu TTD Dokter
+            }
+        @else
+            alert('Anda harus mengunggah tanda tangan terlebih dahulu di Master TTD sebelum meminta TTD Dokter.');
+            return;
+        @endif
+        localStorage.removeItem(storageKey);
+        document.getElementById('assessmentForm').submit();
+    }
+
     function submitForm(event) {
         event.preventDefault();
-        @if(Auth::user()->role === 'perawat')
-            @if(!Auth::user()->signature)
-                alert('Anda harus mengunggah tanda tangan terlebih dahulu di Master TTD sebelum menyimpan perubahan.');
-                return;
-            @endif
-        @elseif(Auth::user()->role === 'dokter')
+        @if(Auth::user()->role === 'dokter')
             @if(!Auth::user()->signature)
                 alert('Anda harus mengunggah tanda tangan terlebih dahulu di Master TTD sebelum menyimpan perubahan.');
                 return;
