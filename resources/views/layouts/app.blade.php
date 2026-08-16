@@ -10,27 +10,40 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
+    <script>
+        if (localStorage.getItem("sidebar-collapsed") === "true" && window.innerWidth >= 768) {
+            document.documentElement.classList.add('sidebar-collapsed');
+        }
+    </script>
     <style>
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
             background-color: #f8fafc;
             color: #0f172a;
         }
+
+        /* Sidebar Collapse CSS Rules based on html class */
+        .sidebar-collapsed #sidebar #sidebar-title { display: none; }
+        .sidebar-collapsed #sidebar #sidebar-logo { transform: scale(0.75); }
+        .sidebar-collapsed #sidebar .sidebar-text { display: none; }
+        .sidebar-collapsed #sidebar { width: 5rem !important; }
+
+        /* Disable transitions on load */
+        .preload, .preload * {
+            transition: none !important;
+        }
     </style>
     @yield('styles')
 </head>
 
-<body class="h-full flex flex-col md:flex-row overflow-x-hidden">
+<body class="h-full flex flex-col md:flex-row overflow-x-hidden preload">
     @auth
         <!-- Sidebar -->
-        <aside id="sidebar" class="bg-white border-r border-slate-200 flex flex-col transition-all duration-300 w-64 z-30 fixed inset-y-0 left-0 -translate-x-full md:translate-x-0 md:relative no-print">
+        <aside id="sidebar" class="bg-white border-r border-slate-200 flex flex-col transition-all duration-300 w-64 shrink-0 z-30 fixed inset-y-0 left-0 -translate-x-full md:translate-x-0 md:relative no-print">
             <!-- Sidebar Header -->
             <div class="h-16 flex items-center justify-between px-4 border-b border-slate-200 flex-shrink-0">
                 <a href="{{ route('dashboard') }}" class="flex items-center space-x-3 overflow-hidden">
                     <img id="sidebar-logo" src="/login.png" alt="Logo" class="h-8 w-auto flex-shrink-0 transition-all duration-300">
-                    <span id="sidebar-title" class="text-base font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent truncate">
-                        RSAB Radiologi
-                    </span>
                 </a>
                 <button onclick="toggleSidebar()" class="text-slate-400 hover:text-slate-600 focus:outline-none hidden md:block">
                     <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -131,39 +144,9 @@
     </div>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const isCollapsed = localStorage.getItem("sidebar-collapsed") === "true";
-            if (isCollapsed && window.innerWidth >= 768) {
-                applySidebarCollapse(true);
-            }
-        });
-
         function toggleSidebar() {
-            const sidebar = document.getElementById("sidebar");
-            const collapsed = sidebar.classList.contains("w-64");
-            applySidebarCollapse(collapsed);
-            localStorage.setItem("sidebar-collapsed", collapsed);
-        }
-
-        function applySidebarCollapse(collapse) {
-            const sidebar = document.getElementById("sidebar");
-            const logo = document.getElementById("sidebar-logo");
-            const title = document.getElementById("sidebar-title");
-            const texts = document.querySelectorAll(".sidebar-text");
-
-            if (collapse) {
-                sidebar.classList.remove("w-64");
-                sidebar.classList.add("w-20");
-                if (logo) logo.classList.add("scale-75");
-                if (title) title.classList.add("hidden");
-                texts.forEach(el => el.classList.add("hidden"));
-            } else {
-                sidebar.classList.remove("w-20");
-                sidebar.classList.add("w-64");
-                if (logo) logo.classList.remove("scale-75");
-                if (title) title.classList.remove("hidden");
-                texts.forEach(el => el.classList.remove("hidden"));
-            }
+            const isCollapsed = document.documentElement.classList.toggle('sidebar-collapsed');
+            localStorage.setItem("sidebar-collapsed", isCollapsed ? "true" : "false");
         }
 
         function toggleMobileSidebar() {
@@ -181,6 +164,12 @@
                 overlay.classList.remove("hidden");
             }
         }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                document.body.classList.remove('preload');
+            }, 10);
+        });
     </script>
     @yield('scripts')
 </body>
