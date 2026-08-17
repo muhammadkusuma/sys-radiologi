@@ -725,10 +725,21 @@
                     class="px-6 py-2.5 border border-slate-300 rounded-xl text-sm font-semibold text-slate-700 bg-white hover:bg-slate-50 transition cursor-pointer">
                     Batal
                 </a>
-                <button type="submit" onclick="submitForm(event)"
-                    class="px-6 py-2.5 rounded-xl text-sm font-semibold text-white bg-blue-600 hover:bg-blue-750 transition cursor-pointer">
-                    Simpan Asesmen
-                </button>
+                @if (Auth::user()->role === 'perawat')
+                    <button type="button" onclick="submitAsDraft(event)"
+                        class="px-6 py-2.5 border border-slate-300 rounded-xl text-sm font-semibold text-slate-700 bg-white hover:bg-slate-50 transition cursor-pointer">
+                        Simpan Draft
+                    </button>
+                    <button type="button" onclick="submitMintaTtd(event)"
+                        class="px-6 py-2.5 rounded-xl text-sm font-semibold text-white bg-blue-600 hover:bg-blue-750 transition cursor-pointer">
+                        Minta TTD Dokter
+                    </button>
+                @else
+                    <button type="submit" onclick="submitForm(event)"
+                        class="px-6 py-2.5 rounded-xl text-sm font-semibold text-white bg-blue-600 hover:bg-blue-750 transition cursor-pointer">
+                        Simpan Asesmen
+                    </button>
+                @endif
             </div>
         </form>
     </div>
@@ -890,9 +901,34 @@
             loadDraft();
         });
 
+        function submitAsDraft(event) {
+            event.preventDefault();
+            const nurseSig = document.getElementById('nurseSigInput');
+            if (nurseSig) {
+                nurseSig.value = ''; // Clear signature so it saves as draft
+            }
+            localStorage.removeItem(storageKey);
+            document.getElementById('assessmentForm').submit();
+        }
+
+        function submitMintaTtd(event) {
+            event.preventDefault();
+            @if(Auth::user()->signature)
+                const nurseSig = document.getElementById('nurseSigInput');
+                if (nurseSig) {
+                    nurseSig.value = "{{ Auth::user()->signature }}"; // Set nurse signature
+                }
+            @else
+                alert('Anda harus mengunggah tanda tangan terlebih dahulu di Master TTD sebelum meminta TTD Dokter.');
+                return;
+            @endif
+            localStorage.removeItem(storageKey);
+            document.getElementById('assessmentForm').submit();
+        }
+
         function submitForm(event) {
             event.preventDefault();
-            @if (Auth::user()->role === 'perawat')
+            @if (Auth::user()->role === 'dokter')
                 @if (!Auth::user()->signature)
                     alert('Anda harus mengunggah tanda tangan terlebih dahulu di Master TTD sebelum menyimpan asesmen.');
                     return;
