@@ -918,5 +918,17 @@
         localStorage.removeItem(storageKey);
         document.getElementById('assessmentForm').submit();
     }
+    @if(!empty($assessment->doctor_signature))
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('#assessmentForm input, #assessmentForm select, #assessmentForm textarea, #assessmentForm button, #assessmentForm canvas').forEach(el => {
+                el.disabled = true;
+                if(el.tagName === 'CANVAS') {
+                    // Disable canvas drawing
+                    el.style.pointerEvents = 'none';
+                    el.style.opacity = '0.6';
+                }
+            });
+        });
+    @endif
 </script>
 @endsection

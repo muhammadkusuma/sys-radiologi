@@ -909,6 +909,11 @@
         window.addEventListener('DOMContentLoaded', () => {
             updatePrintTime();
 
+            // Disable all radio buttons and checkboxes in show view so they cannot be edited on screen
+            document.querySelectorAll('input[type="radio"], input[type="checkbox"]').forEach(el => {
+                el.disabled = true;
+            });
+
             if (window.location.search.includes('download=1')) {
                 setTimeout(() => {
                     window.print();
