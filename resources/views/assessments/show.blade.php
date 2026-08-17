@@ -397,9 +397,16 @@
                 </td>
                 <td rowspan="3" class="stiker">
                     <div style="font-size: 12px; font-weight: bold; line-height: 16px;">
-                        Nama: {{ $assessment->patient->name }}<br>
-                        No. RM: {{ $assessment->patient->medical_record_number }}<br>
-                        Tgl Lahir: {{ $assessment->patient->date_of_birth ? $assessment->patient->date_of_birth->format('d-m-Y') : '-' }}
+                        {{ $assessment->patient->name }}<br>
+                        {{ $assessment->patient->medical_record_number }}<br>
+                        {{ $assessment->patient->date_of_birth ? $assessment->patient->date_of_birth->format('d-m-Y') : '-' }} 
+                        @if($assessment->patient->date_of_birth)
+                            @php
+                                $diff = $assessment->patient->date_of_birth->diff(now());
+                                $ageStr = $diff->y . 'Th ' . $diff->m . 'Bln';
+                            @endphp
+                            ({{ $ageStr }})
+                        @endif
                     </div>
                 </td>
                 <td class="label-kanan bold">
