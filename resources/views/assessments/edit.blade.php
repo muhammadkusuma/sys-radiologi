@@ -1185,19 +1185,9 @@
 
         function submitAsDraft(event) {
             event.preventDefault();
-            // If they are drawing, we don't save the current signature on draft save (or we can, but we clear it to keep as Draft)
             const nurseSig = document.getElementById('nurseSigInput');
             if (nurseSig) {
-                // If they drew something, we can save it, but if they want to save strictly as a draft:
-                // Let's check: if canvas is visible and they drew, we can clear the input so it saves as draft
-                const canvas = document.getElementById('nurseSigPad');
-                const canvasArea = document.getElementById('nurseSigCanvasArea');
-                if (canvasArea && !canvasArea.classList.contains('hidden') && canvas && !isCanvasBlank(canvas)) {
-                    // Let them save what they drew as a draft OR clear it. In edit, draft status is retained if signature is empty
-                    nurseSig.value = '';
-                } else if (!nurseSig.value) {
-                    nurseSig.value = '';
-                }
+                nurseSig.value = ''; // Kosongkan agar status kembali ke Draft / Belum Lengkap
             }
             localStorage.removeItem(storageKey);
             document.getElementById('assessmentForm').submit();
