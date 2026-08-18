@@ -160,26 +160,37 @@
                                         </span>
                                     @endif
                                 </td>
-                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-semibold space-x-2">
-                                    <a href="{{ route('assessments.pdf', $ast->id) }}" target="_blank"
-                                        class="inline-flex items-center px-2.5 py-1 bg-white hover:bg-slate-50 text-slate-700 text-xs font-semibold rounded border border-slate-300">
-                                        Cetak / PDF
-                                    </a>
-                                    <a href="{{ route('assessments.edit', $ast->id) }}"
-                                        class="inline-flex items-center px-2.5 py-1 bg-blue-50 hover:bg-blue-100 text-blue-700 text-xs font-semibold rounded border border-blue-200">
-                                        Edit
-                                    </a>
-                                    <form id="delete-form-{{ $ast->id }}"
-                                        action="{{ route('assessments.destroy', $ast->id) }}" method="POST"
-                                        class="inline-block">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="button"
-                                            onclick="confirmDelete('{{ $ast->id }}', 'Apakah Anda yakin ingin menghapus dokumen asesmen ini?')"
-                                            class="inline-flex items-center px-2.5 py-1 bg-red-50 hover:bg-red-100 text-red-700 text-xs font-semibold rounded border border-red-200 cursor-pointer">
-                                            Hapus
-                                        </button>
-                                    </form>
+                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-semibold">
+                                    <div class="inline-flex items-center justify-end gap-2 flex-wrap">
+                                        <a href="{{ route('assessments.pdf', ['assessment' => $ast->id, 'download' => 1]) }}"
+                                            class="inline-flex items-center px-2.5 py-1 bg-white hover:bg-slate-50 text-slate-700 text-xs font-semibold rounded border border-slate-300">
+                                            <svg class="h-3.5 w-3.5 mr-1" fill="none" viewBox="0 0 24 24"
+                                                stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                                            </svg>
+                                            Download PDF
+                                        </a>
+                                        <a href="{{ route('assessments.pdf', $ast->id) }}" target="_blank"
+                                            class="inline-flex items-center px-2.5 py-1 bg-white hover:bg-slate-50 text-slate-700 text-xs font-semibold rounded border border-slate-300">
+                                            Lihat PDF
+                                        </a>
+                                        <a href="{{ route('assessments.edit', $ast->id) }}"
+                                            class="inline-flex items-center px-2.5 py-1 bg-blue-50 hover:bg-blue-100 text-blue-700 text-xs font-semibold rounded border border-blue-200">
+                                            Edit
+                                        </a>
+                                        <form id="delete-form-{{ $ast->id }}"
+                                            action="{{ route('assessments.destroy', $ast->id) }}" method="POST"
+                                            class="inline-flex items-center m-0">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="button"
+                                                onclick="confirmDelete('{{ $ast->id }}', 'Apakah Anda yakin ingin menghapus dokumen asesmen ini?')"
+                                                class="inline-flex items-center px-2.5 py-1 bg-red-50 hover:bg-red-100 text-red-700 text-xs font-semibold rounded border border-red-200 cursor-pointer">
+                                                Hapus
+                                            </button>
+                                        </form>
+                                    </div>
                                 </td>
                             </tr>
                         @empty
