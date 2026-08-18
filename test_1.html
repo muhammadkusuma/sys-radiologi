@@ -1,0 +1,1553 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Persetujuan Tindakan atau Pengobatan Medis</title>
+
+    <style>
+        /* =====================================================
+           RESET
+        ===================================================== */
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            color: #000;
+            background: #fff;
+
+            /* FONT UTAMA */
+            font-size: 12px;
+            line-height: 1.25;
+        }
+
+
+        /* =====================================================
+           HALAMAN A4
+        ===================================================== */
+
+        .page {
+            width: 210mm;
+            min-height: 297mm;
+
+            margin: 0 auto;
+
+            padding: 5mm 7mm 4mm;
+
+            background: #fff;
+        }
+
+
+        /* =====================================================
+           HEADER
+        ===================================================== */
+
+        .header {
+            width: 100%;
+
+            display: flex;
+            align-items: flex-start;
+
+            margin-bottom: 5mm;
+        }
+
+        .logo {
+            width: 48mm;
+
+            flex-shrink: 0;
+
+            padding-top: 1mm;
+
+            font-size: 24px;
+            font-weight: 900;
+
+            letter-spacing: -1.5px;
+
+            line-height: 1;
+
+            white-space: nowrap;
+        }
+
+
+        /* =====================================================
+           JUDUL
+        ===================================================== */
+
+        .title-area {
+            flex: 1;
+
+            text-align: center;
+
+            padding-right: 48mm;
+        }
+
+        .title {
+            margin: 0;
+
+            font-size: 14px;
+
+            font-weight: bold;
+
+            line-height: 1.2;
+        }
+
+        .title-en {
+            margin-top: 1px;
+
+            font-size: 11px;
+
+            font-weight: bold;
+
+            font-style: italic;
+
+            line-height: 1.2;
+        }
+
+
+        /* =====================================================
+           INTRO
+        ===================================================== */
+
+        .intro {
+            margin-bottom: 3mm;
+        }
+
+        .intro-title {
+            font-size: 12px;
+
+            font-weight: bold;
+
+            margin-bottom: 2mm;
+        }
+
+
+        /* =====================================================
+           DATA PIHAK
+        ===================================================== */
+
+        .party-section {
+            width: 100%;
+
+            margin-bottom: 2mm;
+        }
+
+        .party-row {
+            display: flex;
+
+            align-items: baseline;
+
+            min-height: 5mm;
+
+            width: 100%;
+
+            font-size: 12px;
+        }
+
+        .party-label {
+            width: 40mm;
+
+            padding-left: 5mm;
+
+            flex-shrink: 0;
+        }
+
+        .party-colon {
+            width: 4mm;
+
+            flex-shrink: 0;
+
+            text-align: center;
+        }
+
+        .party-line {
+            flex: 1;
+
+            height: 3mm;
+
+            border-bottom: 1px solid #000;
+        }
+
+        .party-extra {
+            width: 62mm;
+
+            margin-left: 4mm;
+
+            flex-shrink: 0;
+        }
+
+
+        /* =====================================================
+           HUBUNGAN
+        ===================================================== */
+
+        .relationship {
+            margin-top: 2mm;
+
+            font-size: 12px;
+
+            line-height: 1.35;
+        }
+
+        .relationship-line {
+            display: inline-block;
+
+            width: 55mm;
+
+            border-bottom: 1px solid #000;
+
+            vertical-align: bottom;
+        }
+
+
+        /* =====================================================
+           PERSETUJUAN
+        ===================================================== */
+
+        .consent-text {
+            margin-top: 2mm;
+
+            font-size: 12px;
+
+            text-align: justify;
+
+            line-height: 1.35;
+        }
+
+        .fill-line {
+            display: inline-block;
+
+            width: 42mm;
+
+            border-bottom: 1px solid #000;
+
+            vertical-align: bottom;
+        }
+
+
+        /* =====================================================
+           IDENTITAS PASIEN
+        ===================================================== */
+
+        .patient-info {
+            width: 70mm;
+
+            min-height: 38mm;
+
+            border: 1px solid #000;
+
+            margin: 3mm auto 3mm;
+
+            padding: 3mm;
+
+            font-size: 10px;
+
+            line-height: 1.15;
+        }
+
+        .patient-row {
+            display: flex;
+
+            margin-bottom: 1.2mm;
+        }
+
+        .patient-label {
+            width: 27mm;
+
+            flex-shrink: 0;
+        }
+
+        .patient-colon {
+            width: 4mm;
+
+            flex-shrink: 0;
+
+            text-align: center;
+        }
+
+        .patient-value {
+            flex: 1;
+        }
+
+        .patient-note {
+            text-align: center;
+
+            margin-top: 3mm;
+
+            font-style: italic;
+
+            font-size: 9px;
+        }
+
+
+        /* =====================================================
+           PERNYATAAN
+        ===================================================== */
+
+        .statement-title {
+            margin-top: 2mm;
+
+            margin-bottom: 2mm;
+
+            font-size: 12px;
+
+            font-weight: bold;
+
+            line-height: 1.25;
+        }
+
+
+        /* =====================================================
+           CHECKLIST
+        ===================================================== */
+
+        .check-item {
+            display: flex;
+
+            align-items: flex-start;
+
+            margin-bottom: 2.5mm;
+
+            font-size: 12px;
+
+            line-height: 1.3;
+
+            page-break-inside: avoid;
+            break-inside: avoid;
+        }
+
+        .check-box {
+            width: 4mm;
+            height: 4mm;
+
+            min-width: 4mm;
+
+            border: 1px solid #000;
+
+            margin-right: 2.5mm;
+
+            margin-top: 0.5mm;
+        }
+
+        .check-text {
+            flex: 1;
+
+            text-align: justify;
+        }
+
+        .check-text i {
+            display: block;
+
+            margin-top: 0.7mm;
+
+            font-size: 11px;
+
+            line-height: 1.25;
+        }
+
+
+        /* =====================================================
+           TANGGAL / JAM
+        ===================================================== */
+
+        .date-time {
+            margin-top: 2.5mm;
+
+            margin-bottom: 4mm;
+
+            font-size: 12px;
+
+            line-height: 1.7;
+
+            page-break-inside: avoid;
+            break-inside: avoid;
+        }
+
+        .date-line {
+            display: inline-block;
+
+            width: 43mm;
+
+            border-bottom: 1px solid #000;
+
+            vertical-align: bottom;
+        }
+
+        .time-line {
+            display: inline-block;
+
+            width: 32mm;
+
+            border-bottom: 1px solid #000;
+
+            vertical-align: bottom;
+        }
+
+
+        /* =====================================================
+           TANDA TANGAN
+        ===================================================== */
+
+        .signature-table {
+            width: 100%;
+
+            border-collapse: collapse;
+
+            table-layout: fixed;
+
+            margin-top: 2mm;
+
+            page-break-inside: avoid;
+            break-inside: avoid;
+        }
+
+        .signature-table td {
+            width: 33.333%;
+
+            border: 0;
+
+            text-align: center;
+
+            vertical-align: top;
+
+            padding: 0 3mm;
+        }
+
+        .signature-role {
+            font-size: 12px;
+
+            font-weight: bold;
+
+            line-height: 1.2;
+
+            min-height: 10mm;
+        }
+
+        .signature-space {
+            height: 20mm;
+        }
+
+        .signature-line {
+            width: 45mm;
+
+            max-width: 100%;
+
+            margin: 0 auto 1.5mm;
+
+            border-bottom: 1px solid #000;
+        }
+
+        .signature-name {
+            font-size: 12px;
+
+            font-weight: bold;
+
+            line-height: 1.2;
+        }
+
+        .signature-name-en {
+            font-size: 10px;
+
+            font-style: italic;
+
+            line-height: 1.2;
+        }
+
+
+        /* =====================================================
+           FOOTNOTE
+        ===================================================== */
+
+        .footer-note {
+            margin-top: 3mm;
+
+            font-size: 10px;
+
+            line-height: 1.35;
+
+            page-break-inside: avoid;
+            break-inside: avoid;
+        }
+
+        .footer-note div {
+            margin-bottom: 1mm;
+        }
+
+
+        /* =====================================================
+           SCREEN
+        ===================================================== */
+
+        @media screen {
+
+            body {
+                background: #fff;
+            }
+
+            .page {
+                margin: 0 auto;
+
+                background: #fff;
+            }
+        }
+
+
+        /* =====================================================
+           RESPONSIVE MOBILE
+        ===================================================== */
+
+        @media screen and (max-width: 600px) {
+
+            body {
+                font-size: 12px;
+            }
+
+            .page {
+                width: 100%;
+
+                min-height: auto;
+
+                padding: 15px;
+            }
+
+            .header {
+                flex-wrap: wrap;
+            }
+
+            .logo {
+                width: 100%;
+
+                margin-bottom: 8px;
+
+                font-size: 20px;
+            }
+
+            .title-area {
+                width: 100%;
+
+                padding-right: 0;
+            }
+
+            .title {
+                font-size: 14px;
+            }
+
+            .title-en {
+                font-size: 10px;
+            }
+
+            .party-row {
+                font-size: 12px;
+            }
+
+            .party-extra {
+                width: auto;
+
+                margin-left: 3mm;
+            }
+
+            .patient-info {
+                width: 75mm;
+            }
+
+            .check-item {
+                font-size: 12px;
+            }
+
+            .check-text i {
+                font-size: 10px;
+            }
+
+            .signature-table {
+                font-size: 11px;
+            }
+
+        }
+
+
+        /* =====================================================
+           PRINT A4 PORTRAIT
+        ===================================================== */
+
+        @media print {
+
+            @page {
+                size: A4 portrait;
+
+                margin: 0;
+            }
+
+
+            html,
+            body {
+                width: 210mm;
+
+                min-height: 297mm;
+
+                margin: 0;
+
+                padding: 0;
+
+                background: #fff !important;
+            }
+
+
+            body {
+                font-family: Arial, Helvetica, sans-serif;
+
+                font-size: 12px;
+
+                line-height: 1.25;
+
+                -webkit-print-color-adjust: exact;
+
+                print-color-adjust: exact;
+            }
+
+
+            /* =================================================
+               PAGE
+            ================================================= */
+
+            .page {
+                width: 210mm;
+
+                min-height: 297mm;
+
+                margin: 0 !important;
+
+                padding: 5mm 7mm 4mm;
+
+                background: #fff !important;
+
+                box-shadow: none !important;
+
+                /*
+                 * Jangan gunakan height: 297mm.
+                 * Jangan gunakan overflow: hidden.
+                 */
+                height: auto;
+
+                overflow: visible;
+            }
+
+
+            /* =================================================
+               HEADER
+            ================================================= */
+
+            .header {
+                margin-bottom: 5mm;
+
+                page-break-after: avoid;
+
+                break-after: avoid;
+            }
+
+            .logo {
+                width: 48mm;
+
+                font-size: 24px;
+            }
+
+            .title-area {
+                padding-right: 48mm;
+            }
+
+            .title {
+                font-size: 14px;
+
+                line-height: 1.2;
+            }
+
+            .title-en {
+                font-size: 11px;
+
+                line-height: 1.2;
+            }
+
+
+            /* =================================================
+               INTRO
+            ================================================= */
+
+            .intro {
+                margin-bottom: 3mm;
+            }
+
+            .intro-title {
+                font-size: 12px;
+
+                margin-bottom: 2mm;
+            }
+
+
+            /* =================================================
+               DATA PIHAK
+            ================================================= */
+
+            .party-section {
+                margin-bottom: 2mm;
+            }
+
+            .party-row {
+                min-height: 5mm;
+
+                font-size: 12px;
+            }
+
+            .party-label {
+                width: 40mm;
+            }
+
+            .party-extra {
+                width: 62mm;
+            }
+
+
+            /* =================================================
+               HUBUNGAN
+            ================================================= */
+
+            .relationship {
+                font-size: 12px;
+
+                line-height: 1.35;
+            }
+
+
+            /* =================================================
+               PERSETUJUAN
+            ================================================= */
+
+            .consent-text {
+                font-size: 12px;
+
+                line-height: 1.35;
+            }
+
+
+            /* =================================================
+               IDENTITAS PASIEN
+            ================================================= */
+
+            .patient-info {
+                width: 70mm;
+
+                min-height: 38mm;
+
+                margin: 3mm auto;
+
+                padding: 3mm;
+
+                font-size: 10px;
+
+                line-height: 1.15;
+
+                page-break-inside: avoid;
+
+                break-inside: avoid;
+            }
+
+            .patient-note {
+                font-size: 9px;
+            }
+
+
+            /* =================================================
+               PERNYATAAN
+            ================================================= */
+
+            .statement-title {
+                font-size: 12px;
+
+                margin-top: 2mm;
+
+                margin-bottom: 2mm;
+            }
+
+
+            /* =================================================
+               CHECKLIST
+            ================================================= */
+
+            .check-item {
+                font-size: 12px;
+
+                line-height: 1.3;
+
+                margin-bottom: 2.5mm;
+
+                page-break-inside: avoid;
+
+                break-inside: avoid;
+            }
+
+            .check-box {
+                width: 4mm;
+
+                height: 4mm;
+
+                min-width: 4mm;
+            }
+
+            .check-text i {
+                font-size: 11px;
+
+                line-height: 1.25;
+            }
+
+
+            /* =================================================
+               TANGGAL / JAM
+            ================================================= */
+
+            .date-time {
+                font-size: 12px;
+
+                margin-top: 2.5mm;
+
+                margin-bottom: 4mm;
+
+                page-break-inside: avoid;
+
+                break-inside: avoid;
+            }
+
+
+            /* =================================================
+               TANDA TANGAN
+            ================================================= */
+
+            .signature-table {
+                margin-top: 2mm;
+
+                page-break-inside: avoid;
+
+                break-inside: avoid;
+            }
+
+            .signature-role {
+                font-size: 12px;
+
+                min-height: 10mm;
+            }
+
+            .signature-space {
+                /*
+                 * Ruang tanda tangan dibuat agak besar
+                 * supaya halaman A4 lebih penuh.
+                 */
+                height: 20mm;
+            }
+
+            .signature-line {
+                width: 45mm;
+            }
+
+            .signature-name {
+                font-size: 12px;
+            }
+
+            .signature-name-en {
+                font-size: 10px;
+            }
+
+
+            /* =================================================
+               FOOTER
+            ================================================= */
+
+            .footer-note {
+                margin-top: 3mm;
+
+                font-size: 10px;
+
+                line-height: 1.35;
+
+                page-break-inside: avoid;
+
+                break-inside: avoid;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="page">
+
+
+    <!-- =====================================================
+         HEADER
+    ===================================================== -->
+
+    <div class="header">
+
+        <div class="logo">
+            RS AWAL BROS
+        </div>
+
+
+        <div class="title-area">
+
+            <div class="title">
+                PERSETUJUAN TINDAKAN ATAU PENGOBATAN MEDIS
+            </div>
+
+            <div class="title-en">
+                CONSENT FOR MEDICAL PROCEDURE OR TREATMENT
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         IDENTITAS PIHAK
+    ===================================================== -->
+
+    <div class="intro">
+
+        <div class="intro-title">
+
+            Yang bertanda tangan di bawah ini:
+
+            <br>
+
+            <i>
+                The undersigned below:
+            </i>
+
+        </div>
+
+
+        <div class="party-section">
+
+
+            <!-- NAMA -->
+
+            <div class="party-row">
+
+                <div class="party-label">
+
+                    Nama
+                    <br>
+
+                    <i>Name</i>
+
+                </div>
+
+                <div class="party-colon">
+                    :
+                </div>
+
+                <div class="party-line"></div>
+
+            </div>
+
+
+            <!-- UMUR -->
+
+            <div class="party-row">
+
+                <div class="party-label">
+
+                    Umur
+                    <br>
+
+                    <i>Age</i>
+
+                </div>
+
+                <div class="party-colon">
+                    :
+                </div>
+
+                <div class="party-line"></div>
+
+                <div class="party-extra">
+
+                    tahun
+
+                    &nbsp;&nbsp;&nbsp;
+
+                    Jenis Kelamin :
+                    Laki-laki/Perempuan*)
+
+                    <br>
+
+                    <i>
+                        Gender: Male/Female*)
+                    </i>
+
+                </div>
+
+            </div>
+
+
+            <!-- ALAMAT -->
+
+            <div class="party-row">
+
+                <div class="party-label">
+
+                    Alamat
+                    <br>
+
+                    <i>Address</i>
+
+                </div>
+
+                <div class="party-colon">
+                    :
+                </div>
+
+                <div class="party-line"></div>
+
+            </div>
+
+
+            <!-- KARTU IDENTITAS -->
+
+            <div class="party-row">
+
+                <div class="party-label">
+
+                    No. Kartu Identitas
+                    <br>
+
+                    <i>ID Card Number</i>
+
+                </div>
+
+                <div class="party-colon">
+                    :
+                </div>
+
+                <div class="party-line"></div>
+
+                <div class="party-extra">
+
+                    KTP/SIM/Paspor*)
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             HUBUNGAN
+        ================================================== -->
+
+        <div class="relationship">
+
+            Hubungan dengan pasien*):
+
+            Dari sendiri/suami/istri/ayah/ibu/anak/
+
+            <span class="relationship-line"></span>
+
+            <br>
+
+            <i>
+                Relationship to the patient:
+                Self/Husband/Wife/Father/Mother/Child/
+            </i>
+
+        </div>
+
+
+        <!-- =================================================
+             PERSETUJUAN
+        ================================================== -->
+
+        <div class="consent-text">
+
+            Dengan ini menyatakan
+
+            <span class="fill-line"></span>
+
+            untuk dilakukan tindakan atau pengobatan medis
+
+            <br>
+
+            tersebut terhadap pasien:
+
+            <span class="fill-line"></span>
+
+            <br>
+
+            <i>
+
+                Hereby state the consent for
+
+                <span class="fill-line"></span>
+
+                to perform the procedure or medical treatment
+                on the patient:
+
+            </i>
+
+        </div>
+
+
+        <!-- =================================================
+             IDENTITAS PASIEN
+        ================================================== -->
+
+        <div class="patient-info">
+
+
+            <div class="patient-row">
+
+                <div class="patient-label">
+                    Nama Lengkap
+                </div>
+
+                <div class="patient-colon">
+                    :
+                </div>
+
+                <div class="patient-value"></div>
+
+            </div>
+
+
+            <div class="patient-row">
+
+                <div class="patient-label">
+                    Jenis Kelamin
+                </div>
+
+                <div class="patient-colon">
+                    :
+                </div>
+
+                <div class="patient-value">
+                    (L/P)*
+                </div>
+
+            </div>
+
+
+            <div class="patient-row">
+
+                <div class="patient-label">
+                    Tanggal Lahir
+                </div>
+
+                <div class="patient-colon">
+                    :
+                </div>
+
+                <div class="patient-value"></div>
+
+            </div>
+
+
+            <div class="patient-row">
+
+                <div class="patient-label">
+                    Umur
+                </div>
+
+                <div class="patient-colon">
+                    :
+                </div>
+
+                <div class="patient-value"></div>
+
+            </div>
+
+
+            <div class="patient-row">
+
+                <div class="patient-label">
+                    No. Rekam Medis
+                </div>
+
+                <div class="patient-colon">
+                    :
+                </div>
+
+                <div class="patient-value"></div>
+
+            </div>
+
+
+            <div class="patient-note">
+
+                (mohon diisi atau tempelkan stiker pasien)
+
+                <br>
+
+                (Please fill in or attach the patient sticker)
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+    <!-- =====================================================
+         PERNYATAAN
+    ===================================================== -->
+
+    <div class="statement-title">
+
+        Dengan ini menyatakan:
+
+        <br>
+
+        <i>
+            Hereby declare:
+        </i>
+
+    </div>
+
+
+    <!-- =====================================================
+         CHECKLIST 1
+    ===================================================== -->
+
+    <div class="check-item">
+
+        <span class="check-box"></span>
+
+        <div class="check-text">
+
+            Saya mengetahui telah menerima informasi penjelasan
+            mengenai tindakan yang akan dilakukan.
+
+            <i>
+                I acknowledge that I have received explanation
+                regarding the procedure to be performed.
+            </i>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         CHECKLIST 2
+    ===================================================== -->
+
+    <div class="check-item">
+
+        <span class="check-box"></span>
+
+        <div class="check-text">
+
+            Saya memahami perlunya dan manfaat tindakan tersebut
+            sebagaimana telah dijelaskan seperti sebelumnya kepada
+            saya, termasuk risiko dan komplikasi yang mungkin timbul
+            dari tindakan dilakukan atau tidak dilakukan.
+
+            <i>
+                I understand the necessity and benefits of the procedure
+                as explained previously, including the possible risks
+                and complications if the procedure is performed or
+                not performed.
+            </i>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         CHECKLIST 3
+    ===================================================== -->
+
+    <div class="check-item">
+
+        <span class="check-box"></span>
+
+        <div class="check-text">
+
+            Saya mengetahui bahwa saya telah diberikan kesempatan
+            untuk bertanya informasi lebih banyak tentang prosedur ini.
+
+            <i>
+                I acknowledge that I have been given the opportunity
+                to ask for more information about this procedure.
+            </i>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         CHECKLIST 4
+    ===================================================== -->
+
+    <div class="check-item">
+
+        <span class="check-box"></span>
+
+        <div class="check-text">
+
+            Saya juga menyadari tidak ada jaminan yang diberikan
+            bahwa Dokter ataupun petugas yang melakukan tindakan
+            dengan hasil yang sesuai dengan yang diharapkan.
+
+            <i>
+                I also realize that no guarantee has been given
+                that the doctor or staff performing the procedure
+                will achieve the expected result.
+            </i>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         CHECKLIST 5
+    ===================================================== -->
+
+    <div class="check-item">
+
+        <span class="check-box"></span>
+
+        <div class="check-text">
+
+            Saya juga menyadari bahwa oleh karena ilmu kedokteran
+            bukanlah ilmu pasti, maka keberhasilan tindakan
+            bukanlah sesuatu yang pasti.
+
+            <i>
+                I also realize that because medical science is not
+                an exact science, the success of medical procedures
+                is not guaranteed and highly dependent on the will
+                of Almighty God.
+            </i>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         TANGGAL DAN JAM
+    ===================================================== -->
+
+    <div class="date-time">
+
+        <div>
+
+            Pekanbaru,
+
+            <span class="date-line"></span>
+
+        </div>
+
+
+        <div>
+
+            Jam :
+
+            <span class="time-line"></span>
+
+            WIB
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         TANDA TANGAN
+    ===================================================== -->
+
+    <table class="signature-table">
+
+        <tr>
+
+
+            <!-- YANG MENYATAKAN -->
+
+            <td>
+
+                <div class="signature-role">
+
+                    Yang Menyatakan,
+
+                    <br>
+
+                    <i>
+                        Declarant
+                    </i>
+
+                </div>
+
+
+                <div class="signature-space"></div>
+
+
+                <div class="signature-line"></div>
+
+
+                <div class="signature-name">
+
+                    Nama Lengkap dan Tanda Tangan
+
+                </div>
+
+
+                <div class="signature-name-en">
+
+                    Full Name and Signature
+
+                </div>
+
+            </td>
+
+
+            <!-- SAKSI I -->
+
+            <td>
+
+                <div class="signature-role">
+
+                    Saksi I,
+
+                    <br>
+
+                    <i>
+                        Witness I
+                    </i>
+
+                </div>
+
+
+                <div class="signature-space"></div>
+
+
+                <div class="signature-line"></div>
+
+
+                <div class="signature-name">
+
+                    Nama Lengkap dan Tanda Tangan
+
+                </div>
+
+
+                <div class="signature-name-en">
+
+                    Full Name and Signature
+
+                </div>
+
+            </td>
+
+
+            <!-- SAKSI II -->
+
+            <td>
+
+                <div class="signature-role">
+
+                    Saksi II,
+
+                    <br>
+
+                    <i>
+                        Witness II
+                    </i>
+
+                </div>
+
+
+                <div class="signature-space"></div>
+
+
+                <div class="signature-line"></div>
+
+
+                <div class="signature-name">
+
+                    Nama Lengkap dan Tanda Tangan
+
+                </div>
+
+
+                <div class="signature-name-en">
+
+                    Full Name and Signature
+
+                </div>
+
+            </td>
+
+
+        </tr>
+
+    </table>
+
+
+    <!-- =====================================================
+         FOOTER
+    ===================================================== -->
+
+    <div class="footer-note">
+
+        <div>
+
+            *)
+
+            Coret yang tidak perlu/
+
+            <i>
+                Cross out what is not necessary
+            </i>
+
+        </div>
+
+
+        <div>
+
+            □
+
+            Beri tanda (✓) pada kolom yang sesuai/
+
+            <i>
+                Check (✓) the appropriate column
+            </i>
+
+        </div>
+
+    </div>
+
+
+</div>
+
+
+</body>
+
+</html>
