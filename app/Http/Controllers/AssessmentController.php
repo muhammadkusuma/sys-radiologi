@@ -377,17 +377,20 @@ class AssessmentController extends Controller
 
         if (Auth::user()->role === 'dokter') {
             if (!$assessment->nurse_signature) {
-                return redirect()->route('dashboard')->with('error', 'Dokumen belum ditandatangani perawat.');
+                return redirect()->route('assessments.show', $assessment->id)
+                    ->with('error', 'Dokumen belum ditandatangani perawat.');
             }
 
             if ($assessment->doctor_signature) {
-                return redirect()->route('dashboard')->with('error', 'Dokumen sudah ditandatangani dokter.');
+                return redirect()->route('assessments.show', $assessment->id)
+                    ->with('error', 'Dokumen sudah ditandatangani dokter.');
             }
 
             $signature = Auth::user()->signature ?: $request->input('signature');
 
             if (!$signature) {
-                return redirect()->route('dashboard')->with('error', 'Tanda tangan dokter belum tersedia. Silakan hubungi Superadmin/IT untuk mengunggah TTD di Master User.');
+                return redirect()->route('assessments.show', $assessment->id)
+                    ->with('error', 'Tanda tangan dokter belum tersedia. Silakan hubungi Superadmin/IT untuk mengunggah TTD di Master User.');
             }
 
             $assessment->update([
@@ -396,7 +399,8 @@ class AssessmentController extends Controller
                 'signed_at' => now(),
             ]);
 
-            return redirect()->route('dashboard')->with('success', 'Dokumen berhasil ditandatangani oleh Dokter Spesialis Radiologi.');
+            return redirect()->route('assessments.show', $assessment->id)
+                ->with('success', 'Dokumen berhasil ditandatangani oleh Dokter Spesialis Radiologi.');
         }
 
         $request->validate([

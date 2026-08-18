@@ -300,6 +300,70 @@
             font-weight: bold;
         }
 
+        .doctor-sign-panel {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            padding: 8px;
+            border: 1px dashed #cbd5e1;
+            border-radius: 8px;
+            background: #f8fafc;
+        }
+
+        .doctor-sign-panel img {
+            max-height: 60px;
+            max-width: 160px;
+        }
+
+        .doctor-sign-btn {
+            cursor: pointer;
+            padding: 6px 14px;
+            background: #7c3aed;
+            border: none;
+            border-radius: 6px;
+            color: #fff;
+            font-weight: 600;
+            font-size: 12px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+        }
+
+        .doctor-sign-btn:hover {
+            background: #6d28d9;
+        }
+
+        .doctor-sign-note {
+            font-size: 10px;
+            color: #64748b;
+            text-align: center;
+            line-height: 14px;
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 4px 10px;
+            border-radius: 999px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .status-badge-success {
+            background: #dcfce7;
+            color: #166534;
+            border: 1px solid #bbf7d0;
+        }
+
+        .status-badge-warning {
+            background: #fef3c7;
+            color: #92400e;
+            border: 1px solid #fde68a;
+        }
+
+        .print-only {
+            display: none;
+        }
+
         /* ========================================
     FOOTER
     ======================================== */
@@ -342,6 +406,10 @@
                 display: none !important;
             }
 
+            .print-only {
+                display: block !important;
+            }
+
             body {
                 -webkit-print-color-adjust: exact;
                 print-color-adjust: exact;
@@ -358,24 +426,72 @@
 
 <body>
 
+    @php
+        $isDoctor = auth()->user()->role === 'dokter';
+        $canDoctorSign = $isDoctor && $assessment->nurse_signature && !$assessment->doctor_signature && auth()->user()->signature;
+    @endphp
+
+    @if ($canDoctorSign)
+        <form id="doctor-sign-form" action="{{ route('assessments.sign', $assessment->id) }}" method="POST" class="hidden">
+            @csrf
+            <input type="hidden" name="signature" value="{{ auth()->user()->signature }}">
+        </form>
+    @endif
+
+    @if (session('success'))
+        <div class="no-print"
+            style="background: #dcfce7; border-bottom: 1px solid #bbf7d0; color: #166534; padding: 10px 20px; font-size: 12px; font-weight: 600; text-align: center;">
+            {{ session('success') }}
+        </div>
+    @endif
+
+    @if (session('error'))
+        <div class="no-print"
+            style="background: #fee2e2; border-bottom: 1px solid #fecaca; color: #991b1b; padding: 10px 20px; font-size: 12px; font-weight: 600; text-align: center;">
+            {{ session('error') }}
+        </div>
+    @endif
+
     <!-- TOP CONTROL BAR (HIDDEN IN PRINT) -->
     <div class="no-print no-print-bar">
         <div style="font-size: 13px; font-weight: bold; color: #1e293b;">
-            Mode Pratinjau Dokumen Medis
+            @if ($isDoctor)
+                Review Dokumen & TTD Dokter
+            @else
+                Mode Pratinjau Dokumen Medis
+            @endif
         </div>
-        <div style="display: flex; gap: 10px;">
+        <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap; justify-content: flex-end;">
             <a href="{{ route('dashboard') }}"
                 style="text-decoration: none; padding: 6px 14px; background: #fff; border: 1px solid #cbd5e1; border-radius: 6px; color: #475569; font-weight: 600; font-size: 12px;">
                 &larr; Kembali
             </a>
-            <a href="{{ route('assessments.pdf', $assessment->id) }}" target="_blank"
-                style="text-decoration: none; padding: 6px 14px; background: #0f766e; border: none; border-radius: 6px; color: #fff; font-weight: 600; font-size: 12px; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">
-                Buka PDF
-            </a>
-            <button onclick="window.print()"
-                style="cursor: pointer; padding: 6px 14px; background: #2563eb; border: none; border-radius: 6px; color: #fff; font-weight: 600; font-size: 12px; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">
-                Cetak Dokumen (Print)
-            </button>
+
+            @if ($isDoctor)
+                @if ($assessment->doctor_signature)
+                    <span class="status-badge status-badge-success">Sudah Ditandatangani</span>
+                @elseif(!$assessment->nurse_signature)
+                    <span class="status-badge status-badge-warning">Menunggu TTD Perawat</span>
+                @elseif(!auth()->user()->signature)
+                    <span class="status-badge status-badge-warning">TTD Belum Tersedia</span>
+                @endif
+
+                @if ($canDoctorSign)
+                    <button type="button" onclick="confirmDoctorSign()"
+                        class="doctor-sign-btn">
+                        TTD Dokter
+                    </button>
+                @endif
+            @else
+                <a href="{{ route('assessments.pdf', $assessment->id) }}" target="_blank"
+                    style="text-decoration: none; padding: 6px 14px; background: #0f766e; border: none; border-radius: 6px; color: #fff; font-weight: 600; font-size: 12px; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">
+                    Buka PDF
+                </a>
+                <button onclick="window.print()"
+                    style="cursor: pointer; padding: 6px 14px; background: #2563eb; border: none; border-radius: 6px; color: #fff; font-weight: 600; font-size: 12px; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">
+                    Cetak Dokumen (Print)
+                </button>
+            @endif
         </div>
     </div>
 
@@ -863,13 +979,24 @@
                 <div class="ttd-ruang">
                     @if ($assessment->doctor_signature)
                         <img src="{{ $assessment->doctor_signature }}" alt="Ttd Dokter">
+                    @elseif($canDoctorSign)
+                        <div class="doctor-sign-panel no-print">
+                            <img src="{{ auth()->user()->signature }}" alt="Preview TTD Dokter">
+                            <button type="button" onclick="confirmDoctorSign()" class="doctor-sign-btn">
+                                TTD Dokter
+                            </button>
+                            <div class="doctor-sign-note">
+                                TTD digital dari profil dokter akan diterapkan ke dokumen ini.
+                            </div>
+                        </div>
+                        <span class="print-only" style="color: #64748b; font-style: italic;">Belum ditandatangani</span>
                     @else
                         <span style="color: #64748b; font-style: italic;">Belum ditandatangani</span>
                     @endif
                 </div>
                 <div class="ttd-garis">
                     (
-                    {{ $assessment->radiologyDoctor ? $assessment->radiologyDoctor->name : '................................' }}
+                    {{ $assessment->radiologyDoctor ? $assessment->radiologyDoctor->name : (auth()->user()->role === 'dokter' ? auth()->user()->name : '................................') }}
                     )
                 </div>
             </div>
@@ -891,6 +1018,14 @@
     </div>
 
     <script>
+        function confirmDoctorSign() {
+            const patientName = @json($assessment->patient->name);
+
+            if (confirm(`Tandatangani dokumen asesmen pasien ${patientName}?\n\nTTD digital Anda akan diterapkan pada dokumen.`)) {
+                document.getElementById('doctor-sign-form').submit();
+            }
+        }
+
         function updatePrintTime() {
             const now = new Date();
 

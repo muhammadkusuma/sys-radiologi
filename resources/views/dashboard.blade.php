@@ -170,41 +170,14 @@
                                     <div class="inline-flex items-center justify-end gap-2 flex-wrap">
                                         @if (Auth::user()->role === 'dokter')
                                             <a href="{{ route('assessments.show', $ast->id) }}"
-                                                class="inline-flex items-center px-2.5 py-1 bg-white hover:bg-slate-50 text-slate-700 text-xs font-semibold rounded border border-slate-300">
-                                                Review
+                                                class="inline-flex items-center px-2.5 py-1 bg-purple-50 hover:bg-purple-100 text-purple-700 text-xs font-semibold rounded border border-purple-200">
+                                                <svg class="h-3.5 w-3.5 mr-1" fill="none" viewBox="0 0 24 24"
+                                                    stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                        d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                                                </svg>
+                                                Review & TTD
                                             </a>
-                                            <a href="{{ route('assessments.pdf', $ast->id) }}" target="_blank"
-                                                class="inline-flex items-center px-2.5 py-1 bg-white hover:bg-slate-50 text-slate-700 text-xs font-semibold rounded border border-slate-300">
-                                                Lihat PDF
-                                            </a>
-                                            <a href="{{ route('assessments.pdf', ['assessment' => $ast->id, 'download' => 1]) }}"
-                                                class="inline-flex items-center px-2.5 py-1 bg-white hover:bg-slate-50 text-slate-700 text-xs font-semibold rounded border border-slate-300">
-                                                Download PDF
-                                            </a>
-                                            @if (Auth::user()->signature)
-                                                <form id="sign-form-{{ $ast->id }}"
-                                                    action="{{ route('assessments.sign', $ast->id) }}" method="POST"
-                                                    class="inline-flex items-center m-0">
-                                                    @csrf
-                                                    <input type="hidden" name="signature" value="{{ Auth::user()->signature }}">
-                                                    <button type="button"
-                                                        onclick="confirmSign('{{ $ast->id }}', '{{ $ast->patient->name }}')"
-                                                        class="inline-flex items-center px-2.5 py-1 bg-purple-50 hover:bg-purple-100 text-purple-700 text-xs font-semibold rounded border border-purple-200 cursor-pointer">
-                                                        <svg class="h-3.5 w-3.5 mr-1" fill="none" viewBox="0 0 24 24"
-                                                            stroke="currentColor">
-                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                                d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
-                                                        </svg>
-                                                        TTD Dokter
-                                                    </button>
-                                                </form>
-                                            @else
-                                                <span
-                                                    class="inline-flex items-center px-2.5 py-1 bg-amber-50 text-amber-700 text-xs font-semibold rounded border border-amber-200"
-                                                    title="TTD belum diunggah di Master User">
-                                                    TTD Belum Tersedia
-                                                </span>
-                                            @endif
                                         @else
                                             <a href="{{ route('assessments.pdf', ['assessment' => $ast->id, 'download' => 1]) }}"
                                                 class="inline-flex items-center px-2.5 py-1 bg-white hover:bg-slate-50 text-slate-700 text-xs font-semibold rounded border border-slate-300">
@@ -281,16 +254,6 @@
             showConfirm('Konfirmasi Hapus', message, () => {
                 document.getElementById('delete-form-' + id).submit();
             });
-        }
-
-        function confirmSign(id, patientName) {
-            showConfirm(
-                'Konfirmasi TTD Dokter',
-                `Tandatangani dokumen asesmen pasien ${patientName}? TTD digital Anda akan diterapkan pada dokumen.`,
-                () => {
-                    document.getElementById('sign-form-' + id).submit();
-                }
-            );
         }
     </script>
 @endsection
