@@ -348,7 +348,7 @@
             }
 
             .page {
-                width: 100%;
+                width: 99%;
                 max-width: none;
                 margin: 0;
             }
