@@ -8,9 +8,6 @@
     <title>Informasi Tindakan Medis</title>
 
     <style>
-        /* =====================================================
-           RESET
-        ===================================================== */
 
         * {
             box-sizing: border-box;
@@ -25,15 +22,10 @@
         body {
             font-family: Arial, Helvetica, sans-serif;
             font-size: 13px;
-            line-height: 1.35;
+            line-height: 1.3;
             color: #000;
             background: #fff;
         }
-
-
-        /* =====================================================
-           CONTAINER
-        ===================================================== */
 
         .container {
             width: 100%;
@@ -47,32 +39,99 @@
            HEADER
         ===================================================== */
 
+        .hospital-header {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 18px;
+        }
+
+        .hospital-logo {
+            flex: 1;
+            padding-top: 20px;
+            padding-left: 8px;
+        }
+
+        .logo-text {
+            font-size: 30px;
+            font-weight: 900;
+            letter-spacing: -2px;
+            white-space: nowrap;
+        }
+
+
+        /* =====================================================
+           IDENTITAS PASIEN
+        ===================================================== */
+
+        .patient-box {
+            width: 270px;
+            min-height: 124px;
+
+            border: 1px solid #000;
+
+            padding: 8px 10px;
+
+            font-size: 10px;
+            line-height: 1.05;
+        }
+
+        .patient-row {
+            display: flex;
+            align-items: flex-start;
+
+            margin-bottom: 3px;
+        }
+
+        .patient-label {
+            width: 100px;
+        }
+
+        .patient-label i {
+            display: block;
+            font-size: 9px;
+            font-weight: normal;
+        }
+
+        .patient-colon {
+            width: 15px;
+            text-align: center;
+        }
+
+        .patient-value {
+            flex: 1;
+        }
+
+        .patient-note {
+            margin-top: 10px;
+            text-align: center;
+            font-size: 9px;
+            line-height: 1.15;
+        }
+
+
+        /* =====================================================
+           JUDUL
+        ===================================================== */
+
+        .document-title {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
         .title {
             margin: 0;
-            text-align: center;
             font-size: 18px;
             font-weight: bold;
             line-height: 1.3;
         }
 
         .subtitle {
-            margin: 3px 0 15px;
-            text-align: center;
+            margin-top: 3px;
             font-size: 13px;
             font-weight: bold;
             font-style: italic;
-            line-height: 1.3;
-        }
-
-
-        /* =====================================================
-           TABLE WRAPPER
-        ===================================================== */
-
-        .table-wrapper {
-            width: 100%;
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
         }
 
 
@@ -80,9 +139,13 @@
            TABLE
         ===================================================== */
 
-        table {
+        .table-wrapper {
             width: 100%;
-            min-width: 760px;
+            overflow-x: auto;
+        }
+
+        .main-table {
+            width: 100%;
             border-collapse: collapse;
             table-layout: fixed;
         }
@@ -99,35 +162,11 @@
             width: 10%;
         }
 
-        td,
-        th {
+        .main-table td {
             border: 1px solid #000;
-            padding: 7px 8px;
-
-            /* Isi cell berada di tengah vertikal */
+            padding: 6px 7px;
             vertical-align: middle;
-
-            word-break: normal;
             overflow-wrap: break-word;
-        }
-
-
-        /* =====================================================
-           FIELD TITLE
-        ===================================================== */
-
-        .field-title {
-            font-weight: bold;
-            line-height: 1.25;
-        }
-
-        .field-title i {
-            font-weight: normal;
-            line-height: 1.2;
-        }
-
-        .center {
-            text-align: center;
         }
 
 
@@ -135,23 +174,22 @@
            CONTENT
         ===================================================== */
 
+        .field-title {
+            font-weight: bold;
+            line-height: 1.2;
+        }
+
+        .field-title i {
+            font-weight: normal;
+        }
+
         .content {
-            line-height: 1.35;
-            vertical-align: middle;
+            line-height: 1.3;
         }
 
-        .content p {
-            margin: 0 0 6px;
+        .center {
+            text-align: center;
         }
-
-        .content p:last-child {
-            margin-bottom: 0;
-        }
-
-
-        /* =====================================================
-           LIST
-        ===================================================== */
 
         ol {
             margin-top: 3px;
@@ -159,13 +197,8 @@
             padding-left: 22px;
         }
 
-        ol li {
-            padding-left: 3px;
-            margin-bottom: 4px;
-        }
-
-        ol li:last-child {
-            margin-bottom: 0;
+        li {
+            margin-bottom: 3px;
         }
 
 
@@ -175,30 +208,23 @@
 
         .checkbox-row {
             display: flex;
-
-            /* Center secara vertikal */
             align-items: center;
-
-            width: 100%;
-            margin: 0;
-            line-height: 1.25;
+            line-height: 1.2;
         }
 
         .checkbox {
-            display: inline-block;
             width: 11px;
             height: 11px;
+
             min-width: 11px;
 
             border: 1px solid #000;
 
-            margin-right: 7px;
-
-            vertical-align: middle;
+            margin-right: 6px;
         }
 
         .indent {
-            margin-left: 18px;
+            margin-left: 17px;
         }
 
         .italic {
@@ -207,45 +233,40 @@
 
 
         /* =====================================================
-           GARIS ISIAN
+           GARIS
         ===================================================== */
 
         .line {
             display: inline-block;
 
-            width: 160px;
-            max-width: 30%;
+            width: 150px;
 
             border-bottom: 1px solid #000;
 
             margin-left: 3px;
-
-            vertical-align: middle;
         }
 
         .line-small {
             width: 45px;
-            max-width: none;
         }
 
 
         /* =====================================================
-           ALTERNATIVE
+           ALTERNATIF
         ===================================================== */
 
         .alternative-list {
-            margin-top: 8px;
-            padding-left: 24px;
+            padding-left: 22px;
+            margin-top: 6px;
         }
 
         .alternative-list li {
-            margin-bottom: 5px;
             text-align: justify;
+            margin-bottom: 4px;
         }
 
         .note {
-            margin-top: 10px !important;
-            text-align: left;
+            margin-top: 8px;
         }
 
 
@@ -258,9 +279,48 @@
             vertical-align: middle;
         }
 
+        .signature-table {
+            width: 100%;
+            border-collapse: collapse;
+            table-layout: fixed;
+        }
+
+        .signature-table td {
+            border: 1px solid #000;
+            padding: 7px;
+            vertical-align: top;
+        }
+
+        .signature-info {
+            width: 75%;
+        }
+
+        .signature-doctor {
+            width: 25%;
+        }
+
+        .statement {
+            text-align: justify;
+            line-height: 1.25;
+        }
+
+        .signature-box {
+            text-align: center;
+            vertical-align: top !important;
+        }
+
+        .signature-space {
+            height: 60px;
+        }
+
+        .document-notes {
+            padding: 3px 8px;
+            font-size: 10px;
+        }
+
 
         /* =====================================================
-           TABLET
+           MOBILE
         ===================================================== */
 
         @media screen and (max-width: 768px) {
@@ -273,29 +333,24 @@
                 padding: 10px;
             }
 
+            .logo-text {
+                font-size: 24px;
+            }
+
+            .patient-box {
+                width: 245px;
+                font-size: 9px;
+            }
+
             .title {
                 font-size: 16px;
             }
 
             .subtitle {
                 font-size: 12px;
-                margin-bottom: 10px;
-            }
-
-            td,
-            th {
-                padding: 6px;
-            }
-
-            .line {
-                width: 130px;
             }
         }
 
-
-        /* =====================================================
-           HP
-        ===================================================== */
 
         @media screen and (max-width: 480px) {
 
@@ -307,6 +362,19 @@
                 padding: 7px;
             }
 
+            .hospital-header {
+                gap: 10px;
+            }
+
+            .logo-text {
+                font-size: 18px;
+            }
+
+            .patient-box {
+                width: 220px;
+                font-size: 8px;
+            }
+
             .title {
                 font-size: 14px;
             }
@@ -315,32 +383,18 @@
                 font-size: 10px;
             }
 
-            td,
-            th {
-                padding: 5px;
+            .table-wrapper {
+                overflow-x: auto;
             }
 
-            table {
+            .main-table {
                 min-width: 700px;
-            }
-
-            .line {
-                width: 100px;
-            }
-
-            ol {
-                padding-left: 20px;
-            }
-
-            ol li {
-                padding-left: 2px;
-                margin-bottom: 3px;
             }
         }
 
 
         /* =====================================================
-           PRINT / CTRL + P
+           PRINT
         ===================================================== */
 
         @media print {
@@ -359,7 +413,7 @@
             }
 
             body {
-                font-size: 11px;
+                font-size: 9.5px;
             }
 
             .container {
@@ -369,193 +423,394 @@
                 margin: 0;
             }
 
-            .table-wrapper {
-                width: 100%;
-                overflow: visible !important;
+
+            /* =================================================
+               HEADER PERTAMA
+            ================================================= */
+
+            .hospital-header {
+                display: flex;
+                align-items: flex-start;
+
+                margin-bottom: 10px;
+
+                page-break-after: avoid;
             }
 
-            /*
-             * Table BOLEH dilanjutkan ke halaman berikutnya.
-             */
-            table {
-                width: 100%;
-                min-width: 0;
-                table-layout: fixed;
-                border-collapse: collapse;
-
-                page-break-inside: auto;
-                break-inside: auto;
+            .hospital-logo {
+                padding-top: 12px;
+                padding-left: 4px;
             }
 
-            /*
-             * Setiap row diusahakan tidak terpotong.
-             * Jika tidak muat, dipindahkan ke halaman berikutnya.
-             */
-            tr {
-                page-break-inside: avoid;
-                break-inside: avoid;
+            .logo-text {
+                font-size: 24px;
             }
 
-            td,
-            th {
-                padding: 5px 6px;
+            .patient-box {
+                width: 255px;
+                min-height: 105px;
 
-                vertical-align: middle;
+                padding: 5px 7px;
 
-                page-break-inside: avoid;
-                break-inside: avoid;
+                font-size: 7.5px;
+            }
+
+            .patient-label {
+                width: 90px;
+            }
+
+            .patient-label i {
+                font-size: 7px;
+            }
+
+            .patient-note {
+                font-size: 7px;
+                margin-top: 6px;
+            }
+
+
+            /* =================================================
+               JUDUL
+            ================================================= */
+
+            .document-title {
+                margin-bottom: 7px;
+
+                page-break-after: avoid;
             }
 
             .title {
-                font-size: 15px;
-
-                page-break-after: avoid;
-                break-after: avoid;
+                font-size: 13px;
             }
 
             .subtitle {
-                font-size: 11px;
-
-                page-break-after: avoid;
-                break-after: avoid;
+                font-size: 9px;
             }
 
-            /*
-             * Hindari list terpotong.
-             */
-            ol,
-            ul,
-            li {
+
+            /* =================================================
+               TABLE
+            ================================================= */
+
+            .table-wrapper {
+                overflow: visible !important;
+            }
+
+            .main-table {
+                width: 100%;
+
+                border-collapse: collapse;
+
+                table-layout: fixed;
+
+                page-break-inside: auto;
+            }
+
+            .main-table tr {
                 page-break-inside: avoid;
                 break-inside: avoid;
             }
 
-            .content {
+            .main-table td {
+                padding: 4px 5px;
+                vertical-align: middle;
+            }
+
+
+            /* =================================================
+               SIGNATURE
+            ================================================= */
+
+            .signature-table {
+                width: 100%;
+
+                margin-top: 0;
+
                 page-break-inside: avoid;
                 break-inside: avoid;
             }
 
-            .field-title {
+            .signature-table tr {
                 page-break-inside: avoid;
                 break-inside: avoid;
             }
 
-            .checkbox-row {
-                page-break-inside: avoid;
-                break-inside: avoid;
-
-                /* Center */
-                align-items: center;
+            .signature-table td {
+                padding: 5px;
             }
+
+            .statement {
+                font-size: 8.5px;
+                line-height: 1.15;
+            }
+
+            .signature-box {
+                font-size: 8.5px;
+            }
+
+            .signature-space {
+                height: 50px;
+            }
+
+            .document-notes {
+                font-size: 8px;
+            }
+
+
+            /* =================================================
+               PAKSA PALING PENTING:
+               Jangan gunakan fixed logo.
+            ================================================= */
+
+            .print-logo {
+                display: none !important;
+            }
+
         }
+
     </style>
 </head>
 
 
 <body>
 
-    <div class="container">
+<div class="container">
 
-        <!-- =====================================================
-             HEADER
-        ===================================================== -->
 
-        <p class="title">
-            INFORMASI TINDAKAN ATAU PENGOBATAN MEDIS<br>
+    <!-- =====================================================
+         HEADER HALAMAN PERTAMA
+    ===================================================== -->
+
+    <div class="hospital-header">
+
+        <div class="hospital-logo">
+
+            <div class="logo-text">
+                RS AWAL BROS
+            </div>
+
+        </div>
+
+
+        <div class="patient-box">
+
+            <div class="patient-row">
+
+                <span class="patient-label">
+                    Nama Lengkap
+                    <i>Full Name</i>
+                </span>
+
+                <span class="patient-colon">:</span>
+
+                <span class="patient-value"></span>
+
+            </div>
+
+
+            <div class="patient-row">
+
+                <span class="patient-label">
+                    Jenis Kelamin
+                    <i>Sex</i>
+                </span>
+
+                <span class="patient-colon">:</span>
+
+                <span class="patient-value">
+                    (L/P)*
+                </span>
+
+            </div>
+
+
+            <div class="patient-row">
+
+                <span class="patient-label">
+                    Tanggal Lahir
+                    <i>Date of Birth</i>
+                </span>
+
+                <span class="patient-colon">:</span>
+
+                <span class="patient-value"></span>
+
+            </div>
+
+
+            <div class="patient-row">
+
+                <span class="patient-label">
+                    No. Rekam Medis
+                    <i>Medical Record Number</i>
+                </span>
+
+                <span class="patient-colon">:</span>
+
+                <span class="patient-value"></span>
+
+            </div>
+
+
+            <div class="patient-note">
+
+                <i>
+                    (mohon diisi atau tempelkan stiker pasien)
+                </i>
+
+                <br>
+
+                <i>
+                    (Please fill in or attach the patient sticker)
+                </i>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         JUDUL
+    ===================================================== -->
+
+    <div class="document-title">
+
+        <div class="title">
+
+            INFORMASI TINDAKAN ATAU PENGOBATAN MEDIS
+
+            <br>
+
             MRI KEPALA/LEHER/SINUS
-        </p>
 
-        <p class="subtitle">
-            INFORMATION REGARDING MEDICAL PROCEDURE OR TREATMENT<br>
+        </div>
+
+
+        <div class="subtitle">
+
+            INFORMATION REGARDING MEDICAL PROCEDURE OR TREATMENT
+
+            <br>
+
             OF BRAIN/NECK/SINUSES
-        </p>
+
+        </div>
+
+    </div>
 
 
-        <!-- =====================================================
-             TABLE
-        ===================================================== -->
+    <!-- =====================================================
+         TABEL UTAMA
+    ===================================================== -->
 
-        <div class="table-wrapper">
+    <div class="table-wrapper">
 
-            <table>
+        <table class="main-table">
 
-                <colgroup>
-                    <col class="col-label">
-                    <col class="col-content">
-                    <col class="col-signature">
-                </colgroup>
+            <colgroup>
+
+                <col class="col-label">
+
+                <col class="col-content">
+
+                <col class="col-signature">
+
+            </colgroup>
 
 
-                <!-- =================================================
-                     NAMA DOKTER
-                ================================================== -->
+            <tbody>
+
+
+                <!-- NAMA DOKTER -->
 
                 <tr>
+
                     <td>
+
                         <div class="field-title">
+
                             NAMA DOKTER PEMBERI INFORMASI
-                            <br>
-                            <i>Name of Informing Doctor</i>
-                        </div>
-                    </td>
-
-                    <td colspan="2"></td>
-                </tr>
-
-
-                <!-- =================================================
-                     NAMA PENERIMA
-                ================================================== -->
-
-                <tr>
-                    <td>
-                        <div class="field-title">
-                            NAMA PENERIMA INFORMASI
-                            <br>
-                            <i>Name of Recipient of Information</i>
-                        </div>
-                    </td>
-
-                    <td colspan="2"></td>
-                </tr>
-
-
-                <!-- =================================================
-                     HUBUNGAN DENGAN PASIEN
-                ================================================== -->
-
-                <tr>
-                    <td>
-                        <div class="field-title">
-                            HUBUNGAN DENGAN PASIEN
-                            <br>
-                            <i>Relationship to Patient</i>
-                        </div>
-                    </td>
-
-                    <td colspan="2">
-
-                        <div class="content">
-
-                            <b>
-                                *(PASIEN/SUAMI/ISTRI/AYAH/IBU/ANAK/_________________)
-                            </b>
 
                             <br>
 
                             <i>
-                                *(Patient/Husband/Wife/Father/Mother/Child/_______________)
+                                Name of Informing Doctor
                             </i>
 
                         </div>
 
                     </td>
+
+                    <td colspan="2"></td>
+
                 </tr>
 
 
-                <!-- =================================================
-                     HEADER PENJELASAN
-                ================================================== -->
+                <!-- NAMA PENERIMA -->
+
+                <tr>
+
+                    <td>
+
+                        <div class="field-title">
+
+                            NAMA PENERIMA INFORMASI
+
+                            <br>
+
+                            <i>
+                                Name of Recipient of Information
+                            </i>
+
+                        </div>
+
+                    </td>
+
+                    <td colspan="2"></td>
+
+                </tr>
+
+
+                <!-- HUBUNGAN -->
+
+                <tr>
+
+                    <td>
+
+                        <div class="field-title">
+
+                            HUBUNGAN DENGAN PASIEN
+
+                            <br>
+
+                            <i>
+                                Relationship to Patient
+                            </i>
+
+                        </div>
+
+                    </td>
+
+                    <td colspan="2">
+
+                        <b>
+                            *(PASIEN/SUAMI/ISTRI/AYAH/IBU/ANAK/_________________)
+                        </b>
+
+                        <br>
+
+                        <i>
+                            *(Patient/Husband/Wife/Father/Mother/Child/_______________)
+                        </i>
+
+                    </td>
+
+                </tr>
+
+
+                <!-- HEADER PENJELASAN -->
 
                 <tr>
 
@@ -590,9 +845,7 @@
                 </tr>
 
 
-                <!-- =================================================
-                     DIAGNOSIS
-                ================================================== -->
+                <!-- DIAGNOSIS -->
 
                 <tr>
 
@@ -601,6 +854,7 @@
                         <div class="field-title">
 
                             DIAGNOSIS
+
                             <br>
 
                             (DIAGNOSA KERJA DAN DIAGNOSA BANDING)
@@ -616,16 +870,14 @@
 
                     </td>
 
-                    <td class="content"></td>
+                    <td></td>
 
                     <td class="signature-cell"></td>
 
                 </tr>
 
 
-                <!-- =================================================
-                     KONDISI PASIEN
-                ================================================== -->
+                <!-- KONDISI -->
 
                 <tr>
 
@@ -645,16 +897,14 @@
 
                     </td>
 
-                    <td class="content"></td>
+                    <td></td>
 
                     <td class="signature-cell"></td>
 
                 </tr>
 
 
-                <!-- =================================================
-                     NAMA TINDAKAN
-                ================================================== -->
+                <!-- TINDAKAN -->
 
                 <tr>
 
@@ -675,7 +925,7 @@
 
                     </td>
 
-                    <td class="content">
+                    <td>
 
                         <b>
                             MRI Kepala/Leher/Sinus tanpa Kontras,
@@ -691,9 +941,7 @@
                 </tr>
 
 
-                <!-- =================================================
-                     TUJUAN DAN MANFAAT
-                ================================================== -->
+                <!-- TUJUAN -->
 
                 <tr>
 
@@ -713,7 +961,7 @@
 
                     </td>
 
-                    <td class="content">
+                    <td>
 
                         <ol type="a">
 
@@ -738,9 +986,7 @@
                 </tr>
 
 
-                <!-- =================================================
-                     TATA CARA
-                ================================================== -->
+                <!-- TATA CARA -->
 
                 <tr>
 
@@ -760,7 +1006,7 @@
 
                     </td>
 
-                    <td class="content">
+                    <td>
 
                         <ol type="a">
 
@@ -797,9 +1043,7 @@
                 </tr>
 
 
-                <!-- =================================================
-                     RISIKO DAN KOMPLIKASI
-                ================================================== -->
+                <!-- RISIKO -->
 
                 <tr>
 
@@ -822,7 +1066,7 @@
 
                     </td>
 
-                    <td class="content">
+                    <td>
                         Tidak Ada
                     </td>
 
@@ -831,9 +1075,7 @@
                 </tr>
 
 
-                <!-- =================================================
-                     ALTERNATIF
-                ================================================== -->
+                <!-- ALTERNATIF -->
 
                 <tr>
 
@@ -855,7 +1097,7 @@
 
                     </td>
 
-                    <td class="content">
+                    <td>
 
                         <div class="checkbox-row">
 
@@ -884,30 +1126,36 @@
 
                         </div>
 
+
                         <div class="italic indent">
 
                             Yes, namely
+
                             <span class="line"></span>
 
                         </div>
 
 
                         <ol
-                            class="alternative-list"
                             type="a"
+                            class="alternative-list"
                         >
 
                             <li>
+
                                 <i>Rontgen</i> polos,
                                 dengan konsekuensi ketidakjelasan
                                 struktur anatomi.
+
                             </li>
 
                             <li>
+
                                 <i>CT Scan</i> objek yang diperiksa
                                 tanpa dan dengan zat kontras,
                                 dengan konsekuensi pengurangan
                                 visualisasi objek yang diperiksa.
+
                             </li>
 
                         </ol>
@@ -928,9 +1176,7 @@
                 </tr>
 
 
-                <!-- =================================================
-                     PROGNOSIS
-                ================================================== -->
+                <!-- PROGNOSIS -->
 
                 <tr>
 
@@ -950,7 +1196,7 @@
 
                     </td>
 
-                    <td class="content">
+                    <td>
 
                         Tingkat keberhasilan pemeriksaan ini tinggi,
                         kecuali ada penyulit.
@@ -962,9 +1208,7 @@
                 </tr>
 
 
-                <!-- =================================================
-                     MASALAH PEMULIHAN
-                ================================================== -->
+                <!-- PEMULIHAN -->
 
                 <tr>
 
@@ -987,10 +1231,8 @@
 
                     </td>
 
-                    <td class="content">
-
+                    <td>
                         Tidak ada
-
                     </td>
 
                     <td class="signature-cell"></td>
@@ -998,9 +1240,7 @@
                 </tr>
 
 
-                <!-- =================================================
-                     RISIKO JIKA TIDAK DILAKUKAN
-                ================================================== -->
+                <!-- RISIKO TIDAK DILAKUKAN -->
 
                 <tr>
 
@@ -1024,7 +1264,7 @@
 
                     </td>
 
-                    <td class="content">
+                    <td>
 
                         <div class="checkbox-row">
 
@@ -1035,6 +1275,7 @@
                             </span>
 
                         </div>
+
 
                         <div class="italic indent">
                             None
@@ -1053,9 +1294,11 @@
 
                         </div>
 
+
                         <div class="italic indent">
 
                             Yes, namely
+
                             <span class="line"></span>
 
                         </div>
@@ -1083,9 +1326,7 @@
                 </tr>
 
 
-                <!-- =================================================
-                     LAMA RAWAT
-                ================================================== -->
+                <!-- LAMA RAWAT -->
 
                 <tr>
 
@@ -1106,7 +1347,8 @@
 
                     </td>
 
-                    <td class="content">
+
+                    <td>
 
                         <div class="checkbox-row">
 
@@ -1118,8 +1360,11 @@
 
                         </div>
 
+
                         <div class="italic indent">
+
                             Not hospitalized
+
                         </div>
 
 
@@ -1139,6 +1384,7 @@
 
                         </div>
 
+
                         <div class="italic indent">
 
                             Hospitalized:
@@ -1153,14 +1399,13 @@
 
                     </td>
 
+
                     <td class="signature-cell"></td>
 
                 </tr>
 
 
-                <!-- =================================================
-                     PEMBIAYAAN
-                ================================================== -->
+                <!-- PEMBIAYAAN -->
 
                 <tr>
 
@@ -1180,32 +1425,178 @@
 
                     </td>
 
-                    <td class="content">
 
-                        <p>
-                            Sesuai dengan obat dan alat yang digunakan
-                            serta jasa Petugas/Dokter.
-                        </p>
+                    <td>
 
-                        <p>
-                            <i>
-                                According to the medication,
-                                equipment used, and the services
-                                of the staff/doctor.
-                            </i>
-                        </p>
+                        Sesuai dengan obat dan alat yang digunakan
+                        serta jasa Petugas/Dokter.
+
+                        <br>
+
+                        <i>
+                            According to the medication,
+                            equipment used, and the services
+                            of the staff/doctor.
+                        </i>
 
                     </td>
+
 
                     <td class="signature-cell"></td>
 
                 </tr>
 
-            </table>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+
+    <!-- =====================================================
+         PERNYATAAN & TANDA TANGAN
+    ===================================================== -->
+
+    <table class="signature-table">
+
+        <colgroup>
+
+            <col class="signature-info">
+
+            <col class="signature-doctor">
+
+        </colgroup>
+
+
+        <tr>
+
+            <td>
+
+                <div class="statement">
+
+                    <b>
+                        Dengan ini menyatakan bahwa saya telah
+                        menerangkan hal-hal di atas secara benar
+                        dan jujur dan memberikan kesempatan untuk
+                        bertanya dan/atau berdiskusi.
+                    </b>
+
+                    <br>
+
+                    <i>
+                        I hereby state that I have explained the above
+                        matters accurately and honestly and have provided
+                        the opportunity for questions and/or discussion.
+                    </i>
+
+                </div>
+
+            </td>
+
+
+            <td class="signature-box">
+
+                <b>
+                    Tanda Tangan Dokter
+                </b>
+
+                <br>
+
+                <i>
+                    Doctor's Signature
+                </i>
+
+                <div class="signature-space"></div>
+
+            </td>
+
+        </tr>
+
+
+        <tr>
+
+            <td>
+
+                <div class="statement">
+
+                    <b>
+                        Dengan ini menyatakan bahwa saya telah
+                        menerima informasi sebagaimana di atas
+                        yang saya beri tanda/paraf di kolom kanannya,
+                        dan telah memahaminya.
+                    </b>
+
+                    <br>
+
+                    <i>
+                        I hereby state that I have received the above
+                        information, which I have marked/initialed
+                        in the respective column, and I have understood it.
+                    </i>
+
+                </div>
+
+            </td>
+
+
+            <td class="signature-box">
+
+                <b>
+                    Tanda Tangan<br>
+                    Penerima Informasi
+                </b>
+
+                <br>
+
+                <i>
+                    Recipient's Signature:
+                </i>
+
+                <div class="signature-space"></div>
+
+            </td>
+
+        </tr>
+
+    </table>
+
+
+    <!-- =====================================================
+         CATATAN
+    ===================================================== -->
+
+    <div class="document-notes">
+
+        <div>
+
+            <b>*)</b>
+
+            Coret yang tidak perlu/
+
+            <i>
+                Cross out what is not necessary
+            </i>
+
+        </div>
+
+
+        <div>
+
+            □
+
+            Beri tanda (✓) pada kolom yang sesuai/
+
+            <i>
+                Check (✓) the appropriate column
+            </i>
 
         </div>
 
     </div>
+
+
+</div>
 
 </body>
 
