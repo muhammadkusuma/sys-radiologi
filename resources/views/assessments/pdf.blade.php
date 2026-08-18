@@ -306,6 +306,7 @@
 
         .catatan {
             width: 70%;
+            font-family: DejaVu Sans, Arial, Helvetica, sans-serif;
             font-size: 10px;
             line-height: 14px;
         }
@@ -568,14 +569,14 @@
 
                 <td class="isi">
                     <span class="check">
-                        {{ !$assessment->itching_during ? '[X]' : '[ ]' }}
+                        {{ !$assessment->itching_during ? '[✓]' : '[ ]' }}
                     </span>
                     Tidak
 
                     <span class="check-space"></span>
 
                     <span class="check">
-                        {{ $assessment->itching_during ? '[X]' : '[ ]' }}
+                        {{ $assessment->itching_during ? '[✓]' : '[ ]' }}
                     </span>
                     Ya
                 </td>
@@ -586,14 +587,14 @@
 
                 <td class="isi">
                     <span class="check">
-                        {{ !$assessment->itching_after ? '[X]' : '[ ]' }}
+                        {{ !$assessment->itching_after ? '[✓]' : '[ ]' }}
                     </span>
                     Tidak
 
                     <span class="check-space"></span>
 
                     <span class="check">
-                        {{ $assessment->itching_after ? '[X]' : '[ ]' }}
+                        {{ $assessment->itching_after ? '[✓]' : '[ ]' }}
                     </span>
                     Ya
                 </td>
@@ -620,14 +621,14 @@
 
                 <td class="isi">
                     <span class="check">
-                        {{ !$assessment->nausea_during ? '[X]' : '[ ]' }}
+                        {{ !$assessment->nausea_during ? '[✓]' : '[ ]' }}
                     </span>
                     Tidak
 
                     <span class="check-space"></span>
 
                     <span class="check">
-                        {{ $assessment->nausea_during ? '[X]' : '[ ]' }}
+                        {{ $assessment->nausea_during ? '[✓]' : '[ ]' }}
                     </span>
                     Ya
                 </td>
@@ -638,14 +639,14 @@
 
                 <td class="isi">
                     <span class="check">
-                        {{ !$assessment->nausea_after ? '[X]' : '[ ]' }}
+                        {{ !$assessment->nausea_after ? '[✓]' : '[ ]' }}
                     </span>
                     Tidak
 
                     <span class="check-space"></span>
 
                     <span class="check">
-                        {{ $assessment->nausea_after ? '[X]' : '[ ]' }}
+                        {{ $assessment->nausea_after ? '[✓]' : '[ ]' }}
                     </span>
                     Ya
                 </td>
@@ -670,14 +671,14 @@
 
                 <td class="isi">
                     <span class="check">
-                        {{ !$assessment->dizziness_during ? '[X]' : '[ ]' }}
+                        {{ !$assessment->dizziness_during ? '[✓]' : '[ ]' }}
                     </span>
                     Tidak
 
                     <span class="check-space"></span>
 
                     <span class="check">
-                        {{ $assessment->dizziness_during ? '[X]' : '[ ]' }}
+                        {{ $assessment->dizziness_during ? '[✓]' : '[ ]' }}
                     </span>
                     Ya
                 </td>
@@ -688,14 +689,14 @@
 
                 <td class="isi">
                     <span class="check">
-                        {{ !$assessment->dizziness_after ? '[X]' : '[ ]' }}
+                        {{ !$assessment->dizziness_after ? '[✓]' : '[ ]' }}
                     </span>
                     Tidak
 
                     <span class="check-space"></span>
 
                     <span class="check">
-                        {{ $assessment->dizziness_after ? '[X]' : '[ ]' }}
+                        {{ $assessment->dizziness_after ? '[✓]' : '[ ]' }}
                     </span>
                     Ya
                 </td>
@@ -720,14 +721,14 @@
 
                 <td class="isi">
                     <span class="check">
-                        {{ !$assessment->shortness_of_breath_during ? '[X]' : '[ ]' }}
+                        {{ !$assessment->shortness_of_breath_during ? '[✓]' : '[ ]' }}
                     </span>
                     Tidak
 
                     <span class="check-space"></span>
 
                     <span class="check">
-                        {{ $assessment->shortness_of_breath_during ? '[X]' : '[ ]' }}
+                        {{ $assessment->shortness_of_breath_during ? '[✓]' : '[ ]' }}
                     </span>
                     Ya
                 </td>
@@ -738,14 +739,14 @@
 
                 <td class="isi">
                     <span class="check">
-                        {{ !$assessment->shortness_of_breath_after ? '[X]' : '[ ]' }}
+                        {{ !$assessment->shortness_of_breath_after ? '[✓]' : '[ ]' }}
                     </span>
                     Tidak
 
                     <span class="check-space"></span>
 
                     <span class="check">
-                        {{ $assessment->shortness_of_breath_after ? '[X]' : '[ ]' }}
+                        {{ $assessment->shortness_of_breath_after ? '[✓]' : '[ ]' }}
                     </span>
                     Ya
                 </td>
@@ -773,14 +774,14 @@
 
                 <td class="isi">
                     <span class="check">
-                        {{ !$assessment->swollen_eyes_after ? '[X]' : '[ ]' }}
+                        {{ !$assessment->swollen_eyes_after ? '[✓]' : '[ ]' }}
                     </span>
                     Tidak
 
                     <span class="check-space"></span>
 
                     <span class="check">
-                        {{ $assessment->swollen_eyes_after ? '[X]' : '[ ]' }}
+                        {{ $assessment->swollen_eyes_after ? '[✓]' : '[ ]' }}
                     </span>
                     Ya
                 </td>
@@ -815,14 +816,14 @@
 
                 <td class="isi">
                     <span class="check">
-                        {{ !$assessment->bentol_after ? '[X]' : '[ ]' }}
+                        {{ !$assessment->bentol_after ? '[✓]' : '[ ]' }}
                     </span>
                     Tidak
 
                     <span class="check-space"></span>
 
                     <span class="check">
-                        {{ $assessment->bentol_after ? '[X]' : '[ ]' }}
+                        {{ $assessment->bentol_after ? '[✓]' : '[ ]' }}
                     </span>
                     Ya
                 </td>
@@ -942,14 +943,14 @@
                 <td class="isi left">
 
                     <span class="check">
-                        {{ !$assessment->has_allergy_history ? '[X]' : '[ ]' }}
+                        {{ !$assessment->has_allergy_history ? '[✓]' : '[ ]' }}
                     </span>
                     Tidak
 
                     &nbsp;
 
                     <span class="check">
-                        {{ $assessment->has_allergy_history ? '[X]' : '[ ]' }}
+                        {{ $assessment->has_allergy_history ? '[✓]' : '[ ]' }}
                     </span>
                     Ada:
 
@@ -1026,14 +1027,14 @@
                 <td class="isi">
 
                     <span class="check">
-                        {{ !$assessment->swelling_during ? '[X]' : '[ ]' }}
+                        {{ !$assessment->swelling_during ? '[✓]' : '[ ]' }}
                     </span>
                     Tidak
 
                     &nbsp;
 
                     <span class="check">
-                        {{ $assessment->swelling_during ? '[X]' : '[ ]' }}
+                        {{ $assessment->swelling_during ? '[✓]' : '[ ]' }}
                     </span>
                     Ya
 
@@ -1074,14 +1075,14 @@
                 <td class="isi">
 
                     <span class="check">
-                        {{ !$assessment->pain_during ? '[X]' : '[ ]' }}
+                        {{ !$assessment->pain_during ? '[✓]' : '[ ]' }}
                     </span>
                     Tidak
 
                     &nbsp;
 
                     <span class="check">
-                        {{ $assessment->pain_during ? '[X]' : '[ ]' }}
+                        {{ $assessment->pain_during ? '[✓]' : '[ ]' }}
                     </span>
                     Ya
 
@@ -1110,14 +1111,14 @@
                 <td class="isi">
 
                     <span class="check">
-                        {{ !$assessment->contrast_double_check ? '[X]' : '[ ]' }}
+                        {{ !$assessment->contrast_double_check ? '[✓]' : '[ ]' }}
                     </span>
                     Tidak
 
                     &nbsp;
 
                     <span class="check">
-                        {{ $assessment->contrast_double_check ? '[X]' : '[ ]' }}
+                        {{ $assessment->contrast_double_check ? '[✓]' : '[ ]' }}
                     </span>
                     Ya
 
@@ -1130,14 +1131,14 @@
                 <td class="isi">
 
                     <span class="check">
-                        {{ !$assessment->redness_during ? '[X]' : '[ ]' }}
+                        {{ !$assessment->redness_during ? '[✓]' : '[ ]' }}
                     </span>
                     Tidak
 
                     &nbsp;
 
                     <span class="check">
-                        {{ $assessment->redness_during ? '[X]' : '[ ]' }}
+                        {{ $assessment->redness_during ? '[✓]' : '[ ]' }}
                     </span>
                     Ya
 
@@ -1150,14 +1151,14 @@
                 <td class="isi">
 
                     <span class="check">
-                        {{ !$assessment->swelling_after ? '[X]' : '[ ]' }}
+                        {{ !$assessment->swelling_after ? '[✓]' : '[ ]' }}
                     </span>
                     Tidak
 
                     &nbsp;
 
                     <span class="check">
-                        {{ $assessment->swelling_after ? '[X]' : '[ ]' }}
+                        {{ $assessment->swelling_after ? '[✓]' : '[ ]' }}
                     </span>
                     Ya
 
@@ -1176,14 +1177,14 @@
                 <td class="isi">
 
                     <span class="check">
-                        {{ !$assessment->allergy_test ? '[X]' : '[ ]' }}
+                        {{ !$assessment->allergy_test ? '[✓]' : '[ ]' }}
                     </span>
                     Tidak
 
                     &nbsp;
 
                     <span class="check">
-                        {{ $assessment->allergy_test ? '[X]' : '[ ]' }}
+                        {{ $assessment->allergy_test ? '[✓]' : '[ ]' }}
                     </span>
                     Ya
 
@@ -1199,14 +1200,14 @@
                 <td class="isi">
 
                     <span class="check">
-                        {{ !$assessment->pain_after ? '[X]' : '[ ]' }}
+                        {{ !$assessment->pain_after ? '[✓]' : '[ ]' }}
                     </span>
                     Tidak
 
                     &nbsp;
 
                     <span class="check">
-                        {{ $assessment->pain_after ? '[X]' : '[ ]' }}
+                        {{ $assessment->pain_after ? '[✓]' : '[ ]' }}
                     </span>
                     Ya
 
@@ -1225,7 +1226,7 @@
                 <td class="isi">
 
                     <span class="check">
-                        {{ $assessment->allergy_test_result === 'tidak_alergi' ? '[X]' : '[ ]' }}
+                        {{ $assessment->allergy_test_result === 'tidak_alergi' ? '[✓]' : '[ ]' }}
                     </span>
 
                     Tidak Alergi
@@ -1233,7 +1234,7 @@
                     &nbsp;
 
                     <span class="check">
-                        {{ $assessment->allergy_test_result === 'alergi' ? '[X]' : '[ ]' }}
+                        {{ $assessment->allergy_test_result === 'alergi' ? '[✓]' : '[ ]' }}
                     </span>
 
                     Alergi
@@ -1250,14 +1251,14 @@
                 <td class="isi">
 
                     <span class="check">
-                        {{ !$assessment->redness_after ? '[X]' : '[ ]' }}
+                        {{ !$assessment->redness_after ? '[✓]' : '[ ]' }}
                     </span>
                     Tidak
 
                     &nbsp;
 
                     <span class="check">
-                        {{ $assessment->redness_after ? '[X]' : '[ ]' }}
+                        {{ $assessment->redness_after ? '[✓]' : '[ ]' }}
                     </span>
                     Ya
 
@@ -1280,7 +1281,7 @@
                     @endphp
 
                     <span class="check">
-                        {{ in_array('Kemo/Radioterapi', $hist) ? '[X]' : '[ ]' }}
+                        {{ in_array('Kemo/Radioterapi', $hist) ? '[✓]' : '[ ]' }}
                     </span>
 
                     Kemo/Radioterapi
@@ -1288,7 +1289,7 @@
                     <br>
 
                     <span class="check">
-                        {{ in_array('Diabetes', $hist) ? '[X]' : '[ ]' }}
+                        {{ in_array('Diabetes', $hist) ? '[✓]' : '[ ]' }}
                     </span>
 
                     Diabetes
