@@ -15,7 +15,7 @@
             size: A4 landscape;
             /* margin: 8mm; */
             /* width: 100%; */
-            
+
         }
 
         * {
@@ -1409,7 +1409,15 @@
 
                     <td class="center" style="font-size: 9px; font-weight: bold;">
 
-                        {{ $med->nurse_initials ?: ($assessment->radiologyNurse ? $assessment->radiologyNurse->name : '') }}
+                        {{-- {{ $med->nurse_initials ?: ($assessment->radiologyNurse ? $assessment->radiologyNurse->name : '') }} --}}
+
+                        <div class="ttd-ruang" style="height: 50px; text-align: center; vertical-align: middle;">
+
+                            @if ($assessment->nurse_signature)
+                                <img src="{{ $assessment->nurse_signature }}" alt="Tanda Tangan Perawat">
+                            @endif
+
+                        </div>
 
                     </td>
 
