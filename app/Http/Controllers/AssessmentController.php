@@ -16,8 +16,9 @@ class AssessmentController extends Controller
         $patient = Patient::findOrFail($patient_id);
         $doctors = User::where('role', 'dokter')->get();
         $nurses = User::where('role', 'perawat')->get();
+        $doses = \Illuminate\Support\Facades\DB::table('dosis_obat')->pluck('Dosis')->toArray();
 
-        return view('assessments.create', compact('patient', 'doctors', 'nurses'));
+        return view('assessments.create', compact('patient', 'doctors', 'nurses', 'doses'));
     }
 
     public function store(Request $request)
@@ -104,9 +105,17 @@ class AssessmentController extends Controller
         // Store medications
         if ($request->has('medications')) {
             foreach ($request->input('medications') as $med) {
-                if (!empty($med['medication_name'])) {
+                $hasContent = !empty($med['medication_name']) || 
+                              !empty($med['dose']) || 
+                              !empty($med['administration_route']) || 
+                              !empty($med['speed']) || 
+                              !empty($med['pressure']) || 
+                              !empty($med['reaction']) || 
+                              !empty($med['notes']);
+
+                if ($hasContent) {
                     $assessment->medications()->create([
-                        'medication_name' => $med['medication_name'],
+                        'medication_name' => !empty($med['medication_name']) ? $med['medication_name'] : '-',
                         'dose' => $med['dose'] ?? null,
                         'administration_route' => $med['administration_route'] ?? null,
                         'speed' => $med['speed'] ?? null,
@@ -136,8 +145,9 @@ class AssessmentController extends Controller
         $patient = $assessment->patient;
         $doctors = User::where('role', 'dokter')->get();
         $nurses = User::where('role', 'perawat')->get();
+        $doses = \Illuminate\Support\Facades\DB::table('dosis_obat')->pluck('Dosis')->toArray();
 
-        return view('assessments.edit', compact('assessment', 'patient', 'doctors', 'nurses'));
+        return view('assessments.edit', compact('assessment', 'patient', 'doctors', 'nurses', 'doses'));
     }
 
     public function update(Request $request, $id)
@@ -232,9 +242,17 @@ class AssessmentController extends Controller
         $assessment->medications()->delete();
         if ($request->has('medications')) {
             foreach ($request->input('medications') as $med) {
-                if (!empty($med['medication_name'])) {
+                $hasContent = !empty($med['medication_name']) || 
+                              !empty($med['dose']) || 
+                              !empty($med['administration_route']) || 
+                              !empty($med['speed']) || 
+                              !empty($med['pressure']) || 
+                              !empty($med['reaction']) || 
+                              !empty($med['notes']);
+
+                if ($hasContent) {
                     $assessment->medications()->create([
-                        'medication_name' => $med['medication_name'],
+                        'medication_name' => !empty($med['medication_name']) ? $med['medication_name'] : '-',
                         'dose' => $med['dose'] ?? null,
                         'administration_route' => $med['administration_route'] ?? null,
                         'speed' => $med['speed'] ?? null,

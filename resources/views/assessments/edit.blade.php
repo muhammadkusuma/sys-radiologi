@@ -192,7 +192,7 @@
                         <tr>
                             <td class="label-cell">Dokter Pengirim</td>
                             <td>
-                                <select name="referring_doctor_id" class="paper-input">
+                                <select name="referring_doctor_id" id="referring_doctor_id" class="paper-input">
                                     <option value="">-- Pilih Dokter --</option>
                                     @foreach ($doctors as $doc)
                                         <option value="{{ $doc->id }}"
@@ -205,7 +205,7 @@
                         <tr>
                             <td class="label-cell">Perawat Radiologi</td>
                             <td>
-                                <select name="radiology_nurse_id" class="paper-input">
+                                <select name="radiology_nurse_id" id="radiology_nurse_id" class="paper-input">
                                     <option value="">-- Pilih Perawat --</option>
                                     @foreach ($nurses as $ns)
                                         <option value="{{ $ns->id }}"
@@ -812,7 +812,7 @@
                                             value="{{ $medName }}" required class="paper-input"
                                             placeholder="Nama obat..."></td>
                                     <td><input type="text" name="medications[{{ $index }}][dose]"
-                                            value="{{ $medDose }}" class="paper-input text-center"
+                                            value="{{ $medDose }}" list="doses_list" class="paper-input text-center"
                                             placeholder="Dosis..."></td>
                                     <td><input type="text"
                                             name="medications[{{ $index }}][administration_route]"
@@ -838,7 +838,7 @@
                                 <tr>
                                     <td><input type="text" name="medications[0][medication_name]" required
                                             class="paper-input" placeholder="Nama obat..."></td>
-                                    <td><input type="text" name="medications[0][dose]" class="paper-input text-center"
+                                    <td><input type="text" name="medications[0][dose]" list="doses_list" class="paper-input text-center"
                                             placeholder="Dosis..."></td>
                                     <td><input type="text" name="medications[0][administration_route]"
                                             class="paper-input text-center" placeholder="Rute..."></td>
@@ -962,7 +962,7 @@
             const tr = document.createElement('tr');
             tr.innerHTML = `
             <td><input type="text" name="medications[${medIndex}][medication_name]" required class="paper-input" placeholder="Nama obat..."></td>
-            <td><input type="text" name="medications[${medIndex}][dose]" class="paper-input text-center" placeholder="Dosis..."></td>
+            <td><input type="text" name="medications[${medIndex}][dose]" list="doses_list" class="paper-input text-center" placeholder="Dosis..."></td>
             <td><input type="text" name="medications[${medIndex}][administration_route]" class="paper-input text-center" placeholder="Rute..."></td>
             <td><input type="text" name="medications[${medIndex}][speed]" class="paper-input text-center" placeholder="Kecepatan..."></td>
             <td><input type="text" name="medications[${medIndex}][pressure]" class="paper-input text-center" placeholder="Tekanan..."></td>
@@ -1102,6 +1102,30 @@
                     initNurseSignaturePad();
                 }
             @endif
+
+            // Initialize Tom Select search dropdowns
+            if (document.getElementById('referring_doctor_id')) {
+                new TomSelect('#referring_doctor_id', {
+                    create: false,
+                    controlInput: '<input>',
+                    render: {
+                        no_results: function(data, escape) {
+                            return '<div class="no-results" style="padding: 8px; color: #64748b;">Dokter tidak ditemukan...</div>';
+                        },
+                    }
+                });
+            }
+            if (document.getElementById('radiology_nurse_id')) {
+                new TomSelect('#radiology_nurse_id', {
+                    create: false,
+                    controlInput: '<input>',
+                    render: {
+                        no_results: function(data, escape) {
+                            return '<div class="no-results" style="padding: 8px; color: #64748b;">Perawat tidak ditemukan...</div>';
+                        },
+                    }
+                });
+            }
         });
 
         // Manual canvas drawing signature pad for Nurse
@@ -1241,4 +1265,10 @@
             });
         @endif
     </script>
+
+    <datalist id="doses_list">
+        @foreach($doses as $dose)
+            <option value="{{ $dose }}"></option>
+        @endforeach
+    </datalist>
 @endsection

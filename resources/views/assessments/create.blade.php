@@ -191,7 +191,7 @@
                         <tr>
                             <td class="label-cell">Dokter Pengirim</td>
                             <td>
-                                <select name="referring_doctor_id" class="paper-input">
+                                <select name="referring_doctor_id" id="referring_doctor_id" class="paper-input">
                                     <option value="">-- Pilih Dokter --</option>
                                     @foreach ($doctors as $doc)
                                         <option value="{{ $doc->id }}"
@@ -204,7 +204,7 @@
                         <tr>
                             <td class="label-cell">Perawat Radiologi</td>
                             <td>
-                                <select name="radiology_nurse_id" class="paper-input">
+                                <select name="radiology_nurse_id" id="radiology_nurse_id" class="paper-input">
                                     <option value="">-- Pilih Perawat --</option>
                                     @foreach ($nurses as $ns)
                                         <option value="{{ $ns->id }}"
@@ -626,58 +626,57 @@
                         <tbody id="medicationTableBody">
                             @if (old('medications'))
                                 @foreach (old('medications') as $index => $med)
-                                    <tr>
-                                        <td><input type="text"
-                                                name="medications[{{ $index }}][medication_name]"
-                                                value="{{ $med['medication_name'] }}" required class="paper-input"
-                                                placeholder="Nama obat..."></td>
-                                        <td><input type="text" name="medications[{{ $index }}][dose]"
-                                                value="{{ $med['dose'] ?? '' }}" class="paper-input text-center"
-                                                placeholder="Dosis..."></td>
-                                        <td><input type="text"
-                                                name="medications[{{ $index }}][administration_route]"
-                                                value="{{ $med['administration_route'] ?? '' }}"
-                                                class="paper-input text-center" placeholder="Rute..."></td>
-                                        <td><input type="text" name="medications[{{ $index }}][speed]"
-                                                value="{{ $med['speed'] ?? '' }}" class="paper-input text-center"
-                                                placeholder="Kecepatan..."></td>
-                                        <td><input type="text" name="medications[{{ $index }}][pressure]"
-                                                value="{{ $med['pressure'] ?? '' }}" class="paper-input text-center"
-                                                placeholder="Tekanan..."></td>
-                                        <td><input type="text" data-clocklet="format: HH:mm"
-                                                name="medications[{{ $index }}][administered_at]"
-                                                value="{{ $med['administered_at'] ?? '' }}"
-                                                class="paper-input text-center"></td>
-                                        <td><input type="text" name="medications[{{ $index }}][reaction]"
-                                                value="{{ $med['reaction'] ?? '' }}" class="paper-input"
-                                                placeholder="-"></td>
-                                        <td><input type="text" name="medications[{{ $index }}][notes]"
-                                                value="{{ $med['notes'] ?? '' }}" class="paper-input" placeholder="-">
-                                        </td>
-                                        <td class="center no-print"><button type="button" onclick="removeMedRow(this)"
-                                                class="text-red-500 hover:text-red-700 font-bold">&times;</button></td>
-                                    </tr>
-                                @endforeach
-                            @else
-                                <tr>
-                                    <td><input type="text" name="medications[0][medication_name]" required
-                                            class="paper-input" placeholder="Nama obat..."></td>
-                                    <td><input type="text" name="medications[0][dose]" class="paper-input text-center"
-                                            placeholder="Dosis..."></td>
-                                    <td><input type="text" name="medications[0][administration_route]"
-                                            class="paper-input text-center" placeholder="Rute..."></td>
-                                    <td><input type="text" name="medications[0][speed]"
-                                            class="paper-input text-center" placeholder="Kecepatan..."></td>
-                                    <td><input type="text" name="medications[0][pressure]"
-                                            class="paper-input text-center" placeholder="Tekanan..."></td>
-                                    <td><input type="text" data-clocklet="format: HH:mm"
-                                            name="medications[0][administered_at]" value="{{ date('H:i') }}"
-                                            class="paper-input text-center"></td>
-                                    <td><input type="text" name="medications[0][reaction]" class="paper-input"
-                                            placeholder="-"></td>
-                                    <td><input type="text" name="medications[0][notes]" class="paper-input"
-                                            placeholder="-"></td>
-                                    <td class="center no-print"><button type="button" onclick="removeMedRow(this)"
+                                    <tr>                                         <td><input type="text"
+                                                 name="medications[{{ $index }}][medication_name]"
+                                                 value="{{ $med['medication_name'] }}" required class="paper-input"
+                                                 placeholder="Nama obat..."></td>
+                                         <td><input type="text" name="medications[{{ $index }}][dose]"
+                                                 value="{{ $med['dose'] ?? '' }}" list="doses_list" class="paper-input text-center"
+                                                 placeholder="Dosis..."></td>
+                                         <td><input type="text"
+                                                 name="medications[{{ $index }}][administration_route]"
+                                                 value="{{ $med['administration_route'] ?? '' }}"
+                                                 class="paper-input text-center" placeholder="Rute..."></td>
+                                         <td><input type="text" name="medications[{{ $index }}][speed]"
+                                                 value="{{ $med['speed'] ?? '' }}" class="paper-input text-center"
+                                                 placeholder="Kecepatan..."></td>
+                                         <td><input type="text" name="medications[{{ $index }}][pressure]"
+                                                 value="{{ $med['pressure'] ?? '' }}" class="paper-input text-center"
+                                                 placeholder="Tekanan..."></td>
+                                         <td><input type="text" data-clocklet="format: HH:mm"
+                                                 name="medications[{{ $index }}][administered_at]"
+                                                 value="{{ $med['administered_at'] ?? '' }}"
+                                                 class="paper-input text-center"></td>
+                                         <td><input type="text" name="medications[{{ $index }}][reaction]"
+                                                 value="{{ $med['reaction'] ?? '' }}" class="paper-input"
+                                                 placeholder="-"></td>
+                                         <td><input type="text" name="medications[{{ $index }}][notes]"
+                                                 value="{{ $med['notes'] ?? '' }}" class="paper-input" placeholder="-">
+                                         </td>
+                                         <td class="center no-print"><button type="button" onclick="removeMedRow(this)"
+                                                 class="text-red-500 hover:text-red-700 font-bold">&times;</button></td>
+                                     </tr>
+                                 @endforeach
+                             @else
+                                 <tr>
+                                     <td><input type="text" name="medications[0][medication_name]" required
+                                             class="paper-input" placeholder="Nama obat..."></td>
+                                     <td><input type="text" name="medications[0][dose]" list="doses_list" class="paper-input text-center"
+                                             placeholder="Dosis..."></td>
+                                     <td><input type="text" name="medications[0][administration_route]"
+                                             class="paper-input text-center" placeholder="Rute..."></td>
+                                     <td><input type="text" name="medications[0][speed]"
+                                             class="paper-input text-center" placeholder="Kecepatan..."></td>
+                                     <td><input type="text" name="medications[0][pressure]"
+                                             class="paper-input text-center" placeholder="Tekanan..."></td>
+                                     <td><input type="text" data-clocklet="format: HH:mm"
+                                             name="medications[0][administered_at]" value="{{ date('H:i') }}"
+                                             class="paper-input text-center"></td>
+                                     <td><input type="text" name="medications[0][reaction]" class="paper-input"
+                                             placeholder="-"></td>
+                                     <td><input type="text" name="medications[0][notes]" class="paper-input"
+                                             placeholder="-"></td>
+                                     <td class="center no-print"><button type="button" onclick="removeMedRow(this)"
                                             class="text-red-500 hover:text-red-700 font-bold">&times;</button></td>
                                 </tr>
                             @endif
@@ -750,7 +749,7 @@
             const tr = document.createElement('tr');
             tr.innerHTML = `
             <td><input type="text" name="medications[${medIndex}][medication_name]" required class="paper-input" placeholder="Nama obat..."></td>
-            <td><input type="text" name="medications[${medIndex}][dose]" class="paper-input text-center" placeholder="Dosis..."></td>
+            <td><input type="text" name="medications[${medIndex}][dose]" list="doses_list" class="paper-input text-center" placeholder="Dosis..."></td>
             <td><input type="text" name="medications[${medIndex}][administration_route]" class="paper-input text-center" placeholder="Rute..."></td>
             <td><input type="text" name="medications[${medIndex}][speed]" class="paper-input text-center" placeholder="Kecepatan..."></td>
             <td><input type="text" name="medications[${medIndex}][pressure]" class="paper-input text-center" placeholder="Tekanan..."></td>
@@ -887,6 +886,30 @@
             @if(Auth::user()->role === 'perawat')
                 initNurseSignaturePad();
             @endif
+
+            // Initialize Tom Select search dropdowns
+            if (document.getElementById('referring_doctor_id')) {
+                new TomSelect('#referring_doctor_id', {
+                    create: false,
+                    controlInput: '<input>',
+                    render: {
+                        no_results: function(data, escape) {
+                            return '<div class="no-results" style="padding: 8px; color: #64748b;">Dokter tidak ditemukan...</div>';
+                        },
+                    }
+                });
+            }
+            if (document.getElementById('radiology_nurse_id')) {
+                new TomSelect('#radiology_nurse_id', {
+                    create: false,
+                    controlInput: '<input>',
+                    render: {
+                        no_results: function(data, escape) {
+                            return '<div class="no-results" style="padding: 8px; color: #64748b;">Perawat tidak ditemukan...</div>';
+                        },
+                    }
+                });
+            }
         });
 
         // Manual canvas drawing signature pad for Nurse
@@ -994,4 +1017,10 @@
             document.getElementById('assessmentForm').submit();
         }
     </script>
+
+    <datalist id="doses_list">
+        @foreach($doses as $dose)
+            <option value="{{ $dose }}"></option>
+        @endforeach
+    </datalist>
 @endsection
