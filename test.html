@@ -8,66 +8,269 @@
     <title>Informasi Tindakan Medis</title>
 
     <style>
+        /* =====================================================
+           RESET
+        ===================================================== */
+
         * {
             box-sizing: border-box;
         }
 
+        html,
         body {
             margin: 0;
-            padding: 20px;
+            padding: 0;
+        }
+
+        body {
             font-family: Arial, Helvetica, sans-serif;
-            font-size: 14px;
+            font-size: 13px;
+            line-height: 1.35;
             color: #000;
             background: #fff;
         }
 
+
+        /* =====================================================
+           CONTAINER
+        ===================================================== */
+
         .container {
             width: 100%;
-            max-width: 1000px;
+            max-width: 1100px;
             margin: 0 auto;
+            padding: 15px;
         }
 
+
+        /* =====================================================
+           HEADER
+        ===================================================== */
+
         .title {
+            margin: 0;
             text-align: center;
-            font-weight: bold;
             font-size: 18px;
-            line-height: 1.4;
-            margin: 0 0 5px 0;
+            font-weight: bold;
+            line-height: 1.3;
         }
 
         .subtitle {
+            margin: 3px 0 15px;
             text-align: center;
+            font-size: 13px;
+            font-weight: bold;
             font-style: italic;
-            font-size: 14px;
-            line-height: 1.4;
-            margin: 0 0 20px 0;
+            line-height: 1.3;
         }
+
+
+        /* =====================================================
+           TABLE WRAPPER
+        ===================================================== */
 
         .table-wrapper {
             width: 100%;
             overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
         }
+
+
+        /* =====================================================
+           TABLE
+        ===================================================== */
 
         table {
             width: 100%;
+            min-width: 760px;
             border-collapse: collapse;
             table-layout: fixed;
+        }
+
+        .col-label {
+            width: 30%;
+        }
+
+        .col-content {
+            width: 60%;
+        }
+
+        .col-signature {
+            width: 10%;
         }
 
         td,
         th {
             border: 1px solid #000;
-            padding: 8px;
-            vertical-align: top;
-            word-wrap: break-word;
+            padding: 7px 8px;
+
+            /* Isi cell berada di tengah vertikal */
+            vertical-align: middle;
+
+            word-break: normal;
             overflow-wrap: break-word;
         }
 
-        /* Tablet */
-        @media (max-width: 768px) {
+
+        /* =====================================================
+           FIELD TITLE
+        ===================================================== */
+
+        .field-title {
+            font-weight: bold;
+            line-height: 1.25;
+        }
+
+        .field-title i {
+            font-weight: normal;
+            line-height: 1.2;
+        }
+
+        .center {
+            text-align: center;
+        }
+
+
+        /* =====================================================
+           CONTENT
+        ===================================================== */
+
+        .content {
+            line-height: 1.35;
+            vertical-align: middle;
+        }
+
+        .content p {
+            margin: 0 0 6px;
+        }
+
+        .content p:last-child {
+            margin-bottom: 0;
+        }
+
+
+        /* =====================================================
+           LIST
+        ===================================================== */
+
+        ol {
+            margin-top: 3px;
+            margin-bottom: 3px;
+            padding-left: 22px;
+        }
+
+        ol li {
+            padding-left: 3px;
+            margin-bottom: 4px;
+        }
+
+        ol li:last-child {
+            margin-bottom: 0;
+        }
+
+
+        /* =====================================================
+           CHECKBOX
+        ===================================================== */
+
+        .checkbox-row {
+            display: flex;
+
+            /* Center secara vertikal */
+            align-items: center;
+
+            width: 100%;
+            margin: 0;
+            line-height: 1.25;
+        }
+
+        .checkbox {
+            display: inline-block;
+            width: 11px;
+            height: 11px;
+            min-width: 11px;
+
+            border: 1px solid #000;
+
+            margin-right: 7px;
+
+            vertical-align: middle;
+        }
+
+        .indent {
+            margin-left: 18px;
+        }
+
+        .italic {
+            font-style: italic;
+        }
+
+
+        /* =====================================================
+           GARIS ISIAN
+        ===================================================== */
+
+        .line {
+            display: inline-block;
+
+            width: 160px;
+            max-width: 30%;
+
+            border-bottom: 1px solid #000;
+
+            margin-left: 3px;
+
+            vertical-align: middle;
+        }
+
+        .line-small {
+            width: 45px;
+            max-width: none;
+        }
+
+
+        /* =====================================================
+           ALTERNATIVE
+        ===================================================== */
+
+        .alternative-list {
+            margin-top: 8px;
+            padding-left: 24px;
+        }
+
+        .alternative-list li {
+            margin-bottom: 5px;
+            text-align: justify;
+        }
+
+        .note {
+            margin-top: 10px !important;
+            text-align: left;
+        }
+
+
+        /* =====================================================
+           SIGNATURE
+        ===================================================== */
+
+        .signature-cell {
+            text-align: center;
+            vertical-align: middle;
+        }
+
+
+        /* =====================================================
+           TABLET
+        ===================================================== */
+
+        @media screen and (max-width: 768px) {
+
             body {
-                padding: 15px;
-                font-size: 13px;
+                font-size: 12px;
+            }
+
+            .container {
+                padding: 10px;
             }
 
             .title {
@@ -75,20 +278,33 @@
             }
 
             .subtitle {
-                font-size: 13px;
+                font-size: 12px;
+                margin-bottom: 10px;
             }
 
             td,
             th {
-                padding: 7px;
+                padding: 6px;
+            }
+
+            .line {
+                width: 130px;
             }
         }
 
-        /* HP */
-        @media (max-width: 480px) {
+
+        /* =====================================================
+           HP
+        ===================================================== */
+
+        @media screen and (max-width: 480px) {
+
             body {
-                padding: 10px;
-                font-size: 12px;
+                font-size: 11px;
+            }
+
+            .container {
+                padding: 7px;
             }
 
             .title {
@@ -96,568 +312,897 @@
             }
 
             .subtitle {
-                font-size: 11px;
+                font-size: 10px;
             }
 
             td,
             th {
-                padding: 6px;
+                padding: 5px;
+            }
+
+            table {
+                min-width: 700px;
+            }
+
+            .line {
+                width: 100px;
+            }
+
+            ol {
+                padding-left: 20px;
+            }
+
+            ol li {
+                padding-left: 2px;
+                margin-bottom: 3px;
+            }
+        }
+
+
+        /* =====================================================
+           PRINT / CTRL + P
+        ===================================================== */
+
+        @media print {
+
+            @page {
+                size: A4 portrait;
+                margin: 10mm;
+            }
+
+            html,
+            body {
+                margin: 0;
+                padding: 0;
+                width: 100%;
+                background: #fff;
+            }
+
+            body {
+                font-size: 11px;
+            }
+
+            .container {
+                width: 100%;
+                max-width: none;
+                padding: 0;
+                margin: 0;
+            }
+
+            .table-wrapper {
+                width: 100%;
+                overflow: visible !important;
+            }
+
+            /*
+             * Table BOLEH dilanjutkan ke halaman berikutnya.
+             */
+            table {
+                width: 100%;
+                min-width: 0;
+                table-layout: fixed;
+                border-collapse: collapse;
+
+                page-break-inside: auto;
+                break-inside: auto;
+            }
+
+            /*
+             * Setiap row diusahakan tidak terpotong.
+             * Jika tidak muat, dipindahkan ke halaman berikutnya.
+             */
+            tr {
+                page-break-inside: avoid;
+                break-inside: avoid;
+            }
+
+            td,
+            th {
+                padding: 5px 6px;
+
+                vertical-align: middle;
+
+                page-break-inside: avoid;
+                break-inside: avoid;
+            }
+
+            .title {
+                font-size: 15px;
+
+                page-break-after: avoid;
+                break-after: avoid;
+            }
+
+            .subtitle {
+                font-size: 11px;
+
+                page-break-after: avoid;
+                break-after: avoid;
+            }
+
+            /*
+             * Hindari list terpotong.
+             */
+            ol,
+            ul,
+            li {
+                page-break-inside: avoid;
+                break-inside: avoid;
+            }
+
+            .content {
+                page-break-inside: avoid;
+                break-inside: avoid;
+            }
+
+            .field-title {
+                page-break-inside: avoid;
+                break-inside: avoid;
+            }
+
+            .checkbox-row {
+                page-break-inside: avoid;
+                break-inside: avoid;
+
+                /* Center */
+                align-items: center;
             }
         }
     </style>
 </head>
 
+
 <body>
 
     <div class="container">
+
+        <!-- =====================================================
+             HEADER
+        ===================================================== -->
 
         <p class="title">
             INFORMASI TINDAKAN ATAU PENGOBATAN MEDIS<br>
             MRI KEPALA/LEHER/SINUS
         </p>
 
-        <p class="subtitle"><b>
-                INFORMATION REGARDING MEDICAL PROCEDURE OR TREATMENT<br>
-                OF BRAIN/NECK/SINUSES</b>
+        <p class="subtitle">
+            INFORMATION REGARDING MEDICAL PROCEDURE OR TREATMENT<br>
+            OF BRAIN/NECK/SINUSES
         </p>
 
+
+        <!-- =====================================================
+             TABLE
+        ===================================================== -->
+
         <div class="table-wrapper">
+
             <table>
+
+                <colgroup>
+                    <col class="col-label">
+                    <col class="col-content">
+                    <col class="col-signature">
+                </colgroup>
+
+
+                <!-- =================================================
+                     NAMA DOKTER
+                ================================================== -->
+
                 <tr>
                     <td>
-                        <div>
-                            <b>NAMA DOKTER PEMBERI INFORMASI</b>
+                        <div class="field-title">
+                            NAMA DOKTER PEMBERI INFORMASI
                             <br>
                             <i>Name of Informing Doctor</i>
                         </div>
                     </td>
+
                     <td colspan="2"></td>
                 </tr>
+
+
+                <!-- =================================================
+                     NAMA PENERIMA
+                ================================================== -->
+
                 <tr>
                     <td>
-                        <div>
-                            <b>NAMA PENERIMA INFORMASI</b>
+                        <div class="field-title">
+                            NAMA PENERIMA INFORMASI
                             <br>
                             <i>Name of Recipient of Information</i>
                         </div>
                     </td>
+
                     <td colspan="2"></td>
                 </tr>
+
+
+                <!-- =================================================
+                     HUBUNGAN DENGAN PASIEN
+                ================================================== -->
+
                 <tr>
                     <td>
-                        <div>
-                            <b>HUBUNGAN DENGAN PASIEN</b>
+                        <div class="field-title">
+                            HUBUNGAN DENGAN PASIEN
                             <br>
                             <i>Relationship to Patient</i>
                         </div>
                     </td>
+
                     <td colspan="2">
-                        <div>
-                            <b>*(PASIEN/SUAMI/ISTRI/AYAH/IBU/ANAK/_________________)</b>
-                            <br>
-                            <i>*(Patient/Husband/Wife/Father/Mother/Child/ _______________)</i>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <div style="text-align: center;">
-                            <b>PENJELASAN YANG DISAMPAIKAN</b>
-                            <br>
-                            <i>Explanation Provided</i>
-                        </div>
-                    </td>
-                    <td>
-                        <div style="text-align: center;">
-                            <b>PARAF PENERIMA INFORMASI
+
+                        <div class="content">
+
+                            <b>
+                                *(PASIEN/SUAMI/ISTRI/AYAH/IBU/ANAK/_________________)
                             </b>
-                            <br>
-                            <i>Recipient's Initials</i>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div>
-                            <b>DIAGNOSIS (DIAGNOSA KERJA DAN DIAGNOSA BANDING)
-                            </b>
-                            <br>
-                            <i>Diagnosis (Primary Diagnosis and Differential Diagnosis)</i>
-                        </div>
-                    </td>
-                    <td>
 
-                    </td>
-                    <td>
+                            <br>
+
+                            <i>
+                                *(Patient/Husband/Wife/Father/Mother/Child/_______________)
+                            </i>
+
+                        </div>
 
                     </td>
                 </tr>
+
+
+                <!-- =================================================
+                     HEADER PENJELASAN
+                ================================================== -->
+
                 <tr>
-                    <td>
-                        <div>
-                            <b>KONDISI PASIEN SAAT INI</b>
-                            <br>
-                            <i>Current Condition of the Patient</i>
-                        </div>
-                    </td>
-                    <td>
+
+                    <td colspan="2" class="center">
+
+                        <b>
+                            PENJELASAN YANG DISAMPAIKAN
+                        </b>
+
+                        <br>
+
+                        <i>
+                            Explanation Provided
+                        </i>
 
                     </td>
-                    <td>
+
+                    <td class="center">
+
+                        <b>
+                            PARAF PENERIMA INFORMASI
+                        </b>
+
+                        <br>
+
+                        <i>
+                            Recipient's Initials
+                        </i>
 
                     </td>
+
                 </tr>
+
+
+                <!-- =================================================
+                     DIAGNOSIS
+                ================================================== -->
+
                 <tr>
-                    <td>
-                        <div>
-                            <b>NAMA TINDAKAN (PROSEDUR) ATAU PENGOBATAN MEDIS</b>
-                            <br>
-                            <i>Name of Procedure or Medical Treatment</i>
-                        </div>
-                    </td>
-                    <td>
-                        <div>
-                            <b>MRI Kepala/Leher/Sinus tanpa Kontras, adalah
-                                pemeriksaan radiologi dengan modalitas MRI pada organ
-                                Kepala/Leher/Sinus tanpa menggunakan zat kontras
-                                intravena.
-                            </b>
-                        </div>
-                    </td>
+
                     <td>
 
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div>
-                            <b>TUJUAN DAN MANFAAT TINDAKAN</b>
+                        <div class="field-title">
+
+                            DIAGNOSIS
                             <br>
-                            <i>Purpose and Benefits of the Procedure</i>
+
+                            (DIAGNOSA KERJA DAN DIAGNOSA BANDING)
+
+                            <br>
+
+                            <i>
+                                Diagnosis
+                                (Primary Diagnosis and Differential Diagnosis)
+                            </i>
+
                         </div>
+
                     </td>
+
+                    <td class="content"></td>
+
+                    <td class="signature-cell"></td>
+
+                </tr>
+
+
+                <!-- =================================================
+                     KONDISI PASIEN
+                ================================================== -->
+
+                <tr>
+
                     <td>
+
+                        <div class="field-title">
+
+                            KONDISI PASIEN SAAT INI
+
+                            <br>
+
+                            <i>
+                                Current Condition of the Patient
+                            </i>
+
+                        </div>
+
+                    </td>
+
+                    <td class="content"></td>
+
+                    <td class="signature-cell"></td>
+
+                </tr>
+
+
+                <!-- =================================================
+                     NAMA TINDAKAN
+                ================================================== -->
+
+                <tr>
+
+                    <td>
+
+                        <div class="field-title">
+
+                            NAMA TINDAKAN (PROSEDUR)
+                            ATAU PENGOBATAN MEDIS
+
+                            <br>
+
+                            <i>
+                                Name of Procedure or Medical Treatment
+                            </i>
+
+                        </div>
+
+                    </td>
+
+                    <td class="content">
+
+                        <b>
+                            MRI Kepala/Leher/Sinus tanpa Kontras,
+                            adalah pemeriksaan radiologi dengan modalitas
+                            MRI pada organ Kepala/Leher/Sinus tanpa
+                            menggunakan zat kontras intravena.
+                        </b>
+
+                    </td>
+
+                    <td class="signature-cell"></td>
+
+                </tr>
+
+
+                <!-- =================================================
+                     TUJUAN DAN MANFAAT
+                ================================================== -->
+
+                <tr>
+
+                    <td>
+
+                        <div class="field-title">
+
+                            TUJUAN DAN MANFAAT TINDAKAN
+
+                            <br>
+
+                            <i>
+                                Purpose and Benefits of the Procedure
+                            </i>
+
+                        </div>
+
+                    </td>
+
+                    <td class="content">
+
                         <ol type="a">
-                            <li>Mengetahui struktur anatomi objek yang diperiksa.</li>
+
                             <li>
-                                Mengetahui dugaan adanya massa, infeksi, sumbatan,
-                                keganasan, dan kelainan anatomis maupun fisiologis lainnya.
+                                Mengetahui struktur anatomi objek
+                                yang diperiksa.
                             </li>
+
+                            <li>
+                                Mengetahui dugaan adanya massa,
+                                infeksi, sumbatan, keganasan,
+                                dan kelainan anatomis maupun
+                                fisiologis lainnya.
+                            </li>
+
                         </ol>
-                    </td>
-                    <td>
 
                     </td>
+
+                    <td class="signature-cell"></td>
+
                 </tr>
+
+
+                <!-- =================================================
+                     TATA CARA
+                ================================================== -->
+
                 <tr>
+
                     <td>
-                        <div>
-                            <b>TATA CARA TINDAKAN/
-                                PROSEDUR
-                            </b>
+
+                        <div class="field-title">
+
+                            TATA CARA TINDAKAN/PROSEDUR
+
                             <br>
-                            <i>Procedure Method</i>
+
+                            <i>
+                                Procedure Method
+                            </i>
+
                         </div>
+
                     </td>
-                    <td>
+
+                    <td class="content">
+
                         <ol type="a">
-                            <li>Pasien berganti baju dengan baju pemeriksaan yang telah
-                                dipersiapkan.</li>
+
                             <li>
-                                Pasien melepas semua atribut yang berpotensi
-                                mengganggu pemeriksaan
+                                Pasien berganti baju dengan baju
+                                pemeriksaan yang telah dipersiapkan.
                             </li>
+
+                            <li>
+                                Pasien melepas semua atribut yang
+                                berpotensi mengganggu pemeriksaan.
+                            </li>
+
                             <li>
                                 Petugas melakukan MRI polos.
                             </li>
+
                             <li>
                                 Pasien berganti baju.
                             </li>
+
                             <li>
-                                Pemeriksaan selesai, pasien diberikan hasil gambar dalam
-                                bentuk CD atau dikirim melalui Whatsapp/Email.
+                                Pemeriksaan selesai, pasien diberikan
+                                hasil gambar dalam bentuk CD atau
+                                dikirim melalui Whatsapp/Email.
                             </li>
+
                         </ol>
-                    </td>
-                    <td>
 
                     </td>
+
+                    <td class="signature-cell"></td>
+
                 </tr>
+
+
+                <!-- =================================================
+                     RISIKO DAN KOMPLIKASI
+                ================================================== -->
+
                 <tr>
+
                     <td>
-                        <div>
-                            <b>RISIKO DAN KOMPLIKASI
-                                TINDAKAN ATAU
-                                PENGOBATAN MEDIS
-                            </b>
+
+                        <div class="field-title">
+
+                            RISIKO DAN KOMPLIKASI
+                            TINDAKAN ATAU
+                            PENGOBATAN MEDIS
+
                             <br>
-                            <i>Risks and Complications of the
-                                Procedure or Medical Treatment</i>
+
+                            <i>
+                                Risks and Complications of the
+                                Procedure or Medical Treatment
+                            </i>
+
                         </div>
+
                     </td>
-                    <td>
+
+                    <td class="content">
                         Tidak Ada
                     </td>
-                    <td>
 
-                    </td>
+                    <td class="signature-cell"></td>
+
                 </tr>
+
+
+                <!-- =================================================
+                     ALTERNATIF
+                ================================================== -->
+
                 <tr>
+
                     <td>
-                        <div>
-                            <b>ALTERNATIF TINDAKAN/
-                                PENGOBATAN LAIN
-                            </b>
+
+                        <div class="field-title">
+
+                            ALTERNATIF TINDAKAN/
+                            PENGOBATAN LAIN
+
                             <br>
-                            <i>Risks and Complications of the
-                                Procedure or Medical Treatment</i>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="section-content">
 
-                            <div class="checkbox-row">
-                                <span class="checkbox">□</span>
-                                <span>Tidak ada</span>
-                            </div>
-
-                            <div class="italic indent">
-                                None
-                            </div>
-
-                            <div class="checkbox-row">
-                                <span class="checkbox">□</span>
-                                <span>Ada, yaitu</span>
-                                <span class="line"></span>
-                            </div>
-
-                            <div class="italic indent">
-                                Yes, namely <span class="line line-en"></span>
-                            </div>
-
-                            <ol class="sub-list" type="a">
-                                <li>
-                                    <i>Rontgen</i> polos, dengan konsekuensi ketidakjelasan
-                                    struktur anatomi.
-                                </li>
-                                <li>
-                                    <i>CT Scan</i> objek yang diperiksa tanpa dan dengan zat
-                                    kontras, dengan konsekuensi pengurangan visualisasi
-                                    objek yang diperiksa.
-                                </li>
-                            </ol>
-
-                            <p class="note">
-                                Pemilihan alternatif tindakan harap dikonsultasikan kembali
-                                dengan dokter yang merujuk.
-                            </p>
+                            <i>
+                                Alternative Procedure/
+                                Other Treatment
+                            </i>
 
                         </div>
 
-                        <style>
-                            .section-content {
-                                font-family: Arial, sans-serif;
-                                font-size: 14px;
-                                line-height: 1.35;
-                            }
-
-                            .checkbox-row {
-                                display: flex;
-                                align-items: baseline;
-                                margin-bottom: 2px;
-                            }
-
-                            .checkbox {
-                                display: inline-block;
-                                width: 20px;
-                                font-size: 16px;
-                            }
-
-                            .indent {
-                                margin-left: 25px;
-                                margin-bottom: 7px;
-                            }
-
-                            .line {
-                                display: inline-block;
-                                width: 180px;
-                                border-bottom: 1px solid #000;
-                                margin-left: 4px;
-                            }
-
-                            .line-en {
-                                width: 170px;
-                            }
-
-                            .sub-list {
-                                margin-top: 8px;
-                                margin-bottom: 12px;
-                                padding-left: 45px;
-                            }
-
-                            .sub-list li {
-                                padding-left: 4px;
-                                margin-bottom: 5px;
-                                text-align: justify;
-                            }
-
-                            .note {
-                                margin: 0;
-                                text-align: left;
-                            }
-                        </style>
                     </td>
-                    <td>
+
+                    <td class="content">
+
+                        <div class="checkbox-row">
+
+                            <span class="checkbox"></span>
+
+                            <span>
+                                Tidak ada
+                            </span>
+
+                        </div>
+
+                        <div class="italic indent">
+                            None
+                        </div>
+
+
+                        <div class="checkbox-row">
+
+                            <span class="checkbox"></span>
+
+                            <span>
+                                Ada, yaitu
+                            </span>
+
+                            <span class="line"></span>
+
+                        </div>
+
+                        <div class="italic indent">
+
+                            Yes, namely
+                            <span class="line"></span>
+
+                        </div>
+
+
+                        <ol
+                            class="alternative-list"
+                            type="a"
+                        >
+
+                            <li>
+                                <i>Rontgen</i> polos,
+                                dengan konsekuensi ketidakjelasan
+                                struktur anatomi.
+                            </li>
+
+                            <li>
+                                <i>CT Scan</i> objek yang diperiksa
+                                tanpa dan dengan zat kontras,
+                                dengan konsekuensi pengurangan
+                                visualisasi objek yang diperiksa.
+                            </li>
+
+                        </ol>
+
+
+                        <p class="note">
+
+                            Pemilihan alternatif tindakan harap
+                            dikonsultasikan kembali dengan dokter
+                            yang merujuk.
+
+                        </p>
 
                     </td>
+
+                    <td class="signature-cell"></td>
+
                 </tr>
+
+
+                <!-- =================================================
+                     PROGNOSIS
+                ================================================== -->
+
                 <tr>
-                    <td>
-                        <div>
-                            <b>PROGNOSIS
-                            </b>
-                            <br>
-                            <i>Prognosis</i>
-                        </div>
-                    </td>
-                    <td>
-                        Tingkat keberhasilan pemeriksaan ini tinggi, kecuali ada
-                        penyulit.
-                    </td>
+
                     <td>
 
+                        <div class="field-title">
+
+                            PROGNOSIS
+
+                            <br>
+
+                            <i>
+                                Prognosis
+                            </i>
+
+                        </div>
+
                     </td>
+
+                    <td class="content">
+
+                        Tingkat keberhasilan pemeriksaan ini tinggi,
+                        kecuali ada penyulit.
+
+                    </td>
+
+                    <td class="signature-cell"></td>
+
                 </tr>
-                <tr>
-                    <td>
-                        <div>
-                            <b>KEMUNGKINAN MASALAH
-                                TERKAIT DENGAN PROSES
-                                PEMULIHAN
 
-                            </b>
-                            <br>
-                            <i>Potential Issues Related to
-                                Recovery Process</i>
-                        </div>
-                    </td>
+
+                <!-- =================================================
+                     MASALAH PEMULIHAN
+                ================================================== -->
+
+                <tr>
+
                     <td>
+
+                        <div class="field-title">
+
+                            KEMUNGKINAN MASALAH
+                            TERKAIT DENGAN PROSES
+                            PEMULIHAN
+
+                            <br>
+
+                            <i>
+                                Potential Issues Related to
+                                Recovery Process
+                            </i>
+
+                        </div>
+
+                    </td>
+
+                    <td class="content">
+
                         Tidak ada
 
                     </td>
-                    <td>
 
-                    </td>
+                    <td class="signature-cell"></td>
+
                 </tr>
+
+
+                <!-- =================================================
+                     RISIKO JIKA TIDAK DILAKUKAN
+                ================================================== -->
+
                 <tr>
-                    <td>
-                        <div>
-                            <b>KEMUNGKINAN RISIKO
-                                BILA TINDAKAN /
-                                PENGOBATAN TIDAK
-                                DILAKUKAN
 
-                            </b>
+                    <td>
+
+                        <div class="field-title">
+
+                            KEMUNGKINAN RISIKO
+                            BILA TINDAKAN /
+                            PENGOBATAN TIDAK
+                            DILAKUKAN
+
                             <br>
-                            <i>Potential Risks if the Procedure/
-                                Treatment is Not Performed</i>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="section-content">
 
-                            <div class="checkbox-row">
-                                <span class="checkbox">□</span>
-                                <span>Tidak ada</span>
-                            </div>
-
-                            <div class="italic indent">
-                                None
-                            </div>
-
-                            <div class="checkbox-row">
-                                <span class="checkbox">□</span>
-                                <span>Ada, yaitu</span>
-                                <span class="line"></span>
-                            </div>
-
-                            <div class="italic indent">
-                                Yes, namely <span class="line line-en"></span>
-                            </div>
-
-                            <ol class="sub-list" type="a">
-                                <li>Upaya penegakan diagnosis tidak efektif.</li>
-                                <li>
-                                    Tindakan/terapi selanjutnya dimungkinkan akan tidak
-                                    efektif dan atau terlambat.
-                                </li>
-                            </ol>
+                            <i>
+                                Potential Risks if the Procedure/
+                                Treatment is Not Performed
+                            </i>
 
                         </div>
 
-                        <style>
-                            .section-content {
-                                font-family: Arial, sans-serif;
-                                font-size: 14px;
-                                line-height: 1.25;
-                            }
+                    </td>
 
-                            .checkbox-row {
-                                display: flex;
-                                align-items: baseline;
-                                margin-bottom: 0;
-                            }
+                    <td class="content">
 
-                            .checkbox {
-                                width: 22px;
-                                font-size: 16px;
-                                line-height: 1;
-                            }
+                        <div class="checkbox-row">
 
-                            .indent {
-                                margin-left: 25px;
-                            }
+                            <span class="checkbox"></span>
 
-                            .italic {
-                                font-style: italic;
-                                margin-bottom: 6px;
-                            }
+                            <span>
+                                Tidak ada
+                            </span>
 
-                            .line {
-                                display: inline-block;
-                                width: 180px;
-                                border-bottom: 1px solid #000;
-                                margin-left: 3px;
-                            }
+                        </div>
 
-                            .line-en {
-                                width: 170px;
-                            }
+                        <div class="italic indent">
+                            None
+                        </div>
 
-                            .sub-list {
-                                margin-top: 8px;
-                                margin-bottom: 0;
-                                padding-left: 45px;
-                            }
 
-                            .sub-list li {
-                                padding-left: 3px;
-                                margin-bottom: 4px;
-                                text-align: left;
-                            }
-                        </style>
+                        <div class="checkbox-row">
+
+                            <span class="checkbox"></span>
+
+                            <span>
+                                Ada, yaitu
+                            </span>
+
+                            <span class="line"></span>
+
+                        </div>
+
+                        <div class="italic indent">
+
+                            Yes, namely
+                            <span class="line"></span>
+
+                        </div>
+
+
+                        <ol type="a">
+
+                            <li>
+                                Upaya penegakan diagnosis
+                                tidak efektif.
+                            </li>
+
+                            <li>
+                                Tindakan/terapi selanjutnya
+                                dimungkinkan akan tidak efektif
+                                dan atau terlambat.
+                            </li>
+
+                        </ol>
 
                     </td>
-                    <td>
 
-                    </td>
+                    <td class="signature-cell"></td>
+
                 </tr>
+
+
+                <!-- =================================================
+                     LAMA RAWAT
+                ================================================== -->
+
                 <tr>
+
                     <td>
-                        <div>
-                            <b>PERKIRAAN LAMA RAWAT
-                            </b>
+
+                        <div class="field-title">
+
+                            PERKIRAAN LAMA RAWAT
+
                             <br>
-                            <i>Estimated Length of
+
+                            <i>
+                                Estimated Length of
                                 Hospitalization
                             </i>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="section-content">
-
-                            <div class="checkbox-row">
-                                <span class="checkbox"></span>
-                                <span>Tidak dirawat inap</span>
-                            </div>
-
-                            <div class="italic indent">
-                                Not hospitalized
-                            </div>
-
-                            <div class="checkbox-row">
-                                <span class="checkbox"></span>
-                                <span>Rawat inap:</span>
-                                <span class="line"></span>
-                                <span>&nbsp; hari</span>
-                            </div>
-
-                            <div class="italic indent">
-                                Hospitalized: <span class="line line-en"></span>
-                                <span>&nbsp; days</span>
-                            </div>
 
                         </div>
 
-                        <style>
-                            .section-content {
-                                font-family: Arial, sans-serif;
-                                font-size: 14px;
-                                line-height: 1.2;
-                            }
-
-                            .checkbox-row {
-                                display: flex;
-                                align-items: baseline;
-                                margin-bottom: 0;
-                            }
-
-                            .checkbox {
-                                display: inline-block;
-                                width: 11px;
-                                height: 11px;
-                                border: 1px solid #000;
-                                margin-right: 8px;
-                                flex-shrink: 0;
-                            }
-
-                            .indent {
-                                margin-left: 25px;
-                            }
-
-                            .italic {
-                                font-style: italic;
-                                margin-bottom: 5px;
-                            }
-
-                            .line {
-                                display: inline-block;
-                                width: 45px;
-                                border-bottom: 1px solid #000;
-                                margin-left: 3px;
-                            }
-
-                            .line-en {
-                                width: 45px;
-                            }
-                        </style>
                     </td>
-                    <td>
+
+                    <td class="content">
+
+                        <div class="checkbox-row">
+
+                            <span class="checkbox"></span>
+
+                            <span>
+                                Tidak dirawat inap
+                            </span>
+
+                        </div>
+
+                        <div class="italic indent">
+                            Not hospitalized
+                        </div>
+
+
+                        <div class="checkbox-row">
+
+                            <span class="checkbox"></span>
+
+                            <span>
+                                Rawat inap:
+                            </span>
+
+                            <span class="line line-small"></span>
+
+                            <span>
+                                &nbsp;hari
+                            </span>
+
+                        </div>
+
+                        <div class="italic indent">
+
+                            Hospitalized:
+
+                            <span class="line line-small"></span>
+
+                            <span>
+                                &nbsp;days
+                            </span>
+
+                        </div>
 
                     </td>
+
+                    <td class="signature-cell"></td>
+
                 </tr>
+
+
+                <!-- =================================================
+                     PEMBIAYAAN
+                ================================================== -->
+
                 <tr>
-                    <td>
-                        <div>
-                            <b>PEMBIAYAAN
-                            </b>
-                            <br>
-                            <i>Cost</i>
-                        </div>
-                    </td>
-                    <td>
-                        <p>Sesuai dengan obat dan alat yang digunakan serta jasa
-                            Petugas/Dokter.
-                            <br>
-                            <i>According to the medication, equipment used, and the services of
-                                the staff/doctor.</i>
-                        </p>
-                    </td>
+
                     <td>
 
+                        <div class="field-title">
+
+                            PEMBIAYAAN
+
+                            <br>
+
+                            <i>
+                                Cost
+                            </i>
+
+                        </div>
+
                     </td>
+
+                    <td class="content">
+
+                        <p>
+                            Sesuai dengan obat dan alat yang digunakan
+                            serta jasa Petugas/Dokter.
+                        </p>
+
+                        <p>
+                            <i>
+                                According to the medication,
+                                equipment used, and the services
+                                of the staff/doctor.
+                            </i>
+                        </p>
+
+                    </td>
+
+                    <td class="signature-cell"></td>
+
                 </tr>
+
             </table>
+
         </div>
 
     </div>
