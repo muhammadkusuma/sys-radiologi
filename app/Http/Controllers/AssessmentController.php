@@ -168,7 +168,49 @@ class AssessmentController extends Controller
             'medications.nurse',
         ])->findOrFail($id);
 
-        $pdf = Pdf::loadView('assessments.pdf', compact('assessment'))
+        $maxFullPage = 22;
+        $maxLastPage = 20;
+        $medications = $assessment->medications->values();
+        $medicationPages = collect();
+
+        if ($medications->isEmpty()) {
+            $medicationPages->push(collect());
+        } elseif ($medications->count() <= $maxLastPage) {
+            $medicationPages->push($medications);
+        } else {
+            $remaining = $medications;
+
+            while ($remaining->isNotEmpty()) {
+                if ($remaining->count() <= $maxLastPage) {
+                    $medicationPages->push($remaining);
+                    break;
+                }
+
+                if ($remaining->count() <= ($maxFullPage + $maxLastPage)) {
+                    $firstCount = min($maxFullPage, $remaining->count() - 1);
+                    $lastCount = $remaining->count() - $firstCount;
+
+                    if ($lastCount > $maxLastPage) {
+                        $firstCount = $remaining->count() - $maxLastPage;
+                    }
+
+                    if ($firstCount > 0) {
+                        $medicationPages->push($remaining->take($firstCount));
+                        $remaining = $remaining->slice($firstCount)->values();
+                    }
+
+                    $medicationPages->push($remaining);
+                    break;
+                }
+
+                $medicationPages->push($remaining->take($maxFullPage));
+                $remaining = $remaining->slice($maxFullPage)->values();
+            }
+        }
+
+        $totalPages = 1 + $medicationPages->count();
+
+        $pdf = Pdf::loadView('assessments.pdf', compact('assessment', 'medicationPages', 'totalPages'))
             ->setPaper('a4', 'landscape');
 
         $filename = 'asesmen-radiologi-kontras-' . $assessment->id . '.pdf';

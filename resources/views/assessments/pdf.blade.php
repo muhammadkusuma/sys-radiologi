@@ -201,7 +201,22 @@
         }
 
         .tabel-obat td {
-            height: 25px;
+            height: auto;
+            min-height: 18px;
+        }
+
+        .tabel-obat .paraf-perawat {
+            text-align: center;
+            vertical-align: middle;
+            line-height: 0;
+            padding: 2px;
+        }
+
+        .tabel-obat .paraf-perawat img {
+            max-height: 24px;
+            max-width: 70px;
+            width: auto;
+            height: auto;
         }
 
         .tabel-obat .header-tabel th,
@@ -209,6 +224,14 @@
             font-weight: bold;
             text-align: center;
             background: #f3f4f6;
+        }
+
+        .tabel-obat thead {
+            display: table-header-group;
+        }
+
+        .page-obat-signature {
+            page-break-inside: avoid;
         }
 
         /* =========================================================
@@ -1311,7 +1334,7 @@
                         </div>
 
                         <div>
-                            Halaman 1 dari 2
+                            Halaman 1 dari {{ $totalPages }}
                         </div>
 
                     </td>
@@ -1325,238 +1348,249 @@
 
 
     <!-- =========================================================
-         HALAMAN 2
+         HALAMAN OBAT KONTRAS (2+)
     ========================================================= -->
 
-    <div class="page">
+    @foreach ($medicationPages as $medicationPage)
+        @php
+            $currentPage = $loop->iteration + 1;
+            $isLastMedicationPage = $loop->last;
+        @endphp
 
-        <!-- HEADER -->
-        <table class="header" style="margin-top: 5px;">
+        <div class="page {{ ! $isLastMedicationPage ? 'page-break' : '' }}">
 
-            <tr>
-
-                <td class="logo">
-                    <img src="{{ public_path('login.png') }}" alt="Logo">
-                </td>
-
-                <td class="judul">
-                    CATATAN PEMBERIAN OBAT KONTRAS
-                </td>
-
-                <td class="header-spacer"></td>
-
-            </tr>
-
-        </table>
-
-
-        <!-- =====================================================
-             TABEL OBAT KONTRAS
-        ===================================================== -->
-
-        <table class="tabel-obat">
-
-            <thead>
-                <tr class="header-tabel">
-                    <th>Nama Obat</th>
-                    <th>Dosis</th>
-                    <th>Rute Pemberian</th>
-                    <th>Kecepatan</th>
-                    <th>Tekanan</th>
-                    <th>Jam</th>
-                    <th>Reaksi</th>
-                    <th>Keterangan</th>
-                    <th>Paraf Perawat</th>
-                </tr>
-            </thead>
-
-            <tbody>
-                @forelse($assessment->medications as $med)
-                    <tr>
-                        <td>
-                            {{ $med->medication_name }}
-                        </td>
-                        <td class="center">
-                            {{ $med->dose }}
-                        </td>
-                        <td class="center">
-                            {{ $med->administration_route }}
-                        </td>
-                        <td class="center">
-                            {{ $med->speed }}
-                        </td>
-                        <td class="center">
-                            {{ $med->pressure }}
-                        </td>
-                        <td class="center">
-                            {{ $med->administered_at ? substr($med->administered_at, 0, 5) : '-' }} WIB
-                        </td>
-                        <td>
-                            {{ $med->reaction }}
-                        </td>
-                        <td>
-                            {{ $med->notes }}
-                        </td>
-                        <td class="center" style="font-size: 9px; font-weight: bold;">
-                            <div class="ttd-ruang" style="height: 50px; text-align: center; vertical-align: middle;">
-                                @if ($assessment->nurse_signature)
-                                    <img src="{{ $assessment->nurse_signature }}" alt="Tanda Tangan Perawat">
-                                @endif
-                            </div>
-                        </td>
-                    </tr>
-                @empty
-                    <tr>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                    </tr>
-                @endforelse
-            </tbody>
-
-        </table>
-
-
-        <!-- =====================================================
-             TEMPAT DAN WAKTU
-        ===================================================== -->
-
-        <div class="tempat-waktu">
-
-            <div>
-
-                Pekanbaru,
-
-                <span class="bold" style="text-decoration: underline;">
-
-                    {{ $assessment->procedure_date ? $assessment->procedure_date->format('d M Y') : '-' }}
-
-                </span>
-
-            </div>
-
-            <div>
-
-                Jam:
-
-                <span class="bold" style="text-decoration: underline;">
-
-                    {{ $assessment->procedure_time ? substr($assessment->procedure_time, 0, 5) : '-' }}
-
-                </span>
-
-                WIB
-
-            </div>
-
-        </div>
-
-
-        <!-- =====================================================
-             TANDA TANGAN
-        ===================================================== -->
-
-        <div class="ttd-area">
-
-            <table>
+            <!-- HEADER -->
+            <table class="header" style="margin-top: 5px;">
 
                 <tr>
 
-                    <!-- PERAWAT -->
-                    <td>
-
-                        <div class="ttd-jabatan">
-                            Perawat Radiologi
-                        </div>
-
-                        <div class="ttd-ruang">
-
-                            @if ($assessment->nurse_signature)
-                                <img src="{{ $assessment->nurse_signature }}" alt="Tanda Tangan Perawat">
-                            @endif
-
-                        </div>
-
-                        <div class="ttd-garis">
-
-                            (
-                            {{ $assessment->radiologyNurse ? $assessment->radiologyNurse->name : '................................' }}
-                            )
-
-                        </div>
-
+                    <td class="logo">
+                        <img src="{{ public_path('login.png') }}" alt="Logo">
                     </td>
 
-
-                    <!-- DOKTER -->
-                    <td>
-
-                        <div class="ttd-jabatan">
-                            Dokter Spesialis Radiologi
-                        </div>
-
-                        <div class="ttd-ruang">
-
-                            @if ($assessment->doctor_signature)
-                                <img src="{{ $assessment->doctor_signature }}" alt="Tanda Tangan Dokter">
-                            @endif
-
-                        </div>
-
-                        <div class="ttd-garis">
-
-                            (
-                            {{ $assessment->radiologyDoctor ? $assessment->radiologyDoctor->name : '................................' }}
-                            )
-
-                        </div>
-
+                    <td class="judul">
+                        CATATAN PEMBERIAN OBAT KONTRAS
                     </td>
+
+                    <td class="header-spacer"></td>
 
                 </tr>
 
             </table>
 
-        </div>
+
+            <!-- =====================================================
+                 TABEL OBAT KONTRAS
+            ===================================================== -->
+
+            <table class="tabel-obat">
+
+                <thead>
+                    <tr class="header-tabel">
+                        <th>Nama Obat</th>
+                        <th>Dosis</th>
+                        <th>Rute Pemberian</th>
+                        <th>Kecepatan</th>
+                        <th>Tekanan</th>
+                        <th>Jam</th>
+                        <th>Reaksi</th>
+                        <th>Keterangan</th>
+                        <th>Paraf Perawat</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @forelse ($medicationPage as $med)
+                        <tr>
+                            <td>
+                                {{ $med->medication_name }}
+                            </td>
+                            <td class="center">
+                                {{ $med->dose }}
+                            </td>
+                            <td class="center">
+                                {{ $med->administration_route }}
+                            </td>
+                            <td class="center">
+                                {{ $med->speed }}
+                            </td>
+                            <td class="center">
+                                {{ $med->pressure }}
+                            </td>
+                            <td class="center">
+                                {{ $med->administered_at ? substr($med->administered_at, 0, 5) : '-' }} WIB
+                            </td>
+                            <td>
+                                {{ $med->reaction }}
+                            </td>
+                            <td>
+                                {{ $med->notes }}
+                            </td>
+                            <td class="center paraf-perawat">
+                                @if ($assessment->nurse_signature)
+                                    <img src="{{ $assessment->nurse_signature }}" alt="Paraf Perawat">
+                                @endif
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                    @endforelse
+                </tbody>
+
+            </table>
 
 
-        <!-- =====================================================
-             FOOTER HALAMAN 2
-        ===================================================== -->
+            @if ($isLastMedicationPage)
+                <div class="page-obat-signature">
 
-        <div class="footer-area" style="margin-top: 15px;">
+                    <!-- =====================================================
+                         TEMPAT DAN WAKTU
+                    ===================================================== -->
 
-            <table>
+                    <div class="tempat-waktu">
 
-                <tr>
+                        <div>
 
-                    <td></td>
+                            Pekanbaru,
 
-                    <td class="footer-dokumen">
+                            <span class="bold" style="text-decoration: underline;">
 
-                        <div class="kode-dokumen">
-                            RSAB-AY/Rad/007/AKR/2025/Rev.00
+                                {{ $assessment->procedure_date ? $assessment->procedure_date->format('d M Y') : '-' }}
+
+                            </span>
+
                         </div>
 
                         <div>
-                            Halaman 2 dari 2
+
+                            Jam:
+
+                            <span class="bold" style="text-decoration: underline;">
+
+                                {{ $assessment->procedure_time ? substr($assessment->procedure_time, 0, 5) : '-' }}
+
+                            </span>
+
+                            WIB
+
                         </div>
 
-                    </td>
+                    </div>
 
-                </tr>
 
-            </table>
+                    <!-- =====================================================
+                         TANDA TANGAN
+                    ===================================================== -->
+
+                    <div class="ttd-area">
+
+                        <table>
+
+                            <tr>
+
+                                <!-- PERAWAT -->
+                                <td>
+
+                                    <div class="ttd-jabatan">
+                                        Perawat Radiologi
+                                    </div>
+
+                                    <div class="ttd-ruang">
+
+                                        @if ($assessment->nurse_signature)
+                                            <img src="{{ $assessment->nurse_signature }}" alt="Tanda Tangan Perawat">
+                                        @endif
+
+                                    </div>
+
+                                    <div class="ttd-garis">
+
+                                        (
+                                        {{ $assessment->radiologyNurse ? $assessment->radiologyNurse->name : '................................' }}
+                                        )
+
+                                    </div>
+
+                                </td>
+
+
+                                <!-- DOKTER -->
+                                <td>
+
+                                    <div class="ttd-jabatan">
+                                        Dokter Spesialis Radiologi
+                                    </div>
+
+                                    <div class="ttd-ruang">
+
+                                        @if ($assessment->doctor_signature)
+                                            <img src="{{ $assessment->doctor_signature }}" alt="Tanda Tangan Dokter">
+                                        @endif
+
+                                    </div>
+
+                                    <div class="ttd-garis">
+
+                                        (
+                                        {{ $assessment->radiologyDoctor ? $assessment->radiologyDoctor->name : '................................' }}
+                                        )
+
+                                    </div>
+
+                                </td>
+
+                            </tr>
+
+                        </table>
+
+                    </div>
+
+                </div>
+            @endif
+
+
+            <!-- =====================================================
+                 FOOTER HALAMAN OBAT
+            ===================================================== -->
+
+            <div class="footer-area" style="margin-top: 15px;">
+
+                <table>
+
+                    <tr>
+
+                        <td></td>
+
+                        <td class="footer-dokumen">
+
+                            <div class="kode-dokumen">
+                                RSAB-AY/Rad/007/AKR/2025/Rev.00
+                            </div>
+
+                            <div>
+                                Halaman {{ $currentPage }} dari {{ $totalPages }}
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+                </table>
+
+            </div>
 
         </div>
-
-    </div>
+    @endforeach
 
 </body>
 
