@@ -90,6 +90,8 @@
             border-collapse: collapse;
             table-layout: fixed;
             margin: 0;
+            /* page-break-inside: auto; */
+            /* page-break-inside: 10px; */
         }
 
         td,
@@ -202,6 +204,7 @@
             height: 25px;
         }
 
+        .tabel-obat .header-tabel th,
         .tabel-obat .header-tabel td {
             font-weight: bold;
             text-align: center;
@@ -1353,92 +1356,69 @@
 
         <table class="tabel-obat">
 
-            <tr class="header-tabel">
-
-                <td>Nama Obat</td>
-                <td>Dosis</td>
-                <td>Rute Pemberian</td>
-                <td>Kecepatan</td>
-                <td>Tekanan</td>
-                <td>Jam</td>
-                <td>Reaksi</td>
-                <td>Keterangan</td>
-                <td>Paraf Perawat</td>
-
-            </tr>
-
-
-            @forelse($assessment->medications as $med)
-                <tr>
-
-                    <td>
-                        {{ $med->medication_name }}
-                    </td>
-
-                    <td class="center">
-                        {{ $med->dose }}
-                    </td>
-
-                    <td class="center">
-                        {{ $med->administration_route }}
-                    </td>
-
-                    <td class="center">
-                        {{ $med->speed }}
-                    </td>
-
-                    <td class="center">
-                        {{ $med->pressure }}
-                    </td>
-
-                    <td class="center">
-
-                        {{ $med->administered_at ? substr($med->administered_at, 0, 5) : '-' }}
-
-                        WIB
-
-                    </td>
-
-                    <td>
-                        {{ $med->reaction }}
-                    </td>
-
-                    <td>
-                        {{ $med->notes }}
-                    </td>
-
-                    <td class="center" style="font-size: 9px; font-weight: bold;">
-
-                        {{-- {{ $med->nurse_initials ?: ($assessment->radiologyNurse ? $assessment->radiologyNurse->name : '') }} --}}
-
-                        <div class="ttd-ruang" style="height: 50px; text-align: center; vertical-align: middle;">
-
-                            @if ($assessment->nurse_signature)
-                                <img src="{{ $assessment->nurse_signature }}" alt="Tanda Tangan Perawat">
-                            @endif
-
-                        </div>
-
-                    </td>
-
+            <thead>
+                <tr class="header-tabel">
+                    <th>Nama Obat</th>
+                    <th>Dosis</th>
+                    <th>Rute Pemberian</th>
+                    <th>Kecepatan</th>
+                    <th>Tekanan</th>
+                    <th>Jam</th>
+                    <th>Reaksi</th>
+                    <th>Keterangan</th>
+                    <th>Paraf Perawat</th>
                 </tr>
+            </thead>
 
-            @empty
-
-                <tr>
-
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-
-                </tr>
-            @endforelse
+            <tbody>
+                @forelse($assessment->medications as $med)
+                    <tr>
+                        <td>
+                            {{ $med->medication_name }}
+                        </td>
+                        <td class="center">
+                            {{ $med->dose }}
+                        </td>
+                        <td class="center">
+                            {{ $med->administration_route }}
+                        </td>
+                        <td class="center">
+                            {{ $med->speed }}
+                        </td>
+                        <td class="center">
+                            {{ $med->pressure }}
+                        </td>
+                        <td class="center">
+                            {{ $med->administered_at ? substr($med->administered_at, 0, 5) : '-' }} WIB
+                        </td>
+                        <td>
+                            {{ $med->reaction }}
+                        </td>
+                        <td>
+                            {{ $med->notes }}
+                        </td>
+                        <td class="center" style="font-size: 9px; font-weight: bold;">
+                            <div class="ttd-ruang" style="height: 50px; text-align: center; vertical-align: middle;">
+                                @if ($assessment->nurse_signature)
+                                    <img src="{{ $assessment->nurse_signature }}" alt="Tanda Tangan Perawat">
+                                @endif
+                            </div>
+                        </td>
+                    </tr>
+                @empty
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                @endforelse
+            </tbody>
 
         </table>
 
