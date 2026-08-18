@@ -375,25 +375,39 @@ class AssessmentController extends Controller
     {
         $assessment = RadiologyContrastAssessment::findOrFail($id);
 
+        if (Auth::user()->role === 'dokter') {
+            if (!$assessment->nurse_signature) {
+                return redirect()->route('dashboard')->with('error', 'Dokumen belum ditandatangani perawat.');
+            }
+
+            if ($assessment->doctor_signature) {
+                return redirect()->route('dashboard')->with('error', 'Dokumen sudah ditandatangani dokter.');
+            }
+
+            $signature = Auth::user()->signature ?: $request->input('signature');
+
+            if (!$signature) {
+                return redirect()->route('dashboard')->with('error', 'Tanda tangan dokter belum tersedia. Silakan hubungi Superadmin/IT untuk mengunggah TTD di Master User.');
+            }
+
+            $assessment->update([
+                'radiology_doctor_id' => Auth::id(),
+                'doctor_signature' => $signature,
+                'signed_at' => now(),
+            ]);
+
+            return redirect()->route('dashboard')->with('success', 'Dokumen berhasil ditandatangani oleh Dokter Spesialis Radiologi.');
+        }
+
         $request->validate([
             'signature' => 'required|string',
         ]);
 
-        if (Auth::user()->role === 'dokter') {
-            $assessment->update([
-                'radiology_doctor_id' => Auth::id(),
-                'doctor_signature' => $request->input('signature'),
-                'signed_at' => now(),
-            ]);
-            $msg = 'Dokumen berhasil ditandatangani oleh Dokter Spesialis Radiologi.';
-        } else {
-            $assessment->update([
-                'nurse_signature' => $request->input('signature'),
-            ]);
-            $msg = 'Dokumen berhasil ditandatangani oleh Perawat Radiologi.';
-        }
+        $assessment->update([
+            'nurse_signature' => $request->input('signature'),
+        ]);
 
-        return redirect()->route('dashboard')->with('success', $msg);
+        return redirect()->route('dashboard')->with('success', 'Dokumen berhasil ditandatangani oleh Perawat Radiologi.');
     }
 
     public function destroy($id)
