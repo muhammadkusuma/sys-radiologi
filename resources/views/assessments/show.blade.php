@@ -368,6 +368,10 @@
                 style="text-decoration: none; padding: 6px 14px; background: #fff; border: 1px solid #cbd5e1; border-radius: 6px; color: #475569; font-weight: 600; font-size: 12px;">
                 &larr; Kembali
             </a>
+            <a href="{{ route('assessments.pdf', $assessment->id) }}" target="_blank"
+                style="text-decoration: none; padding: 6px 14px; background: #0f766e; border: none; border-radius: 6px; color: #fff; font-weight: 600; font-size: 12px; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">
+                Buka PDF
+            </a>
             <button onclick="window.print()"
                 style="cursor: pointer; padding: 6px 14px; background: #2563eb; border: none; border-radius: 6px; color: #fff; font-weight: 600; font-size: 12px; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">
                 Cetak Dokumen (Print)

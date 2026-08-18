@@ -6,6 +6,7 @@ use App\Models\Patient;
 use App\Models\RadiologyContrastAssessment;
 use App\Models\RadiologyContrastMedication;
 use App\Models\User;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -90,9 +91,26 @@ class AssessmentController extends Controller
 
         // Convert boolean fields
         $booleanFields = [
-            'has_allergy_history', 'contrast_double_check', 'allergy_test',
-            'itching_during', 'nausea_during', 'dizziness_during', 'shortness_of_breath_during', 'swollen_eyes_during', 'swelling_during', 'pain_during', 'redness_during',
-            'itching_after', 'nausea_after', 'dizziness_after', 'shortness_of_breath_after', 'swollen_eyes_after', 'bentol_after', 'swelling_after', 'pain_after', 'redness_after'
+            'has_allergy_history',
+            'contrast_double_check',
+            'allergy_test',
+            'itching_during',
+            'nausea_during',
+            'dizziness_during',
+            'shortness_of_breath_during',
+            'swollen_eyes_during',
+            'swelling_during',
+            'pain_during',
+            'redness_during',
+            'itching_after',
+            'nausea_after',
+            'dizziness_after',
+            'shortness_of_breath_after',
+            'swollen_eyes_after',
+            'bentol_after',
+            'swelling_after',
+            'pain_after',
+            'redness_after'
         ];
 
         foreach ($booleanFields as $field) {
@@ -106,13 +124,13 @@ class AssessmentController extends Controller
         // Store medications
         if ($request->has('medications')) {
             foreach ($request->input('medications') as $med) {
-                $hasContent = !empty($med['medication_name']) || 
-                              !empty($med['dose']) || 
-                              !empty($med['administration_route']) || 
-                              !empty($med['speed']) || 
-                              !empty($med['pressure']) || 
-                              !empty($med['reaction']) || 
-                              !empty($med['notes']);
+                $hasContent = !empty($med['medication_name']) ||
+                    !empty($med['dose']) ||
+                    !empty($med['administration_route']) ||
+                    !empty($med['speed']) ||
+                    !empty($med['pressure']) ||
+                    !empty($med['reaction']) ||
+                    !empty($med['notes']);
 
                 if ($hasContent) {
                     $assessment->medications()->create([
@@ -138,6 +156,28 @@ class AssessmentController extends Controller
     {
         $assessment = RadiologyContrastAssessment::with(['patient', 'referringDoctor', 'radiologyNurse', 'radiologyDoctor', 'medications.nurse'])->findOrFail($id);
         return view('assessments.show', compact('assessment'));
+    }
+
+    public function pdf(Request $request, $id)
+    {
+        $assessment = RadiologyContrastAssessment::with([
+            'patient',
+            'referringDoctor',
+            'radiologyNurse',
+            'radiologyDoctor',
+            'medications.nurse',
+        ])->findOrFail($id);
+
+        $pdf = Pdf::loadView('assessments.pdf', compact('assessment'))
+            ->setPaper('a4', 'landscape');
+
+        $filename = 'asesmen-radiologi-kontras-' . $assessment->id . '.pdf';
+
+        if ($request->boolean('download')) {
+            return $pdf->download($filename);
+        }
+
+        return $pdf->stream($filename);
     }
 
     public function edit($id)
@@ -221,9 +261,26 @@ class AssessmentController extends Controller
         ]);
 
         $booleanFields = [
-            'has_allergy_history', 'contrast_double_check', 'allergy_test',
-            'itching_during', 'nausea_during', 'dizziness_during', 'shortness_of_breath_during', 'swollen_eyes_during', 'swelling_during', 'pain_during', 'redness_during',
-            'itching_after', 'nausea_after', 'dizziness_after', 'shortness_of_breath_after', 'swollen_eyes_after', 'bentol_after', 'swelling_after', 'pain_after', 'redness_after'
+            'has_allergy_history',
+            'contrast_double_check',
+            'allergy_test',
+            'itching_during',
+            'nausea_during',
+            'dizziness_during',
+            'shortness_of_breath_during',
+            'swollen_eyes_during',
+            'swelling_during',
+            'pain_during',
+            'redness_during',
+            'itching_after',
+            'nausea_after',
+            'dizziness_after',
+            'shortness_of_breath_after',
+            'swollen_eyes_after',
+            'bentol_after',
+            'swelling_after',
+            'pain_after',
+            'redness_after'
         ];
 
         foreach ($booleanFields as $field) {
@@ -244,13 +301,13 @@ class AssessmentController extends Controller
         $assessment->medications()->delete();
         if ($request->has('medications')) {
             foreach ($request->input('medications') as $med) {
-                $hasContent = !empty($med['medication_name']) || 
-                              !empty($med['dose']) || 
-                              !empty($med['administration_route']) || 
-                              !empty($med['speed']) || 
-                              !empty($med['pressure']) || 
-                              !empty($med['reaction']) || 
-                              !empty($med['notes']);
+                $hasContent = !empty($med['medication_name']) ||
+                    !empty($med['dose']) ||
+                    !empty($med['administration_route']) ||
+                    !empty($med['speed']) ||
+                    !empty($med['pressure']) ||
+                    !empty($med['reaction']) ||
+                    !empty($med['notes']);
 
                 if ($hasContent) {
                     $assessment->medications()->create([

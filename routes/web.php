@@ -32,6 +32,7 @@ Route::middleware('auth')->group(function () {
     // Asesmen
     Route::get('/assessments/create/{patient_id}', [AssessmentController::class, 'create'])->name('assessments.create');
     Route::post('/assessments', [AssessmentController::class, 'store'])->name('assessments.store');
+    Route::get('/assessments/{assessment}/pdf', [AssessmentController::class, 'pdf'])->name('assessments.pdf');
     Route::get('/assessments/{assessment}', [AssessmentController::class, 'show'])->name('assessments.show');
     Route::get('/assessments/{assessment}/edit', [AssessmentController::class, 'edit'])->name('assessments.edit');
     Route::post('/assessments/{assessment}', [AssessmentController::class, 'update'])->name('assessments.update');
