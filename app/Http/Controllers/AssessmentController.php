@@ -158,6 +158,21 @@ class AssessmentController extends Controller
         return view('assessments.show', compact('assessment'));
     }
 
+    public function history()
+    {
+        if (Auth::user()->role !== 'dokter') {
+            abort(403, 'Unauthorized action.');
+        }
+
+        $historyAssessments = RadiologyContrastAssessment::with(['patient', 'radiologyNurse', 'radiologyDoctor'])
+            ->where('radiology_doctor_id', Auth::id())
+            ->whereNotNull('doctor_signature')
+            ->orderBy('signed_at', 'desc')
+            ->get();
+
+        return view('assessments.history', compact('historyAssessments'));
+    }
+
     public function pdf(Request $request, $id)
     {
         $assessment = RadiologyContrastAssessment::with([

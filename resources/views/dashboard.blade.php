@@ -114,7 +114,7 @@
             </div>
 
             <div class="overflow-x-auto">
-                <table class="min-w-full divide-y divide-slate-200">
+                <table id="assessmentTable" class="min-w-full divide-y divide-slate-200">
                     <thead class="bg-slate-50">
                         <tr>
                             <th class="px-6 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wider">
@@ -229,7 +229,7 @@
         function filterAssessmentTable() {
             const input = document.getElementById("assessmentSearch");
             const filter = input.value.toLowerCase();
-            const tbody = document.querySelector("table tbody");
+            const tbody = document.querySelector("#assessmentTable tbody") || document.querySelector("table tbody");
             const rows = tbody.getElementsByTagName("tr");
 
             for (let i = 0; i < rows.length; i++) {
