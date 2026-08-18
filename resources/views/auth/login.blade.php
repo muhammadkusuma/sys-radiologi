@@ -19,7 +19,7 @@
         <div class="absolute -bottom-10 right-0 w-80 h-80 bg-indigo-100 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-blob animation-delay-2000"></div>
 
         <div class="sm:mx-auto w-full max-w-md z-10 text-center">
-            <img src="login.png" alt="" srcset="" class="mx-auto h-14 w-auto">
+            <img src="{{ asset('login.png') }}" alt="" srcset="" class="mx-auto h-14 w-auto">
             <h2 class="mt-3 text-xl font-extrabold text-slate-900 tracking-tight">
                 Asesmen Radiologi Kontras
             </h2>

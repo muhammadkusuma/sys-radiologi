@@ -686,33 +686,18 @@
 
                     <!-- SIGNATURE AREA FOR NURSE -->
                     @if (Auth::user()->role === 'perawat')
-                        <div
-                            class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center border-t border-slate-200 pt-6 mt-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center border-t border-slate-200 pt-6 mt-6">
                             <div>
-                                <span class="block text-xs font-bold text-slate-800 mb-2">Tanda Tangan Perawat
-                                    Radiologi:</span>
-                                @if (Auth::user()->signature)
-                                    <div class="bg-white p-3 border border-slate-200 rounded-lg inline-block shadow-sm">
-                                        <img src="{{ Auth::user()->signature }}" alt="Tanda Tangan" class="h-16">
-                                        <span class="text-[10px] text-green-600 font-bold block mt-1">Otomatis dari Profil
-                                            Master TTD</span>
-                                    </div>
-                                    <input type="hidden" name="nurse_signature" id="nurseSigInput"
-                                        value="{{ Auth::user()->signature }}">
-                                @else
-                                    <div class="p-3 bg-amber-50 border border-amber-200 text-amber-800 text-xs rounded-lg">
-                                        Anda belum mengunggah tanda tangan di Master TTD. Silakan
-                                        <a href="{{ route('signatures.index') }}"
-                                            class="underline font-semibold text-blue-600" target="_blank">Unggah TTD Anda
-                                            di sini</a>
-                                        agar dapat melakukan tanda tangan otomatis.
-                                    </div>
-                                @endif
+                                <span class="block text-xs font-bold text-slate-800 mb-2">Tanda Tangan Perawat Radiologi (Gambar Manual):</span>
+                                <canvas id="nurseSigPad" class="signature-box" width="350" height="130"></canvas>
+                                <div class="flex space-x-2 mt-2">
+                                    <button type="button" onclick="clearNursePad()" class="px-3 py-1 bg-slate-200 text-slate-700 text-xs font-semibold rounded hover:bg-slate-350 cursor-pointer">Hapus</button>
+                                </div>
+                                <input type="hidden" name="nurse_signature" id="nurseSigInput">
                             </div>
                             <div class="text-xs text-slate-500 space-y-2">
-                                <p class="font-bold text-slate-800">Tanda Tangan Elektronik Otomatis</p>
-                                <p>Sistem mendeteksi tanda tangan PNG Anda yang diunggah di menu Master TTD. Tanda tangan
-                                    ini akan otomatis dicantumkan pada lembar Asesmen Radiologi Kontras.</p>
+                                <p class="font-bold text-slate-800">Tanda Tangan Elektronik Manual</p>
+                                <p>Silakan gambar paraf / tanda tangan Anda pada bidang canvas di samping. Tanda tangan ini harus dibuat secara manual setiap kali membuat asesmen baru.</p>
                             </div>
                         </div>
                     @endif
@@ -899,7 +884,82 @@
 
         window.addEventListener('load', () => {
             loadDraft();
+            @if(Auth::user()->role === 'perawat')
+                initNurseSignaturePad();
+            @endif
         });
+
+        // Manual canvas drawing signature pad for Nurse
+        let nurseCtx = null;
+        let drawingNurse = false;
+
+        function initNurseSignaturePad() {
+            const canvas = document.getElementById('nurseSigPad');
+            if (!canvas) return;
+            nurseCtx = canvas.getContext('2d');
+            nurseCtx.strokeStyle = '#000000';
+            nurseCtx.lineWidth = 2.5;
+
+            // Mouse events
+            canvas.addEventListener('mousedown', startDrawingNurse);
+            canvas.addEventListener('mousemove', drawNurse);
+            canvas.addEventListener('mouseup', stopDrawingNurse);
+            canvas.addEventListener('mouseout', stopDrawingNurse);
+
+            // Touch events for mobile
+            canvas.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                const touch = e.touches[0];
+                const rect = canvas.getBoundingClientRect();
+                nurseCtx.beginPath();
+                nurseCtx.moveTo(touch.clientX - rect.left, touch.clientY - rect.top);
+                drawingNurse = true;
+            });
+            canvas.addEventListener('touchmove', (e) => {
+                e.preventDefault();
+                if (!drawingNurse) return;
+                const touch = e.touches[0];
+                const rect = canvas.getBoundingClientRect();
+                nurseCtx.lineTo(touch.clientX - rect.left, touch.clientY - rect.top);
+                nurseCtx.stroke();
+            });
+            canvas.addEventListener('touchend', stopDrawingNurse);
+        }
+
+        function startDrawingNurse(e) {
+            const canvas = e.target;
+            const rect = canvas.getBoundingClientRect();
+            nurseCtx.beginPath();
+            nurseCtx.moveTo(e.clientX - rect.left, e.clientY - rect.top);
+            drawingNurse = true;
+        }
+
+        function drawNurse(e) {
+            if (!drawingNurse) return;
+            const canvas = e.target;
+            const rect = canvas.getBoundingClientRect();
+            nurseCtx.lineTo(e.clientX - rect.left, e.clientY - rect.top);
+            nurseCtx.stroke();
+        }
+
+        function stopDrawingNurse() {
+            drawingNurse = false;
+        }
+
+        function clearNursePad() {
+            const canvas = document.getElementById('nurseSigPad');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            document.getElementById('nurseSigInput').value = '';
+        }
+
+        function isCanvasBlank(canvas) {
+            const blank = document.createElement('canvas');
+            blank.width = canvas.width;
+            blank.height = canvas.height;
+            return canvas.toDataURL() === blank.toDataURL();
+        }
 
         function submitAsDraft(event) {
             event.preventDefault();
@@ -913,27 +973,23 @@
 
         function submitMintaTtd(event) {
             event.preventDefault();
-            @if(Auth::user()->signature)
-                const nurseSig = document.getElementById('nurseSigInput');
-                if (nurseSig) {
-                    nurseSig.value = "{{ Auth::user()->signature }}"; // Set nurse signature
+            const canvas = document.getElementById('nurseSigPad');
+            if (canvas) {
+                if (isCanvasBlank(canvas)) {
+                    alert('Anda harus menggambar tanda tangan terlebih dahulu pada canvas.');
+                    return;
                 }
-            @else
-                alert('Anda harus mengunggah tanda tangan terlebih dahulu di Master TTD sebelum meminta TTD Dokter.');
+                document.getElementById('nurseSigInput').value = canvas.toDataURL('image/png');
+            } else {
+                alert('Tanda tangan perawat diperlukan.');
                 return;
-            @endif
+            }
             localStorage.removeItem(storageKey);
             document.getElementById('assessmentForm').submit();
         }
 
         function submitForm(event) {
             event.preventDefault();
-            @if (Auth::user()->role === 'dokter')
-                @if (!Auth::user()->signature)
-                    alert('Anda harus mengunggah tanda tangan terlebih dahulu di Master TTD sebelum menyimpan asesmen.');
-                    return;
-                @endif
-            @endif
             localStorage.removeItem(storageKey);
             document.getElementById('assessmentForm').submit();
         }

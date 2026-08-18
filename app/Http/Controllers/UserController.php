@@ -38,9 +38,15 @@ class UserController extends Controller implements HasMiddleware
             'email' => 'required|string|email|max:255|unique:users,email',
             'password' => 'required|string|min:6',
             'role' => 'required|in:dokter,perawat,superadmin',
+            'signature_file' => 'nullable|image|mimes:png,jpg,jpeg|max:1024',
         ]);
 
         $validated['password'] = Hash::make($validated['password']);
+
+        if ($request->hasFile('signature_file') && $validated['role'] === 'dokter') {
+            $file = $request->file('signature_file');
+            $validated['signature'] = 'data:' . $file->getMimeType() . ';base64,' . base64_encode(file_get_contents($file));
+        }
 
         User::create($validated);
 
@@ -55,12 +61,18 @@ class UserController extends Controller implements HasMiddleware
             'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
             'password' => 'nullable|string|min:6',
             'role' => 'required|in:dokter,perawat,superadmin',
+            'signature_file' => 'nullable|image|mimes:png,jpg,jpeg|max:1024',
         ]);
 
         if (!empty($validated['password'])) {
             $validated['password'] = Hash::make($validated['password']);
         } else {
             unset($validated['password']);
+        }
+
+        if ($request->hasFile('signature_file') && $validated['role'] === 'dokter') {
+            $file = $request->file('signature_file');
+            $validated['signature'] = 'data:' . $file->getMimeType() . ';base64,' . base64_encode(file_get_contents($file));
         }
 
         $user->update($validated);

@@ -88,7 +88,7 @@
         <span class="hidden sm:inline-block sm:align-middle sm:h-screen">&#8203;</span>
         
         <div class="inline-block align-bottom bg-white rounded-xl text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full border border-slate-200 relative z-10">
-            <form id="userForm" action="{{ route('users.store') }}" method="POST">
+            <form id="userForm" action="{{ route('users.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <input type="hidden" name="_method" id="formMethod" value="POST">
                 
@@ -126,11 +126,16 @@
 
                         <div>
                             <label for="role" class="block text-sm font-semibold text-slate-700">Peran</label>
-                            <select name="role" id="role" required class="mt-1 appearance-none block w-full px-3 py-2 border border-slate-300 rounded-lg bg-white text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500 sm:text-sm">
+                            <select name="role" id="role" onchange="toggleSignatureField(this.value)" required class="mt-1 appearance-none block w-full px-3 py-2 border border-slate-300 rounded-lg bg-white text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500 sm:text-sm">
                                 <option value="perawat">Perawat</option>
                                 <option value="dokter">Dokter</option>
                                 <option value="superadmin">Superadmin (IT)</option>
                             </select>
+                        </div>
+
+                        <div id="signatureField" class="hidden">
+                            <label for="signature_file" class="block text-sm font-semibold text-slate-700">Tanda Tangan (.png / .jpg / .jpeg, maks 1MB)</label>
+                            <input type="file" name="signature_file" id="signature_file" class="mt-1 block w-full px-3 py-2 border border-slate-300 rounded-lg text-sm bg-white focus:outline-none focus:ring-2 focus:ring-blue-500">
                         </div>
                     </div>
                 </div>
@@ -147,6 +152,15 @@
 
 @section('scripts')
 <script>
+    function toggleSignatureField(role) {
+        const field = document.getElementById('signatureField');
+        if (role === 'dokter') {
+            field.classList.remove('hidden');
+        } else {
+            field.classList.add('hidden');
+        }
+    }
+
     function toggleUserModal() {
         const modal = document.getElementById('userModal');
         modal.classList.toggle('hidden');
@@ -157,6 +171,7 @@
             document.getElementById('userForm').action = "{{ route('users.store') }}";
             document.getElementById('modalTitle').textContent = 'Tambah User Baru';
             document.getElementById('password').required = true;
+            document.getElementById('signatureField').classList.add('hidden');
         }
     }
 
@@ -171,6 +186,8 @@
         document.getElementById('email').value = user.email;
         document.getElementById('role').value = user.role;
         document.getElementById('password').required = false;
+        
+        toggleSignatureField(user.role);
     }
 
     function filterUserTable() {

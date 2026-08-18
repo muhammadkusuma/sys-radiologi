@@ -28,10 +28,7 @@ Route::middleware('auth')->group(function () {
     // Master User
     Route::resource('users', UserController::class);
 
-    // Master TTD
-    Route::get('/signatures', [SignatureController::class, 'index'])->name('signatures.index');
-    Route::post('/signatures', [SignatureController::class, 'store'])->name('signatures.store');
-    
+
     // Asesmen
     Route::get('/assessments/create/{patient_id}', [AssessmentController::class, 'create'])->name('assessments.create');
     Route::post('/assessments', [AssessmentController::class, 'store'])->name('assessments.store');

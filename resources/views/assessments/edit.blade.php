@@ -860,69 +860,55 @@
                     </table>
                     <!-- SIGNATURE AREA FOR NURSE -->
                     @if (Auth::user()->role === 'perawat')
-                        <div
-                            class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center border-t border-slate-200 pt-6 mt-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center border-t border-slate-200 pt-6 mt-6">
                             <div>
-                                <span class="block text-xs font-bold text-slate-800 mb-2">Tanda Tangan Perawat
-                                    Radiologi:</span>
-                                @if ($assessment->nurse_signature)
-                                    <div class="bg-white p-3 border border-slate-200 rounded-lg inline-block shadow-sm">
-                                        <img src="{{ $assessment->nurse_signature }}" alt="Tanda Tangan"
-                                            class="h-16">
-                                        <span class="text-[10px] text-green-600 font-bold block mt-1">Sudah
-                                            Ditandatangani</span>
+                                <span class="block text-xs font-bold text-slate-800 mb-2">Tanda Tangan Perawat Radiologi (Gambar Manual):</span>
+                                <div id="nurseSigDisplay" class="{{ $assessment->nurse_signature ? '' : 'hidden' }}">
+                                    @if ($assessment->nurse_signature)
+                                        <div class="bg-white p-3 border border-slate-200 rounded-lg inline-block shadow-sm mb-2">
+                                            <img src="{{ $assessment->nurse_signature }}" alt="Tanda Tangan" class="h-16">
+                                        </div>
+                                    @endif
+                                    <div>
+                                        <button type="button" onclick="redrawNurse()" class="px-3 py-1 bg-amber-500 text-white text-xs font-semibold rounded hover:bg-amber-600 cursor-pointer">Tanda Tangan Ulang</button>
                                     </div>
-                                    <input type="hidden" name="nurse_signature" id="nurseSigInput"
-                                        value="{{ $assessment->nurse_signature }}">
-                                @elseif(Auth::user()->signature)
-                                    <div class="bg-white p-3 border border-slate-200 rounded-lg inline-block shadow-sm">
-                                        <img src="{{ Auth::user()->signature }}" alt="Tanda Tangan" class="h-16">
-                                        <span class="text-[10px] text-slate-500 font-bold block mt-1">Otomatis Terisi saat
-                                            klik "Minta TTD Dokter"</span>
+                                </div>
+                                <div id="nurseSigCanvasArea" class="{{ $assessment->nurse_signature ? 'hidden' : '' }}">
+                                    <canvas id="nurseSigPad" class="signature-box" width="350" height="130"></canvas>
+                                    <div class="flex space-x-2 mt-2">
+                                        <button type="button" onclick="clearNursePad()" class="px-3 py-1 bg-slate-200 text-slate-700 text-xs font-semibold rounded hover:bg-slate-350 cursor-pointer">Hapus</button>
                                     </div>
-                                    <input type="hidden" name="nurse_signature" id="nurseSigInput" value="">
-                                @else
-                                    <div class="p-3 bg-amber-50 border border-amber-200 text-amber-800 text-xs rounded-lg">
-                                        Anda belum mengunggah tanda tangan di Master TTD. Silakan
-                                        <a href="{{ route('signatures.index') }}"
-                                            class="underline font-semibold text-blue-600" target="_blank">Unggah TTD Anda
-                                            di sini</a>
-                                        agar dapat mengirim dokumen untuk ditandatangani dokter.
-                                    </div>
-                                @endif
+                                </div>
+                                <input type="hidden" name="nurse_signature" id="nurseSigInput" value="{{ $assessment->nurse_signature }}">
+                            </div>
+                            <div class="text-xs text-slate-500 space-y-2">
+                                <p class="font-bold text-slate-800">Tanda Tangan Elektronik Manual</p>
+                                <p>Silakan gambar paraf / tanda tangan Anda pada bidang canvas di atas. Tanda tangan ini harus dibuat secara manual setiap kali Anda ingin menyimpan / memperbarui asesmen.</p>
                             </div>
                         </div>
                     @endif
 
                     <!-- SIGNATURE AREA FOR DOCTOR (IF LOGGED IN AS DOKTER) -->
                     @if (Auth::user()->role === 'dokter')
-                        <div
-                            class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center border-t border-slate-200 pt-6 mt-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center border-t border-slate-200 pt-6 mt-6">
                             <div>
-                                <span class="block text-xs font-bold text-slate-800 mb-2">Tanda Tangan Dokter Spesialis
-                                    Radiologi:</span>
+                                <span class="block text-xs font-bold text-slate-800 mb-2">Tanda Tangan Dokter Spesialis Radiologi:</span>
                                 @if (Auth::user()->signature)
                                     <div class="bg-white p-3 border border-slate-200 rounded-lg inline-block shadow-sm">
                                         <img src="{{ Auth::user()->signature }}" alt="Tanda Tangan" class="h-16">
-                                        <span class="text-[10px] text-green-600 font-bold block mt-1">Otomatis dari Profil
-                                            Master TTD</span>
+                                        <span class="text-[10px] text-green-600 font-bold block mt-1">Otomatis dari Profil Dokter</span>
                                     </div>
-                                    <input type="hidden" name="doctor_signature" id="doctorSigInput"
-                                        value="{{ Auth::user()->signature }}">
+                                    <input type="hidden" name="doctor_signature" id="doctorSigInput" value="{{ Auth::user()->signature }}">
                                 @else
                                     <div class="p-3 bg-amber-50 border border-amber-200 text-amber-800 text-xs rounded-lg">
-                                        Anda belum mengunggah tanda tangan di Master TTD. Silakan
-                                        <a href="{{ route('signatures.index') }}"
-                                            class="underline font-semibold text-blue-600" target="_blank">Unggah TTD Anda
-                                            di sini</a>
-                                        agar dapat melakukan tanda tangan otomatis.
+                                        Dokter belum memiliki tanda tangan di database. Silakan minta Superadmin/IT untuk mengunggah tanda tangan Anda di Master User agar dapat menandatangani dokumen secara otomatis.
                                     </div>
+                                    <input type="hidden" name="doctor_signature" id="doctorSigInput" value="">
                                 @endif
                             </div>
                             <div class="text-xs text-slate-500 space-y-2">
                                 <p class="font-bold text-slate-800">Tanda Tangan Dokter Spesialis</p>
-                                <p>Sistem mendeteksi tanda tangan PNG Anda yang diunggah di menu Master TTD. Tanda tangan
-                                    ini akan otomatis dicantumkan pada lembar Asesmen Radiologi Kontras.</p>
+                                <p>Sistem otomatis memuat tanda tangan digital Anda yang diunggah oleh Superadmin/IT di Master User.</p>
                             </div>
                         </div>
                     @endif
@@ -1110,13 +1096,108 @@
 
         window.addEventListener('load', () => {
             loadDraft();
+            @if(Auth::user()->role === 'perawat')
+                // Only initialize if there is no pre-existing signature
+                if (!document.getElementById('nurseSigCanvasArea').classList.contains('hidden')) {
+                    initNurseSignaturePad();
+                }
+            @endif
         });
+
+        // Manual canvas drawing signature pad for Nurse
+        let nurseCtx = null;
+        let drawingNurse = false;
+
+        function initNurseSignaturePad() {
+            const canvas = document.getElementById('nurseSigPad');
+            if (!canvas) return;
+            nurseCtx = canvas.getContext('2d');
+            nurseCtx.strokeStyle = '#000000';
+            nurseCtx.lineWidth = 2.5;
+
+            // Mouse events
+            canvas.addEventListener('mousedown', startDrawingNurse);
+            canvas.addEventListener('mousemove', drawNurse);
+            canvas.addEventListener('mouseup', stopDrawingNurse);
+            canvas.addEventListener('mouseout', stopDrawingNurse);
+
+            // Touch events for mobile
+            canvas.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                const touch = e.touches[0];
+                const rect = canvas.getBoundingClientRect();
+                nurseCtx.beginPath();
+                nurseCtx.moveTo(touch.clientX - rect.left, touch.clientY - rect.top);
+                drawingNurse = true;
+            });
+            canvas.addEventListener('touchmove', (e) => {
+                e.preventDefault();
+                if (!drawingNurse) return;
+                const touch = e.touches[0];
+                const rect = canvas.getBoundingClientRect();
+                nurseCtx.lineTo(touch.clientX - rect.left, touch.clientY - rect.top);
+                nurseCtx.stroke();
+            });
+            canvas.addEventListener('touchend', stopDrawingNurse);
+        }
+
+        function startDrawingNurse(e) {
+            const canvas = e.target;
+            const rect = canvas.getBoundingClientRect();
+            nurseCtx.beginPath();
+            nurseCtx.moveTo(e.clientX - rect.left, e.clientY - rect.top);
+            drawingNurse = true;
+        }
+
+        function drawNurse(e) {
+            if (!drawingNurse) return;
+            const canvas = e.target;
+            const rect = canvas.getBoundingClientRect();
+            nurseCtx.lineTo(e.clientX - rect.left, e.clientY - rect.top);
+            nurseCtx.stroke();
+        }
+
+        function stopDrawingNurse() {
+            drawingNurse = false;
+        }
+
+        function clearNursePad() {
+            const canvas = document.getElementById('nurseSigPad');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            document.getElementById('nurseSigInput').value = '';
+        }
+
+        function redrawNurse() {
+            document.getElementById('nurseSigDisplay').classList.add('hidden');
+            document.getElementById('nurseSigCanvasArea').classList.remove('hidden');
+            document.getElementById('nurseSigInput').value = '';
+            setTimeout(initNurseSignaturePad, 100);
+        }
+
+        function isCanvasBlank(canvas) {
+            const blank = document.createElement('canvas');
+            blank.width = canvas.width;
+            blank.height = canvas.height;
+            return canvas.toDataURL() === blank.toDataURL();
+        }
 
         function submitAsDraft(event) {
             event.preventDefault();
+            // If they are drawing, we don't save the current signature on draft save (or we can, but we clear it to keep as Draft)
             const nurseSig = document.getElementById('nurseSigInput');
             if (nurseSig) {
-                nurseSig.value = ''; // Kosongkan agar status kembali ke Draft / Belum Lengkap
+                // If they drew something, we can save it, but if they want to save strictly as a draft:
+                // Let's check: if canvas is visible and they drew, we can clear the input so it saves as draft
+                const canvas = document.getElementById('nurseSigPad');
+                const canvasArea = document.getElementById('nurseSigCanvasArea');
+                if (canvasArea && !canvasArea.classList.contains('hidden') && canvas && !isCanvasBlank(canvas)) {
+                    // Let them save what they drew as a draft OR clear it. In edit, draft status is retained if signature is empty
+                    nurseSig.value = '';
+                } else if (!nurseSig.value) {
+                    nurseSig.value = '';
+                }
             }
             localStorage.removeItem(storageKey);
             document.getElementById('assessmentForm').submit();
@@ -1124,31 +1205,38 @@
 
         function submitMintaTtd(event) {
             event.preventDefault();
-            @if (Auth::user()->signature)
-                const nurseSig = document.getElementById('nurseSigInput');
-                if (nurseSig) {
-                    nurseSig.value =
-                        "{{ Auth::user()->signature }}"; // Set ttd perawat agar status menjadi Menunggu TTD Dokter
+            const canvasArea = document.getElementById('nurseSigCanvasArea');
+            const nurseSigInput = document.getElementById('nurseSigInput');
+
+            if (canvasArea && !canvasArea.classList.contains('hidden')) {
+                const canvas = document.getElementById('nurseSigPad');
+                if (canvas) {
+                    if (isCanvasBlank(canvas)) {
+                        alert('Anda harus menggambar tanda tangan terlebih dahulu pada canvas.');
+                        return;
+                    }
+                    nurseSigInput.value = canvas.toDataURL('image/png');
+                } else {
+                    alert('Tanda tangan perawat diperlukan.');
+                    return;
                 }
-            @else
-                alert('Anda harus mengunggah tanda tangan terlebih dahulu di Master TTD sebelum meminta TTD Dokter.');
-                return;
-            @endif
+            } else {
+                if (!nurseSigInput || !nurseSigInput.value) {
+                    alert('Tanda tangan perawat diperlukan.');
+                    return;
+                }
+            }
+
             localStorage.removeItem(storageKey);
             document.getElementById('assessmentForm').submit();
         }
 
         function submitForm(event) {
             event.preventDefault();
-            @if (Auth::user()->role === 'dokter')
-                @if (!Auth::user()->signature)
-                    alert('Anda harus mengunggah tanda tangan terlebih dahulu di Master TTD sebelum menyimpan perubahan.');
-                    return;
-                @endif
-            @endif
             localStorage.removeItem(storageKey);
             document.getElementById('assessmentForm').submit();
         }
+
         @if (!empty($assessment->doctor_signature))
             document.addEventListener('DOMContentLoaded', () => {
                 document.querySelectorAll(
@@ -1156,7 +1244,6 @@
                 ).forEach(el => {
                     el.disabled = true;
                     if (el.tagName === 'CANVAS') {
-                        // Disable canvas drawing
                         el.style.pointerEvents = 'none';
                         el.style.opacity = '0.6';
                     }
