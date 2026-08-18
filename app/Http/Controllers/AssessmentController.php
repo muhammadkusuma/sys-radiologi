@@ -17,8 +17,9 @@ class AssessmentController extends Controller
         $doctors = User::where('role', 'dokter')->get();
         $nurses = User::where('role', 'perawat')->get();
         $doses = \Illuminate\Support\Facades\DB::table('dosis_obat')->pluck('Dosis')->toArray();
+        $routes = \Illuminate\Support\Facades\DB::table('rute_pemberian_obat')->pluck('Nama')->toArray();
 
-        return view('assessments.create', compact('patient', 'doctors', 'nurses', 'doses'));
+        return view('assessments.create', compact('patient', 'doctors', 'nurses', 'doses', 'routes'));
     }
 
     public function store(Request $request)
@@ -146,8 +147,9 @@ class AssessmentController extends Controller
         $doctors = User::where('role', 'dokter')->get();
         $nurses = User::where('role', 'perawat')->get();
         $doses = \Illuminate\Support\Facades\DB::table('dosis_obat')->pluck('Dosis')->toArray();
+        $routes = \Illuminate\Support\Facades\DB::table('rute_pemberian_obat')->pluck('Nama')->toArray();
 
-        return view('assessments.edit', compact('assessment', 'patient', 'doctors', 'nurses', 'doses'));
+        return view('assessments.edit', compact('assessment', 'patient', 'doctors', 'nurses', 'doses', 'routes'));
     }
 
     public function update(Request $request, $id)

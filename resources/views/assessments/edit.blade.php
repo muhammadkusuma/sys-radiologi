@@ -816,7 +816,7 @@
                                             placeholder="Dosis..."></td>
                                     <td><input type="text"
                                             name="medications[{{ $index }}][administration_route]"
-                                            value="{{ $medRoute }}" class="paper-input text-center"
+                                            value="{{ $medRoute }}" list="routes_list" class="paper-input text-center"
                                             placeholder="Rute..."></td>
                                     <td><input type="text" name="medications[{{ $index }}][speed]"
                                             value="{{ $medSpeed }}" class="paper-input text-center"
@@ -840,7 +840,7 @@
                                             class="paper-input" placeholder="Nama obat..."></td>
                                     <td><input type="text" name="medications[0][dose]" list="doses_list" class="paper-input text-center"
                                             placeholder="Dosis..."></td>
-                                    <td><input type="text" name="medications[0][administration_route]"
+                                    <td><input type="text" name="medications[0][administration_route]" list="routes_list"
                                             class="paper-input text-center" placeholder="Rute..."></td>
                                     <td><input type="text" name="medications[0][speed]"
                                             class="paper-input text-center" placeholder="Kecepatan..."></td>
@@ -963,7 +963,7 @@
             tr.innerHTML = `
             <td><input type="text" name="medications[${medIndex}][medication_name]" required class="paper-input" placeholder="Nama obat..."></td>
             <td><input type="text" name="medications[${medIndex}][dose]" list="doses_list" class="paper-input text-center" placeholder="Dosis..."></td>
-            <td><input type="text" name="medications[${medIndex}][administration_route]" class="paper-input text-center" placeholder="Rute..."></td>
+            <td><input type="text" name="medications[${medIndex}][administration_route]" list="routes_list" class="paper-input text-center" placeholder="Rute..."></td>
             <td><input type="text" name="medications[${medIndex}][speed]" class="paper-input text-center" placeholder="Kecepatan..."></td>
             <td><input type="text" name="medications[${medIndex}][pressure]" class="paper-input text-center" placeholder="Tekanan..."></td>
             <td><input type="text" data-clocklet="format: HH:mm" name="medications[${medIndex}][administered_at]" class="paper-input text-center"></td>
@@ -1269,6 +1269,12 @@
     <datalist id="doses_list">
         @foreach($doses as $dose)
             <option value="{{ $dose }}"></option>
+        @endforeach
+    </datalist>
+
+    <datalist id="routes_list">
+        @foreach($routes as $route)
+            <option value="{{ $route }}"></option>
         @endforeach
     </datalist>
 @endsection
