@@ -55,7 +55,9 @@ class PersetujuanTindakanMedisController extends Controller
     {
         $persetujuan = \App\Models\PersetujuanTindakanMedis::findOrFail($id);
         $patients = \App\Models\Patient::all();
-        return view('persetujuan_tindakan.edit', compact('persetujuan', 'patients'));
+        $doctors = \App\Models\User::where('role', 'dokter')->get();
+        $patient = $persetujuan->patient;
+        return view('persetujuan_tindakan.edit', compact('persetujuan', 'patients', 'doctors', 'patient'));
     }
 
     public function update(Request $request, $id)

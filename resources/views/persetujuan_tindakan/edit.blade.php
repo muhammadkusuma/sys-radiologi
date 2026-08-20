@@ -18,7 +18,7 @@
                 </a>
 
                 <h1 class="text-xl font-bold text-slate-900">
-                    Isi Form Persetujuan Medis
+                    Edit Form Persetujuan Medis
                 </h1>
             </div>
 
@@ -50,8 +50,9 @@
         @endif
 
         {{-- Form --}}
-        <form method="POST" action="{{ route('persetujuan-tindakan.store') }}">
+        <form method="POST" action="{{ route('persetujuan-tindakan.update', $persetujuan->id) }}">
             @csrf
+            @method('PUT')
 
             <div class="overflow-hidden rounded-lg border border-gray-300 bg-white shadow-sm">
 
@@ -79,6 +80,12 @@
                     <tbody>
 
                         {{-- ===================================================== --}}
+@if(request('mode') == 'patient')
+<input type="hidden" name="patient_id" value="{{ $persetujuan->patient_id }}">
+<input type="hidden" name="doctor" value="{{ $persetujuan->doctor }}">
+<input type="hidden" name="alternative_treatment" value="{{ $persetujuan->alternative_treatment }}">
+@endif
+
                         {{-- PASIEN --}}
                         {{-- ===================================================== --}}
                         <tr>
@@ -91,7 +98,7 @@
                                 </div>
                             </td>
                             <td class="w-2/3 border border-gray-300 px-4 py-3 align-middle" colspan="2">
-                                <select id="patient_id" name="patient_id" required
+                                <select id="patient_id" name="patient_id" required {{ request('mode') == 'patient' ? 'disabled' : '' }}
                                     class="w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm
                                     focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
                                     <option value="">-- Pilih Pasien --</option>
@@ -99,7 +106,7 @@
                                         <option value="{{ $p->id }}" data-name="{{ $p->name }}"
                                             data-rm="{{ $p->medical_record_number }}" data-dob="{{ $p->date_of_birth?->format('d/m/Y') }}"
                                             data-jk="{{ $p->gender }}"
-                                            {{ isset($patient) && $patient->id == $p->id ? 'selected' : '' }}>
+                                            {{ $persetujuan->patient_id == $p->id ? 'selected' : '' }}>
                                             {{ $p->name }} (RM: {{ $p->medical_record_number }})
                                         </option>
                                     @endforeach
@@ -123,7 +130,7 @@
 
                             <td class="w-2/3 border border-gray-300 px-4 py-3 align-middle" colspan="2">
 
-                                <select id="doctor" name="doctor"
+                                <select id="doctor" name="doctor" {{ request('mode') == 'patient' ? 'disabled' : '' }}
                                     class="w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm
                                     focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
 
@@ -132,7 +139,7 @@
                                     </option>
 
                                     @foreach ($doctors as $doctor)
-                                        <option value="{{ $doctor->id }}" data-signature="{{ $doctor->signature }}" @selected(old('doctor') == $doctor->id)>
+                                        <option value="{{ $doctor->id }}" data-signature="{{ $doctor->signature }}" @selected($persetujuan->doctor == $doctor->id)>
                                             {{ $doctor->name }}
                                         </option>
                                     @endforeach
@@ -159,7 +166,7 @@
 
                             <td class="w-2/3 border border-gray-300 px-4 py-3 align-middle" colspan="2">
 
-                                <input type="text" name="recipient_name" value="{{ old('recipient_name') }}"
+                                <input type="text" name="recipient_name" value="{{ $persetujuan->recipient_name }}"
                                     placeholder="Masukkan nama penerima informasi"
                                     class="w-full rounded-md border border-gray-300 px-3 py-2 text-sm
                                     focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
@@ -194,27 +201,27 @@
                                         Pilih Hubungan
                                     </option>
 
-                                    <option value="pasien" @selected(old('relationship') === 'pasien')}>
+                                    <option value="pasien" @selected($persetujuan->relationship === 'pasien')}>
                                         Pasien / Patient
                                     </option>
 
-                                    <option value="suami" @selected(old('relationship') === 'suami')}>
+                                    <option value="suami" @selected($persetujuan->relationship === 'suami')}>
                                         Suami / Husband
                                     </option>
 
-                                    <option value="istri" @selected(old('relationship') === 'istri')}>
+                                    <option value="istri" @selected($persetujuan->relationship === 'istri')}>
                                         Istri / Wife
                                     </option>
 
-                                    <option value="ayah" @selected(old('relationship') === 'ayah')}>
+                                    <option value="ayah" @selected($persetujuan->relationship === 'ayah')}>
                                         Ayah / Father
                                     </option>
 
-                                    <option value="ibu" @selected(old('relationship') === 'ibu')}>
+                                    <option value="ibu" @selected($persetujuan->relationship === 'ibu')}>
                                         Ibu / Mother
                                     </option>
 
-                                    <option value="lainnya" @selected(old('relationship') === 'lainnya')}>
+                                    <option value="lainnya" @selected($persetujuan->relationship === 'lainnya')}>
                                         Lainnya / Other
                                     </option>
 
@@ -223,7 +230,7 @@
 
                                 {{-- Input hubungan lainnya --}}
                                 <div id="otherRelationship"
-                                    class="{{ old('relationship') === 'lainnya' ? '' : 'hidden' }} mt-3">
+                                    class="{{ $persetujuan->relationship === 'lainnya' ? '' : 'hidden' }} mt-3">
 
                                     <label for="other_relationship" class="mb-1 block text-sm font-medium text-gray-700">
 
@@ -235,7 +242,7 @@
                                     </label>
 
                                     <input type="text" id="other_relationship" name="other_relationship"
-                                        value="{{ old('other_relationship') }}"
+                                        value="{{ $persetujuan->other_relationship }}"
                                         placeholder="Tuliskan hubungan dengan pasien..."
                                         class="w-full rounded-md border border-gray-300 px-3 py-2 text-sm
                                         focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
@@ -327,9 +334,9 @@
                             {{-- KOLOM 2 --}}
                             <td class="border border-gray-300 px-4 py-4 align-top">
 
-                                <textarea name="diagnosis" rows="4" placeholder="Tuliskan diagnosis kerja dan diagnosis banding..."
+                                <textarea name="diagnosis" rows="4" placeholder="Tuliskan diagnosis kerja dan diagnosis banding..." {{ request('mode') == 'patient' ? 'readonly' : '' }}
                                     class="w-full rounded-md border border-gray-300 px-3 py-2 text-sm
-                                    focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500">{{ old('diagnosis') }}</textarea>
+                                    focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500">{{ $persetujuan->diagnosis }}</textarea>
 
                             </td>
 
@@ -373,9 +380,9 @@
                             {{-- KOLOM 2 --}}
                             <td class="border border-gray-300 px-4 py-4 align-top">
 
-                                <textarea name="planned_procedure" rows="4" placeholder="Tuliskan kondisi pasien saat ini..."
+                                <textarea name="planned_procedure" rows="4" placeholder="Tuliskan kondisi pasien saat ini..." {{ request('mode') == 'patient' ? 'readonly' : '' }}
                                     class="w-full rounded-md border border-gray-300 px-3 py-2 text-sm
-                                    focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500">{{ old('planned_procedure') }}</textarea>
+                                    focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500">{{ $persetujuan->planned_procedure }}</textarea>
 
                             </td>
 
@@ -618,7 +625,7 @@
                                 <label class="flex cursor-pointer items-start gap-3">
 
                                     <input type="radio" name="alternative_treatment" value="none"
-                                        {{ old('alternative_treatment') == 'none' ? 'checked' : '' }}
+                                        {{ $persetujuan->alternative_treatment == 'none' ? 'checked' : '' }} {{ request('mode') == 'patient' ? 'disabled' : '' }}
                                         class="h-5 w-5 border-gray-300 text-blue-600 focus:ring-blue-500" />
 
                                     <div class=leading-[1.25]">
@@ -633,7 +640,7 @@
                                 <label class="mt-4 flex cursor-pointer items-start gap-3">
 
                                     <input type="radio" name="alternative_treatment" value="yes"
-                                        {{ old('alternative_treatment') == 'yes' ? 'checked' : '' }}
+                                        {{ $persetujuan->alternative_treatment == 'yes' ? 'checked' : '' }} {{ request('mode') == 'patient' ? 'disabled' : '' }}
                                         class="h-5 w-5 border-gray-300 text-blue-600 focus:ring-blue-500"
                                         onclick="toggleAlternativeInput(true)" />
 
@@ -644,7 +651,7 @@
 
                                             <input type="text" name="alternative_treatment_detail"
                                                 id="alternative_treatment_detail"
-                                                value="{{ old('alternative_treatment_detail') }}" maxlength="255"
+                                                value="{{ $persetujuan->alternative_treatment_detail }}" {{ request('mode') == 'patient' ? 'readonly' : '' }} maxlength="255"
                                                 class="w-full max-w-[300px] border-0 border-b border-black
                                bg-transparent px-1 py-0
                                focus:border-blue-500 focus:outline-none focus:ring-0"
@@ -840,7 +847,7 @@
                                 <label class="flex cursor-pointer items-start gap-3">
 
                                     <input type="radio" name="alternative_treatment" value="none"
-                                        {{ old('alternative_treatment') == 'none' ? 'checked' : '' }}
+                                        {{ $persetujuan->alternative_treatment == 'none' ? 'checked' : '' }} {{ request('mode') == 'patient' ? 'disabled' : '' }}
                                         class="h-5 w-5 border-gray-300 text-blue-600 focus:ring-blue-500" />
 
                                     <div class=leading-[1.25]">
@@ -855,7 +862,7 @@
                                 <label class="mt-4 flex cursor-pointer items-start gap-3">
 
                                     <input type="radio" name="alternative_treatment" value="yes"
-                                        {{ old('alternative_treatment') == 'yes' ? 'checked' : '' }}
+                                        {{ $persetujuan->alternative_treatment == 'yes' ? 'checked' : '' }} {{ request('mode') == 'patient' ? 'disabled' : '' }}
                                         class="h-5 w-5 border-gray-300 text-blue-600 focus:ring-blue-500"
                                         onclick="toggleAlternativeInput(true)" />
 
@@ -866,7 +873,7 @@
 
                                             <input type="text" name="alternative_treatment_detail"
                                                 id="alternative_treatment_detail"
-                                                value="{{ old('alternative_treatment_detail') }}" maxlength="255"
+                                                value="{{ $persetujuan->alternative_treatment_detail }}" {{ request('mode') == 'patient' ? 'readonly' : '' }} maxlength="255"
                                                 class="w-full max-w-[300px] border-0 border-b border-black
                                bg-transparent px-1 py-0
                                focus:border-blue-500 focus:outline-none focus:ring-0"
@@ -961,7 +968,7 @@
                                 <label class="flex cursor-pointer items-start gap-3">
 
                                     <input type="radio" name="alternative_treatment" value="none"
-                                        {{ old('alternative_treatment') == 'none' ? 'checked' : '' }}
+                                        {{ $persetujuan->alternative_treatment == 'none' ? 'checked' : '' }} {{ request('mode') == 'patient' ? 'disabled' : '' }}
                                         class="h-5 w-5 border-gray-300 text-blue-600 focus:ring-blue-500" />
 
                                     <div class=leading-[1.25]">
@@ -976,7 +983,7 @@
                                 <label class="mt-4 flex cursor-pointer items-start gap-3">
 
                                     <input type="radio" name="alternative_treatment" value="yes"
-                                        {{ old('alternative_treatment') == 'yes' ? 'checked' : '' }}
+                                        {{ $persetujuan->alternative_treatment == 'yes' ? 'checked' : '' }} {{ request('mode') == 'patient' ? 'disabled' : '' }}
                                         class="h-5 w-5 border-gray-300 text-blue-600 focus:ring-blue-500"
                                         onclick="toggleAlternativeInput(true)" />
 
@@ -987,7 +994,7 @@
 
                                             <input type="text" name="alternative_treatment_detail"
                                                 id="alternative_treatment_detail"
-                                                value="{{ old('alternative_treatment_detail') }}" maxlength="255"
+                                                value="{{ $persetujuan->alternative_treatment_detail }}" {{ request('mode') == 'patient' ? 'readonly' : '' }} maxlength="255"
                                                 class="w-full max-w-[300px] border-0 border-b border-black
                                bg-transparent px-1 py-0
                                focus:border-blue-500 focus:outline-none focus:ring-0"
@@ -1331,7 +1338,7 @@
 
                         {{-- checkbox 1 --}}
                         <label class="flex items-start">
-                            <input type="checkbox" name="check_received_info"
+                            <input type="checkbox" name="check_received_info" {{ $persetujuan->check_received_info ? 'checked' : '' }}
                                 class="mt-1 h-5 w-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500" required>
                             <div class="ml-2 flex flex-col">
                                 <span class="text-slate-900">Saya mengakui telah menerima informasi penjelasan mengenai
@@ -1343,7 +1350,7 @@
 
                         {{-- checkbox 2 --}}
                         <label class="flex items-start">
-                            <input type="checkbox" name="check_understand_necessity"
+                            <input type="checkbox" name="check_understand_necessity" {{ $persetujuan->check_understand_necessity ? 'checked' : '' }}
                                 class="mt-1 h-5 w-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500" required>
                             <div class="ml-2 flex flex-col">
                                 <span class="text-slate-900">Saya memahami perlunya dan manfaat tindakan tersebut
@@ -1357,7 +1364,7 @@
 
                         {{-- checkbox 3 --}}
                         <label class="flex items-start">
-                            <input type="checkbox" name="check_given_opportunity"
+                            <input type="checkbox" name="check_given_opportunity" {{ $persetujuan->check_given_opportunity ? 'checked' : '' }}
                                 class="mt-1 h-5 w-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500" required>
                             <div class="ml-2 flex flex-col">
                                 <span class="text-slate-900">Saya mengakui bahwa saya telah diberikan kesempatan untuk
@@ -1369,7 +1376,7 @@
 
                         {{-- checkbox 4 --}}
                         <label class="flex items-start">
-                            <input type="checkbox" name="check_realize_no_guarantee"
+                            <input type="checkbox" name="check_realize_no_guarantee" {{ $persetujuan->check_realize_no_guarantee ? 'checked' : '' }}
                                 class="mt-1 h-5 w-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500" required>
                             <div class="ml-2 flex flex-col">
                                 <span class="text-slate-900">Saya juga menyadari tidak ada jaminan yang diberikan bahwa
@@ -1382,7 +1389,7 @@
 
                         {{-- checkbox 5 --}}
                         <label class="flex items-start">
-                            <input type="checkbox" name="check_realize_not_exact_science"
+                            <input type="checkbox" name="check_realize_not_exact_science" {{ $persetujuan->check_realize_not_exact_science ? 'checked' : '' }}
                                 class="mt-1 h-5 w-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500" required>
                             <div class="ml-2 flex flex-col">
                                 <span class="text-slate-900">Saya juga menyadari bahwa oleh karena ilmu kedokteran bukanlah
@@ -1694,6 +1701,40 @@
             if (doctorSelect && doctorSelect.value) {
                 doctorSelect.dispatchEvent(new Event('change'));
             }
+
+            // Preload signatures
+            const signatures = @json($persetujuan->signature ?? []);
+            if(signatures && signatures.length > 0) {
+                const inputs = document.querySelectorAll('.signature-input');
+                const canvases = document.querySelectorAll('.signature-pad');
+                
+                inputs.forEach((input, index) => {
+                    if (signatures[index]) {
+                        input.value = signatures[index];
+                        const canvas = canvases[index];
+                        if (canvas) {
+                            const ctx = canvas.getContext('2d');
+                            const img = new Image();
+                            img.onload = function() {
+                                const hRatio = canvas.width / img.width;
+                                const vRatio = canvas.height / img.height;
+                                const ratio  = Math.min(hRatio, vRatio);
+                                const centerShift_x = (canvas.width - img.width*ratio) / 2;
+                                const centerShift_y = (canvas.height - img.height*ratio) / 2;
+                                ctx.drawImage(img, 0,0, img.width, img.height, centerShift_x, centerShift_y, img.width*ratio, img.height*ratio);
+                                
+                                // Hide clear button if it's the doctor's signature
+                                if (index === 0) {
+                                    const clearBtn = document.getElementById('doctor_signature_clear_btn');
+                                    if(clearBtn) clearBtn.style.display = 'none';
+                                }
+                            }
+                            img.src = signatures[index];
+                        }
+                    }
+                });
+            }
+
         });
     </script>
 @endsection

@@ -37,7 +37,10 @@
                                 <td class="py-3 px-4">{{ $item->planned_procedure }}</td>
                                 <td class="py-3 px-4">{{ $item->created_at->format('d M Y H:i') }}</td>
                                 <td class="py-3 px-4 text-center">
-                                    <a href="#" class="text-blue-600 hover:text-blue-800">Detail</a>
+                                    <div class="flex items-center justify-center gap-3">
+                                        <a href="{{ route('persetujuan-tindakan.edit', $item->id) }}" class="text-blue-600 hover:text-blue-800">Edit</a>
+                                        <a href="{{ route('persetujuan-tindakan.edit', ['persetujuan_tindakan' => $item->id, 'mode' => 'patient']) }}" class="text-green-600 hover:text-green-800">Isi Pasien</a>
+                                    </div>
                                 </td>
                             </tr>
                         @empty
