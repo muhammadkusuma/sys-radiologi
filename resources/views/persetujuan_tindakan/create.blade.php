@@ -50,7 +50,7 @@
         @endif
 
         {{-- Form --}}
-        <form method="POST" action="">
+        <form method="POST" action="{{ route('persetujuan-tindakan.store') }}">
             @csrf
 
             <div class="overflow-hidden rounded-lg border border-gray-300 bg-white shadow-sm">
