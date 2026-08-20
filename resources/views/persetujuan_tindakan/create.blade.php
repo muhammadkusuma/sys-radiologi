@@ -1591,16 +1591,33 @@
                 container.querySelector('.signature-input').value = '';
             };
 
-            const relationship = document.getElementById('wali_hubungan');
-            const otherInput = document.getElementById('wali_hubungan_lainnya');
+            const waliRelationship = document.getElementById('wali_hubungan');
+            const waliOtherInput = document.getElementById('wali_hubungan_lainnya');
 
-            if (relationship && otherInput) {
+            if (waliRelationship && waliOtherInput) {
+                waliRelationship.addEventListener('change', function() {
+                    if (this.value === 'lainnya') {
+                        waliOtherInput.classList.remove('hidden');
+                        waliOtherInput.required = true;
+                    } else {
+                        waliOtherInput.classList.add('hidden');
+                        waliOtherInput.required = false;
+                        waliOtherInput.value = '';
+                    }
+                });
+            }
+
+            const relationship = document.getElementById('relationship');
+            const otherRelationshipDiv = document.getElementById('otherRelationship');
+            const otherInput = document.getElementById('other_relationship');
+
+            if (relationship && otherRelationshipDiv && otherInput) {
                 relationship.addEventListener('change', function() {
                     if (this.value === 'lainnya') {
-                        otherInput.classList.remove('hidden');
+                        otherRelationshipDiv.classList.remove('hidden');
                         otherInput.required = true;
                     } else {
-                        otherInput.classList.add('hidden');
+                        otherRelationshipDiv.classList.add('hidden');
                         otherInput.required = false;
                         otherInput.value = '';
                     }
@@ -1665,6 +1682,9 @@
             }
 
             // Initial trigger if there is a preset value
+            if (waliRelationship && waliRelationship.value === 'lainnya') {
+                waliRelationship.dispatchEvent(new Event('change'));
+            }
             if (relationship && relationship.value === 'lainnya') {
                 relationship.dispatchEvent(new Event('change'));
             }
