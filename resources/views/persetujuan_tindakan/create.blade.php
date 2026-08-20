@@ -132,7 +132,7 @@
                                     </option>
 
                                     @foreach ($doctors as $doctor)
-                                        <option value="{{ $doctor->id }}" @selected(old('doctor') == $doctor->id)>
+                                        <option value="{{ $doctor->id }}" data-signature="{{ $doctor->signature }}" @selected(old('doctor') == $doctor->id)>
                                             {{ $doctor->name }}
                                         </option>
                                     @endforeach
@@ -1109,13 +1109,12 @@
                                     class="mt-3 flex h-24 w-full cursor-crosshair items-center justify-center rounded-md border border-dashed border-gray-400 bg-gray-50">
 
                                     <div class="relative w-full h-full flex items-center justify-center">
-                                        <canvas
-                                            class="signature-pad w-full h-full bg-transparent absolute top-0 left-0"></canvas>
+                                        <canvas id="doctor_signature_canvas" class="signature-pad w-full h-full bg-transparent absolute top-0 left-0"></canvas>
                                         <span class="text-sm text-gray-400 pointer-events-none">Area Tanda Tangan</span>
-                                        <button type="button"
+                                        <button type="button" id="doctor_signature_clear_btn"
                                             class="absolute top-1 right-1 text-[10px] text-gray-500 hover:text-red-500 bg-white border rounded px-1"
                                             onclick="clearSignature(this)">Clear</button>
-                                        <input type="hidden" name="signature[]" class="signature-input">
+                                        <input type="hidden" name="signature[]" id="doctor_signature_input" class="signature-input">
                                     </div>
 
                                 </div>
@@ -1630,12 +1629,50 @@
                 });
             }
 
+            const doctorSelect = document.getElementById('doctor');
+            if(doctorSelect) {
+                doctorSelect.addEventListener('change', function() {
+                    const selected = this.options[this.selectedIndex];
+                    const signatureData = selected.value ? selected.getAttribute('data-signature') : null;
+                    const canvas = document.getElementById('doctor_signature_canvas');
+                    const input = document.getElementById('doctor_signature_input');
+                    
+                    if(canvas && input) {
+                        const ctx = canvas.getContext('2d');
+                        ctx.clearRect(0, 0, canvas.width, canvas.height);
+                        input.value = '';
+                        const clearBtn = document.getElementById('doctor_signature_clear_btn');
+                        
+                        if(signatureData && signatureData !== '') {
+                            const img = new Image();
+                            img.onload = function() {
+                                // Draw centered and scaled to fit if necessary
+                                const hRatio = canvas.width / img.width;
+                                const vRatio = canvas.height / img.height;
+                                const ratio  = Math.min(hRatio, vRatio);
+                                const centerShift_x = (canvas.width - img.width*ratio) / 2;
+                                const centerShift_y = (canvas.height - img.height*ratio) / 2;
+                                ctx.drawImage(img, 0,0, img.width, img.height, centerShift_x, centerShift_y, img.width*ratio, img.height*ratio);
+                                input.value = signatureData;
+                                if(clearBtn) clearBtn.style.display = 'none';
+                            }
+                            img.src = signatureData;
+                        } else {
+                            if(clearBtn) clearBtn.style.display = 'block';
+                        }
+                    }
+                });
+            }
+
             // Initial trigger if there is a preset value
             if (relationship && relationship.value === 'lainnya') {
                 relationship.dispatchEvent(new Event('change'));
             }
             if (patientSelect && patientSelect.value) {
                 patientSelect.dispatchEvent(new Event('change'));
+            }
+            if (doctorSelect && doctorSelect.value) {
+                doctorSelect.dispatchEvent(new Event('change'));
             }
         });
     </script>
