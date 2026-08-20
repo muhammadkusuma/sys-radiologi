@@ -3,6 +3,7 @@
 @section('title', 'Persetujuan Medis')
 
 @section('styles')
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/dmuy/MDTimePicker@v2.0.0/dist/mdtimepicker.css">
 @endsection
 
 @section('content')
@@ -309,11 +310,10 @@
 
                                 <div class="flex min-h-[80px] items-center justify-center">
 
+
                                     {{-- input checkbox untuk paraf penerima informasi --}}
-                                    <input type="checkbox" name="diagnosis_initial" value="{{ old('diagnosis_initial') }}"
-                                        placeholder="Paraf" maxlength="10"
-                                        class="w-24 rounded-md border border-gray-300 px-3 py-2 text-center text-sm
-                                        focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                    <input type="checkbox" name="diagnosis_initial" value="1"
+                                        class="h-5 w-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500">
 
                                 </div>
 
@@ -355,10 +355,8 @@
                             <td class="border border-gray-300 px-4 py-4 text-center align-middle">
 
                                 {{-- input checkbox untuk paraf penerima informasi --}}
-                                <input type="checkbox" name="diagnosis_initial" value="{{ old('diagnosis_initial') }}"
-                                    placeholder="Paraf" maxlength="10"
-                                    class="w-24 rounded-md border border-gray-300 px-3 py-2 text-center text-sm
-                                        focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <input type="checkbox" name="diagnosis_initial" value="1"
+                                    class="h-5 w-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500">
 
                             </td>
 
@@ -401,10 +399,8 @@
                             <td class="border border-gray-300 px-4 py-4 text-center align-middle">
 
                                 {{-- input checkbox untuk paraf penerima informasi --}}
-                                <input type="checkbox" name="diagnosis_initial" value="{{ old('diagnosis_initial') }}"
-                                    placeholder="Paraf" maxlength="10"
-                                    class="w-24 rounded-md border border-gray-300 px-3 py-2 text-center text-sm
-                                        focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <input type="checkbox" name="diagnosis_initial" value="1"
+                                    class="h-5 w-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500">
 
                             </td>
 
@@ -452,10 +448,8 @@
                             <td class="border border-gray-300 px-4 py-4 text-center align-middle">
 
                                 {{-- input checkbox untuk paraf penerima informasi --}}
-                                <input type="checkbox" name="diagnosis_initial" value="{{ old('diagnosis_initial') }}"
-                                    placeholder="Paraf" maxlength="10"
-                                    class="w-24 rounded-md border border-gray-300 px-3 py-2 text-center text-sm
-                                        focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <input type="checkbox" name="diagnosis_initial" value="1"
+                                    class="h-5 w-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500">
 
                             </td>
 
@@ -513,10 +507,8 @@
                             <td class="border border-gray-300 px-4 py-4 text-center align-middle">
 
                                 {{-- input checkbox untuk paraf penerima informasi --}}
-                                <input type="checkbox" name="diagnosis_initial" value="{{ old('diagnosis_initial') }}"
-                                    placeholder="Paraf" maxlength="10"
-                                    class="w-24 rounded-md border border-gray-300 px-3 py-2 text-center text-sm
-                                        focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <input type="checkbox" name="diagnosis_initial" value="1"
+                                    class="h-5 w-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500">
 
                             </td>
 
@@ -560,10 +552,8 @@
                             <td class="border border-gray-300 px-4 py-4 text-center align-middle">
 
                                 {{-- input checkbox untuk paraf penerima informasi --}}
-                                <input type="checkbox" name="diagnosis_initial" value="{{ old('diagnosis_initial') }}"
-                                    placeholder="Paraf" maxlength="10"
-                                    class="w-24 rounded-md border border-gray-300 px-3 py-2 text-center text-sm
-                                        focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <input type="checkbox" name="diagnosis_initial" value="1"
+                                    class="h-5 w-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500">
 
                             </td>
 
@@ -600,8 +590,7 @@
 
                                     <input type="radio" name="alternative_treatment" value="none"
                                         {{ old('alternative_treatment') == 'none' ? 'checked' : '' }}
-                                        class="mt-1 shrink-0 border-gray-500 text-blue-600
-                       focus:ring-2 focus:ring-blue-500" />
+                                        class="h-5 w-5 border-gray-300 text-blue-600 focus:ring-blue-500" />
 
                                     <div class=leading-[1.25]">
                                         <div>Tidak ada</div>
@@ -616,8 +605,7 @@
 
                                     <input type="radio" name="alternative_treatment" value="yes"
                                         {{ old('alternative_treatment') == 'yes' ? 'checked' : '' }}
-                                        class="mt-1 h-[18px] w-[18px] shrink-0 border-gray-500 text-blue-600
-                       focus:ring-2 focus:ring-blue-500"
+                                        class="h-5 w-5 border-gray-300 text-blue-600 focus:ring-blue-500"
                                         onclick="toggleAlternativeInput(true)" />
 
                                     <div class="flex-1 leading-[1.25]">
@@ -702,10 +690,8 @@
 
                                 {{-- PARAF PENERIMA INFORMASI --}}
                                 {{-- input checkbox untuk paraf penerima informasi --}}
-                                <input type="checkbox" name="diagnosis_initial" value="{{ old('diagnosis_initial') }}"
-                                    placeholder="Paraf" maxlength="10"
-                                    class="w-24 rounded-md border border-gray-300 px-3 py-2 text-center text-sm
-                                        focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <input type="checkbox" name="diagnosis_initial" value="1"
+                                    class="h-5 w-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500">
 
                             </td>
 
@@ -744,10 +730,8 @@
                             <td class="border border-gray-300 px-4 py-4 text-center align-middle">
 
                                 {{-- input checkbox untuk paraf penerima informasi --}}
-                                <input type="checkbox" name="diagnosis_initial" value="{{ old('diagnosis_initial') }}"
-                                    placeholder="Paraf" maxlength="10"
-                                    class="w-24 rounded-md border border-gray-300 px-3 py-2 text-center text-sm
-                                        focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <input type="checkbox" name="diagnosis_initial" value="1"
+                                    class="h-5 w-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500">
 
                             </td>
 
@@ -786,10 +770,8 @@
                             <td class="border border-gray-300 px-4 py-4 text-center align-middle">
 
                                 {{-- input checkbox untuk paraf penerima informasi --}}
-                                <input type="checkbox" name="diagnosis_initial" value="{{ old('diagnosis_initial') }}"
-                                    placeholder="Paraf" maxlength="10"
-                                    class="w-24 rounded-md border border-gray-300 px-3 py-2 text-center text-sm
-                                        focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <input type="checkbox" name="diagnosis_initial" value="1"
+                                    class="h-5 w-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500">
 
                             </td>
 
@@ -830,8 +812,7 @@
 
                                     <input type="radio" name="alternative_treatment" value="none"
                                         {{ old('alternative_treatment') == 'none' ? 'checked' : '' }}
-                                        class="mt-1 shrink-0 border-gray-500 text-blue-600
-                       focus:ring-2 focus:ring-blue-500" />
+                                        class="h-5 w-5 border-gray-300 text-blue-600 focus:ring-blue-500" />
 
                                     <div class=leading-[1.25]">
                                         <div>Tidak ada</div>
@@ -846,8 +827,7 @@
 
                                     <input type="radio" name="alternative_treatment" value="yes"
                                         {{ old('alternative_treatment') == 'yes' ? 'checked' : '' }}
-                                        class="mt-1 h-[18px] w-[18px] shrink-0 border-gray-500 text-blue-600
-                       focus:ring-2 focus:ring-blue-500"
+                                        class="h-5 w-5 border-gray-300 text-blue-600 focus:ring-blue-500"
                                         onclick="toggleAlternativeInput(true)" />
 
                                     <div class="flex-1 leading-[1.25]">
@@ -914,10 +894,8 @@
 
                                 {{-- PARAF PENERIMA INFORMASI --}}
                                 {{-- input checkbox untuk paraf penerima informasi --}}
-                                <input type="checkbox" name="diagnosis_initial" value="{{ old('diagnosis_initial') }}"
-                                    placeholder="Paraf" maxlength="10"
-                                    class="w-24 rounded-md border border-gray-300 px-3 py-2 text-center text-sm
-                                        focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <input type="checkbox" name="diagnosis_initial" value="1"
+                                    class="h-5 w-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500">
 
                             </td>
 
@@ -955,8 +933,7 @@
 
                                     <input type="radio" name="alternative_treatment" value="none"
                                         {{ old('alternative_treatment') == 'none' ? 'checked' : '' }}
-                                        class="mt-1 shrink-0 border-gray-500 text-blue-600
-                       focus:ring-2 focus:ring-blue-500" />
+                                        class="h-5 w-5 border-gray-300 text-blue-600 focus:ring-blue-500" />
 
                                     <div class=leading-[1.25]">
                                         <div>Tidak dirawat inap</div>
@@ -971,8 +948,7 @@
 
                                     <input type="radio" name="alternative_treatment" value="yes"
                                         {{ old('alternative_treatment') == 'yes' ? 'checked' : '' }}
-                                        class="mt-1 shrink-0 border-gray-500 text-blue-600
-                       focus:ring-2 focus:ring-blue-500"
+                                        class="h-5 w-5 border-gray-300 text-blue-600 focus:ring-blue-500"
                                         onclick="toggleAlternativeInput(true)" />
 
                                     <div class="flex-1 leading-[1.25]">
@@ -1008,10 +984,8 @@
 
                                 {{-- PARAF PENERIMA INFORMASI --}}
                                 {{-- input checkbox untuk paraf penerima informasi --}}
-                                <input type="checkbox" name="diagnosis_initial" value="{{ old('diagnosis_initial') }}"
-                                    placeholder="Paraf" maxlength="10"
-                                    class="w-24 rounded-md border border-gray-300 px-3 py-2 text-center text-sm
-                                        focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <input type="checkbox" name="diagnosis_initial" value="1"
+                                    class="h-5 w-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500">
 
                             </td>
 
@@ -1043,17 +1017,15 @@
                                 <p>Sesuai dengan obat dan alat yang digunakan serta jasa
                                     Petugas/Dokter.</p>
                                 <i>According to the medication, equipment used, and the services of
-                                    the staff/doctor./i>
+                                    the staff/doctor.</i>
                             </td>
 
 
                             {{-- KOLOM 3 --}}
                             <td class="border border-gray-300 px-4 py-4 text-center align-middle">
 
-                                <input type="checkbox" name="diagnosis_initial" value="{{ old('diagnosis_initial') }}"
-                                    placeholder="Paraf" maxlength="10"
-                                    class="w-24 rounded-md border border-gray-300 px-3 py-2 text-center text-sm
-                                        focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <input type="checkbox" name="diagnosis_initial" value="1"
+                                    class="h-5 w-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500">
 
                             </td>
 
@@ -1103,6 +1075,21 @@
                                 <div class="mt-1 text-sm italic leading-tight">
                                     Doctor's Signature
                                 </div>
+
+                                <div
+                                    class="mt-3 flex h-24 w-full cursor-crosshair items-center justify-center rounded-md border border-dashed border-gray-400 bg-gray-50">
+
+                                    <div class="relative w-full h-full flex items-center justify-center">
+                                        <canvas
+                                            class="signature-pad w-full h-full bg-transparent absolute top-0 left-0"></canvas>
+                                        <span class="text-sm text-gray-400 pointer-events-none">Area Tanda Tangan</span>
+                                        <button type="button"
+                                            class="absolute top-1 right-1 text-[10px] text-gray-500 hover:text-red-500 bg-white border rounded px-1"
+                                            onclick="clearSignature(this)">Clear</button>
+                                        <input type="hidden" name="signature[]" class="signature-input">
+                                    </div>
+
+                                </div>
                             </td>
                         </tr>
 
@@ -1139,6 +1126,21 @@
                                 <div class="mt-1 text-sm italic leading-tight">
                                     Recipient's Signature:
                                 </div>
+
+                                <div
+                                    class="mt-3 flex h-24 w-full cursor-crosshair items-center justify-center rounded-md border border-dashed border-gray-400 bg-gray-50">
+
+                                    <div class="relative w-full h-full flex items-center justify-center">
+                                        <canvas
+                                            class="signature-pad w-full h-full bg-transparent absolute top-0 left-0"></canvas>
+                                        <span class="text-sm text-gray-400 pointer-events-none">Area Tanda Tangan</span>
+                                        <button type="button"
+                                            class="absolute top-1 right-1 text-[10px] text-gray-500 hover:text-red-500 bg-white border rounded px-1"
+                                            onclick="clearSignature(this)">Clear</button>
+                                        <input type="hidden" name="signature[]" class="signature-input">
+                                    </div>
+
+                                </div>
                             </td>
 
                         </tr>
@@ -1170,138 +1172,275 @@
                         <tbody>
                             <tr>
                                 <td class="w-1/3 border border-gray-300 bg-gray-50 px-4 py-3 align-top">
-                                    Nama
+                                    <div class="font-bold text-slate-900">Nama</div>
+                                    <div class="text-sm italic text-gray-600">Name</div>
                                 </td>
-                                <td class="w-1/3 border border-gray-300 bg-gray-50 px-4 py-3 align-top">
-
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td class="w-1/3 border border-gray-300 bg-gray-50 px-4 py-3 align-top">
-                                    Umur :
-                                </td>
-                                <td class="w-1/3 border border-gray-300 bg-gray-50 px-4 py-3 align-top">
-                                    .... tahun Jenis Kelamin
+                                <td class="w-2/3 border border-gray-300 px-4 py-3 align-top">
+                                    <input type="text" name="wali_nama"
+                                        class="w-full rounded-md border border-gray-300 px-3 py-1 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                                        placeholder="Masukkan nama">
                                 </td>
                             </tr>
 
                             <tr>
                                 <td class="w-1/3 border border-gray-300 bg-gray-50 px-4 py-3 align-top">
-                                    Alamat
+                                    <div class="font-bold text-slate-900">Umur</div>
+                                    <div class="text-sm italic text-gray-600">Age</div>
                                 </td>
-                                <td class="w-1/3 border border-gray-300 bg-gray-50 px-4 py-3 align-top">
-
+                                <td class="w-2/3 border border-gray-300 px-4 py-3 align-top">
+                                    <div class="flex items-center gap-4">
+                                        <div class="flex items-center gap-2">
+                                            <input type="number" name="wali_umur"
+                                                class="w-20 rounded-md border border-gray-300 px-3 py-1 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500">
+                                            <span>tahun <i class="text-gray-600">/ years</i></span>
+                                        </div>
+                                        <div class="flex items-center gap-2">
+                                            <span>Jenis Kelamin <i class="text-gray-600">/ Gender</i>:</span>
+                                            <select name="wali_jk"
+                                                class="rounded-md border border-gray-300 px-3 py-1 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500">
+                                                <option value="">Pilih... / Select...</option>
+                                                <option value="L">Laki-laki / Male</option>
+                                                <option value="P">Perempuan / Female</option>
+                                            </select>
+                                        </div>
+                                    </div>
                                 </td>
                             </tr>
 
+                            <tr>
+                                <td class="w-1/3 border border-gray-300 bg-gray-50 px-4 py-3 align-top">
+                                    <div class="font-bold text-slate-900">Alamat</div>
+                                    <div class="text-sm italic text-gray-600">Address</div>
+                                </td>
+                                <td class="w-2/3 border border-gray-300 px-4 py-3 align-top">
+                                    <textarea name="wali_alamat" rows="2"
+                                        class="w-full rounded-md border border-gray-300 px-3 py-1 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                                        placeholder="Masukkan alamat lengkap"></textarea>
+                                </td>
+                            </tr>
 
                             <tr>
                                 <td class="w-1/3 border border-gray-300 bg-gray-50 px-4 py-3 align-top">
-                                    No Kartu Identitas
+                                    <div class="font-bold text-slate-900">No Kartu Identitas</div>
+                                    <div class="text-sm italic text-gray-600">ID Card Number</div>
                                 </td>
-                                <td class="w-1/3 border border-gray-300 bg-gray-50 px-4 py-3 align-top">
-                                    ..... KTP/SIM/Pasport
+                                <td class="w-2/3 border border-gray-300 px-4 py-3 align-top">
+                                    <div class="flex items-center gap-2">
+                                        <select name="wali_jenis_identitas"
+                                            class="rounded-md border border-gray-300 px-3 py-1 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500">
+                                            <option value="KTP">KTP</option>
+                                            <option value="SIM">SIM</option>
+                                            <option value="Paspor">Paspor / Passport</option>
+                                        </select>
+                                        <input type="text" name="wali_identitas"
+                                            class="w-full rounded-md border border-gray-300 px-3 py-1 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                                            placeholder="Masukkan nomor identitas">
+                                    </div>
                                 </td>
                             </tr>
                         </tbody>
-
                     </table>
-
-
                 </div>
 
-                <div class="pt-3">
-                    <p>Hubungan dengan pasien: Diri sendiri/suami/istri/ayah/ibu/anak/ _________________________</p>
-                </div>
-                <div class="pt-3">
-                    <p>Dengan ini menyatakan _______________________________ untuk dilakukan tindakan atau pengobatan medis
-                        tersebut terhadap pasien:</p>
+                <div class="pt-4 flex items-center gap-2">
+                    <div class="flex flex-col">
+                        <p class="font-bold text-slate-900">Hubungan dengan pasien:</p>
+                        <i class="text-sm text-gray-600">Relationship to patient:</i>
+                    </div>
+                    <select id="wali_hubungan" name="wali_hubungan"
+                        class="rounded-md border border-gray-300 px-3 py-1 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                        onchange="document.getElementById('wali_hubungan_lainnya').classList.toggle('hidden', this.value !== 'lainnya')">
+                        <option value="">Pilih... / Select...</option>
+                        <option value="diri_sendiri">Diri sendiri / Self</option>
+                        <option value="suami">Suami / Husband</option>
+                        <option value="istri">Istri / Wife</option>
+                        <option value="ayah">Ayah / Father</option>
+                        <option value="ibu">Ibu / Mother</option>
+                        <option value="anak">Anak / Child</option>
+                        <option value="lainnya">Lainnya / Other</option>
+                    </select>
+                    <input type="text" id="wali_hubungan_lainnya" name="wali_hubungan_lainnya"
+                        class="hidden w-48 rounded-md border border-gray-300 px-3 py-1 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                        placeholder="Tuliskan hubungan...">
                 </div>
 
-                <div class="flex justify-center">
+                <div class="pt-4 flex items-center gap-2 flex-wrap">
+                    <div class="flex flex-col">
+                        <p class="font-bold text-slate-900">Dengan ini menyatakan</p>
+                        <i class="text-sm text-gray-600">Hereby states</i>
+                    </div>
+                    <select name="pernyataan_tindakan"
+                        class="rounded-md border border-gray-300 font-bold px-3 py-1 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500">
+                        <option value="SETUJU">SETUJU / AGREE</option>
+                        <option value="TIDAK SETUJU">TIDAK SETUJU / DISAGREE</option>
+                    </select>
+                    <div class="flex flex-col">
+                        <p class="font-bold text-slate-900">untuk dilakukan tindakan atau pengobatan medis tersebut
+                            terhadap pasien:</p>
+                        <i class="text-sm text-gray-600">for the medical procedure or treatment to be performed on the
+                            patient:</i>
+                    </div>
+                </div>
+
+                <div class="mt-4 flex justify-center">
                     <div class="inline-block w-fit border border-gray-300 px-3 py-2 text-left text-xs leading-5">
-                        Nama : <br>
-                        Tgl Lahir: <br>
-                        RM : JK : <br>
+                        Nama : {{ $patient->name ?? '.......................' }}<br>
+                        Tgl Lahir: {{ $patient->birth_date ?? '.......................' }}<br>
+                        RM : {{ $patient->medical_record_number ?? '.......' }} &nbsp; JK :
+                        {{ $patient->gender ?? '.......' }}<br>
                         <span class="font-semibold">*Tempel Stiker Pasien</span>
                     </div>
                 </div>
 
 
                 <div class="pt-3">
-                    <p>Dengan ini menyatakan: </p>
-                    <div class="ml-7">
+                    <p class="font-bold text-slate-900">Dengan ini menyatakan: </p>
+                    <i class="text-sm text-gray-600">Hereby states:</i>
+                    <div class="ml-7 mt-2 space-y-3">
 
-                        {{-- checkbox --}}
-                        <label class="flex items-center">
+                        {{-- checkbox 1 --}}
+                        <label class="flex items-start">
                             <input type="checkbox"
-                                class="form-checkbox h-4 w-4 text-blue-600 transition duration-150 ease-in-out" required>
-                            <span class="ml-2"> Saya mengakui telah menerima informasi penjelasan mengenai tindakan yang
-                                akan dilakukan.</span>
+                                class="mt-1 h-5 w-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                                required>
+                            <div class="ml-2 flex flex-col">
+                                <span class="text-slate-900">Saya mengakui telah menerima informasi penjelasan mengenai
+                                    tindakan yang akan dilakukan.</span>
+                                <i class="text-sm text-gray-600">I acknowledge that I have received an explanation
+                                    regarding the procedure to be performed.</i>
+                            </div>
                         </label>
 
-                        {{-- checkbox --}}
-                        <label class="flex items-center">
+                        {{-- checkbox 2 --}}
+                        <label class="flex items-start">
                             <input type="checkbox"
-                                class="form-checkbox h-4 w-4 text-blue-600 transition duration-150 ease-in-out" required>
-                            <span class="ml-2"> Saya memahami perlunya dan manfaat tindakan tersebut sebagaimana telah
-                                dijelaskan seperti sebelumnya kepada
-                                saya, termasuk risiko dan komplikasi yang mungkin timbul bila tindakan dilakukan atau tidak
-                                dilakukan.</span>
+                                class="mt-1 h-5 w-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                                required>
+                            <div class="ml-2 flex flex-col">
+                                <span class="text-slate-900">Saya memahami perlunya dan manfaat tindakan tersebut
+                                    sebagaimana telah dijelaskan seperti sebelumnya kepada saya, termasuk risiko dan
+                                    komplikasi yang mungkin timbul bila tindakan dilakukan atau tidak dilakukan.</span>
+                                <i class="text-sm text-gray-600">I understand the necessity and benefits of the procedure
+                                    as previously explained to me, including the risks and complications that may arise if
+                                    the procedure is performed or not performed.</i>
+                            </div>
                         </label>
 
-                        {{-- checkbox --}}
-                        <label class="flex items-center">
+                        {{-- checkbox 3 --}}
+                        <label class="flex items-start">
                             <input type="checkbox"
-                                class="form-checkbox h-4 w-4 text-blue-600 transition duration-150 ease-in-out" required>
-                            <span class="ml-2"> Saya mengakui bahwa saya telah diberikan kesempatan untuk bertanya
-                                informasi lebih banyak tentang prosedur ini. </span>
+                                class="mt-1 h-5 w-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                                required>
+                            <div class="ml-2 flex flex-col">
+                                <span class="text-slate-900">Saya mengakui bahwa saya telah diberikan kesempatan untuk
+                                    bertanya informasi lebih banyak tentang prosedur ini.</span>
+                                <i class="text-sm text-gray-600">I acknowledge that I have been given the opportunity to
+                                    ask for more information about this procedure.</i>
+                            </div>
                         </label>
 
-                        {{-- checkbox --}}
-                        <label class="flex items-center">
+                        {{-- checkbox 4 --}}
+                        <label class="flex items-start">
                             <input type="checkbox"
-                                class="form-checkbox h-4 w-4 text-blue-600 transition duration-150 ease-in-out" required>
-                            <span class="ml-2"> Saya juga menyadari tidak ada jaminan yang diberikan bahwa Dokter ataupun
-                                petugas yang melaksanakan tindakan
-                                dengan hasil yang sesuai dengan yang dijelaskan </span>
+                                class="mt-1 h-5 w-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                                required>
+                            <div class="ml-2 flex flex-col">
+                                <span class="text-slate-900">Saya juga menyadari tidak ada jaminan yang diberikan bahwa
+                                    Dokter ataupun petugas yang melaksanakan tindakan dengan hasil yang sesuai dengan yang
+                                    dijelaskan.</span>
+                                <i class="text-sm text-gray-600">I also realize that no guarantee is given that the Doctor
+                                    or the staff performing the procedure will achieve the results exactly as explained.</i>
+                            </div>
                         </label>
 
-                        {{-- checkbox --}}
-                        <label class="flex items-center">
+                        {{-- checkbox 5 --}}
+                        <label class="flex items-start">
                             <input type="checkbox"
-                                class="form-checkbox h-4 w-4 text-blue-600 transition duration-150 ease-in-out" required>
-                            <span class="ml-2"> Saya juga menyadari bahwa oleh karena ilmu kedokteran bukanlah ilmu
-                                pasti, maka keberhasilan tindakan
-                                kedokteran bukanlah keniscayaan, melainkan sangat bergantung kepada izin Tuhan Yang Maha
-                                Esa. </span>
+                                class="mt-1 h-5 w-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                                required>
+                            <div class="ml-2 flex flex-col">
+                                <span class="text-slate-900">Saya juga menyadari bahwa oleh karena ilmu kedokteran bukanlah
+                                    ilmu pasti, maka keberhasilan tindakan kedokteran bukanlah keniscayaan, melainkan sangat
+                                    bergantung kepada izin Tuhan Yang Maha Esa.</span>
+                                <i class="text-sm text-gray-600">I also realize that because medical science is not an
+                                    exact science, the success of a medical procedure is not a certainty, but highly depends
+                                    on the permission of God Almighty.</i>
+                            </div>
                         </label>
                     </div>
                 </div>
 
-                <div class="pt-3">
-                    Pekanbaru, Tanggal
-                    <br>
-                    Jam : ..... WIB
+                <div class="mt-6 flex flex-col gap-2">
+                    <div class="flex items-center gap-2">
+                        <span>Pekanbaru, Tanggal</span>
+                        <input type="date" name="tanggal_persetujuan"
+                            class="rounded-md border border-gray-300 px-3 py-1 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500">
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span>Jam :</span>
+                        <input type="text" name="jam_persetujuan"
+                            class="w-24 cursor-pointer rounded-md border border-gray-300 px-3 py-1 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                            placeholder="00:00" readonly>
+                        <span>WIB</span>
+                    </div>
                 </div>
 
-                <div class="row">
-                    <div class="col">Yang Menyatakan
+                <div class="mt-8 grid grid-cols-1 gap-6 md:grid-cols-3">
+                    <div class="text-center">
+                        <p class="mb-2 font-bold text-slate-900">Yang Menyatakan</p>
+                        <div
+                            class="mb-2 flex h-32 w-full cursor-crosshair items-center justify-center rounded-md border border-dashed border-gray-400 bg-gray-50">
 
-                        <br>
-                        {{-- input nama lengkap sama ttd --}}
+                            <div class="relative w-full h-full flex items-center justify-center">
+                                <canvas class="signature-pad w-full h-full bg-transparent absolute top-0 left-0"></canvas>
+                                <span class="text-sm text-gray-400 pointer-events-none">Area Tanda Tangan</span>
+                                <button type="button"
+                                    class="absolute top-1 right-1 text-[10px] text-gray-500 hover:text-red-500 bg-white border rounded px-1"
+                                    onclick="clearSignature(this)">Clear</button>
+                                <input type="hidden" name="signature[]" class="signature-input">
+                            </div>
+
+                        </div>
+                        <input type="text" name="yang_menyatakan_nama" placeholder="Nama Lengkap"
+                            class="w-full rounded-md border border-gray-300 px-3 py-2 text-center text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
                     </div>
-                     <div class="col">Saksi I
 
-                        <br>
-                        {{-- input nama lengkap sama ttd --}}
+                    <div class="text-center">
+                        <p class="mb-2 font-bold text-slate-900">Saksi I</p>
+                        <div
+                            class="mb-2 flex h-32 w-full cursor-crosshair items-center justify-center rounded-md border border-dashed border-gray-400 bg-gray-50">
+
+                            <div class="relative w-full h-full flex items-center justify-center">
+                                <canvas class="signature-pad w-full h-full bg-transparent absolute top-0 left-0"></canvas>
+                                <span class="text-sm text-gray-400 pointer-events-none">Area Tanda Tangan</span>
+                                <button type="button"
+                                    class="absolute top-1 right-1 text-[10px] text-gray-500 hover:text-red-500 bg-white border rounded px-1"
+                                    onclick="clearSignature(this)">Clear</button>
+                                <input type="hidden" name="signature[]" class="signature-input">
+                            </div>
+
+                        </div>
+                        <input type="text" name="saksi_1_nama" placeholder="Nama Lengkap"
+                            class="w-full rounded-md border border-gray-300 px-3 py-2 text-center text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
                     </div>
 
-                     <div class="col">Saksi II
+                    <div class="text-center">
+                        <p class="mb-2 font-bold text-slate-900">Saksi II</p>
+                        <div
+                            class="mb-2 flex h-32 w-full cursor-crosshair items-center justify-center rounded-md border border-dashed border-gray-400 bg-gray-50">
 
-                        <br>
-                        {{-- input nama lengkap sama ttd --}}
+                            <div class="relative w-full h-full flex items-center justify-center">
+                                <canvas class="signature-pad w-full h-full bg-transparent absolute top-0 left-0"></canvas>
+                                <span class="text-sm text-gray-400 pointer-events-none">Area Tanda Tangan</span>
+                                <button type="button"
+                                    class="absolute top-1 right-1 text-[10px] text-gray-500 hover:text-red-500 bg-white border rounded px-1"
+                                    onclick="clearSignature(this)">Clear</button>
+                                <input type="hidden" name="signature[]" class="signature-input">
+                            </div>
+
+                        </div>
+                        <input type="text" name="saksi_2_nama" placeholder="Nama Lengkap"
+                            class="w-full rounded-md border border-gray-300 px-3 py-2 text-center text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
                     </div>
                 </div>
 
@@ -1332,8 +1471,99 @@
 
 
 @section('scripts')
+    <script src="https://cdn.jsdelivr.net/gh/dmuy/MDTimePicker@v2.0.0/dist/mdtimepicker.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Analog 24-hour time picker
+            mdtimepicker('input[name="jam_persetujuan"]', {
+                is24hour: true,
+                format: 'hh:mm',
+                clearBtn: true
+            });
+            // Signature pad logic
+            const canvases = document.querySelectorAll('canvas.signature-pad');
+            canvases.forEach(canvas => {
+                const ctx = canvas.getContext('2d');
+                let isDrawing = false;
+
+                // Resize canvas correctly
+                function resizeCanvas() {
+                    const rect = canvas.parentElement.getBoundingClientRect();
+                    canvas.width = rect.width;
+                    canvas.height = rect.height;
+                }
+                window.addEventListener('resize', resizeCanvas);
+                resizeCanvas(); // initial sizing
+
+                function getCoordinates(e) {
+                    const rect = canvas.getBoundingClientRect();
+                    let x, y;
+                    if (e.touches && e.touches.length > 0) {
+                        x = e.touches[0].clientX - rect.left;
+                        y = e.touches[0].clientY - rect.top;
+                    } else {
+                        x = e.clientX - rect.left;
+                        y = e.clientY - rect.top;
+                    }
+                    return {
+                        x,
+                        y
+                    };
+                }
+
+                function startDrawing(e) {
+                    isDrawing = true;
+                    const {
+                        x,
+                        y
+                    } = getCoordinates(e);
+                    ctx.beginPath();
+                    ctx.moveTo(x, y);
+                    e.preventDefault();
+                }
+
+                function draw(e) {
+                    if (!isDrawing) return;
+                    const {
+                        x,
+                        y
+                    } = getCoordinates(e);
+                    ctx.lineTo(x, y);
+                    ctx.stroke();
+                    e.preventDefault();
+                }
+
+                function stopDrawing() {
+                    if (isDrawing) {
+                        isDrawing = false;
+                        ctx.closePath();
+                        // Save signature data
+                        const dataUrl = canvas.toDataURL();
+                        canvas.parentElement.querySelector('.signature-input').value = dataUrl;
+                    }
+                }
+
+                canvas.addEventListener('mousedown', startDrawing);
+                canvas.addEventListener('mousemove', draw);
+                canvas.addEventListener('mouseup', stopDrawing);
+                canvas.addEventListener('mouseout', stopDrawing);
+
+                canvas.addEventListener('touchstart', startDrawing, {
+                    passive: false
+                });
+                canvas.addEventListener('touchmove', draw, {
+                    passive: false
+                });
+                canvas.addEventListener('touchend', stopDrawing);
+            });
+
+            window.clearSignature = function(btn) {
+                const container = btn.closest('.relative');
+                const canvas = container.querySelector('canvas.signature-pad');
+                const ctx = canvas.getContext('2d');
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                container.querySelector('.signature-input').value = '';
+            };
 
             const relationship = document.getElementById('relationship');
             const otherRelationship = document.getElementById('otherRelationship');
