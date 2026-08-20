@@ -39,4 +39,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/assessments/{assessment}', [AssessmentController::class, 'update'])->name('assessments.update');
     Route::delete('/assessments/{assessment}', [AssessmentController::class, 'destroy'])->name('assessments.destroy');
     Route::post('/assessments/{assessment}/sign', [AssessmentController::class, 'sign'])->name('assessments.sign');
+    
+    // Persetujuan Tindakan Medis
+    Route::resource('persetujuan-tindakan', \App\Http\Controllers\PersetujuanTindakanMedisController::class);
 });
