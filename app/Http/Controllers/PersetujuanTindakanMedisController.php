@@ -12,12 +12,17 @@ class PersetujuanTindakanMedisController extends Controller
         return view('persetujuan_tindakan.index', compact('persetujuan'));
     }
 
-    public function create()
+    public function create(Request $request)
     {
         $patients = \App\Models\Patient::all();
         $doctors = \App\Models\User::where('role', 'dokter')->get();
-        // dd($doctors);
-        return view('persetujuan_tindakan.create', compact('patients', 'doctors'));
+        
+        $patient = null;
+        if ($request->has('patient_id')) {
+            $patient = \App\Models\Patient::find($request->patient_id);
+        }
+
+        return view('persetujuan_tindakan.create', compact('patients', 'doctors', 'patient'));
     }
 
     public function store(Request $request)

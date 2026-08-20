@@ -28,8 +28,8 @@
                 </span>
 
                 <span class="text-sm font-bold text-blue-900">
-                    {{ $patient->name ?? 'N/A' }}
-                    (RM: {{ $patient->medical_record_number ?? 'N/A' }})
+                    <span id="header_patient_name">{{ $patient->name ?? 'N/A' }}</span>
+                    (RM: <span id="header_patient_rm">{{ $patient->medical_record_number ?? 'N/A' }}</span>)
                 </span>
             </div>
         </div>
@@ -77,6 +77,35 @@
                 {{-- ================= TABLE ================= --}}
                 <table class="w-full border-collapse border border-gray-300">
                     <tbody>
+
+                        {{-- ===================================================== --}}
+                        {{-- PASIEN --}}
+                        {{-- ===================================================== --}}
+                        <tr>
+                            <td class="w-1/3 border border-gray-300 bg-gray-50 px-4 py-3 align-top">
+                                <div class="font-bold text-slate-900">
+                                    PILIH PASIEN
+                                </div>
+                                <div class="text-sm italic text-gray-600">
+                                    Select Patient
+                                </div>
+                            </td>
+                            <td class="w-2/3 border border-gray-300 px-4 py-3 align-middle" colspan="2">
+                                <select id="patient_id" name="patient_id" required
+                                    class="w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm
+                                    focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                    <option value="">-- Pilih Pasien --</option>
+                                    @foreach ($patients as $p)
+                                        <option value="{{ $p->id }}" data-name="{{ $p->name }}"
+                                            data-rm="{{ $p->medical_record_number }}" data-dob="{{ $p->date_of_birth?->format('d/m/Y') }}"
+                                            data-jk="{{ $p->gender }}"
+                                            {{ isset($patient) && $patient->id == $p->id ? 'selected' : '' }}>
+                                            {{ $p->name }} (RM: {{ $p->medical_record_number }})
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </td>
+                        </tr>
 
                         {{-- ===================================================== --}}
                         {{-- DOKTER PEMBERI INFORMASI --}}
@@ -1284,10 +1313,13 @@
 
                 <div class="mt-4 flex justify-center">
                     <div class="inline-block w-fit border border-gray-300 px-3 py-2 text-left text-xs leading-5">
-                        Nama : {{ $patient->name ?? '.......................' }}<br>
-                        Tgl Lahir: {{ $patient->birth_date ?? '.......................' }}<br>
-                        RM : {{ $patient->medical_record_number ?? '.......' }} &nbsp; JK :
-                        {{ $patient->gender ?? '.......' }}<br>
+                        Nama : <span
+                            id="sticker_patient_name">{{ $patient->name ?? '.......................' }}</span><br>
+                        Tgl Lahir: <span
+                            id="sticker_patient_dob">{{ $patient?->date_of_birth?->format('d/m/Y') ?? '.......................' }}</span><br>
+                        RM : <span id="sticker_patient_rm">{{ $patient->medical_record_number ?? '.......' }}</span>
+                        &nbsp; JK :
+                        <span id="sticker_patient_jk">{{ $patient->gender ?? '.......' }}</span><br>
                         <span class="font-semibold">*Tempel Stiker Pasien</span>
                     </div>
                 </div>
@@ -1300,9 +1332,8 @@
 
                         {{-- checkbox 1 --}}
                         <label class="flex items-start">
-                            <input type="checkbox"
-                                class="mt-1 h-5 w-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
-                                required>
+                            <input type="checkbox" name="check_realize_not_exact_science"
+                                class="mt-1 h-5 w-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500" required>
                             <div class="ml-2 flex flex-col">
                                 <span class="text-slate-900">Saya mengakui telah menerima informasi penjelasan mengenai
                                     tindakan yang akan dilakukan.</span>
@@ -1314,8 +1345,7 @@
                         {{-- checkbox 2 --}}
                         <label class="flex items-start">
                             <input type="checkbox"
-                                class="mt-1 h-5 w-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
-                                required>
+                                class="mt-1 h-5 w-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500" required>
                             <div class="ml-2 flex flex-col">
                                 <span class="text-slate-900">Saya memahami perlunya dan manfaat tindakan tersebut
                                     sebagaimana telah dijelaskan seperti sebelumnya kepada saya, termasuk risiko dan
@@ -1329,8 +1359,7 @@
                         {{-- checkbox 3 --}}
                         <label class="flex items-start">
                             <input type="checkbox"
-                                class="mt-1 h-5 w-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
-                                required>
+                                class="mt-1 h-5 w-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500" required>
                             <div class="ml-2 flex flex-col">
                                 <span class="text-slate-900">Saya mengakui bahwa saya telah diberikan kesempatan untuk
                                     bertanya informasi lebih banyak tentang prosedur ini.</span>
@@ -1342,8 +1371,7 @@
                         {{-- checkbox 4 --}}
                         <label class="flex items-start">
                             <input type="checkbox"
-                                class="mt-1 h-5 w-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
-                                required>
+                                class="mt-1 h-5 w-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500" required>
                             <div class="ml-2 flex flex-col">
                                 <span class="text-slate-900">Saya juga menyadari tidak ada jaminan yang diberikan bahwa
                                     Dokter ataupun petugas yang melaksanakan tindakan dengan hasil yang sesuai dengan yang
@@ -1356,8 +1384,7 @@
                         {{-- checkbox 5 --}}
                         <label class="flex items-start">
                             <input type="checkbox"
-                                class="mt-1 h-5 w-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
-                                required>
+                                class="mt-1 h-5 w-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500" required>
                             <div class="ml-2 flex flex-col">
                                 <span class="text-slate-900">Saya juga menyadari bahwa oleh karena ilmu kedokteran bukanlah
                                     ilmu pasti, maka keberhasilan tindakan kedokteran bukanlah keniscayaan, melainkan sangat
@@ -1565,39 +1592,51 @@
                 container.querySelector('.signature-input').value = '';
             };
 
-            const relationship = document.getElementById('relationship');
-            const otherRelationship = document.getElementById('otherRelationship');
-            const otherInput = document.getElementById('other_relationship');
+            const relationship = document.getElementById('wali_hubungan');
+            const otherInput = document.getElementById('wali_hubungan_lainnya');
 
-            if (!relationship || !otherRelationship || !otherInput) {
-                return;
+            if (relationship && otherInput) {
+                relationship.addEventListener('change', function() {
+                    if (this.value === 'lainnya') {
+                        otherInput.classList.remove('hidden');
+                        otherInput.required = true;
+                    } else {
+                        otherInput.classList.add('hidden');
+                        otherInput.required = false;
+                        otherInput.value = '';
+                    }
+                });
             }
 
-            function toggleOtherRelationship() {
+            const patientSelect = document.getElementById('patient_id');
+            if (patientSelect) {
+                patientSelect.addEventListener('change', function() {
+                    const selected = this.options[this.selectedIndex];
+                    const name = selected.value ? selected.getAttribute('data-name') :
+                        '.......................';
+                    const rm = selected.value ? selected.getAttribute('data-rm') : '.......';
+                    const dob = selected.value ? selected.getAttribute('data-dob') :
+                        '.......................';
+                    const jk = selected.value ? selected.getAttribute('data-jk') : '.......';
 
-                const isOther = relationship.value === 'lainnya';
+                    document.getElementById('header_patient_name').textContent = selected.value ? name :
+                        'N/A';
+                    document.getElementById('header_patient_rm').textContent = selected.value ? rm : 'N/A';
 
-                if (isOther) {
-
-                    otherRelationship.classList.remove('hidden');
-
-                    otherInput.required = true;
-
-                } else {
-
-                    otherRelationship.classList.add('hidden');
-
-                    otherInput.required = false;
-
-                    otherInput.value = '';
-                }
+                    document.getElementById('sticker_patient_name').textContent = name;
+                    document.getElementById('sticker_patient_rm').textContent = rm;
+                    document.getElementById('sticker_patient_dob').textContent = dob;
+                    document.getElementById('sticker_patient_jk').textContent = jk;
+                });
             }
 
-            relationship.addEventListener('change', toggleOtherRelationship);
-
-            // Jalankan saat halaman pertama kali dibuka
-            toggleOtherRelationship();
-
+            // Initial trigger if there is a preset value
+            if (relationship && relationship.value === 'lainnya') {
+                relationship.dispatchEvent(new Event('change'));
+            }
+            if (patientSelect && patientSelect.value) {
+                patientSelect.dispatchEvent(new Event('change'));
+            }
         });
     </script>
 @endsection

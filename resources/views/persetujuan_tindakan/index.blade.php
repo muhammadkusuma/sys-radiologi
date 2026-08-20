@@ -32,10 +32,10 @@
                     <tbody class="divide-y divide-slate-200 text-sm">
                         @forelse($persetujuan as $item)
                             <tr class="hover:bg-slate-50">
-                                <td class="py-3 px-4">{{ $item->patient_name }}</td>
-                                <td class="py-3 px-4">{{ $item->patient_mrn }}</td>
-                                <td class="py-3 px-4">{{ $item->procedure_name }}</td>
-                                <td class="py-3 px-4">{{ $item->consent_datetime }}</td>
+                                <td class="py-3 px-4">{{ $item->patient->name ?? '-' }}</td>
+                                <td class="py-3 px-4">{{ $item->patient->medical_record_number ?? '-' }}</td>
+                                <td class="py-3 px-4">{{ $item->planned_procedure }}</td>
+                                <td class="py-3 px-4">{{ $item->created_at->format('d M Y H:i') }}</td>
                                 <td class="py-3 px-4 text-center">
                                     <a href="#" class="text-blue-600 hover:text-blue-800">Detail</a>
                                 </td>
