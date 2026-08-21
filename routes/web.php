@@ -41,5 +41,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/assessments/{assessment}/sign', [AssessmentController::class, 'sign'])->name('assessments.sign');
     
     // Persetujuan Tindakan Medis
+    Route::get('persetujuan-tindakan/{id}/print', [\App\Http\Controllers\PersetujuanTindakanMedisController::class, 'print'])
+        ->name('persetujuan-tindakan.print');
     Route::resource('persetujuan-tindakan', \App\Http\Controllers\PersetujuanTindakanMedisController::class);
 });

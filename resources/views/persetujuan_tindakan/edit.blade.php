@@ -22,6 +22,12 @@
                 </h1>
             </div>
 
+            <div class="flex items-center gap-3">
+            <a href="{{ route('persetujuan-tindakan.print', $persetujuan->id) }}"
+                target="_blank"
+                class="inline-flex items-center px-3 py-2 bg-slate-800 hover:bg-slate-900 text-white text-sm font-semibold rounded-lg shadow transition">
+                Cetak PDF
+            </a>
             <div class="rounded-xl border border-blue-100 bg-blue-50 px-4 py-2 text-right">
                 <span class="block text-xs text-blue-600">
                     Nama Pasien
@@ -31,6 +37,7 @@
                     <span id="header_patient_name">{{ $patient->name ?? 'N/A' }}</span>
                     (RM: <span id="header_patient_rm">{{ $patient->medical_record_number ?? 'N/A' }}</span>)
                 </span>
+            </div>
             </div>
         </div>
 

@@ -71,6 +71,23 @@ class PersetujuanTindakanMedisController extends Controller
         return view('persetujuan_tindakan.show', compact('persetujuan'));
     }
 
+    public function print($id)
+    {
+        $persetujuan = \App\Models\PersetujuanTindakanMedis::with('patient')->findOrFail($id);
+        $patient = $persetujuan->patient;
+
+        $doctor = null;
+        if (! empty($persetujuan->doctor)) {
+            $doctor = is_numeric($persetujuan->doctor)
+                ? \App\Models\User::find($persetujuan->doctor)
+                : null;
+        }
+
+        $doctorName = $doctor?->name ?? (is_numeric($persetujuan->doctor) ? '' : ($persetujuan->doctor ?? ''));
+
+        return view('persetujuan_tindakan.print', compact('persetujuan', 'patient', 'doctor', 'doctorName'));
+    }
+
     public function edit($id)
     {
         $persetujuan = \App\Models\PersetujuanTindakanMedis::findOrFail($id);
