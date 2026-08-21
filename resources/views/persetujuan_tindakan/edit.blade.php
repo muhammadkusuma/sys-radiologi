@@ -50,7 +50,7 @@
         @endif
 
         {{-- Form --}}
-        <form method="POST" action="{{ route('persetujuan-tindakan.update', $persetujuan->id) }}">
+        <form method="POST" action="{{ route('persetujuan-tindakan.update', $persetujuan->id) . (request('mode') ? '?mode=' . request('mode') : '') }}">
             @csrf
             @method('PUT')
 
@@ -1364,13 +1364,13 @@
                         class="rounded-md border border-gray-300 px-3 py-1 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
                         onchange="document.getElementById('wali_hubungan_lainnya').classList.toggle('hidden', this.value !== 'lainnya')">
                         <option value="">Pilih... / Select...</option>
-                        <option value="diri_sendiri">Diri sendiri / Self</option>
-                        <option value="suami">Suami / Husband</option>
-                        <option value="istri">Istri / Wife</option>
-                        <option value="ayah">Ayah / Father</option>
-                        <option value="ibu">Ibu / Mother</option>
-                        <option value="anak">Anak / Child</option>
-                        <option value="lainnya">Lainnya / Other</option>
+                        <option value="diri_sendiri" @selected($persetujuan->wali_hubungan == 'diri_sendiri')>Diri sendiri / Self</option>
+                        <option value="suami" @selected($persetujuan->wali_hubungan == 'suami')>Suami / Husband</option>
+                        <option value="istri" @selected($persetujuan->wali_hubungan == 'istri')>Istri / Wife</option>
+                        <option value="ayah" @selected($persetujuan->wali_hubungan == 'ayah')>Ayah / Father</option>
+                        <option value="ibu" @selected($persetujuan->wali_hubungan == 'ibu')>Ibu / Mother</option>
+                        <option value="anak" @selected($persetujuan->wali_hubungan == 'anak')>Anak / Child</option>
+                        <option value="lainnya" @selected($persetujuan->wali_hubungan == 'lainnya')>Lainnya / Other</option>
                     </select>
                     <input type="text" id="wali_hubungan_lainnya" name="wali_hubungan_lainnya"
                         class="hidden w-48 rounded-md border border-gray-300 px-3 py-1 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
