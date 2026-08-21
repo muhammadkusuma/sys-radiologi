@@ -1374,77 +1374,127 @@
 
 
                 <div class="pt-3">
-                    <p class="font-bold text-slate-900">Dengan ini menyatakan: </p>
-                    <i class="text-sm text-gray-600">Hereby states:</i>
-                    <div class="ml-7 mt-2 space-y-3">
+    <p class="font-bold text-slate-900">Dengan ini menyatakan:</p>
+    <i class="text-sm text-gray-600">Hereby states:</i>
 
-                        {{-- checkbox 1 --}}
-                        <label class="flex items-start">
-                            <input type="checkbox" name="check_received_info" {{ $persetujuan->check_received_info ? 'checked' : '' }}
-                                class="mt-1 h-5 w-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500" required>
-                            <div class="ml-2 flex flex-col">
-                                <span class="text-slate-900">Saya mengakui telah menerima informasi penjelasan mengenai
-                                    tindakan yang akan dilakukan.</span>
-                                <i class="text-sm text-gray-600">I acknowledge that I have received an explanation
-                                    regarding the procedure to be performed.</i>
-                            </div>
-                        </label>
+    <div class="ml-7 mt-2 space-y-3">
 
-                        {{-- checkbox 2 --}}
-                        <label class="flex items-start">
-                            <input type="checkbox" name="check_understand_necessity" {{ $persetujuan->check_understand_necessity ? 'checked' : '' }}
-                                class="mt-1 h-5 w-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500" required>
-                            <div class="ml-2 flex flex-col">
-                                <span class="text-slate-900">Saya memahami perlunya dan manfaat tindakan tersebut
-                                    sebagaimana telah dijelaskan seperti sebelumnya kepada saya, termasuk risiko dan
-                                    komplikasi yang mungkin timbul bila tindakan dilakukan atau tidak dilakukan.</span>
-                                <i class="text-sm text-gray-600">I understand the necessity and benefits of the procedure
-                                    as previously explained to me, including the risks and complications that may arise if
-                                    the procedure is performed or not performed.</i>
-                            </div>
-                        </label>
+        {{-- checkbox 1 --}}
+        <label class="flex items-start">
+            <input
+                type="checkbox"
+                name="check_received_info"
+                {{ $persetujuan->check_received_info ? 'checked' : '' }}
+                class="mt-1 size-5 min-h-5 min-w-5 shrink-0 rounded border-gray-300 text-blue-600 focus:ring-2 focus:ring-blue-500"
+                required
+            >
+            <div class="ml-2 flex flex-col">
+                <span class="text-slate-900">
+                    Saya mengakui telah menerima informasi penjelasan mengenai
+                    tindakan yang akan dilakukan.
+                </span>
+                <i class="text-sm text-gray-600">
+                    I acknowledge that I have received an explanation
+                    regarding the procedure to be performed.
+                </i>
+            </div>
+        </label>
 
-                        {{-- checkbox 3 --}}
-                        <label class="flex items-start">
-                            <input type="checkbox" name="check_given_opportunity" {{ $persetujuan->check_given_opportunity ? 'checked' : '' }}
-                                class="mt-1 h-5 w-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500" required>
-                            <div class="ml-2 flex flex-col">
-                                <span class="text-slate-900">Saya mengakui bahwa saya telah diberikan kesempatan untuk
-                                    bertanya informasi lebih banyak tentang prosedur ini.</span>
-                                <i class="text-sm text-gray-600">I acknowledge that I have been given the opportunity to
-                                    ask for more information about this procedure.</i>
-                            </div>
-                        </label>
+        {{-- checkbox 2 --}}
+        <label class="flex items-start">
+            <input
+                type="checkbox"
+                name="check_understand_necessity"
+                {{ $persetujuan->check_understand_necessity ? 'checked' : '' }}
+                class="mt-1 size-5 min-h-5 min-w-5 shrink-0 rounded border-gray-300 text-blue-600 focus:ring-2 focus:ring-blue-500"
+                required
+            >
+            <div class="ml-2 flex flex-col">
+                <span class="text-slate-900">
+                    Saya memahami perlunya dan manfaat tindakan tersebut
+                    sebagaimana telah dijelaskan seperti sebelumnya kepada saya,
+                    termasuk risiko dan komplikasi yang mungkin timbul bila
+                    tindakan dilakukan atau tidak dilakukan.
+                </span>
+                <i class="text-sm text-gray-600">
+                    I understand the necessity and benefits of the procedure
+                    as previously explained to me, including the risks and
+                    complications that may arise if the procedure is performed
+                    or not performed.
+                </i>
+            </div>
+        </label>
 
-                        {{-- checkbox 4 --}}
-                        <label class="flex items-start">
-                            <input type="checkbox" name="check_realize_no_guarantee" {{ $persetujuan->check_realize_no_guarantee ? 'checked' : '' }}
-                                class="mt-1 h-5 w-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500" required>
-                            <div class="ml-2 flex flex-col">
-                                <span class="text-slate-900">Saya juga menyadari tidak ada jaminan yang diberikan bahwa
-                                    Dokter ataupun petugas yang melaksanakan tindakan dengan hasil yang sesuai dengan yang
-                                    dijelaskan.</span>
-                                <i class="text-sm text-gray-600">I also realize that no guarantee is given that the Doctor
-                                    or the staff performing the procedure will achieve the results exactly as explained.</i>
-                            </div>
-                        </label>
+        {{-- checkbox 3 --}}
+        <label class="flex items-start">
+            <input
+                type="checkbox"
+                name="check_given_opportunity"
+                {{ $persetujuan->check_given_opportunity ? 'checked' : '' }}
+                class="mt-1 size-5 min-h-5 min-w-5 shrink-0 rounded border-gray-300 text-blue-600 focus:ring-2 focus:ring-blue-500"
+                required
+            >
+            <div class="ml-2 flex flex-col">
+                <span class="text-slate-900">
+                    Saya mengakui bahwa saya telah diberikan kesempatan untuk
+                    bertanya informasi lebih banyak tentang prosedur ini.
+                </span>
+                <i class="text-sm text-gray-600">
+                    I acknowledge that I have been given the opportunity to
+                    ask for more information about this procedure.
+                </i>
+            </div>
+        </label>
 
-                        {{-- checkbox 5 --}}
-                        <label class="flex items-start">
-                            <input type="checkbox" name="check_realize_not_exact_science" {{ $persetujuan->check_realize_not_exact_science ? 'checked' : '' }}
-                                class="mt-1 h-5 w-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500" required>
-                            <div class="ml-2 flex flex-col">
-                                <span class="text-slate-900">Saya juga menyadari bahwa oleh karena ilmu kedokteran bukanlah
-                                    ilmu pasti, maka keberhasilan tindakan kedokteran bukanlah keniscayaan, melainkan sangat
-                                    bergantung kepada izin Tuhan Yang Maha Esa.</span>
-                                <i class="text-sm text-gray-600">I also realize that because medical science is not an
-                                    exact science, the success of a medical procedure is not a certainty, but highly depends
-                                    on the permission of God Almighty.</i>
-                            </div>
-                        </label>
-                    </div>
-                </div>
+        {{-- checkbox 4 --}}
+        <label class="flex items-start">
+            <input
+                type="checkbox"
+                name="check_realize_no_guarantee"
+                {{ $persetujuan->check_realize_no_guarantee ? 'checked' : '' }}
+                class="mt-1 size-5 min-h-5 min-w-5 shrink-0 rounded border-gray-300 text-blue-600 focus:ring-2 focus:ring-blue-500"
+                required
+            >
+            <div class="ml-2 flex flex-col">
+                <span class="text-slate-900">
+                    Saya juga menyadari tidak ada jaminan yang diberikan bahwa
+                    Dokter ataupun petugas yang melaksanakan tindakan dengan
+                    hasil yang sesuai dengan yang dijelaskan.
+                </span>
+                <i class="text-sm text-gray-600">
+                    I also realize that no guarantee is given that the Doctor
+                    or the staff performing the procedure will achieve the
+                    results exactly as explained.
+                </i>
+            </div>
+        </label>
 
+        {{-- checkbox 5 --}}
+        <label class="flex items-start">
+            <input
+                type="checkbox"
+                name="check_realize_not_exact_science"
+                {{ $persetujuan->check_realize_not_exact_science ? 'checked' : '' }}
+                class="mt-1 size-5 min-h-5 min-w-5 shrink-0 rounded border-gray-300 text-blue-600 focus:ring-2 focus:ring-blue-500"
+                required
+            >
+            <div class="ml-2 flex flex-col">
+                <span class="text-slate-900">
+                    Saya juga menyadari bahwa oleh karena ilmu kedokteran
+                    bukanlah ilmu pasti, maka keberhasilan tindakan kedokteran
+                    bukanlah keniscayaan, melainkan sangat bergantung kepada
+                    izin Tuhan Yang Maha Esa.
+                </span>
+                <i class="text-sm text-gray-600">
+                    I also realize that because medical science is not an
+                    exact science, the success of a medical procedure is not
+                    a certainty, but highly depends on the permission of God Almighty.
+                </i>
+            </div>
+        </label>
+
+    </div>
+</div>
                 <div class="mt-6 flex flex-col gap-2">
                     <div class="flex items-center gap-2">
                         <span>Pekanbaru, Tanggal</span>
@@ -1739,22 +1789,21 @@
                 );
 
                 if (!noneRadio || !yesRadio) return;
-                if (noneRadio.disabled || yesRadio.disabled) return;
 
                 const dependentInputs = config.dependentSelectors.flatMap(selector =>
                     Array.from(document.querySelectorAll(selector))
                 );
 
                 const syncState = () => {
-                    const shouldDisable = noneRadio.checked;
+                    const isYesSelected = yesRadio.checked;
 
                     dependentInputs.forEach((input) => {
                         if (input.disabled && input.type === 'hidden') return;
                         if (input.hasAttribute('readonly')) return;
 
-                        input.disabled = shouldDisable;
-                        input.classList.toggle('opacity-60', shouldDisable);
-                        input.classList.toggle('cursor-not-allowed', shouldDisable);
+                        input.disabled = !isYesSelected;
+                        input.classList.toggle('opacity-60', !isYesSelected);
+                        input.classList.toggle('cursor-not-allowed', !isYesSelected);
                     });
                 };
 
