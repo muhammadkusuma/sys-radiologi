@@ -12,7 +12,7 @@
         {{-- Header --}}
         <div class="mb-6 flex items-center justify-between no-print">
             <div>
-                <a href="{{ route('dashboard') }}"
+                <a href="{{ route('persetujuan-tindakan.index') }}"
                     class="mb-1 flex items-center text-xs font-semibold text-slate-500 transition hover:text-slate-900">
                     &larr; Kembali ke Dashboard
                 </a>
@@ -97,7 +97,8 @@
                                     <option value="">-- Pilih Pasien --</option>
                                     @foreach ($patients as $p)
                                         <option value="{{ $p->id }}" data-name="{{ $p->name }}"
-                                            data-rm="{{ $p->medical_record_number }}" data-dob="{{ $p->date_of_birth?->format('d/m/Y') }}"
+                                            data-rm="{{ $p->medical_record_number }}"
+                                            data-dob="{{ $p->date_of_birth?->format('d/m/Y') }}"
                                             data-jk="{{ $p->gender }}"
                                             {{ isset($patient) && $patient->id == $p->id ? 'selected' : '' }}>
                                             {{ $p->name }} (RM: {{ $p->medical_record_number }})
@@ -132,7 +133,8 @@
                                     </option>
 
                                     @foreach ($doctors as $doctor)
-                                        <option value="{{ $doctor->id }}" data-signature="{{ $doctor->signature }}" @selected(old('doctor') == $doctor->id)>
+                                        <option value="{{ $doctor->id }}" data-signature="{{ $doctor->signature }}"
+                                            @selected(old('doctor') == $doctor->id)>
                                             {{ $doctor->name }}
                                         </option>
                                     @endforeach
@@ -621,7 +623,7 @@
                                         {{ old('alternative_treatment') == 'none' ? 'checked' : '' }}
                                         class="h-5 w-5 border-gray-300 text-blue-600 focus:ring-blue-500" />
 
-                                    <div class=leading-[1.25]">
+                                    <div class="leading-[1.25]">
                                         <div>Tidak ada</div>
                                         <div class="italic">None</div>
                                     </div>
@@ -634,8 +636,7 @@
 
                                     <input type="radio" name="alternative_treatment" value="yes"
                                         {{ old('alternative_treatment') == 'yes' ? 'checked' : '' }}
-                                        class="h-5 w-5 border-gray-300 text-blue-600 focus:ring-blue-500"
-                                        onclick="toggleAlternativeInput(true)" />
+                                        class="h-5 w-5 border-gray-300 text-blue-600 focus:ring-blue-500" />
 
                                     <div class="flex-1 leading-[1.25]">
 
@@ -671,10 +672,18 @@
                                         </div>
 
                                         <div>
-                                            <span class="italic">Rontgen</span>
-                                            polos, dengan konsekuensi ketidakjelasan
-                                            <br />
-                                            struktur anatomi.
+                                            <label class="inline-flex items-start gap-2 cursor-pointer">
+                                                <input type="checkbox" name="alternative_treatment_choices[]"
+                                                    value="rontgen_polos"
+                                                    {{ in_array('rontgen_polos', old('alternative_treatment_choices', [])) ? 'checked' : '' }}
+                                                    class="mt-1 h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500" />
+                                                <span>
+                                                    <span class="italic">Rontgen</span>
+                                                    polos, dengan konsekuensi ketidakjelasan
+                                                    <br />
+                                                    struktur anatomi.
+                                                </span>
+                                            </label>
                                         </div>
 
                                     </div>
@@ -688,12 +697,20 @@
                                         </div>
 
                                         <div>
-                                            CT <span class="italic">Scan</span>
-                                            objek yang diperiksa tanpa dan dengan zat
-                                            <br />
-                                            kontras, dengan konsekuensi pengurangan visualisasi
-                                            <br />
-                                            objek yang diperiksa.
+                                            <label class="inline-flex items-start gap-2 cursor-pointer">
+                                                <input type="checkbox" name="alternative_treatment_choices[]"
+                                                    value="ct_scan_tanpa_dan_dengan_kontras"
+                                                    {{ in_array('ct_scan_tanpa_dan_dengan_kontras', old('alternative_treatment_choices', [])) ? 'checked' : '' }}
+                                                    class="mt-1 h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500" />
+                                                <span>
+                                                    CT <span class="italic">Scan</span>
+                                                    objek yang diperiksa tanpa dan dengan zat
+                                                    <br />
+                                                    kontras, dengan konsekuensi pengurangan visualisasi
+                                                    <br />
+                                                    objek yang diperiksa.
+                                                </span>
+                                            </label>
                                         </div>
 
                                     </div>
@@ -839,11 +856,11 @@
                                 {{-- TIDAK ADA --}}
                                 <label class="flex cursor-pointer items-start gap-3">
 
-                                    <input type="radio" name="alternative_treatment" value="none"
-                                        {{ old('alternative_treatment') == 'none' ? 'checked' : '' }}
+                                    <input type="radio" name="risk_if_not_treated_option" value="none"
+                                        {{ old('risk_if_not_treated_option') == 'none' ? 'checked' : '' }}
                                         class="h-5 w-5 border-gray-300 text-blue-600 focus:ring-blue-500" />
 
-                                    <div class=leading-[1.25]">
+                                    <div class="leading-[1.25]">
                                         <div>Tidak ada</div>
                                         <div class="italic">None</div>
                                     </div>
@@ -854,19 +871,18 @@
                                 {{-- ADA --}}
                                 <label class="mt-4 flex cursor-pointer items-start gap-3">
 
-                                    <input type="radio" name="alternative_treatment" value="yes"
-                                        {{ old('alternative_treatment') == 'yes' ? 'checked' : '' }}
-                                        class="h-5 w-5 border-gray-300 text-blue-600 focus:ring-blue-500"
-                                        onclick="toggleAlternativeInput(true)" />
+                                    <input type="radio" name="risk_if_not_treated_option" value="yes"
+                                        {{ old('risk_if_not_treated_option') == 'yes' ? 'checked' : '' }}
+                                        class="h-5 w-5 border-gray-300 text-blue-600 focus:ring-blue-500" />
 
                                     <div class="flex-1 leading-[1.25]">
 
                                         <div class="flex items-center gap-1">
                                             <span>Ada, yaitu</span>
 
-                                            <input type="text" name="alternative_treatment_detail"
-                                                id="alternative_treatment_detail"
-                                                value="{{ old('alternative_treatment_detail') }}" maxlength="255"
+                                            <input type="text" name="risk_if_not_treated_detail"
+                                                id="risk_if_not_treated_detail"
+                                                value="{{ old('risk_if_not_treated_detail') }}" maxlength="255"
                                                 class="w-full max-w-[300px] border-0 border-b border-black
                                bg-transparent px-1 py-0
                                focus:border-blue-500 focus:outline-none focus:ring-0"
@@ -893,7 +909,13 @@
                                         </div>
 
                                         <div>
-                                            Upaya penegakan diagnosis tidak efektif.
+                                            <label class="inline-flex items-start gap-2 cursor-pointer">
+                                                <input type="checkbox" name="risk_if_not_treated_choices[]"
+                                                    value="upaya_diagnosis_tidak_efektif"
+                                                    {{ in_array('upaya_diagnosis_tidak_efektif', old('risk_if_not_treated_choices', [])) ? 'checked' : '' }}
+                                                    class="mt-1 h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500" />
+                                                <span>Upaya penegakan diagnosis tidak efektif.</span>
+                                            </label>
                                         </div>
 
                                     </div>
@@ -907,8 +929,16 @@
                                         </div>
 
                                         <div>
-                                            Tindakan/terapi selanjutnya dimungkinkan akan tidak
-                                            efektif dan atau terlambat.
+                                            <label class="inline-flex items-start gap-2 cursor-pointer">
+                                                <input type="checkbox" name="risk_if_not_treated_choices[]"
+                                                    value="terapi_lanjutan_tidak_efektif_atau_terlambat"
+                                                    {{ in_array('terapi_lanjutan_tidak_efektif_atau_terlambat', old('risk_if_not_treated_choices', [])) ? 'checked' : '' }}
+                                                    class="mt-1 h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500" />
+                                                <span>
+                                                    Tindakan/terapi selanjutnya dimungkinkan akan tidak
+                                                    efektif dan atau terlambat.
+                                                </span>
+                                            </label>
                                         </div>
 
                                     </div>
@@ -960,11 +990,11 @@
                                 {{-- TIDAK ADA --}}
                                 <label class="flex cursor-pointer items-start gap-3">
 
-                                    <input type="radio" name="alternative_treatment" value="none"
-                                        {{ old('alternative_treatment') == 'none' ? 'checked' : '' }}
+                                    <input type="radio" name="hospitalization_option" value="not_hospitalized"
+                                        {{ old('hospitalization_option') == 'not_hospitalized' ? 'checked' : '' }}
                                         class="h-5 w-5 border-gray-300 text-blue-600 focus:ring-blue-500" />
 
-                                    <div class=leading-[1.25]">
+                                    <div class="leading-[1.25]">
                                         <div>Tidak dirawat inap</div>
                                         <div class="italic">Not hospitalized </div>
                                     </div>
@@ -975,19 +1005,17 @@
                                 {{-- ADA --}}
                                 <label class="mt-4 flex cursor-pointer items-start gap-3">
 
-                                    <input type="radio" name="alternative_treatment" value="yes"
-                                        {{ old('alternative_treatment') == 'yes' ? 'checked' : '' }}
-                                        class="h-5 w-5 border-gray-300 text-blue-600 focus:ring-blue-500"
-                                        onclick="toggleAlternativeInput(true)" />
+                                    <input type="radio" name="hospitalization_option" value="hospitalized"
+                                        {{ old('hospitalization_option') == 'hospitalized' ? 'checked' : '' }}
+                                        class="h-5 w-5 border-gray-300 text-blue-600 focus:ring-blue-500" />
 
                                     <div class="flex-1 leading-[1.25]">
 
                                         <div class="flex items-center gap-1">
                                             <span>Rawat inap:</span>
 
-                                            <input type="text" name="alternative_treatment_detail"
-                                                id="alternative_treatment_detail"
-                                                value="{{ old('alternative_treatment_detail') }}" maxlength="255"
+                                            <input type="number" name="hospitalization_days" id="hospitalization_days"
+                                                value="{{ old('hospitalization_days') }}" min="1" max="365"
                                                 class="w-full max-w-[300px] border-0 border-b border-black
                                bg-transparent px-1 py-0
                                focus:border-blue-500 focus:outline-none focus:ring-0"
@@ -1109,12 +1137,14 @@
                                     class="mt-3 flex h-24 w-full cursor-crosshair items-center justify-center rounded-md border border-dashed border-gray-400 bg-gray-50">
 
                                     <div class="relative w-full h-full flex items-center justify-center">
-                                        <canvas id="doctor_signature_canvas" class="signature-pad w-full h-full bg-transparent absolute top-0 left-0"></canvas>
+                                        <canvas id="doctor_signature_canvas"
+                                            class="signature-pad w-full h-full bg-transparent absolute top-0 left-0"></canvas>
                                         <span class="text-sm text-gray-400 pointer-events-none">Area Tanda Tangan</span>
                                         <button type="button" id="doctor_signature_clear_btn"
                                             class="absolute top-1 right-1 text-[10px] text-gray-500 hover:text-red-500 bg-white border rounded px-1"
                                             onclick="clearSignature(this)">Clear</button>
-                                        <input type="hidden" name="signature[]" id="doctor_signature_input" class="signature-input">
+                                        <input type="hidden" name="signature[]" id="doctor_signature_input"
+                                            class="signature-input">
                                     </div>
 
                                 </div>
@@ -1325,74 +1355,110 @@
 
 
                 <div class="pt-3">
-                    <p class="font-bold text-slate-900">Dengan ini menyatakan: </p>
+                    <p class="font-bold text-slate-900">Dengan ini menyatakan:</p>
                     <i class="text-sm text-gray-600">Hereby states:</i>
+
                     <div class="ml-7 mt-2 space-y-3">
 
                         {{-- checkbox 1 --}}
                         <label class="flex items-start">
                             <input type="checkbox" name="check_received_info"
-                                class="mt-1 h-5 w-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500" required>
+                                class="mt-1 size-5 min-h-5 min-w-5 shrink-0 rounded border-gray-300 text-blue-600 focus:ring-2 focus:ring-blue-500"
+                                required>
+
                             <div class="ml-2 flex flex-col">
-                                <span class="text-slate-900">Saya mengakui telah menerima informasi penjelasan mengenai
-                                    tindakan yang akan dilakukan.</span>
-                                <i class="text-sm text-gray-600">I acknowledge that I have received an explanation
-                                    regarding the procedure to be performed.</i>
+                                <span class="text-slate-900">
+                                    Saya mengakui telah menerima informasi penjelasan mengenai
+                                    tindakan yang akan dilakukan.
+                                </span>
+                                <i class="text-sm text-gray-600">
+                                    I acknowledge that I have received an explanation
+                                    regarding the procedure to be performed.
+                                </i>
                             </div>
                         </label>
 
                         {{-- checkbox 2 --}}
                         <label class="flex items-start">
                             <input type="checkbox" name="check_understand_necessity"
-                                class="mt-1 h-5 w-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500" required>
+                                class="mt-1 size-5 min-h-5 min-w-5 shrink-0 rounded border-gray-300 text-blue-600 focus:ring-2 focus:ring-blue-500"
+                                required>
+
                             <div class="ml-2 flex flex-col">
-                                <span class="text-slate-900">Saya memahami perlunya dan manfaat tindakan tersebut
-                                    sebagaimana telah dijelaskan seperti sebelumnya kepada saya, termasuk risiko dan
-                                    komplikasi yang mungkin timbul bila tindakan dilakukan atau tidak dilakukan.</span>
-                                <i class="text-sm text-gray-600">I understand the necessity and benefits of the procedure
-                                    as previously explained to me, including the risks and complications that may arise if
-                                    the procedure is performed or not performed.</i>
+                                <span class="text-slate-900">
+                                    Saya memahami perlunya dan manfaat tindakan tersebut
+                                    sebagaimana telah dijelaskan seperti sebelumnya kepada saya,
+                                    termasuk risiko dan komplikasi yang mungkin timbul bila
+                                    tindakan dilakukan atau tidak dilakukan.
+                                </span>
+                                <i class="text-sm text-gray-600">
+                                    I understand the necessity and benefits of the procedure
+                                    as previously explained to me, including the risks and
+                                    complications that may arise if the procedure is performed
+                                    or not performed.
+                                </i>
                             </div>
                         </label>
 
                         {{-- checkbox 3 --}}
                         <label class="flex items-start">
                             <input type="checkbox" name="check_given_opportunity"
-                                class="mt-1 h-5 w-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500" required>
+                                class="mt-1 size-5 min-h-5 min-w-5 shrink-0 rounded border-gray-300 text-blue-600 focus:ring-2 focus:ring-blue-500"
+                                required>
+
                             <div class="ml-2 flex flex-col">
-                                <span class="text-slate-900">Saya mengakui bahwa saya telah diberikan kesempatan untuk
-                                    bertanya informasi lebih banyak tentang prosedur ini.</span>
-                                <i class="text-sm text-gray-600">I acknowledge that I have been given the opportunity to
-                                    ask for more information about this procedure.</i>
+                                <span class="text-slate-900">
+                                    Saya mengakui bahwa saya telah diberikan kesempatan untuk
+                                    bertanya informasi lebih banyak tentang prosedur ini.
+                                </span>
+                                <i class="text-sm text-gray-600">
+                                    I acknowledge that I have been given the opportunity to
+                                    ask for more information about this procedure.
+                                </i>
                             </div>
                         </label>
 
                         {{-- checkbox 4 --}}
                         <label class="flex items-start">
                             <input type="checkbox" name="check_realize_no_guarantee"
-                                class="mt-1 h-5 w-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500" required>
+                                class="mt-1 size-5 min-h-5 min-w-5 shrink-0 rounded border-gray-300 text-blue-600 focus:ring-2 focus:ring-blue-500"
+                                required>
+
                             <div class="ml-2 flex flex-col">
-                                <span class="text-slate-900">Saya juga menyadari tidak ada jaminan yang diberikan bahwa
-                                    Dokter ataupun petugas yang melaksanakan tindakan dengan hasil yang sesuai dengan yang
-                                    dijelaskan.</span>
-                                <i class="text-sm text-gray-600">I also realize that no guarantee is given that the Doctor
-                                    or the staff performing the procedure will achieve the results exactly as explained.</i>
+                                <span class="text-slate-900">
+                                    Saya juga menyadari tidak ada jaminan yang diberikan bahwa
+                                    Dokter ataupun petugas yang melaksanakan tindakan dengan
+                                    hasil yang sesuai dengan yang dijelaskan.
+                                </span>
+                                <i class="text-sm text-gray-600">
+                                    I also realize that no guarantee is given that the Doctor
+                                    or the staff performing the procedure will achieve the
+                                    results exactly as explained.
+                                </i>
                             </div>
                         </label>
 
                         {{-- checkbox 5 --}}
                         <label class="flex items-start">
                             <input type="checkbox" name="check_realize_not_exact_science"
-                                class="mt-1 h-5 w-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500" required>
+                                class="mt-1 size-5 min-h-5 min-w-5 shrink-0 rounded border-gray-300 text-blue-600 focus:ring-2 focus:ring-blue-500"
+                                required>
+
                             <div class="ml-2 flex flex-col">
-                                <span class="text-slate-900">Saya juga menyadari bahwa oleh karena ilmu kedokteran bukanlah
-                                    ilmu pasti, maka keberhasilan tindakan kedokteran bukanlah keniscayaan, melainkan sangat
-                                    bergantung kepada izin Tuhan Yang Maha Esa.</span>
-                                <i class="text-sm text-gray-600">I also realize that because medical science is not an
-                                    exact science, the success of a medical procedure is not a certainty, but highly depends
-                                    on the permission of God Almighty.</i>
+                                <span class="text-slate-900">
+                                    Saya juga menyadari bahwa oleh karena ilmu kedokteran
+                                    bukanlah ilmu pasti, maka keberhasilan tindakan kedokteran
+                                    bukanlah keniscayaan, melainkan sangat bergantung kepada
+                                    izin Tuhan Yang Maha Esa.
+                                </span>
+                                <i class="text-sm text-gray-600">
+                                    I also realize that because medical science is not an
+                                    exact science, the success of a medical procedure is not
+                                    a certainty, but highly depends on the permission of God Almighty.
+                                </i>
                             </div>
                         </label>
+
                     </div>
                 </div>
 
@@ -1647,39 +1713,115 @@
             }
 
             const doctorSelect = document.getElementById('doctor');
-            if(doctorSelect) {
+            if (doctorSelect) {
                 doctorSelect.addEventListener('change', function() {
                     const selected = this.options[this.selectedIndex];
                     const signatureData = selected.value ? selected.getAttribute('data-signature') : null;
                     const canvas = document.getElementById('doctor_signature_canvas');
                     const input = document.getElementById('doctor_signature_input');
-                    
-                    if(canvas && input) {
+
+                    if (canvas && input) {
                         const ctx = canvas.getContext('2d');
                         ctx.clearRect(0, 0, canvas.width, canvas.height);
                         input.value = '';
                         const clearBtn = document.getElementById('doctor_signature_clear_btn');
-                        
-                        if(signatureData && signatureData !== '') {
+
+                        if (signatureData && signatureData !== '') {
                             const img = new Image();
                             img.onload = function() {
                                 // Draw centered and scaled to fit if necessary
                                 const hRatio = canvas.width / img.width;
                                 const vRatio = canvas.height / img.height;
-                                const ratio  = Math.min(hRatio, vRatio);
-                                const centerShift_x = (canvas.width - img.width*ratio) / 2;
-                                const centerShift_y = (canvas.height - img.height*ratio) / 2;
-                                ctx.drawImage(img, 0,0, img.width, img.height, centerShift_x, centerShift_y, img.width*ratio, img.height*ratio);
+                                const ratio = Math.min(hRatio, vRatio);
+                                const centerShift_x = (canvas.width - img.width * ratio) / 2;
+                                const centerShift_y = (canvas.height - img.height * ratio) / 2;
+                                ctx.drawImage(img, 0, 0, img.width, img.height, centerShift_x,
+                                    centerShift_y, img.width * ratio, img.height * ratio);
                                 input.value = signatureData;
-                                if(clearBtn) clearBtn.style.display = 'none';
+                                if (clearBtn) clearBtn.style.display = 'none';
                             }
                             img.src = signatureData;
                         } else {
-                            if(clearBtn) clearBtn.style.display = 'block';
+                            if (clearBtn) clearBtn.style.display = 'block';
                         }
                     }
                 });
             }
+
+            function setupRadioDependentSection(config) {
+                const noneRadio = document.querySelector(
+                    `input[name="${config.radioName}"][value="${config.noneValue}"]`
+                );
+                const yesRadio = document.querySelector(
+                    `input[name="${config.radioName}"][value="${config.yesValue}"]`
+                );
+
+                if (!noneRadio || !yesRadio) return;
+                if (noneRadio.disabled || yesRadio.disabled) return;
+
+                const dependentInputs = config.dependentSelectors.flatMap(selector =>
+                    Array.from(document.querySelectorAll(selector))
+                );
+
+                const syncState = () => {
+                    const shouldDisable = noneRadio.checked;
+
+                    dependentInputs.forEach((input) => {
+                        if (input.disabled && input.type === 'hidden') return;
+
+                        input.disabled = shouldDisable;
+                        input.classList.toggle('opacity-60', shouldDisable);
+                        input.classList.toggle('cursor-not-allowed', shouldDisable);
+                    });
+                };
+
+                noneRadio.addEventListener('change', syncState);
+                yesRadio.addEventListener('change', syncState);
+
+                dependentInputs.forEach((input) => {
+                    const activateYesOption = () => {
+                        if (yesRadio.disabled) return;
+                        yesRadio.checked = true;
+                        syncState();
+                    };
+
+                    input.addEventListener('focus', activateYesOption);
+                    input.addEventListener('input', activateYesOption);
+                    input.addEventListener('change', activateYesOption);
+                    input.addEventListener('click', activateYesOption);
+                });
+
+                syncState();
+            }
+
+            setupRadioDependentSection({
+                radioName: 'alternative_treatment',
+                noneValue: 'none',
+                yesValue: 'yes',
+                dependentSelectors: [
+                    'input[name="alternative_treatment_detail"]',
+                    'input[name="alternative_treatment_choices[]"]'
+                ]
+            });
+
+            setupRadioDependentSection({
+                radioName: 'risk_if_not_treated_option',
+                noneValue: 'none',
+                yesValue: 'yes',
+                dependentSelectors: [
+                    'input[name="risk_if_not_treated_detail"]',
+                    'input[name="risk_if_not_treated_choices[]"]'
+                ]
+            });
+
+            setupRadioDependentSection({
+                radioName: 'hospitalization_option',
+                noneValue: 'not_hospitalized',
+                yesValue: 'hospitalized',
+                dependentSelectors: [
+                    'input[name="hospitalization_days"]'
+                ]
+            });
 
             // Initial trigger if there is a preset value
             if (waliRelationship && waliRelationship.value === 'lainnya') {

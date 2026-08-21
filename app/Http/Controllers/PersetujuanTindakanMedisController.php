@@ -28,6 +28,26 @@ class PersetujuanTindakanMedisController extends Controller
     public function store(Request $request)
     {
         $data = $request->except('_token');
+
+        $data['alternative_treatment_choices'] = array_values($request->input('alternative_treatment_choices', []));
+        $data['risk_if_not_treated_choices'] = array_values($request->input('risk_if_not_treated_choices', []));
+        $data['hospitalization_days'] = $request->filled('hospitalization_days')
+            ? (int) $request->input('hospitalization_days')
+            : null;
+
+        if (($data['alternative_treatment'] ?? null) !== 'yes') {
+            $data['alternative_treatment_detail'] = null;
+            $data['alternative_treatment_choices'] = [];
+        }
+
+        if (($data['risk_if_not_treated_option'] ?? null) !== 'yes') {
+            $data['risk_if_not_treated_detail'] = null;
+            $data['risk_if_not_treated_choices'] = [];
+        }
+
+        if (($data['hospitalization_option'] ?? null) !== 'hospitalized') {
+            $data['hospitalization_days'] = null;
+        }
         
         // Handle boolean fields from checkboxes
         $booleanFields = [
@@ -64,6 +84,26 @@ class PersetujuanTindakanMedisController extends Controller
     {
         $persetujuan = \App\Models\PersetujuanTindakanMedis::findOrFail($id);
         $data = $request->except('_token', '_method');
+
+        $data['alternative_treatment_choices'] = array_values($request->input('alternative_treatment_choices', []));
+        $data['risk_if_not_treated_choices'] = array_values($request->input('risk_if_not_treated_choices', []));
+        $data['hospitalization_days'] = $request->filled('hospitalization_days')
+            ? (int) $request->input('hospitalization_days')
+            : null;
+
+        if (($data['alternative_treatment'] ?? null) !== 'yes') {
+            $data['alternative_treatment_detail'] = null;
+            $data['alternative_treatment_choices'] = [];
+        }
+
+        if (($data['risk_if_not_treated_option'] ?? null) !== 'yes') {
+            $data['risk_if_not_treated_detail'] = null;
+            $data['risk_if_not_treated_choices'] = [];
+        }
+
+        if (($data['hospitalization_option'] ?? null) !== 'hospitalized') {
+            $data['hospitalization_days'] = null;
+        }
         
         $booleanFields = [
             'check_received_info', 'check_understand_necessity',

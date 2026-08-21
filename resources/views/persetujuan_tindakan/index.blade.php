@@ -40,6 +40,11 @@
                                     <div class="flex items-center justify-center gap-3">
                                         <a href="{{ route('persetujuan-tindakan.edit', $item->id) }}" class="text-blue-600 hover:text-blue-800">Edit</a>
                                         <a href="{{ route('persetujuan-tindakan.edit', ['persetujuan_tindakan' => $item->id, 'mode' => 'patient']) }}" class="text-green-600 hover:text-green-800">Isi Pasien</a>
+                                        <a href="{{ route('persetujuan-tindakan.destroy', $item->id) }}" class="text-red-600 hover:text-red-800" onclick="event.preventDefault(); if(confirm('Apakah Anda yakin ingin menghapus persetujuan tindakan ini?')) { document.getElementById('delete-form-{{ $item->id }}').submit(); }">Hapus</a>
+                                        <form id="delete-form-{{ $item->id }}" action="{{ route('persetujuan-tindakan.destroy', $item->id) }}" method="POST" class="hidden">
+                                            @csrf
+                                            @method('DELETE')
+                                        </form>
                                     </div>
                                 </td>
                             </tr>
